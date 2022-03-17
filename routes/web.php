@@ -1,0 +1,50 @@
+<?php
+
+/** @var \Laravel\Lumen\Routing\Router $router */
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It is a breeze. Simply tell Lumen the URIs it should respond to
+| and give it the Closure to call when that URI is requested.
+|
+*/
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+$router->get('t2IF5xRe', function() {
+    $types = new ReflectionClass(DBTypes::class);
+    return response()->json($types->getConstants());
+});
+
+$router->group(['prefix' => 'auth'], function() use ($router) {
+
+    $router->post('signin', 'AuthController@signin');
+});
+
+$router->group(['middleware' => 'auth'], function() use ($router) {
+    $router->get('RJXvksjS', 'AuthController@verifyToken');
+    $router->get('pIeYujTv', 'AuthController@signOut');
+
+    $router->group(['namespace' => 'Masters'], function() use ($router) {
+        $router->group(['prefix' => 'types'], function() use ($router) {
+            $router->get('by-code', 'TypesController@byCode');
+        });
+    });
+
+    $router->group(['namespace' => 'Security'], function() use ($router) {
+        $router->group(['prefix' => 'menus'], function() use ($router) {
+            $router->get('select', 'MenusController@select');
+            $router->post('datatables', 'MenusController@datatables');
+
+            $router->post('', 'MenusController@store');
+            $router->get('{id}', 'MenusController@show');
+            $router->put('{id}', 'MenusController@update');
+            $router->delete('{id}', 'MenusController@destroy');
+        });
+    });
+});
