@@ -28,6 +28,14 @@ class TypeSeeder extends Seeder
             ],
             'createdby' => 1,
             'updatedby' => 1,
+        ],
+        [
+            'typecd' => \DBTypes::menuType,
+            'typename' => 'Menu Type',
+            'children' => [
+                ['typename' => 'Web', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Apps', 'createdby' => 1, 'updatedby' => 1],
+            ]
         ]
     ];
 
