@@ -20,13 +20,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([TypeSeeder::class]);
 
-        $bptype = find_type()->byCode(\DBTypes::businessPartner)
-            ->children();
-        $types = find_type()->in([\DBTypes::roleSuperAdmin]);
+        $bptype = find_type()->byCode([\DBTypes::businessPartner, \DBTypes::menuType])
+            ->children(\DBTypes::menuType);
+        $types = find_type()->in([\DBTypes::roleSuperAdmin, \DBTypes::role]);
 
         BusinessPartner::factory(5)->create(['bptypeid' => $bptype->random()->getId()]);
         User::factory(1)->create(['username' => 'developer']);
         UserDetail::factory(1)->create(['userid' => 1, 'usertypeid' => $types->get(\DBTypes::roleSuperAdmin)->getId()]);
-
     }
 }
