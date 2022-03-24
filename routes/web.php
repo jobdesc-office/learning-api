@@ -43,6 +43,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'types'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
         });
+
         $router->group(['prefix' => 'user'], function() use ($router) {
             $router->get('select', 'UsersController@select');
             $router->post('datatables', 'UsersController@datatables');
@@ -52,6 +53,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->put('{id}', 'UsersController@update');
             $router->delete('{id}', 'UsersController@destroy');
         });
+
+        $router->group(['prefix' => 'businesspartner'], function() use ($router) {
+            $router->get('select', 'BusinessPartnerController@select');
+            $router->post('datatables', 'BusinessPartnerController@datatables');
+
+            $router->post('', 'BusinessPartnerController@store');
+            $router->get('{id}', 'BusinessPartnerController@show');
+            $router->put('{id}', 'BusinessPartnerController@update');
+            $router->delete('{id}', 'BusinessPartnerController@destroy');
+        });
+
     });
 
     $router->group(['namespace' => 'Security'], function () use ($router) {
