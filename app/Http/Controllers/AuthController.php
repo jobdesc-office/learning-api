@@ -15,15 +15,15 @@ class AuthController extends Controller
     {
         $credentials = $req->only(['username', 'password']);
 
-        if(!$token = Auth::attempt($credentials, true))
-            return response()->json(['message' => \TextMessages::failedSignIn]);
+        if (!$token = Auth::attempt($credentials, true))
+            return response()->json(['message' => \TextMessages::failedSignIn], 400);
 
         $user = new UserColumn($authServices->authQuery()->find(\auth()->id()));
 
         $response = collect([
             'userid' => $user->getId(),
             'userfullname' => $user->getFullName(),
-            'userdetails' => collect($user->userDetail()->all())->map(function($data) {
+            'userdetails' => collect($user->userDetail()->all())->map(function ($data) {
                 return ['usertype' => $data->userType()->toArray(), 'businesspartner' => $data->businessPartner()->toArray()];
             })->all(),
         ]);
