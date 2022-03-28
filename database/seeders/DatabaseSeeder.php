@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([TypeSeeder::class]);
 
-        $bptype = find_type()->byCode([\DBTypes::businessPartner, \DBTypes::menuType])
+        $bptype = find_type()->byCode([\DBTypes::menuType])
             ->children(\DBTypes::menuType);
         $types = find_type()->in([\DBTypes::roleSuperAdmin, \DBTypes::role]);
 

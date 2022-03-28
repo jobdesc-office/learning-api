@@ -4,8 +4,6 @@ namespace App\Actions;
 
 use App\Collections\Types\TypeFinder;
 use App\Services\TypeServices;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class FindTypeAction
 {
