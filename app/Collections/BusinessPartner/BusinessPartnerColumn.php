@@ -9,7 +9,7 @@ class BusinessPartnerColumn extends Collection
 
     public function getId()
     {
-        return $this->get('bpid');
+        return $this->get('userdtbpid');
     }
 
     public function getName()

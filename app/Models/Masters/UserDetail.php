@@ -36,7 +36,7 @@ class UserDetail extends Model
 
     public function usertype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'usertypeid');
+        return $this->hasOne(Types::class, 'typeid', 'userdttypeid');
     }
 
     public function businesspartner()
