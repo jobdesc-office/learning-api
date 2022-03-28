@@ -13,7 +13,7 @@ class UserDetailFactory extends Factory
     public function definition()
     {
         return [
-            'bpid' => $this->faker->numberBetween(1, 5),
+            'userdtbpid' => $this->faker->numberBetween(1, 5),
             'createdby' => 1,
             'updatedby' => 1
         ];

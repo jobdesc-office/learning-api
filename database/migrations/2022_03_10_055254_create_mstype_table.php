@@ -18,8 +18,8 @@ class CreateMstypeTable extends Migration
             $table->string('typecd', 10)->nullable();
             $table->string('typename', 100);
             $table->integer('typeseq')->nullable();
-            $table->integer('masterid')->nullable();
-            $table->text('description')->nullable();
+            $table->integer('typemasterid')->nullable();
+            $table->text('typedesc')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
