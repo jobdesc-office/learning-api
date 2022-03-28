@@ -44,7 +44,6 @@ class FindTypeAction
 
         $types = $this->service->whereParent($codes)
             ->get();
-        Log::info((new TypeFinder('typecd', $code, $types->toArray()))->all());
         return new TypeFinder('typecd', $code, $types->toArray());
     }
 }

@@ -4,6 +4,7 @@ namespace App\Collections\Types;
 
 use App\Collections\CollectionFinder;
 use App\Models\Masters\Types;
+use Illuminate\Support\Facades\Log;
 
 class TypeFinder extends CollectionFinder
 {
@@ -56,6 +57,7 @@ class TypeFinder extends CollectionFinder
      * */
     public function children($keyValue = null)
     {
+        Log::info($keyValue);
         if ($this->items->count() == 0)
             throw new \Exception("Data tipe tidak ditemukan");
 

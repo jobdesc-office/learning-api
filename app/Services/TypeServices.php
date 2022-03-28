@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Masters\Types;
+use Illuminate\Support\Facades\Log;
 
 class TypeServices extends Types
 {
