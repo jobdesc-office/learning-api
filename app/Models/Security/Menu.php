@@ -15,10 +15,10 @@ class Menu extends Model
         "masterid",
         "menutypeid",
         "menunm",
-        "icon",
-        "route",
-        "color",
-        "seq",
+        "menuicon",
+        "menuroute",
+        "menucolor",
+        "menuseq",
         "createdby",
         "updatedby",
         "isactive",
@@ -34,6 +34,6 @@ class Menu extends Model
 
     public function parent()
     {
-        return $this->hasOne(Menu::class, 'menuid', 'masterid');
+        return $this->hasOne(Menu::class, 'menuid', 'typemasterid');
     }
 }

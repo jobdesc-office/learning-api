@@ -16,12 +16,11 @@ class UserDetail extends Model
 
     protected $fillable = [
         "userid",
-        "usertypeid",
-        "bpid",
-        "branchid",
-        "deptid",
-        "referalcode",
-        "relationid",
+        "userdttypeid",
+        "userdtbpid",
+        "userdtbranchnm",
+        "userdtreferalcode",
+        "userdtrelationid",
         "createdby",
         "updatedby",
         "isactive"
