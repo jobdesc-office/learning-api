@@ -20,7 +20,7 @@ class CreateMsuserdtTable extends Migration
             $table->bigInteger('userdtbpid');
             $table->string('userdtbranchnm', 100)->nullable();
             $table->string('userdtreferalcode', 50)->nullable();
-            $table->bigInteger('userdtrelationid');
+            $table->bigInteger('userdtrelationid')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
