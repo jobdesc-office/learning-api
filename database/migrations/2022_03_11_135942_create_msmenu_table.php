@@ -15,13 +15,13 @@ class CreateMsmenuTable extends Migration
     {
         Schema::create('msmenu', function (Blueprint $table) {
             $table->id('menuid');
-            $table->bigInteger('masterid')->nullable();
+            $table->bigInteger('masterid');
             $table->bigInteger('menutypeid');
             $table->string('menunm', 100);
-            $table->string('icon', 100)->nullable();
-            $table->string('route', 100)->nullable();
-            $table->string('color', 100)->nullable();
-            $table->integer('seq')->nullable();
+            $table->string('menuicon', 100)->nullable();
+            $table->string('menuroute', 100)->nullable();
+            $table->string('menucolor', 100)->nullable();
+            $table->integer('menuseq')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
