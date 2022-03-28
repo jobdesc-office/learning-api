@@ -15,7 +15,7 @@ class CreateMsmenuTable extends Migration
     {
         Schema::create('msmenu', function (Blueprint $table) {
             $table->id('menuid');
-            $table->bigInteger('masterid')->nullable();
+            $table->bigInteger('typemasterid')->nullable();
             $table->bigInteger('menutypeid');
             $table->string('menunm', 100);
             $table->string('menuicon', 100)->nullable();

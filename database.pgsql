@@ -103,7 +103,7 @@ ALTER SEQUENCE public.msbusinesspartner_bpid_seq OWNED BY public.msbusinesspartn
 
 CREATE TABLE public.msmenu (
     menuid bigint NOT NULL,
-    masterid bigint,
+    typemasterid bigint,
     menutypeid bigint NOT NULL,
     menunm character varying(100) NOT NULL,
     icon character varying(100),
@@ -150,7 +150,7 @@ CREATE TABLE public.mstype (
     typecd character varying(10),
     typename character varying(100) NOT NULL,
     typeseq integer,
-    masterid integer,
+    typemasterid integer,
     description text,
     createdby bigint,
     createddate timestamp(0) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -338,7 +338,7 @@ COPY public.msbusinesspartner (bpid, bpname, bptypeid, bppicname, bpemail, bppho
 -- Data for Name: msmenu; Type: TABLE DATA; Schema: public; Owner: hsm01_postgres
 --
 
-COPY public.msmenu (menuid, masterid, menutypeid, menunm, icon, route, color, seq, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
+COPY public.msmenu (menuid, typemasterid, menutypeid, menunm, icon, route, color, seq, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
 \.
 
 
@@ -346,7 +346,7 @@ COPY public.msmenu (menuid, masterid, menutypeid, menunm, icon, route, color, se
 -- Data for Name: mstype; Type: TABLE DATA; Schema: public; Owner: hsm01_postgres
 --
 
-COPY public.mstype (typeid, typecd, typename, typeseq, masterid, description, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
+COPY public.mstype (typeid, typecd, typename, typeseq, typemasterid, description, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
 1	role	Role	\N	\N	\N	1	2022-03-18 02:42:27	1	2022-03-18 02:42:27	t
 2	rolespa	Super Admin	\N	1	\N	1	2022-03-18 02:42:27	1	2022-03-18 02:42:27	t
 3	bptype	Tipe Business Partner	\N	\N	\N	1	2022-03-18 02:42:27	1	2022-03-18 02:42:27	t

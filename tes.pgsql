@@ -37,7 +37,7 @@ CREATE TABLE public.msuserdt
 CREATE TABLE public.msmenu
 (
     menuid serial,
-    masterid bigint NOT NULL,
+    typemasterid bigint NOT NULL,
     menutypeid bigint NOT NULL,
     menunm character varying(100) COLLATE pg_catalog."default" NOT NULL,
     menuicon character varying(100) COLLATE pg_catalog."default",

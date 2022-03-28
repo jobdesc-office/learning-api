@@ -31,7 +31,6 @@ class BusinessPartner extends Model
 
     public function parent()
     {
-        return $this->hasOne(Types::class, 'typeid', 'masterid');
+        return $this->hasOne(Types::class, 'typeid', 'typemasterid');
     }
-
 }

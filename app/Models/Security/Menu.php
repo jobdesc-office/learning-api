@@ -12,7 +12,7 @@ class Menu extends Model
     protected $primaryKey = "menuid";
 
     protected $fillable = [
-        "masterid",
+        "typemasterid",
         "menutypeid",
         "menunm",
         "menuicon",

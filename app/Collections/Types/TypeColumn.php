@@ -34,12 +34,12 @@ class TypeColumn extends Collection
 
     public function getParentId()
     {
-        return $this->get('masterid');
+        return $this->get('typemasterid');
     }
 
     public function parent()
     {
-        if($this->hasNotEmpty('parent'))
+        if ($this->hasNotEmpty('parent'))
             return new TypeColumn($this->get('parent'));
 
         return new TypeColumn();

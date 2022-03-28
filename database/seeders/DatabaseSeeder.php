@@ -26,6 +26,6 @@ class DatabaseSeeder extends Seeder
 
         BusinessPartner::factory(5)->create(['bptypeid' => $bptype->random()->getId()]);
         User::factory(1)->create(['username' => 'developer']);
-        UserDetail::factory(1)->create(['userid' => 1, 'usertypeid' => $types->get(\DBTypes::roleSuperAdmin)->getId()]);
+        UserDetail::factory(1)->create(['userid' => 1, 'userdttypeid' => $types->get(\DBTypes::roleSuperAdmin)->getId()]);
     }
 }
