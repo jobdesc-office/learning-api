@@ -10,7 +10,7 @@ class MenuServices extends Menu
 
     public function select($searchValue)
     {
-        return $this->newQuery()->select('menuid', 'menunm', 'typemasterid')
+        return $this->newQuery()->select('menuid', 'menunm', 'masterid')
             ->with([
                 'parent' => function ($query) {
                     $query->select('menuid', 'menunm');
@@ -37,7 +37,7 @@ class MenuServices extends Menu
 
     public function find($id)
     {
-        return $this->newQuery()->select('menuid', 'menutypeid', 'menunm', 'typemasterid', 'icon', 'route', 'color', 'seq')
+        return $this->newQuery()->select('menuid', 'menutypeid', 'menunm', 'masterid', 'menuicon', 'menuroute', 'menucolor', 'menuseq')
             ->with([
                 'parent' => function ($query) {
                     $query->select('menuid', 'menunm');

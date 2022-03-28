@@ -14,7 +14,6 @@ class UserDetailFactory extends Factory
     {
         return [
             'userdtbpid' => $this->faker->numberBetween(1, 5),
-            'userdtrelationid' => 1,
             'createdby' => 1,
             'updatedby' => 1
         ];

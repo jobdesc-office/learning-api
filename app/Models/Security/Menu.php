@@ -12,7 +12,7 @@ class Menu extends Model
     protected $primaryKey = "menuid";
 
     protected $fillable = [
-        "typemasterid",
+        "masterid",
         "menutypeid",
         "menunm",
         "menuicon",
@@ -34,6 +34,6 @@ class Menu extends Model
 
     public function parent()
     {
-        return $this->hasOne(Menu::class, 'menuid', 'typemasterid');
+        return $this->hasOne(Menu::class, 'menuid', 'masterid');
     }
 }
