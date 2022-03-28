@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Masters\Types;
+use DBTypes;
 use Illuminate\Support\Facades\Log;
 
 class TypeServices extends Types
@@ -17,7 +18,7 @@ class TypeServices extends Types
                 }
             ])
             ->whereHas('parent', function ($query) use ($code) {
-                $query->where('typecd', $code);
+                $query->whereIn('typecd', array_merge([], $code));
             });
     }
 }
