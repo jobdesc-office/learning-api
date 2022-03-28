@@ -21,6 +21,7 @@ class CreateMsuserTable extends Migration
             $table->string('useremail', 100)->nullable();
             $table->string('userphone', 100)->nullable();
             $table->string('userdeviceid', 50)->nullable();
+            $table->text('userfcmtoken')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
