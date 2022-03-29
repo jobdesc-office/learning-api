@@ -5,13 +5,30 @@ namespace App\Http\Controllers\Masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\User;
 use App\Services\Masters\UserServices;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Http\JsonResponse;
+use App\Services\Masters\TypeServices;
+use App\Services\Masters\BusinessPartnerServices;
+use App\Services\Masters\UserDetailServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    public function select(Request $req, TypeServices $typeServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $typeServices->select($searchValue);
+
+        return response()->json($selects);
+    }
+
+    public function select2(Request $req, BusinessPartnerServices $businessPartnerService)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $businessPartnerService->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(UserServices $userServices)
     {
         $query = $userServices->datatables();
@@ -29,9 +46,9 @@ class UsersController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, User $modelUser)
+    public function show($id, UserDetailServices $userDetailServices)
     {
-        $row = $modelUser->find($id);
+        $row = $userDetailServices->find($id);
         return response()->json($row);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Types;
+use Illuminate\Support\Facades\DB;
 
 class TypeServices extends Types
 {
@@ -14,5 +15,16 @@ class TypeServices extends Types
                 $query->where('typecd', $code);
             })
             ->get();
+    }
+
+    public function select($searchValue)
+    {
+        return $this->newQuery()->select('typeid', 'typename')
+        ->where('typemasterid', 1)
+        ->where(function ($query) use ($searchValue) {
+            $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
+        })
+        ->limit(3)
+        ->get();
     }
 }

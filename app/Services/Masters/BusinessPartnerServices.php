@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\BusinessPartner;
+use Illuminate\Support\Facades\DB;
 
 class BusinessPartnerServices extends BusinessPartner
 {
@@ -24,5 +25,15 @@ class BusinessPartnerServices extends BusinessPartner
                 }
             ])
             ->findOrFail($id);
+    }
+
+    public function select($searchValue)
+    {
+        return $this->newQuery()->select('bpid', 'bpname')
+        ->where(function ($query) use ($searchValue) {
+            $query->where(DB::raw('TRIM(LOWER(bpname))'), 'like', "%$searchValue%");
+        })
+        ->limit(3)
+        ->get();
     }
 }

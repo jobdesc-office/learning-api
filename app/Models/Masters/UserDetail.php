@@ -41,6 +41,6 @@ class UserDetail extends Model
 
     public function businesspartner()
     {
-        return $this->hasOne(BusinessPartner::class, 'bpid', 'bpid');
+        return $this->hasOne(BusinessPartner::class, 'bpid', 'userdtbpid');
     }
 }
