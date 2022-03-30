@@ -46,9 +46,9 @@ class UsersController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, UserDetailServices $userDetailServices)
+    public function show($id, UserServices $userServices)
     {
-        $row = $userDetailServices->find($id);
+        $row = $userServices->find($id);
         return response()->json($row);
     }
 

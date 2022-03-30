@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class UserServices extends User
 {
+    public function find($id)
+    {
+        return DB::table('msuserdt')
+        ->join('msuser', 'msuserdt.userid', '=', 'msuser.userid')
+        ->join('mstype', 'msuserdt.userdttypeid', '=', 'mstype.typeid')
+        ->join('msbusinesspartner', 'msuserdt.userdtbpid', '=', 'msbusinesspartner.bpid')
+        ->select('*')
+        ->get();
+    }
 
     public function select($searchValue)
     {
