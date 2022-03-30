@@ -14,6 +14,7 @@ class UserServices extends User
         ->join('mstype', 'msuserdt.userdttypeid', '=', 'mstype.typeid')
         ->join('msbusinesspartner', 'msuserdt.userdtbpid', '=', 'msbusinesspartner.bpid')
         ->select('*')
+        ->where('msuserdt.userid', $id)
         ->get();
     }
 
