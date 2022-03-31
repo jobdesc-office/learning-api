@@ -34,6 +34,11 @@ class UserDetail extends Model
         return new UserDetailFactory();
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'userid', 'userid');
+    }
+
     public function usertype()
     {
         return $this->hasOne(Types::class, 'typeid', 'userdttypeid');
