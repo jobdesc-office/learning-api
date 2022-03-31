@@ -88,13 +88,19 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'user'], function () use ($router) {
-                $router->get('select', 'UsersController@select');
-                $router->post('datatables', 'UsersController@datatables');
-
+                $router->get('', 'UsersController@all');
                 $router->post('', 'UsersController@store');
                 $router->get('{id}', 'UsersController@show');
                 $router->put('{id}', 'UsersController@update');
                 $router->delete('{id}', 'UsersController@destroy');
+            });
+
+            $router->group(['prefix' => 'businesspartner'], function () use ($router) {
+                $router->get('', 'BusinessPartnerController@all');
+                $router->post('', 'BusinessPartnerController@store');
+                $router->get('{id}', 'BusinessPartnerController@show');
+                $router->put('{id}', 'BusinessPartnerController@update');
+                $router->delete('{id}', 'BusinessPartnerController@destroy');
             });
         });
 

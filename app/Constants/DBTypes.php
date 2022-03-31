@@ -9,4 +9,5 @@ class DBTypes
     const businessPartner = 'bptype';
 
     const menuType = 'MNTP';
+    const schedule = 'schedule';
 }

@@ -37,6 +37,12 @@ class UsersController extends Controller
             ->toJson();
     }
 
+    public function all(UserServices $userServices)
+    {
+        $users = $userServices->all();
+        return response()->json($users);
+    }
+
     public function store(Request $req, User $modelUser)
     {
         $insert = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')));
@@ -57,7 +63,7 @@ class UsersController extends Controller
         $row = $modelUser->findOrFail($id);
 
         $update = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))
-        ->except('updatedby');
+            ->except('updatedby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);

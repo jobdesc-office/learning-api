@@ -17,6 +17,12 @@ class BusinessPartnerController extends Controller
             ->toJson();
     }
 
+    public function all(BusinessPartnerServices $businessPartnerServices)
+    {
+        $businesspartners = $businessPartnerServices->all();
+        return response()->json($businesspartners);
+    }
+
     public function store(Request $req, BusinessPartner $modelBusinessPartner)
     {
         $insert = collect($req->only($modelBusinessPartner->getFillable()))->filter();
@@ -37,7 +43,7 @@ class BusinessPartnerController extends Controller
         $row = $modelBusinessPartner->findOrFail($id);
 
         $update = collect($req->only($modelBusinessPartner->getFillable()))->filter()
-        ->except('updatedby');
+            ->except('updatedby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
