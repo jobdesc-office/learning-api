@@ -13,9 +13,7 @@ class UserDetailServices extends UserDetail
         ->with([
             'usertype' => function($query) {
                 $query->select('typeid', 'typename');
-            }
-        ])
-        ->with([
+            },
             'businesspartner' => function($query) {
                 $query->select('bpid', 'bpname');
             }
