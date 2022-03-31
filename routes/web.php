@@ -102,12 +102,18 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'BusinessPartnerController@update');
                 $router->delete('{id}', 'BusinessPartnerController@destroy');
             });
+
+            $router->group(['prefix' => 'schedule'], function () use ($router) {
+                $router->get('', 'ScheduleController@all');
+                $router->post('', 'ScheduleController@store');
+                $router->get('{id}', 'ScheduleController@show');
+                $router->put('{id}', 'ScheduleController@update');
+                $router->delete('{id}', 'ScheduleController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'Security'], function () use ($router) {
             $router->group(['prefix' => 'menus'], function () use ($router) {
-                $router->get('select', 'MenusController@select');
-                $router->post('datatables', 'MenusController@datatables');
 
                 $router->post('', 'MenusController@store');
                 $router->get('{id}', 'MenusController@show');
