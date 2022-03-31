@@ -18,8 +18,8 @@ class CreateVtscheduleTable extends Migration
             $table->string('schenm', 50)->nullable();
             $table->date('schestartdate')->nullable();
             $table->date('scheenddate')->nullable();
-            $table->date('schestarttime')->nullable();
-            $table->date('scheendtime')->nullable();
+            $table->time('schestarttime')->nullable();
+            $table->time('scheendtime')->nullable();
             $table->integer('schetypeid')->nullable();
             $table->date('scheactdate')->nullable();
             $table->integer('schetowardid')->nullable();
