@@ -20,7 +20,7 @@ class UserDetailServices extends UserDetail
                     $query->select('bpid', 'bpname');
                 },
                 'user' => function ($query) {
-                    $query->select('userid', 'userfullname', 'username', 'useremail', 'userphone');
+                    $query->select('*');
                 }
             ])
             ->findOrFail($id);
