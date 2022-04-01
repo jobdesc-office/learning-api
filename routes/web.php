@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Crypt;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -51,7 +53,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->post('', 'UsersController@store');
             $router->get('{id}', 'UsersController@show');
-            $router->put('{id}', 'UsersController@update');
+            $router->put(Crypt::encrypt('{id}'), 'UsersController@update');
             $router->delete('{id}', 'UsersController@destroy');
         });
 

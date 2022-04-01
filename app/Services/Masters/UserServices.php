@@ -26,6 +26,7 @@ class UserServices extends User
 
     public function datatables()
     {
-        return $this->newQuery()->select('userid', 'userfullname', 'useremail', 'userphone', 'isactive');
+        return $this->newQuery()
+        ->select('userid', 'userfullname', 'useremail', 'userphone', 'isactive');
     }
 }
