@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Crypt;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -63,6 +65,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'BusinessPartnerController@show');
             $router->put('{id}', 'BusinessPartnerController@update');
             $router->delete('{id}', 'BusinessPartnerController@destroy');
+        });
+
+        $router->group(['prefix' => 'schedule'], function () use ($router) {
+            $router->post('datatables', 'ScheduleController@datatables');
+
+            // $router->post('', 'ScheduleController@store');
+            $router->get('{id}', 'ScheduleController@show');
+            // $router->put('{id}', 'ScheduleController@update');
+            // $router->delete('{id}', 'ScheduleController@destroy');
         });
     });
 

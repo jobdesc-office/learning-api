@@ -16,7 +16,7 @@ class AuthController extends Controller
         $credentials = $req->only(['username', 'password']);
 
         if (!$token = Auth::attempt($credentials, true))
-            return null;
+            return response()->json(['message' => \TextMessages::failedSignIn], 400);
 
         $user = new UserColumn($authServices->authQuery()->find(\auth()->id()));
 
