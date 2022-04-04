@@ -45,6 +45,15 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Event', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Reminder', 'createdby' => 1, 'updatedby' => 1],
             ]
+        ],
+        [
+            'typecd' => \DBTypes::schedulePermission,
+            'typename' => 'Schedule Permission',
+            'children' => [
+                ['typename' => 'Read Only', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Add Member', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Share Link', 'createdby' => 1, 'updatedby' => 1],
+            ]
         ]
     ];
 

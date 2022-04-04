@@ -10,4 +10,5 @@ class DBTypes
 
     const menuType = 'MNTP';
     const schedule = 'schedule';
+    const schedulePermission = 'SCP';
 }
