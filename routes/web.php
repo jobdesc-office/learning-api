@@ -53,7 +53,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->post('', 'UsersController@store');
             $router->get('{id}', 'UsersController@show');
-            $router->put(Crypt::encrypt('{id}'), 'UsersController@update');
+            $router->put('{id}', 'UsersController@update');
             $router->delete('{id}', 'UsersController@destroy');
         });
 
@@ -69,7 +69,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'schedule'], function () use ($router) {
             $router->post('datatables', 'ScheduleController@datatables');
-            
+
             // $router->post('', 'ScheduleController@store');
             $router->get('{id}', 'ScheduleController@show');
             // $router->put('{id}', 'ScheduleController@update');

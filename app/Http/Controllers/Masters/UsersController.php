@@ -72,14 +72,22 @@ class UsersController extends Controller
         return response()->json($row);
     }
 
-    public function update($id, Request $req, User $modelUser)
+    public function update($id, Request $req, User $modelUser, UserDetail $modelUserDetail)
     {
-        $row = $modelUser->findOrFail(Crypt::decrypt($id));
+        $row = $modelUser->findOrFail($id);
 
         $update = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))
             ->except('updatedby');
         $row->update($update->toArray());
 
+        $dt = $modelUserDetail->select('userdtid')->where('userid', $id)->get();
+        $roles = json_decode($req->get('roles'));
+        foreach ($roles as $role) {
+            $dt->update([
+                'userdttypeid' => $role->roleid,
+                'userdtbpid' => $role->bpid,
+            ]);
+        }
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
