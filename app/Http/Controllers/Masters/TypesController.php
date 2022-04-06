@@ -22,4 +22,10 @@ class TypesController extends Controller
         return datatables()->eloquent($query)
             ->toJson();
     }
+
+    public function show($id, TypeServices $typeServices)
+    {
+        $row = $typeServices->find($id);
+        return response()->json($row);
+    }
 }

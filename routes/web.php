@@ -47,7 +47,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('datatables', 'TypesController@datatables');
 
             // $router->post('', 'TypesController@store');
-            // $router->get('{id}', 'TypesController@show');
+            $router->get('{id}', 'TypesController@show');
             // $router->put('{id}', 'TypesController@update');
             // $router->delete('{id}', 'TypesController@destroy');
 

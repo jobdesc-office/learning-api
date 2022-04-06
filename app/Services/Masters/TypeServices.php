@@ -31,4 +31,10 @@ class TypeServices extends Types
     {
         return $this->newQuery()->select('*')->where('typemasterid', null);
     }
+
+    public function find($id)
+    {
+        return $this->newQuery()
+            ->findOrFail($id);
+    }
 }
