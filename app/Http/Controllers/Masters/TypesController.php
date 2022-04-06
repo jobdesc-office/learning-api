@@ -14,4 +14,12 @@ class TypesController extends Controller
         $types = $typeServices->byCode($req->get('typecd'));
         return response()->json($types);
     }
+
+    public function datatables(TypeServices $typeServices)
+    {
+        $query = $typeServices->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 }
