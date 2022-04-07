@@ -3,22 +3,15 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
-use App\Services\Masters\TypeServices;
+use App\Services\Masters\TypeChildrenServices;
 use App\Models\Masters\Types;
 use Illuminate\Http\Request;
 
-class TypesController extends Controller
+class TypesChildrenController extends Controller
 {
-
-    public function byCode(Request $req, TypeServices $typeServices)
+    public function datatables($id, TypeChildrenServices $typeChildrenServices)
     {
-        $types = $typeServices->byCode($req->get('typecd'));
-        return response()->json($types);
-    }
-
-    public function datatables(TypeServices $typeServices)
-    {
-        $query = $typeServices->datatables();
+        $query = $typeChildrenServices->datatables($id);
 
         return datatables()->eloquent($query)
             ->toJson();
@@ -33,9 +26,23 @@ class TypesController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, TypeServices $typeServices)
+    public function parent(TypeChildrenServices $typeChildrenServices)
     {
-        $row = $typeServices->find($id);
+        $query = $typeChildrenServices->parent();
+
+        return response()->json($query);
+    }
+
+    public function showParent($id, TypeChildrenServices $typeChildrenServices)
+    {
+        $query = $typeChildrenServices->showParent($id);
+
+        return response()->json($query);
+    }
+
+    public function show($id, TypeChildrenServices $typeChildrenServices)
+    {
+        $row = $typeChildrenServices->find($id);
         return response()->json($row);
     }
 

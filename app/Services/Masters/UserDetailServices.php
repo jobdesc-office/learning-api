@@ -23,6 +23,8 @@ class UserDetailServices extends UserDetail
                     $query->select('*');
                 }
             ])
+            // ->where('userid', $id)
+            // ->get();
             ->findOrFail($id);
     }
 }

@@ -36,8 +36,6 @@ class UsersController extends Controller
     {
         $query = $userServices->datatables();
 
-        // return datatables()->eloquent($query)
-        //     ->toJson();
         return datatables()->eloquent($query)
             ->toJson();
     }
@@ -80,7 +78,7 @@ class UsersController extends Controller
             ->except('updatedby');
         $row->update($update->toArray());
 
-        $dt = $modelUserDetail->select('userdtid')->where('userid', $id)->get();
+        $dt = $modelUserDetail->findOrFail($id);
         $roles = json_decode($req->get('roles'));
         foreach ($roles as $role) {
             $dt->update([
