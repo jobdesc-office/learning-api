@@ -24,6 +24,15 @@ class TypesController extends Controller
             ->toJson();
     }
 
+    public function store(Request $req, Types $modelTypes)
+    {
+        $insert = collect($req->only($modelTypes->getFillable()))->filter();
+
+        $modelTypes->fill($insert->toArray())->save();
+
+        return response()->json(['message' => \TextMessages::successCreate]);
+    }
+
     public function show($id, TypeServices $typeServices)
     {
         $row = $typeServices->find($id);
@@ -35,9 +44,17 @@ class TypesController extends Controller
         $row = $modelTypes->findOrFail($id);
 
         $update = collect($req->only($modelTypes->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
+    public function destroy($id, Types $modelTypes)
+    {
+        $row = $modelTypes->findOrFail($id);
+        $row->delete();
+
+        return response()->json(['message' => \TextMessages::successDelete]);
     }
 }

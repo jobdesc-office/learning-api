@@ -46,23 +46,21 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
             $router->post('datatables', 'TypesController@datatables');
 
-            // $router->post('', 'TypesController@store');
+            $router->post('', 'TypesController@store');
             $router->get('{id}', 'TypesController@show');
             $router->put('{id}', 'TypesController@update');
-            // $router->delete('{id}', 'TypesController@destroy');
-
+            $router->delete('{id}', 'TypesController@destroy');
         });
 
         $router->group(['prefix' => 'typeschildren'], function () use ($router) {
             $router->post('datatables/{id}', 'TypesChildrenController@datatables');
-            $router->post('datatables', 'TypesChildrenController@datatabless');
             $router->get('parent', 'TypesChildrenController@parent');
+            $router->get('parent/{id}', 'TypesChildrenController@showParent');
 
-            // $router->post('', 'TypesController@store');
-            // $router->get('{id}', 'TypesController@show');
-            // $router->put('{id}', 'TypesController@update');
-            // $router->delete('{id}', 'TypesController@destroy');
-
+            $router->post('', 'TypesController@store');
+            $router->get('{id}', 'TypesController@show');
+            $router->put('{id}', 'TypesController@update');
+            $router->delete('{id}', 'TypesController@destroy');
         });
 
         $router->group(['prefix' => 'user'], function () use ($router) {

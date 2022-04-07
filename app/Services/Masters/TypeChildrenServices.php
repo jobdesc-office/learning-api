@@ -12,13 +12,23 @@ class TypeChildrenServices extends Types
         return $this->newQuery()->select('*')->where('typemasterid', $id);
     }
 
-    public function datatabless()
-    {
-        return $this->newQuery()->select('*');
-    }
-
     public function parent()
     {
         return $this->newQuery()->select('*')->where('typemasterid', null)->get();
+    }
+
+    public function showParent($id)
+    {
+        return $this->newQuery()->select('*')->where('typemasterid', null)->where('typeid', $id)
+            ->findOrFail($id);
+    }
+
+    public function find($id)
+    {
+        return $this->newQuery()
+            ->whereHas('parent', function ($query) use ($id) {
+                $query->where('typeid', $id);
+            })
+            ->findOrFail($id);
     }
 }
