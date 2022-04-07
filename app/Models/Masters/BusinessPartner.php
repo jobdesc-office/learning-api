@@ -33,4 +33,9 @@ class BusinessPartner extends Model
     {
         return $this->hasOne(Types::class, 'typeid', 'typemasterid');
     }
+
+    public function userdetail()
+    {
+        return $this->belongsTo(UserDetail::class, 'bpid', 'userdtbpid');
+    }
 }

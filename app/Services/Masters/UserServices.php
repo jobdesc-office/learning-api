@@ -29,4 +29,9 @@ class UserServices extends User
         return $this->newQuery()
             ->select('userid', 'userfullname', 'useremail', 'userphone', 'isactive');
     }
+
+    public function find($id)
+    {
+        return $this->newQuery()->findOrFail($id);
+    }
 }

@@ -17,9 +17,10 @@ class BusinessPartnerController extends Controller
             ->toJson();
     }
 
-    public function all(BusinessPartnerServices $businessPartnerServices)
+    public function all(Request $req, BusinessPartnerServices $businessPartnerServices)
     {
-        $businesspartners = $businessPartnerServices->all();
+        $whereArr = collect($req->all())->filter();
+        $businesspartners = $businessPartnerServices->getAll($whereArr);
         return response()->json($businesspartners);
     }
 
