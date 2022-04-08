@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\User;
+use App\Models\Masters\UserDetail;
 use Illuminate\Support\Facades\DB;
 
 class UserServices extends User
@@ -27,7 +28,13 @@ class UserServices extends User
     public function getAll($whereArr)
     {
         $users = $this->newQuery()->with([
-            'userdetails' => function ($query) {
+            'userdetails' => function ($query) use ($whereArr) {
+
+                $userDetailFillable = (new UserDetail())->getFillable();
+                if (!$whereArr->only($userDetailFillable)->isEmpty()) {
+                    $query->where($whereArr->only($userDetailFillable)->toArray());
+                }
+
                 $query->select('userid', 'userdttypeid', 'userdtbpid')
                     ->with([
                         'usertype' => function ($query) {
@@ -43,8 +50,16 @@ class UserServices extends User
             $users = $users->where($whereArr->only($this->getFillable())->toArray());
         }
 
+        $userDetailFillable = (new UserDetail())->getFillable();
+        if (!$whereArr->only($userDetailFillable)->isEmpty()) {
+            $users = $users->whereHas('userdetails', function ($query) use ($whereArr, $userDetailFillable) {
+                $query->where($whereArr->only($userDetailFillable)->toArray());
+            });
+        }
+
+
         if (isset($whereArr['search'])) {
-            $users = $users->where(DB::raw('TRIM(LOWER(username))'), 'like', "%$whereArr[serach]%");
+            $users = $users->where(DB::raw('TRIM(LOWER(username))'), 'like', "%$whereArr[search]%");
         }
         return $users->get();
     }
