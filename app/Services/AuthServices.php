@@ -13,7 +13,7 @@ class AuthServices extends User
         return $this->newQuery()->select(['userid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid'])
             ->with([
                 'userdetails' => function ($query) {
-                    $query->select('userid', 'userdttypeid', 'userdtbpid')
+                    $query->select('userid', 'userdtid', 'userdttypeid', 'userdtbpid')
                         ->with([
                             'usertype' => function ($query) {
                                 $query->select('typeid', 'typename', 'typecd');
