@@ -53,6 +53,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'typeschildren'], function () use ($router) {
+            $router->post('datatables', 'TypesChildrenController@datatablesNonFilter');
             $router->post('datatables/{id}', 'TypesChildrenController@datatables');
             $router->get('parent', 'TypesChildrenController@parent');
             $router->get('parent/{id}', 'TypesChildrenController@showParent');
