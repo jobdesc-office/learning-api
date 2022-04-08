@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class TypesChildrenController extends Controller
 {
+    public function datatablesNonFilter(TypeChildrenServices $typeChildrenServices)
+    {
+        $query = $typeChildrenServices->datatablesNonFilter();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
     public function datatables($id, TypeChildrenServices $typeChildrenServices)
     {
         $query = $typeChildrenServices->datatables($id);
