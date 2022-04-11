@@ -48,10 +48,10 @@ class UsersController extends Controller
             ->toJson();
     }
 
-    public function all(Request $req, UserServices $userServices)
+    public function all(Request $req, UserDetailServices $userDetailServices)
     {
         $whereArr = collect($req->all())->filter();
-        $users = $userServices->getAll($whereArr);
+        $users = $userDetailServices->getAll($whereArr);
         return response()->json($users);
     }
 

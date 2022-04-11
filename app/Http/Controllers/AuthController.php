@@ -24,7 +24,11 @@ class AuthController extends Controller
             'userid' => $user->getId(),
             'userfullname' => $user->getFullName(),
             'userdetails' => collect($user->userDetail()->all())->map(function ($data) {
-                return ['usertype' => $data->userType()->toArray(), 'businesspartner' => $data->businessPartner()->toArray()];
+                return [
+                    'userdtid' => $data->getId(),
+                    'usertype' => $data->userType()->toArray(),
+                    'businesspartner' => $data->businessPartner()->toArray(),
+                ];
             })->all(),
         ]);
         $response->put('jwt_token', $token);

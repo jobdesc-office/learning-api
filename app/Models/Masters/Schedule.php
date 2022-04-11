@@ -43,12 +43,12 @@ class Schedule extends Model
         return $this->hasOne(Types::class, 'typeid', 'schetypeid');
     }
 
-    public function businesspartner()
+    public function schebp()
     {
         return $this->hasOne(BusinessPartner::class, 'bpid', 'schebpid');
     }
 
-    public function user()
+    public function schetoward()
     {
         return $this->hasOne(User::class, 'userid', 'schetowardid');
     }

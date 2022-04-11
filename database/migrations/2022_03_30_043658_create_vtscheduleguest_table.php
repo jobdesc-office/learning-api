@@ -19,14 +19,14 @@ class CreateVtscheduleguestTable extends Migration
             $table->integer('scheid')->nullable();
             $table->integer('scheuserid')->nullable();
             $table->integer('schebpid')->nullable();
-            
+
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
             $table->bigInteger('updatedby')->nullable();
             $table->timestamp('updateddate')->useCurrent();
             $table->boolean('isactive')->default(true);
         });
-        DB::statement('ALTER TABLE vtscheduleguest ADD COLUMN schepermisid character varying[] null');
+        DB::statement('ALTER TABLE vtscheduleguest ADD COLUMN schepermisid int[] null');
     }
 
     /**
