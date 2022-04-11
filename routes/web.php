@@ -57,6 +57,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('datatables/{id}', 'TypesChildrenController@datatables');
             $router->get('parent', 'TypesChildrenController@parent');
             $router->get('parent/{id}', 'TypesChildrenController@showParent');
+            $router->get('children', 'TypesChildrenController@children');
 
             $router->post('', 'TypesController@store');
             $router->get('{id}', 'TypesController@show');
@@ -67,6 +68,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'user'], function () use ($router) {
             $router->get('select', 'UsersController@select');
             $router->get('select2', 'UsersController@select2');
+            $router->get('all', 'UsersController@allUser');
             $router->post('datatables', 'UsersController@datatables');
 
             $router->post('', 'UsersController@store');

@@ -33,9 +33,10 @@ class TypesChildrenController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function parent(TypeChildrenServices $typeChildrenServices)
+    public function parent(Request $req, TypeChildrenServices $typeChildrenServices)
     {
-        $query = $typeChildrenServices->parent();
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $query = $typeChildrenServices->parents($searchValue);
 
         return response()->json($query);
     }
@@ -43,6 +44,14 @@ class TypesChildrenController extends Controller
     public function showParent($id, TypeChildrenServices $typeChildrenServices)
     {
         $query = $typeChildrenServices->showParent($id);
+
+        return response()->json($query);
+    }
+
+    public function children(Request $req, TypeChildrenServices $typeChildrenServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $query = $typeChildrenServices->children($searchValue);
 
         return response()->json($query);
     }

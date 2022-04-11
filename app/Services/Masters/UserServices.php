@@ -25,6 +25,15 @@ class UserServices extends User
             ->get();
     }
 
+    public function allUser($searchValue)
+    {
+        return $this->newQuery()->select('userid', 'userfullname')
+            ->where(function ($query) use ($searchValue) {
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function getAll($whereArr)
     {
         $users = $this->newQuery()->with([

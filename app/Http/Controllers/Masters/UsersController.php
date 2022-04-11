@@ -32,6 +32,14 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
+    public function allUser(Request $req, UserServices $userServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $query = $userServices->allUser($searchValue);
+
+        return response()->json($query);
+    }
+
     public function datatables(UserServices $userServices)
     {
         $query = $userServices->datatables();

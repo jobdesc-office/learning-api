@@ -22,6 +22,7 @@ class TypeServices extends Types
         return $this->newQuery()->select('typeid', 'typename')
             ->where('typemasterid', 1)
             ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
             })
             ->get();
