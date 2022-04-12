@@ -43,8 +43,8 @@ class ScheduleController extends Controller
         $schedule = $scheduleModel->findOrFail($id);
 
         $fields = collect($req->only($scheduleModel->getFillable()))->filter()
-            ->except('updatedby');
-        $schedule->fill($fields)->save();
+            ->except('createdby');
+        $schedule->update($fields->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }

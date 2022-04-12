@@ -92,8 +92,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->post('', 'ScheduleController@store');
             $router->get('{id}', 'ScheduleController@show');
-            // $router->put('{id}', 'ScheduleController@update');
-            // $router->delete('{id}', 'ScheduleController@destroy');
+            $router->put('{id}', 'ScheduleController@update');
+            $router->delete('{id}', 'ScheduleController@destroy');
         });
     });
 
