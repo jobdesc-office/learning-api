@@ -39,7 +39,7 @@ class TypeSeeder extends Seeder
         ],
         [
             'typecd' => \DBTypes::schedule,
-            'typename' => 'schedule',
+            'typename' => 'Schedule',
             'children' => [
                 ['typename' => 'Task', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Event', 'createdby' => 1, 'updatedby' => 1],

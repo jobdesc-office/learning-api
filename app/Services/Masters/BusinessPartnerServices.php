@@ -25,7 +25,6 @@ class BusinessPartnerServices extends BusinessPartner
     public function select($searchValue)
     {
         return $this->searchQuery($searchValue)
-            ->limit(3)
             ->get();
     }
 
