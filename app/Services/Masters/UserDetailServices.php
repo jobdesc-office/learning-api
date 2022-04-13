@@ -3,6 +3,8 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\UserDetail;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class UserDetailServices extends UserDetail
 {
@@ -28,7 +30,7 @@ class UserDetailServices extends UserDetail
             ->findOrFail($id);
     }
 
-    public function getAll($whereArr)
+    public function getAll(Collection $whereArr)
     {
         $users = $this->newQuery()->with([
             'usertype' => function ($query) {
@@ -43,6 +45,12 @@ class UserDetailServices extends UserDetail
         ]);
         if (!$whereArr->only($this->getFillable())->isEmpty()) {
             $users = $users->where($whereArr->only($this->getFillable())->toArray());
+        }
+        if ($whereArr->has('search')) {
+            $users = $users->whereHas('user', function ($query) use ($whereArr) {
+                $searchValue = strtolower($whereArr->get('search'));
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
+            });
         }
         return $users->get();
     }
