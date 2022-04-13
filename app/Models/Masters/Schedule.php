@@ -2,7 +2,6 @@
 
 namespace App\Models\Masters;
 
-use App\Models\Masters\Types;
 use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
@@ -56,5 +55,10 @@ class Schedule extends Model
     public function schereftype()
     {
         return $this->hasOne(Types::class, 'typeid', 'schereftypeid');
+    }
+
+    public function scheguest()
+    {
+        return $this->hasOne(ScheduleGuest::class, 'scheid', 'scheid');
     }
 }

@@ -13,9 +13,9 @@ class ScheduleServices extends Schedule
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
-                // 'schereftypeid' => function ($query) {
-                //     $query->select('typeid', 'typename');
-                // },
+                'scheguest' => function ($query) {
+                    $query->select('scheuserid', 'schepermisid');
+                },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');
                 },
