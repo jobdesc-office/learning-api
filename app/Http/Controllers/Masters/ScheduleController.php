@@ -30,14 +30,16 @@ class ScheduleController extends Controller
 
         $scheduleModel->fill($insert->toArray())->save();
 
-        $members = json_decode($req->get('members'));
-        foreach ($members as $member) {
-            $scheduleGuestModel->create([
-                'scheid' => $scheduleModel->scheid,
-                'scheuserid' => $member->scheuserid,
-                'schebpid' => $member->schebpid,
-                'schepermisid' => $member->schepermisid
-            ]);
+        if ($req->has('members')) {
+            $members = json_decode($req->get('members'));
+            foreach ($members as $member) {
+                $scheduleGuestModel->create([
+                    'scheid' => $scheduleModel->scheid,
+                    'scheuserid' => $member->scheuserid,
+                    'schebpid' => $member->schebpid,
+                    'schepermisid' => $member->schepermisid
+                ]);
+            }
         }
 
         return response()->json(['message' => \TextMessages::successCreate]);
