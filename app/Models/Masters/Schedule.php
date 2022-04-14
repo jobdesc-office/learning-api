@@ -37,6 +37,11 @@ class Schedule extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
+    public function scheguest()
+    {
+        return $this->hasMany(ScheduleGuest::class, 'scheid', 'scheid');
+    }
+
     public function schetype()
     {
         return $this->hasOne(Types::class, 'typeid', 'schetypeid');
@@ -55,10 +60,5 @@ class Schedule extends Model
     public function schereftype()
     {
         return $this->hasOne(Types::class, 'typeid', 'schereftypeid');
-    }
-
-    public function scheguest()
-    {
-        return $this->hasOne(ScheduleGuest::class, 'scheid', 'scheid');
     }
 }
