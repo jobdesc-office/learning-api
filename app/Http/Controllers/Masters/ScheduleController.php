@@ -7,6 +7,7 @@ use App\Models\Masters\Schedule;
 use App\Models\Masters\ScheduleGuest;
 use App\Services\Masters\ScheduleServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
@@ -60,11 +61,16 @@ class ScheduleController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, Schedule $scheduleModel)
+    public function destroy($id, Schedule $scheduleModel, ScheduleGuest $scheduleGuest)
     {
-        $row = $scheduleModel->findOrFail($id);
-        $row->delete();
-
-        return response()->json(['message' => \TextMessages::successDelete]);
+        DB::beginTransaction();
+        try {
+            $rowDt = $scheduleGuest->select('scheid')->where('scheid', $id)->delete();
+            $row = $scheduleModel->findOrFail($id)->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }
