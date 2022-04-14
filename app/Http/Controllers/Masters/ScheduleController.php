@@ -31,7 +31,7 @@ class ScheduleController extends Controller
 
         $scheduleModel->fill($insert->toArray())->save();
 
-        if ($req->has('members')) {
+        if ($req->has('members') && $req->get('members') != null) {
             $members = json_decode($req->get('members'));
             foreach ($members as $member) {
                 $scheduleGuestModel->create([
