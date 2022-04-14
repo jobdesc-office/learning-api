@@ -39,7 +39,8 @@ class Schedule extends Model
 
     public function scheguest()
     {
-        return $this->hasMany(ScheduleGuest::class, 'scheid', 'scheid');
+        return $this->hasOne(ScheduleGuest::class, 'scheid', 'scheid');
+        // return $this->hasMany(ScheduleGuest::class, 'scheid', 'scheid');
     }
 
     public function schetype()

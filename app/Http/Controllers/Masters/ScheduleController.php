@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Models\Masters\Schedule;
+use App\Models\Masters\ScheduleGuest;
 use App\Services\Masters\ScheduleServices;
 use Illuminate\Http\Request;
 
@@ -23,11 +24,21 @@ class ScheduleController extends Controller
             ->toJson();
     }
 
-    public function store(Request $req, Schedule $scheduleModel)
+    public function store(Request $req, Schedule $scheduleModel, ScheduleGuest $scheduleGuestModel)
     {
         $insert = collect($req->only($scheduleModel->getFillable()))->filter();
 
         $scheduleModel->fill($insert->toArray())->save();
+
+        $members = json_decode($req->get('members'));
+        foreach ($members as $member) {
+            $scheduleGuestModel->create([
+                'scheid' => $scheduleModel->scheid,
+                'scheuserid' => $member->scheuserid,
+                'schebpid' => $member->schebpid,
+                'schepermisid' => $member->schepermisid
+            ]);
+        }
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
