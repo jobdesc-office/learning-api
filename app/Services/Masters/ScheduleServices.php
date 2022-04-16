@@ -42,4 +42,24 @@ class ScheduleServices extends Schedule
                 }
             ]);
     }
+
+    public function getAll()
+    {
+        return $this->newQuery()
+            ->with([
+                'schetype' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'scheguest' => function ($query) {
+                    $query->select('*')
+                        ->join('msuser', 'vtscheduleguest.scheuserid', '=', 'msuser.userid');
+                },
+                'schebp' => function ($query) {
+                    $query->select('bpid', 'bpname');
+                },
+                'schetoward' => function ($query) {
+                    $query->select('userid', 'userfullname');
+                }
+            ])->get();
+    }
 }

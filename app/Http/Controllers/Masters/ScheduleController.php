@@ -13,7 +13,7 @@ class ScheduleController extends Controller
 {
     public function all(ScheduleServices $scheduleServices)
     {
-        $schedules = $scheduleServices->all();
+        $schedules = $scheduleServices->getAll();
         return response()->json($schedules);
     }
 
