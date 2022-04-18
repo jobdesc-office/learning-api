@@ -67,6 +67,13 @@ class ScheduleServices extends Schedule
         if ($scheduleWhere->isNotEmpty()) {
             $query = $query->where($scheduleWhere->toArray());
         }
+
+        if ($whereArr->has('schemonth')) {
+            $query = $query->where(function ($q) use ($whereArr) {
+                $q->WhereMonth('schestartdate', $whereArr->get('schemonth'))
+                    ->orWhereMonth('scheenddate', $whereArr->get('schemonth'));
+            });
+        }
         return $query->get();
     }
 }
