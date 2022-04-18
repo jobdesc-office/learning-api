@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Schedule;
+use Illuminate\Support\Collection;
 
 class ScheduleServices extends Schedule
 {
@@ -43,9 +44,9 @@ class ScheduleServices extends Schedule
             ]);
     }
 
-    public function getAll()
+    public function getAll(Collection $whereArr)
     {
-        return $this->newQuery()
+        $query = $this->newQuery()
             ->with([
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
@@ -60,6 +61,12 @@ class ScheduleServices extends Schedule
                 'schetoward' => function ($query) {
                     $query->select('userid', 'userfullname');
                 }
-            ])->get();
+            ]);
+
+        $scheduleWhere = $whereArr->only($this->fillable);
+        if ($scheduleWhere->isNotEmpty()) {
+            $query = $query->where($scheduleWhere->toArray());
+        }
+        return $query->get();
     }
 }
