@@ -74,6 +74,18 @@ class ScheduleServices extends Schedule
                     ->orWhereMonth('scheenddate', $whereArr->get('schemonth'));
             });
         }
+
+        if ($whereArr->has('schedate')) {
+            $query = $query->where(function ($q) use ($whereArr) {
+                $q->where(function ($q) use ($whereArr) {
+                    $q->whereDate("schestartdate", "<=", $whereArr->get('schedate'))
+                        ->whereDate("scheenddate", ">=", $whereArr->get('schedate'));
+                });
+                $q->orWhere(function ($q) use ($whereArr) {
+                    $q->whereDate("schestartdate", $whereArr->get('schedate'))->where("scheenddate", null);
+                });
+            });
+        }
         return $query->get();
     }
 }
