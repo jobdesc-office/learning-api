@@ -17,14 +17,6 @@ class ScheduleController extends Controller
         return response()->json($schedules);
     }
 
-    public function datatables(ScheduleServices $scheduleServices)
-    {
-        $query = $scheduleServices->datatables();
-
-        return datatables()->eloquent($query)
-            ->toJson();
-    }
-
     public function store(Request $req, Schedule $scheduleModel, ScheduleGuest $scheduleGuestModel)
     {
         $insert = collect($req->only($scheduleModel->getFillable()))->filter();

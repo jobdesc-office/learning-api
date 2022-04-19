@@ -88,7 +88,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'schedule'], function () use ($router) {
-            $router->post('datatables', 'ScheduleController@datatables');
+            $router->get('', 'ScheduleController@all');
 
             $router->post('', 'ScheduleController@store');
             $router->get('{id}', 'ScheduleController@show');
