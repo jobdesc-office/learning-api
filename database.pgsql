@@ -428,13 +428,13 @@ ALTER TABLE ONLY public.vtscheduleguest ALTER COLUMN scheguestid SET DEFAULT nex
 --
 
 COPY public.migrations (id, migration, batch) FROM stdin;
-22	2022_03_10_045810_create_msuser_table	1
-23	2022_03_10_052651_create_msuserdt_table	1
-24	2022_03_10_055254_create_mstype_table	1
-25	2022_03_10_061238_create_msbusinesspartner_table	1
-26	2022_03_11_135942_create_msmenu_table	1
-27	2022_03_30_040856_create_vtschedule_table	1
-28	2022_03_30_043658_create_vtscheduleguest_table	1
+29	2022_03_10_045810_create_msuser_table	1
+30	2022_03_10_052651_create_msuserdt_table	1
+31	2022_03_10_055254_create_mstype_table	1
+32	2022_03_10_061238_create_msbusinesspartner_table	1
+33	2022_03_11_135942_create_msmenu_table	1
+34	2022_03_30_040856_create_vtschedule_table	1
+35	2022_03_30_043658_create_vtscheduleguest_table	1
 \.
 
 
@@ -443,11 +443,11 @@ COPY public.migrations (id, migration, batch) FROM stdin;
 --
 
 COPY public.msbusinesspartner (bpid, bpname, bptypeid, bppicname, bpemail, bpphone, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
-2	Leffler-Romaguera	8	Mr. Waylon Johnston	dereck.mante@trantow.com	1-248-862-8971	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-3	Tromp, Windler and Senger	8	Maxime Larson	braxton44@yahoo.com	319-750-7752	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-4	Bailey, Bailey and Lebsack	8	Prof. Carlee Ritchie II	elenora.hermann@adams.com	+1.740.440.1625	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-5	Davis Ltd	8	Patricia Bailey	hhoppe@king.net	662.980.2693	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-1	Christiansen-Stanton	8	Giovani Murazik	kentong39@stoltenberg.net	+1.423.267.0122	2	2022-04-04 07:37:50	1	2022-04-06 09:27:23	t
+1	Marvin-Donnelly	7	Mr. Cleveland Armstrong	emilio98@hotmail.com	+1 (262) 755-1183	1	2022-04-12 08:40:22	1	2022-04-12 08:40:22	t
+2	Schroeder-Casper	7	Brice Crooks	emmanuel.treutel@hoppe.org	+1-678-933-3295	1	2022-04-12 08:40:22	1	2022-04-12 08:40:22	t
+3	Champlin-Hill	7	Aubrey Keebler	assunta61@wisozk.biz	+1-603-609-1807	1	2022-04-12 08:40:22	1	2022-04-12 08:40:22	t
+4	Schinner-Denesik	7	Reymundo Gutkowski DVM	bernhard47@yahoo.com	(339) 636-0552	1	2022-04-12 08:40:22	1	2022-04-12 08:40:22	t
+5	Ernser-Turner	7	Martine Williamson	emmy.torp@hotmail.com	+1 (364) 642-5797	1	2022-04-12 08:40:22	1	2022-04-12 08:40:22	t
 \.
 
 
@@ -464,22 +464,22 @@ COPY public.msmenu (menuid, masterid, menutypeid, menunm, menuicon, menuroute, m
 --
 
 COPY public.mstype (typeid, typecd, typename, typeseq, typemasterid, typedesc, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
-4	\N	Otomotif	\N	3	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-5	\N	Manufaktur	\N	3	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-7	\N	Web	\N	6	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-8	\N	Apps	\N	6	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-10	\N	Task	\N	9	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-11	\N	Event	\N	9	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-12	\N	Reminder	\N	9	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-14	\N	Read Only	\N	13	\N	1	2022-04-04 10:56:32	1	2022-04-04 10:56:32	t
-15	\N	Add Member	\N	13	\N	1	2022-04-04 10:56:32	1	2022-04-04 10:56:32	t
-16	\N	Share Link	\N	13	\N	1	2022-04-04 10:56:32	1	2022-04-04 10:56:32	t
-1	role	Roles	\N	\N	\N	2	2022-04-04 07:37:50	1	2022-04-06 08:54:42	t
-3	bptype	Tipe Business Partners	\N	\N	\N	2	2022-04-04 07:37:50	1	2022-04-06 08:54:51	t
-13	SCP	Schedule Permissions	\N	\N	\N	2	2022-04-04 10:54:21	1	2022-04-06 08:54:57	t
-9	Sche	Schedules	\N	\N	\N	2	2022-04-04 07:37:50	\N	2022-04-06 09:46:49	t
-2	rolespa	Super Admin	\N	1	\N	1	2022-04-04 07:37:50	2	2022-04-07 04:51:06	t
-6	MNTP	Menu Types	9	\N	\N	2	2022-04-04 07:37:50	2	2022-04-07 04:52:49	t
+1	role	Role	\N	\N	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+2	rolespa	Super Admin	\N	1	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+3	bptype	Tipe Business Partner	\N	\N	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+4	\N	Otomotif	\N	3	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+5	\N	Manufaktur	\N	3	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+6	mntp	Menu Type	\N	\N	\N	\N	2022-04-12 08:40:21	\N	2022-04-12 08:40:21	t
+7	\N	Web	\N	6	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+8	\N	Apps	\N	6	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+9	schedule	Schedule	\N	\N	\N	\N	2022-04-12 08:40:21	\N	2022-04-12 08:40:21	t
+10	\N	Task	\N	9	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+11	\N	Event	\N	9	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+12	\N	Reminder	\N	9	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+13	scp	Schedule Permission	\N	\N	\N	\N	2022-04-12 08:40:21	\N	2022-04-12 08:40:21	t
+14	\N	Read Only	\N	13	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+15	\N	Add Member	\N	13	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
+16	\N	Share Link	\N	13	\N	1	2022-04-12 08:40:21	1	2022-04-12 08:40:21	t
 \.
 
 
@@ -488,8 +488,8 @@ COPY public.mstype (typeid, typecd, typename, typeseq, typemasterid, typedesc, c
 --
 
 COPY public.msuser (userid, username, userpassword, userfullname, useremail, userphone, userdeviceid, userfcmtoken, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
-1	developer	$2y$10$Inar8x0T4NZEQ48uZ2RjzuCHmlQxIYEnci49C1GTxEULQF2yEsAD2	Jayne Kutch	wehner.adrain@yahoo.com	650-553-6062	\N	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-2	Novan	$2y$10$1cAZuEmogsTOf99im2bQiepxgdORJhlfOrORQfmWjD25sdzfghIu6	Novan Andre Andriansyah Putra	novanandre41@gmail.com	+628988803500	\N	\N	1	2022-04-04 07:49:31	1	2022-04-05 02:32:54	t
+1	developer	$2y$10$YyD3kTIeMUQkMzITqaPC0Ov0n8w41xz3kkeDFZENPuGQbfBTFuNKi	Waino Kirlin	kmaggio@feeney.info	+1 (260) 505-2153	\N	\N	1	2022-04-12 08:40:22	1	2022-04-12 08:40:22	t
+2	Novan	$2y$10$b7SWdN9akCKQ/rkVKCYqguVllWrEAFCBe7iXZiQ2tmWonvNoOIFMi	Novan Andre Andriansyah Putra	novanandre41@gmail.com	+628988803500	\N	\N	1	2022-04-12 09:34:50	1	2022-04-14 07:00:32	t
 \.
 
 
@@ -498,9 +498,8 @@ COPY public.msuser (userid, username, userpassword, userfullname, useremail, use
 --
 
 COPY public.msuserdt (userdtid, userid, userdttypeid, userdtbpid, userdtbranchnm, userdtreferalcode, userdtrelationid, createdby, createddate, updatedby, updateddate, isactive) FROM stdin;
-1	1	2	5	\N	\N	\N	1	2022-04-04 07:37:50	1	2022-04-04 07:37:50	t
-2	2	2	1	\N	\N	\N	\N	2022-04-04 07:49:31	\N	2022-04-05 02:18:21	t
-11	1	2	4	\N	\N	\N	1	2022-04-07 10:47:48	1	2022-04-07 10:47:48	t
+1	1	2	2	\N	\N	\N	1	2022-04-12 08:40:23	1	2022-04-12 08:40:23	t
+2	2	2	2	\N	\N	\N	\N	2022-04-12 09:34:50	\N	2022-04-14 06:36:02	t
 \.
 
 
@@ -524,7 +523,7 @@ COPY public.vtscheduleguest (scheguestid, scheid, scheuserid, schebpid, createdb
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hsm01_postgres
 --
 
-SELECT pg_catalog.setval('public.migrations_id_seq', 28, true);
+SELECT pg_catalog.setval('public.migrations_id_seq', 35, true);
 
 
 --
@@ -545,21 +544,21 @@ SELECT pg_catalog.setval('public.msmenu_menuid_seq', 1, false);
 -- Name: mstype_typeid_seq; Type: SEQUENCE SET; Schema: public; Owner: hsm01_postgres
 --
 
-SELECT pg_catalog.setval('public.mstype_typeid_seq', 19, true);
+SELECT pg_catalog.setval('public.mstype_typeid_seq', 16, true);
 
 
 --
 -- Name: msuser_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: hsm01_postgres
 --
 
-SELECT pg_catalog.setval('public.msuser_userid_seq', 7, true);
+SELECT pg_catalog.setval('public.msuser_userid_seq', 6, true);
 
 
 --
 -- Name: msuserdt_userdtid_seq; Type: SEQUENCE SET; Schema: public; Owner: hsm01_postgres
 --
 
-SELECT pg_catalog.setval('public.msuserdt_userdtid_seq', 11, true);
+SELECT pg_catalog.setval('public.msuserdt_userdtid_seq', 8, true);
 
 
 --

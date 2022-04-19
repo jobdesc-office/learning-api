@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
-    public function all(ScheduleServices $scheduleServices)
+    public function all(Request $req, ScheduleServices $scheduleServices)
     {
-        $schedules = $scheduleServices->all();
+        $schedules = $scheduleServices->getAll(collect($req->all()));
         return response()->json($schedules);
     }
 
@@ -23,14 +23,16 @@ class ScheduleController extends Controller
 
         $scheduleModel->fill($insert->toArray())->save();
 
-        $members = json_decode($req->get('members'));
-        foreach ($members as $member) {
-            $scheduleGuestModel->create([
-                'scheid' => $scheduleModel->scheid,
-                'scheuserid' => $member->scheuserid,
-                'schebpid' => $member->schebpid,
-                'schepermisid' => $member->schepermisid
-            ]);
+        if ($req->has('members') && $req->get('members') != null) {
+            $members = json_decode($req->get('members'));
+            foreach ($members as $member) {
+                $scheduleGuestModel->create([
+                    'scheid' => $scheduleModel->scheid,
+                    'scheuserid' => $member->scheuserid,
+                    'schebpid' => $member->schebpid,
+                    'schepermisid' => $member->schepermisid
+                ]);
+            }
         }
 
         return response()->json(['message' => \TextMessages::successCreate]);
