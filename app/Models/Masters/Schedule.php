@@ -2,10 +2,13 @@
 
 namespace App\Models\Masters;
 
+use Database\Factories\ScheduleFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    use HasFactory;
     protected $table = "vtschedule";
     protected $primaryKey = "scheid";
 
@@ -37,10 +40,15 @@ class Schedule extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
+    protected static function newFactory()
+    {
+        return new ScheduleFactory;
+    }
+
     public function scheguest()
     {
-        return $this->hasOne(ScheduleGuest::class, 'scheid', 'scheid');
-        // return $this->hasMany(ScheduleGuest::class, 'scheid', 'scheid');
+        // return $this->hasOne(ScheduleGuest::class, 'scheid', 'scheid');
+        return $this->hasMany(ScheduleGuest::class, 'scheid', 'scheid');
     }
 
     public function schetype()

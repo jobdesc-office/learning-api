@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Masters\Types;
+use DBTypes;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Seeder;
 
@@ -41,9 +42,9 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::schedule,
             'typename' => 'Schedule',
             'children' => [
-                ['typename' => 'Task', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Event', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Reminder', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Task', 'typecd' => DBTypes::scheduleTask, 'createdby' => 1, 'updatedby' => 1,],
+                ['typename' => 'Event', 'typecd' => DBTypes::scheduleEvent, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Reminder', 'typecd' => DBTypes::scheduleReminder, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

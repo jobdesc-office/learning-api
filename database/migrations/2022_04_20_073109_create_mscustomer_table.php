@@ -15,11 +15,11 @@ class CreateMscustomerTable extends Migration
     {
         Schema::create('mscustomer', function (Blueprint $table) {
             $table->id('customerid');
-            $table->string('customerprefix', 100);
+            $table->string('customerprefix', 100)->nullable();
             $table->string('customername', 100);
             $table->string('customerphone', 20)->nullable();
             $table->text('customeraddress')->nullable();
-            $table->bigInteger('customertypeid');
+            $table->bigInteger('customertypeid')->nullable();
             $table->bigInteger('customerproviceid')->nullable();
             $table->bigInteger('customercityid')->nullable();
             $table->bigInteger('customersubdistrictid')->nullable();

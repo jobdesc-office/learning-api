@@ -9,6 +9,10 @@ class DBTypes
     const businessPartner = 'bptype';
 
     const menuType = 'mntp';
-    const schedule = 'schedule';
     const schedulePermission = 'scp';
+
+    const schedule = 'schedule';
+    const scheduleEvent = "scheevent";
+    const scheduleTask = "schetask";
+    const scheduleReminder = "scheremind";
 }
