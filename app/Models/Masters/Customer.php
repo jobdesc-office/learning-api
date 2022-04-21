@@ -11,21 +11,21 @@ class Customer extends Model
 {
     use HasFactory;
     protected $table = "mscustomer";
-    protected $primaryKey = "customerid";
+    protected $primaryKey = "cstmid";
 
     protected $fillable = [
-        'customerprefix',
-        'customername',
-        'customerphone',
-        'customeraddress',
-        'customertypeid',
-        'customerproviceid',
-        'customercityid',
-        'customersubdistrictid',
-        'customeruvid',
-        'customerpostalcode',
-        'customerlatitude',
-        'customerlongitude',
+        'cstmprefix',
+        'cstmname',
+        'cstmphone',
+        'cstmaddress',
+        'cstmtypeid',
+        'cstmprovinceid',
+        'cstmcityid',
+        'cstmsubdistrictid',
+        'cstmuvid',
+        'cstmpostalcode',
+        'cstmlatitude',
+        'cstmlongitude',
         'referalcode',
         'createdby',
         'updatedby',
@@ -40,8 +40,8 @@ class Customer extends Model
         return new CustomerFactory;
     }
 
-    public function customertype()
+    public function cstmtype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'customertypeid');
+        return $this->hasOne(Types::class, 'typeid', 'cstmtypeid');
     }
 }

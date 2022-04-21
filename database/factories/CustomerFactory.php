@@ -24,15 +24,15 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'customername' => $this->faker->company,
-            'customerphone' => $this->faker->phoneNumber,
-            'customeraddress' => $this->faker->address,
-            'customerproviceid' => $this->faker->numberBetween(1, 34),
-            'customercityid' => $this->faker->numberBetween(1, 10),
-            'customersubdistrictid' => $this->faker->numberBetween(1, 10),
-            'customerpostalcode' => $this->faker->numberBetween(30001, 39999),
-            'customerlatitude' => $this->faker->latitude,
-            'customerlongitude' => $this->faker->longitude,
+            'cstmname' => $this->faker->company,
+            'cstmphone' => $this->faker->phoneNumber,
+            'cstmaddress' => $this->faker->address,
+            'cstmprovinceid' => $this->faker->numberBetween(1, 34),
+            'cstmcityid' => $this->faker->numberBetween(1, 10),
+            'cstmsubdistrictid' => $this->faker->numberBetween(1, 10),
+            'cstmpostalcode' => $this->faker->numberBetween(30001, 39999),
+            'cstmlatitude' => $this->faker->latitude,
+            'cstmlongitude' => $this->faker->longitude,
         ];
     }
 }

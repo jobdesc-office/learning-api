@@ -14,13 +14,13 @@ class CreateStbpcustomerTable extends Migration
     public function up()
     {
         Schema::create('stbpcustomer', function (Blueprint $table) {
-            $table->id('bpcustomerid');
-            $table->bigInteger('bpid');
-            $table->bigInteger('customerid');
-            $table->string('customername', 100);
-            $table->string('customerphone', 255)->nullable();
-            $table->string('customeraddress', 255)->nullable();
-            $table->string('customerpic', 255)->nullable();
+            $table->id('sbcid');
+            $table->bigInteger('sbcbpid');
+            $table->bigInteger('sbccstmid');
+            $table->string('sbccstmname', 100);
+            $table->string('sbccstmphone', 255)->nullable();
+            $table->string('sbccstmaddress', 255)->nullable();
+            $table->string('sbccstmpic', 255)->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

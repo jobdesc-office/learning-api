@@ -44,13 +44,27 @@ class ScheduleController extends Controller
         return response()->json($schedule);
     }
 
-    public function update($id, Request $req, Schedule $scheduleModel)
+    public function update($id, Request $req, Schedule $scheduleModel, ScheduleGuest $scheduleGuestModel)
     {
         $schedule = $scheduleModel->findOrFail($id);
 
         $fields = collect($req->only($scheduleModel->getFillable()))->filter()
             ->except('createdby');
         $schedule->update($fields->toArray());
+
+        if ($req->has('members') && $req->get('members') != null) {
+            $scheduleGuestModel->where('scheid', $id)->delete();
+
+            $members = json_decode($req->get('members'));
+            foreach ($members as $member) {
+                $scheduleGuestModel->create([
+                    'scheid' => $scheduleModel->scheid,
+                    'scheuserid' => $member->scheuserid,
+                    'schebpid' => $member->schebpid,
+                    'schepermisid' => $member->schepermisid
+                ]);
+            }
+        }
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }

@@ -25,19 +25,19 @@ class BpCustomerFactory extends Factory
     {
         $this->prepareAttributes();
         return [
-            'bpid' => $this->businessPartnerId,
-            'customerid' => $this->customerId,
-            'customername' => $this->getCustomer()->customername,
-            'customerphone' => $this->getCustomer()->customerphone,
-            'customeraddress' => $this->getCustomer()->customeraddress,
-            'customerpic' => $this->faker->imageUrl(480, 480),
+            'sbcbpid' => $this->businessPartnerId,
+            'sbccstmid' => $this->customerId,
+            'sbccstmname' => $this->getCustomer()->cstmname,
+            'sbccstmphone' => $this->getCustomer()->cstmphone,
+            'sbccstmaddress' => $this->getCustomer()->cstmaddress,
+            'sbccstmpic' => $this->faker->imageUrl(480, 480),
         ];
     }
 
     function prepareAttributes()
     {
         $ids = $this->getCombination()[$this->faker->unique->numberBetween(0, FactoryCount::bpCustomerCount - 1)];
-        $this->customerId = $ids['customerid'];
+        $this->customerId = $ids['cstmid'];
         $this->businessPartnerId = $ids['bpid'];
     }
 
@@ -53,7 +53,7 @@ class BpCustomerFactory extends Factory
             for ($j = 1; $j <= FactoryCount::customerCount; $j++) {
                 $arr[] = [
                     'bpid' => $i,
-                    'customerid' => $j,
+                    'cstmid' => $j,
                 ];
             }
         }

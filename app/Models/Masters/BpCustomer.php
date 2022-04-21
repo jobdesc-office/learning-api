@@ -11,15 +11,15 @@ class BpCustomer extends Model
 {
     use HasFactory;
     protected $table = "stbpcustomer";
-    protected $primaryKey = "bpcustomerid";
+    protected $primaryKey = "sbcid";
 
     protected $fillable = [
-        'bpid',
-        'customerid',
-        'customername',
-        'customerphone',
-        'customeraddress',
-        'customerpic',
+        'sbcbpid',
+        'sbccstmid',
+        'sbccstmname',
+        'sbccstmphone',
+        'sbccstmaddress',
+        'sbccstmpic',
         'createdby',
         'updatedby',
         'isactive'
@@ -33,13 +33,13 @@ class BpCustomer extends Model
         return new BpCustomerFactory;
     }
 
-    public function customerbp()
+    public function sbcbp()
     {
-        return $this->hasOne(Types::class, 'bpid', 'bpid');
+        return $this->hasOne(BusinessPartner::class, 'bpid', 'sbcbpid');
     }
 
-    public function customer()
+    public function sbccustomer()
     {
-        return $this->hasOne(Types::class, 'customerid', 'customerid');
+        return $this->hasOne(Customer::class, 'cstmid', 'sbccstmid');
     }
 }

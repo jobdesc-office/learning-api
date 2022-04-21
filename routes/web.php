@@ -141,6 +141,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'ScheduleController@update');
                 $router->delete('{id}', 'ScheduleController@destroy');
             });
+
+            $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
+                $router->get('', 'BpCustomerController@all');
+                $router->post('', 'BpCustomerController@store');
+                $router->get('{id}', 'BpCustomerController@show');
+                $router->put('{id}', 'BpCustomerController@update');
+                $router->delete('{id}', 'BpCustomerController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'Security'], function () use ($router) {
