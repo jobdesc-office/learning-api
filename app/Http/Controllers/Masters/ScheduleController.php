@@ -57,7 +57,7 @@ class ScheduleController extends Controller
 
             $members = json_decode($req->get('members'));
             foreach ($members as $member) {
-                $scheduleGuestModel->create([
+                $scheduleGuestModel->update([
                     'scheid' => $scheduleModel->scheid,
                     'scheuserid' => $member->scheuserid,
                     'schebpid' => $member->schebpid,
