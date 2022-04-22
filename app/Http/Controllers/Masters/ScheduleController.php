@@ -58,6 +58,7 @@ class ScheduleController extends Controller
             foreach ($members as $member) {
                 $schedule = ScheduleGuest::find($member->id);
                 $schedule->fill(collect($member)->filter()->all());
+                $schedule->save();
             }
         }
         return response()->json(['message' => \TextMessages::successEdit]);
