@@ -60,7 +60,6 @@ class ScheduleController extends Controller
                 $schedule->fill(collect($member)->filter()->all());
             }
         }
-
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
