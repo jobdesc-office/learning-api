@@ -53,7 +53,7 @@ class ScheduleController extends Controller
         $schedule->update($fields->toArray());
 
         if ($req->has('members') && $req->get('members') != null) {
-            $scheduleGuestModel->where('scheid', $id)->delete();
+            $scheduleGuestModel->where('scheid', $id);
 
             $members = json_decode($req->get('members'));
             foreach ($members as $member) {
