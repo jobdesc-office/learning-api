@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\BusinessPartners\BusinessPartner;
 use App\Models\Masters\BpCustomer;
 use App\Models\Masters\City;
+use App\Models\Masters\Country;
 use App\Models\Masters\Customer;
 use App\Models\Masters\Province;
 use App\Models\Masters\Schedule;
@@ -26,10 +27,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([TypeSeeder::class]);
 
+        $countriesData = $this->getCountriesData();
         $provincesData = $this->getProvincesData();
         $citiesData = $this->getCitiesData();
         $subdistrictsdata = $this->getSubdistrictData();
 
+        Country::insert($countriesData);
         Province::insert($provincesData);
         City::insert($citiesData);
         Subdistrict::insert($subdistrictsdata);
@@ -39,6 +42,18 @@ class DatabaseSeeder extends Seeder
         Schedule::factory(\FactoryCount::scheduleCount)->create();
         Customer::factory(\FactoryCount::customerCount)->create();
         BpCustomer::factory(\FactoryCount::bpCustomerCount)->create();
+    }
+
+
+    /**
+     * @return array
+     * import contries from array
+     * */
+    private function getCountriesData()
+    {
+        return [
+            ['countryname' => 'Indonesia',],
+        ];
     }
 
     /**
