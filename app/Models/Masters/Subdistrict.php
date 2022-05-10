@@ -22,6 +22,6 @@ class Subdistrict extends Model
 
     public function subdistrictcity()
     {
-        $this->belongsTo(City::class, 'subdistrictcityid', 'cityid');
+        return $this->belongsTo(City::class, 'subdistrictcityid', 'cityid');
     }
 }

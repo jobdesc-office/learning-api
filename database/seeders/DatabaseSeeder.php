@@ -89,6 +89,7 @@ class DatabaseSeeder extends Seeder
                 return [
                     'cityname' => $city->nama,
                     'cityprovid' => $prov->id,
+                    'cityid' => $city->id,
                 ];
             })->filter();
             $results->push(...$cities->toArray());
@@ -115,6 +116,7 @@ class DatabaseSeeder extends Seeder
                     return [
                         'subdistrictname' => $subd->nama,
                         'subdistrictcityid' => $city->id,
+                        'subdistrictid' => $subd->id,
                     ];
                 })->filter();
 

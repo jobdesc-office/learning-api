@@ -167,6 +167,37 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'CustomerController@update');
                 $router->delete('{id}', 'CustomerController@destroy');
             });
+
+            $router->group(['prefix' => 'country'], function () use ($router) {
+                $router->get('', 'CountryController@all');
+                $router->post('', 'CountryController@store');
+                $router->get('{id}', 'CountryController@show');
+                $router->put('{id}', 'CountryController@update');
+                $router->delete('{id}', 'CountryController@destroy');
+            });
+
+            $router->group(['prefix' => 'province'], function () use ($router) {
+                $router->get('', 'ProvinceController@all');
+                $router->post('', 'ProvinceController@store');
+                $router->get('{id}', 'ProvinceController@show');
+                $router->put('{id}', 'ProvinceController@update');
+                $router->delete('{id}', 'ProvinceController@destroy');
+            });
+
+            $router->group(['prefix' => 'city'], function () use ($router) {
+                $router->get('', 'CityController@all');
+                $router->post('', 'CityController@store');
+                $router->get('{id}', 'CityController@show');
+                $router->put('{id}', 'CityController@update');
+                $router->delete('{id}', 'CityController@destroy');
+            });
+            $router->group(['prefix' => 'subdistrict'], function () use ($router) {
+                $router->get('', 'SubdistrictController@all');
+                $router->post('', 'SubdistrictController@store');
+                $router->get('{id}', 'SubdistrictController@show');
+                $router->put('{id}', 'SubdistrictController@update');
+                $router->delete('{id}', 'SubdistrictController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'Security'], function () use ($router) {

@@ -22,6 +22,6 @@ class Province extends Model
 
     public function provcountry()
     {
-        $this->belongsTo(Country::class, 'provcountryid', 'countryid');
+        return $this->belongsTo(Country::class, 'provcountryid', 'countryid');
     }
 }

@@ -18,4 +18,9 @@ class Country extends Model
 
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
+
+    public function provinces()
+    {
+        return $this->hasMany(Province::class, 'provcountryid', 'countryid');
+    }
 }
