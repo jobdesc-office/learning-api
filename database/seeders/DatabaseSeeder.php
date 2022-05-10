@@ -4,11 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\BusinessPartners\BusinessPartner;
 use App\Models\Masters\BpCustomer;
+use App\Models\Masters\City;
 use App\Models\Masters\Customer;
+use App\Models\Masters\Province;
 use App\Models\Masters\Schedule;
-use App\Models\Masters\User;
+use App\Models\Masters\Subdistrict;
 use App\Models\Masters\UserDetail;
-use FactoryCount;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 
@@ -25,10 +26,102 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([TypeSeeder::class]);
 
+        $provincesData = $this->getProvincesData();
+        $citiesData = $this->getCitiesData();
+        $subdistrictsdata = $this->getSubdistrictData();
+
+        Province::insert($provincesData);
+        City::insert($citiesData);
+        Subdistrict::insert($subdistrictsdata);
+
         BusinessPartner::factory(\FactoryCount::bpCount)->create();
         UserDetail::factory(\FactoryCount::userDetailCount)->create();
         Schedule::factory(\FactoryCount::scheduleCount)->create();
         Customer::factory(\FactoryCount::customerCount)->create();
         BpCustomer::factory(\FactoryCount::bpCustomerCount)->create();
+    }
+
+    /**
+     * @return array
+     * import provinces from public api
+     * */
+    private function getProvincesData()
+    {
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'))->slice(20);
+
+        return $provinces->map(function ($prov) {
+            return [
+                'provname' => $prov->nama,
+                'provcountryid' => 1,
+                'provid' => $prov->id,
+            ];
+        })->filter()->toArray();
+    }
+
+    /**
+     * @return array
+     * import cities from public api
+     * */
+    private function getCitiesData()
+    {
+        $results = collect([]);
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'))->slice(20);
+
+        $provinces->each(function ($prov) use ($results) {
+            $cities = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kabupaten/$prov->id.json"));
+
+            $cities = $cities->map(function ($city) use ($prov) {
+                return [
+                    'cityname' => $city->nama,
+                    'cityprovid' => $prov->id,
+                ];
+            })->filter();
+            $results->push(...$cities->toArray());
+        });
+        return $results->filter()->toArray();
+    }
+
+    /**
+     * @return array
+     * import subdistrict from public api
+     * */
+    private function getSubdistrictData()
+    {
+        $results = collect([]);
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'))->slice(20);
+
+        $provinces->each(function ($prov) use ($results) {
+            $cities = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kabupaten/$prov->id.json"));
+
+            $cities->each(function ($city) use ($results) {
+                $subdistricts = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kecamatan/$city->id.json"));
+
+                $subdistricts = $subdistricts->map(function ($subd) use ($city) {
+                    return [
+                        'subdistrictname' => $subd->nama,
+                        'subdistrictcityid' => $city->id,
+                    ];
+                })->filter();
+
+                $results->push(...$subdistricts->toArray());
+            });
+        });
+        return $results->filter()->toArray();
+    }
+
+    /**
+     * @return stdClass
+     * send GET request to passed url
+     */
+    private function fetchData($url)
+    {
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($resp);
     }
 }

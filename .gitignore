@@ -5,4 +5,4 @@ Homestead.yaml
 .env
 .phpunit.result.cache
 /command
-./Ventes DB.session.sql
+Ventes DB.session.sql
