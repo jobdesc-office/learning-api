@@ -53,14 +53,19 @@ class ScheduleController extends Controller
         $schedule->update($fields->toArray());
 
         if ($req->has('members') && $req->get('members') != null) {
+            $scheduleGuestModel->where('scheid', $id);
 
             $members = json_decode($req->get('members'));
             foreach ($members as $member) {
-                $schedule = ScheduleGuest::find($member->id);
-                $schedule->fill(collect($member)->filter()->all());
-                $schedule->save();
+                $scheduleGuestModel->update([
+                    'scheid' => $scheduleModel->scheid,
+                    'scheuserid' => $member->scheuserid,
+                    'schebpid' => $member->schebpid,
+                    'schepermisid' => $member->schepermisid
+                ]);
             }
         }
+
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
