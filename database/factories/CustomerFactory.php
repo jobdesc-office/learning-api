@@ -33,6 +33,14 @@ class CustomerFactory extends Factory
             'cstmpostalcode' => $this->faker->numberBetween(30001, 39999),
             'cstmlatitude' => $this->faker->latitude,
             'cstmlongitude' => $this->faker->longitude,
+            'cstmtypeid' => $this->getTypeId(),
         ];
+    }
+
+    function getTypeid()
+    {
+        $customertype = find_type()->byCode([\DBTypes::cstmtype])
+            ->children(\DBTypes::cstmtype);
+        return $customertype->random()->getId();
     }
 }

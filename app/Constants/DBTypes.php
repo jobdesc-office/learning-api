@@ -15,4 +15,6 @@ class DBTypes
     const scheduleEvent = "scheevent";
     const scheduleTask = "schetask";
     const scheduleReminder = "scheremind";
+
+    const cstmtype = 'cstmtype';
 }

@@ -55,6 +55,13 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Add Member', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Share Link', 'createdby' => 1, 'updatedby' => 1],
             ]
+        ],
+        [
+            'typecd' => \DBTypes::cstmtype,
+            'typename' => 'Customer Type',
+            'children' => [
+                ['typename' => 'Manufacture', 'createdby' => 1, 'updatedby' => 1],
+            ]
         ]
     ];
 

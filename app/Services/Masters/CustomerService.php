@@ -2,21 +2,18 @@
 
 namespace App\Services\Masters;
 
-use App\Models\Masters\BpCustomer;
+use App\Models\Masters\Customer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class BpCustomerService extends BpCustomer
+class CustomerService extends Customer
 {
     public function find($id)
     {
         return $this->newQuery()
             ->with([
-                'sbcbp' => function ($query) {
-                    $query->select('bpid', 'bpname');
-                },
-                'sbccstm' => function ($query) {
-                    $query->select('*');
+                'cstmtype' => function ($query) {
+                    $query->select('typeid', 'typename');
                 },
             ])
             ->findOrFail($id);
@@ -26,11 +23,8 @@ class BpCustomerService extends BpCustomer
     {
         $query = $this->newQuery()
             ->with([
-                'sbcbp' => function ($query) {
-                    $query->select('bpid', 'bpname');
-                },
-                'sbccstm' => function ($query) {
-                    $query->select('*');
+                'cstmtype' => function ($query) {
+                    $query->select('typeid', 'typename');
                 },
             ]);
 

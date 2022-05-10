@@ -38,7 +38,7 @@ class BpCustomer extends Model
         return $this->hasOne(BusinessPartner::class, 'bpid', 'sbcbpid');
     }
 
-    public function sbccustomer()
+    public function sbccstm()
     {
         return $this->hasOne(Customer::class, 'cstmid', 'sbccstmid');
     }
