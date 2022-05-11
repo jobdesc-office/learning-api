@@ -22,7 +22,7 @@ class ProvinceServices extends Province
         }
 
         if ($whereArr->has('search')) {
-            $query = $query->where('provname', 'like', "%$whereArr->search%");
+            $query = $query->where('provname', 'like', "%$whereArr->get('search')%");
         }
 
         return $query->get();

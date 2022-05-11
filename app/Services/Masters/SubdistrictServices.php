@@ -22,7 +22,7 @@ class SubdistrictServices extends Subdistrict
         }
 
         if ($whereArr->has('search')) {
-            $query = $query->where('subdistrictname', 'like', "%$whereArr->search%");
+            $query = $query->where('subdistrictname', 'like', "%$whereArr->get('search')%");
         }
 
         return $query->get();
