@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\Province;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ProvinceServices extends Province
 {
@@ -22,7 +23,7 @@ class ProvinceServices extends Province
         }
 
         if ($whereArr->has('search')) {
-            $query = $query->where('provname', 'like', "%$whereArr->get('search')%");
+            $query = $query->where(DB::raw('TRIM(LOWER(provname))'), 'like', "%" . $whereArr->get('search') . "%");
         }
 
         return $query->get();
