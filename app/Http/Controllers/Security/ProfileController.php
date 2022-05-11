@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Controllers\Security;
+
+use App\Http\Controllers\Controller;
+use App\Services\Masters\ScheduleServices;
+use App\Services\Masters\UserDetailServices;
+
+class ProfileController extends Controller
+{
+    public function index($id, ScheduleServices $scheduleServices, UserDetailServices $userDetailServices)
+    {
+        $myProfiles = $userDetailServices->find($id);
+        $mySchedules = $scheduleServices->mySchedules($id);
+
+        return response()->json(['myProfiles' => $myProfiles, 'mySchedules' => $mySchedules]);
+    }
+}

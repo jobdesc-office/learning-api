@@ -109,7 +109,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'home'], function () use ($router) {
-            $router->get('{id}', 'HomeController@index');
+            $router->get('index', 'HomeController@index');
+            // $router->post('datatables', 'MenusController@datatables');
+
+            // $router->post('', 'MenusController@store');
+            // $router->get('{id}', 'MenusController@show');
+            // $router->put('{id}', 'MenusController@update');
+            // $router->delete('{id}', 'MenusController@destroy');
+        });
+
+        $router->group(['prefix' => 'profile'], function () use ($router) {
+            $router->get('{id}', 'ProfileController@index');
             // $router->post('datatables', 'MenusController@datatables');
 
             // $router->post('', 'MenusController@store');

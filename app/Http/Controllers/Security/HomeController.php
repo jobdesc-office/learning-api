@@ -10,14 +10,12 @@ use App\Services\Masters\ScheduleServices;
 
 class HomeController extends Controller
 {
-    public function index($id, ScheduleServices $scheduleServices)
+    public function index()
     {
         $users = User::all()->where('isactive', true)->count();
         $schedules = Schedule::all()->where('isactive', true)->count();
         $partners = BusinessPartner::all()->where('isactive', true)->count();
 
-        $mySchedules = $scheduleServices->mySchedules($id);
-
-        return response()->json(['users' => $users, 'schedules' => $schedules, 'businesspartner' => $partners, 'mySchedules' => $mySchedules]);
+        return response()->json(['users' => $users, 'schedules' => $schedules, 'businesspartner' => $partners]);
     }
 }
