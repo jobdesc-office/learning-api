@@ -31,7 +31,7 @@ class AuthController extends Controller
                 ];
             })->all(),
         ]);
-        $response->put('jwt_token', $token);
+        if ($user->getId() != null) $response->put('jwt_token', $token);
 
         return response()->json($response);
     }

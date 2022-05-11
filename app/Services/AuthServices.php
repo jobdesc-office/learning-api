@@ -23,7 +23,8 @@ class AuthServices extends User
                             }
                         ]);
                 }
-            ]);
+            ])
+            ->where('isactive', true);
     }
 
     /**
