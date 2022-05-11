@@ -109,7 +109,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'home'], function () use ($router) {
-            $router->get('index', 'HomeController@index');
+            $router->get('{id}', 'HomeController@index');
             // $router->post('datatables', 'MenusController@datatables');
 
             // $router->post('', 'MenusController@store');
