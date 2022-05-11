@@ -21,6 +21,10 @@ class ProvinceServices extends Province
             $query = $query->where($provincewhere->toArray());
         }
 
+        if ($whereArr->has('search')) {
+            $query = $query->where('provname', 'like', "%$whereArr->search%");
+        }
+
         return $query->get();
     }
 

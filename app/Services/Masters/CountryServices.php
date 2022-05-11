@@ -22,6 +22,10 @@ class CountryServices extends Country
             $query = $query->where($countrywhere->toArray());
         }
 
+        if ($whereArr->has('search')) {
+            $query = $query->where('countryname', 'like', "%$whereArr->search%");
+        }
+
         return $query->get();
     }
 }

@@ -21,6 +21,10 @@ class CityServices extends City
             $query = $query->where($citywhere->toArray());
         }
 
+        if ($whereArr->has("search")) {
+            $query = $query->where('cityname', 'like', "%$whereArr->search%");
+        }
+
         return $query->get();
     }
 
