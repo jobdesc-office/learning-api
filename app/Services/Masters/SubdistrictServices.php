@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\Subdistrict;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class SubdistrictServices extends Subdistrict
 {
@@ -19,6 +20,10 @@ class SubdistrictServices extends Subdistrict
         $subdistrictwhere = $whereArr->only($this->fillable);
         if ($subdistrictwhere->isNotEmpty()) {
             $query = $query->where($subdistrictwhere->toArray());
+        }
+
+        if ($whereArr->has('search')) {
+            $query = $query->where(DB::raw('TRIM(LOWER(subdistrictname))'), 'like', "%" . $whereArr->get('search') . "%");
         }
 
         return $query->get();

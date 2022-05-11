@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\City;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CityServices extends City
 {
@@ -19,6 +20,10 @@ class CityServices extends City
         $citywhere = $whereArr->only($this->fillable);
         if ($citywhere->isNotEmpty()) {
             $query = $query->where($citywhere->toArray());
+        }
+
+        if ($whereArr->has("search")) {
+            $query = $query->where(DB::raw('TRIM(LOWER(cityname))'), 'like', "%" . $whereArr->get('search') . "%");
         }
 
         return $query->get();
