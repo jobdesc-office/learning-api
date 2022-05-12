@@ -10,9 +10,8 @@ class ProfileController extends Controller
 {
     public function index($id, ScheduleServices $scheduleServices, UserDetailServices $userDetailServices)
     {
-        $myProfiles = $userDetailServices->find($id);
         $mySchedules = $scheduleServices->mySchedules($id);
 
-        return response()->json(['myProfiles' => $myProfiles, 'mySchedules' => $mySchedules]);
+        return response()->json(['mySchedules' => $mySchedules]);
     }
 }

@@ -9,22 +9,7 @@ class ScheduleServices extends Schedule
 {
     public function mySchedules($id)
     {
-        $query = $this->newQuery()->select('*')
-            ->with([
-                'schetype' => function ($query) {
-                    $query->select('typeid', 'typename');
-                },
-                'scheguest' => function ($query) {
-                    $query->select('*')
-                        ->join('msuser', 'vtscheduleguest.scheuserid', '=', 'msuser.userid');
-                },
-                'schebp' => function ($query) {
-                    $query->select('bpid', 'bpname');
-                },
-                'schetoward' => function ($query) {
-                    $query->select('userid', 'userfullname');
-                }
-            ])
+        $query = $this->newQuery()->select('scheid', 'schenm', 'schestartdate', 'schestarttime')
             ->where('schetowardid', $id);
 
         return $query->get();
