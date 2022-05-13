@@ -3,12 +3,30 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\BpCustomer;
+use App\Models\Masters\Customer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class BpCustomerService extends BpCustomer
 {
     public function find($id)
+    {
+        return $this->getQuery()->findOrFail($id);
+    }
+
+    public function getAll(Collection $whereArr)
+    {
+        $query = $this->getQuery();
+
+        $bpcustomerwhere = $whereArr->only($this->fillable);
+        if ($bpcustomerwhere->isNotEmpty()) {
+            $query = $query->where($bpcustomerwhere->toArray());
+        }
+
+        return $query->get();
+    }
+
+    public function getQuery()
     {
         return $this->newQuery()
             ->with([
@@ -18,27 +36,26 @@ class BpCustomerService extends BpCustomer
                 'sbccstm' => function ($query) {
                     $query->select('*');
                 },
-            ])
-            ->findOrFail($id);
+            ]);
     }
 
-    public function getAll(Collection $whereArr)
+    public function createCustomer(Collection $insertArr)
     {
-        $query = $this->newQuery()
-            ->with([
-                'sbcbp' => function ($query) {
-                    $query->select('bpid', 'bpname');
-                },
-                'sbccstm' => function ($query) {
-                    $query->select('*');
-                },
-            ]);
+        if ($insertArr->has('cstmid')) {
+        } else {
+            $customerService = new CustomerService;
+            $customerInsert = $insertArr->only($customerService->getFillable())->filter();
+            $result = $customerService->fill($customerInsert->toArray())->save();
 
-        $bpcustomerwhere = $whereArr->only($this->fillable);
-        if ($bpcustomerwhere->isNotEmpty()) {
-            $query = $query->where($bpcustomerwhere->toArray());
+            if ($result) {
+                $this->fill($insertArr->only($this->getFillable())->toArray());
+                $this->sbccstmid = $customerService->cstmid;
+                $this->sbccstmname = $customerService->cstmname;
+                $this->sbccstmphone = $customerService->cstmphone;
+                $this->sbccstmaddress = $customerService->cstmaddress;
+                return $this->save();
+            }
         }
-
-        return $query->get();
+        return false;
     }
 }
