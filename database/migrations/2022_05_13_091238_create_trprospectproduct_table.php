@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMscontactpersonTable extends Migration
+class CreateTrprospectproductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateMscontactpersonTable extends Migration
      */
     public function up()
     {
-        Schema::create('mscontactperson', function (Blueprint $table) {
-            $table->id('contactpersonid');
-            $table->integer('customerid');
-            $table->integer('contacttypeid');
-            $table->text('contactvalueid')->nullable();
+        Schema::create('trprospectproduct', function (Blueprint $table) {
+            $table->id('prospectproductid');
+            $table->integer('prospectid');
+            $table->double('prospectproductprice')->nullable();
+            $table->integer('prospectqty')->nullable();
+            $table->double('prospecttax')->nullable();
+            $table->double('prospectdiscount')->nullable();
+            $table->double('prospectamount')->nullable();
+            $table->integer('prospecttaxtypeid');
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
@@ -34,6 +38,6 @@ class CreateMscontactpersonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mscontactperson');
+        Schema::dropIfExists('trprospectproduct');
     }
 }

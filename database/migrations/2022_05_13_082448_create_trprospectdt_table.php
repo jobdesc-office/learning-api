@@ -18,8 +18,8 @@ class CreateTrprospectdtTable extends Migration
             $table->integer('prospectid');
             $table->integer('prospectcatid');
             $table->integer('prospecttypeid');
-            $table->date('prospectdate');
-            $table->text('prospectdescription');
+            $table->date('prospectdate')->nullable();
+            $table->text('prospectdtdesc')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

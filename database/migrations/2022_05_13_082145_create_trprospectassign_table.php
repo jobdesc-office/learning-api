@@ -17,7 +17,7 @@ class CreateTrprospectassignTable extends Migration
             $table->id('prospectassignid');
             $table->integer('prospectassignto');
             $table->integer('prospectreportto');
-            $table->text('prospectdescription');
+            $table->text('prospectassigndesc')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
