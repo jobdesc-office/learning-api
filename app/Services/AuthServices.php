@@ -10,7 +10,9 @@ class AuthServices extends User
 
     public function authQuery()
     {
-        return $this->newQuery()->select(['userid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid'])
+        return $this->newQuery()->select(['msuser.userid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid', 'typename'])
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->join('mstype', 'msuserdt.userdttypeid', '=', 'mstype.typeid')
             ->with([
                 'userdetails' => function ($query) {
                     $query->select('userid', 'userdtid', 'userdttypeid', 'userdtbpid')
@@ -24,7 +26,7 @@ class AuthServices extends User
                         ]);
                 }
             ])
-            ->where('isactive', true);
+            ->where('msuser.isactive', true);
     }
 
     /**

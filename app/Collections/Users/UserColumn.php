@@ -18,6 +18,11 @@ class UserColumn extends Collection
         return $this->get('userfullname');
     }
 
+    public function getName()
+    {
+        return $this->get('username');
+    }
+
     public function getPassword()
     {
         return $this->get('userpassword');
@@ -43,9 +48,14 @@ class UserColumn extends Collection
         return $this->get('userdeviceid');
     }
 
+    public function getTypeName()
+    {
+        return $this->get('typename');
+    }
+
     public function userDetail()
     {
-        if($this->hasNotEmpty('userdetails'))
+        if ($this->hasNotEmpty('userdetails'))
             return new UserDetailCollection($this->get('userdetails'));
 
         return new UserDetailCollection([]);

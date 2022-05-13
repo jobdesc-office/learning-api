@@ -23,6 +23,8 @@ class AuthController extends Controller
         $response = collect([
             'userid' => $user->getId(),
             'userfullname' => $user->getFullName(),
+            'username' => $user->getName(),
+            'role' => $user->getTypeName(),
             'userdetails' => collect($user->userDetail()->all())->map(function ($data) {
                 return [
                     'userdtid' => $data->getId(),

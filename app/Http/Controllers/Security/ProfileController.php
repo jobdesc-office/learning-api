@@ -12,6 +12,6 @@ class ProfileController extends Controller
     {
         $mySchedules = $scheduleServices->mySchedules($id);
 
-        return response()->json(['mySchedules' => $mySchedules]);
+        return response()->json($mySchedules);
     }
 }
