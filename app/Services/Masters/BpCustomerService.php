@@ -34,7 +34,11 @@ class BpCustomerService extends BpCustomer
                     $query->select('bpid', 'bpname');
                 },
                 'sbccstm' => function ($query) {
-                    $query->select('*');
+                    $query->select('*')->with([
+                        'cstmtype' => function ($query) {
+                            $query->select('typeid', 'typename');
+                        },
+                    ]);
                 },
             ]);
     }
