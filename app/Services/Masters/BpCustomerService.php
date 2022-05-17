@@ -58,4 +58,29 @@ class BpCustomerService extends BpCustomer
         }
         return false;
     }
+
+    public function updateCustomer($id, Collection $insertArr)
+    {
+        $bpCustomer = $this->find($id);
+        $modelCustomerService = new CustomerService;
+        $customer = $modelCustomerService->find($bpCustomer->sbccstmid);
+
+        $updateCustomer = collect($insertArr->only($modelCustomerService->getFillable()))->filter()
+            ->except('updatedby');
+        $resultCustomer = $customer->fill($updateCustomer->toArray())->save();
+
+        if ($resultCustomer) {
+            $updateBpCustomer = collect($insertArr->only($this->getFillable()))->filter()
+                ->except('updatedby');
+
+            $bpCustomer->fill($updateBpCustomer->toArray());
+            $bpCustomer->sbccstmid = $customer->cstmid;
+            $bpCustomer->sbccstmname = $customer->cstmname;
+            $bpCustomer->sbccstmphone = $customer->cstmphone;
+            $bpCustomer->sbccstmaddress = $customer->cstmaddress;
+            $resultCustomer = $resultCustomer && $bpCustomer->save();
+        }
+
+        return $resultCustomer;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\BpCustomerService;
+use App\Services\Masters\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -48,13 +49,26 @@ class BpCustomerController extends Controller
 
     public function update($id, Request $req, BpCustomerService $modelBpCustomerService)
     {
-        $row = $modelBpCustomerService->findOrFail($id);
+        $bpCustomer = $modelBpCustomerService->findOrFail($id);
+        $insert = collect($req->all())->filter();
 
-        $update = collect($req->only($modelBpCustomerService->getFillable()))->filter()
-            ->except('updatedby');
-        $row->update($update->toArray());
+        $image = $req->file('sbccstmpic');
+        if ($image != null) {
+            $filename = explode('/', $bpCustomer->sbccstmpic);
+            $filename = end($filename);
+            $res = $image->storeAs('public/images', $filename);
+            if ($res) {
+                $insert->put('sbccstmpic', url('/storage/images/' . $filename));
+            }
+        }
 
-        return response()->json(['message' => \TextMessages::successEdit]);
+        $resultCustomer = $modelBpCustomerService->updateCustomer($id, $insert);
+
+        if ($resultCustomer) {
+            return response()->json(['message' => \TextMessages::successEdit,]);
+        } else {
+            return response()->json(['message' => \TextMessages::failedEdit,], 400);
+        }
     }
 
     public function destroy($id, BpCustomerService $modelBpCustomerService)
