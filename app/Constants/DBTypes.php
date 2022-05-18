@@ -19,4 +19,9 @@ class DBTypes
     const cstmtype = 'cstmtype';
 
     const cstmstatus = 'cstmstatus';
+
+    const prospectStage = 'prospectstage';
+    const prospectStatus = 'prospectstatus';
+
+    const taxType = 'taxtype';
 }

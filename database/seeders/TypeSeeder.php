@@ -71,6 +71,36 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Customer', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::prospectStage,
+            'typename' => 'Prospect Stage',
+            'children' => [
+                ['typename' => 'Meeting', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Proposal', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Negociation', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Complete', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::prospectStatus,
+            'typename' => 'Prospect Status',
+            'children' => [
+                ['typename' => 'Open', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Waiting', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'On Going', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Closed', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::taxType,
+            'typename' => 'Tax Type',
+            'children' => [
+                ['typename' => 'Taxable goods', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Title Transfer Tax', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Stamp Duty', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Land and Building Title Transfer Duty', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**
