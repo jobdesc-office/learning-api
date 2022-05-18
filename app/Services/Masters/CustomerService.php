@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Customer;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -59,13 +60,12 @@ class CustomerService extends Customer
     public function saveOrGet(Collection $data)
     {
         $data = $data->only($this->getFillable());
-        $anchor = [
-            DB::raw('TRIM(LOWER(cstmname))') => Str::lower($data->get('cstmname')),
-            DB::raw('TRIM(LOWER(cstmaddress))') => Str::lower($data->get('cstmaddress')),
-            'cstmphone' => $data->get('cstmphone'),
-            'cstmtypeid' => $data->get('cstmtypeid'),
-        ];
-        $customer = $this->getQuery()->where($anchor)->get();
+        $customer = $this->getQuery()
+            ->where(DB::raw('TRIM(LOWER(cstmname))'), Str::lower($data->get('cstmname')))
+            ->where(DB::raw('TRIM(LOWER(cstmaddress))'), Str::lower($data->get('cstmaddress')))
+            ->where('cstmphone', Str::lower($data->get('cstmphone')))
+            ->where('cstmtypeid', Str::lower($data->get('cstmtypeid')))
+            ->get();
 
         if ($customer->count() > 0) {
             return $customer->first();

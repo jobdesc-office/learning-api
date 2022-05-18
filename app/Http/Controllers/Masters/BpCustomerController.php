@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\CustomerService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 class BpCustomerController extends Controller
 {

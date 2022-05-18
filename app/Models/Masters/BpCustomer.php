@@ -16,6 +16,7 @@ class BpCustomer extends Model
     protected $fillable = [
         'sbcbpid',
         'sbccstmid',
+        'sbccstmstatusid',
         'sbccstmname',
         'sbccstmphone',
         'sbccstmaddress',

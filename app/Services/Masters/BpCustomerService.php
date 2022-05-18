@@ -45,8 +45,8 @@ class BpCustomerService extends BpCustomer
 
     public function createCustomer(Collection $insertArr)
     {
-        $bpcustomer = $this->fill($insertArr->toArray());
         if ($insertArr->has('cstmid')) {
+            $bpcustomer = $this->fill($insertArr->toArray());
             $bpcustomer->sbccstmid =  $insertArr->get('cstmid');
             if ($insertArr->has('sbccstmpic') && isset($_FILES['sbccstmpic'])) {
                 $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
