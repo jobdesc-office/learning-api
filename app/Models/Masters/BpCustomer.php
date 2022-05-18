@@ -29,11 +29,6 @@ class BpCustomer extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
-    protected static function newFactory()
-    {
-        return new BpCustomerFactory;
-    }
-
     public function sbcbp()
     {
         return $this->hasOne(BusinessPartner::class, 'bpid', 'sbcbpid');
