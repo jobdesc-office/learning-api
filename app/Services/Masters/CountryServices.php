@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\Country;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class CountryServices extends Country
@@ -23,7 +24,7 @@ class CountryServices extends Country
         }
 
         if ($whereArr->has('search')) {
-            $query = $query->where(DB::raw('TRIM(LOWER(countryname))'), 'like', "%" . $whereArr->get('search') . "%");
+            $query = $query->where(DB::raw('TRIM(LOWER(countryname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
 
         return $query->get();

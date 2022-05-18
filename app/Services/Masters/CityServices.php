@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\City;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class CityServices extends City
@@ -23,7 +24,7 @@ class CityServices extends City
         }
 
         if ($whereArr->has("search")) {
-            $query = $query->where(DB::raw('TRIM(LOWER(cityname))'), 'like', "%" . $whereArr->get('search') . "%");
+            $query = $query->where(DB::raw('TRIM(LOWER(cityname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
 
         return $query->get();
