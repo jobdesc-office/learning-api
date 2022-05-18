@@ -20,8 +20,8 @@ class DBTypes
 
     const cstmstatus = 'cstmstatus';
 
-    const prospectStage = 'prospectstage';
-    const prospectStatus = 'prospectstatus';
+    const prospectStage = 'prstage';
+    const prospectStatus = 'prstatus';
 
     const taxType = 'taxtype';
 }
