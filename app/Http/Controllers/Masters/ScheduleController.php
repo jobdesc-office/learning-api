@@ -73,8 +73,8 @@ class ScheduleController extends Controller
     {
         DB::beginTransaction();
         try {
-            $rowDt = $scheduleGuest->select('scheid')->where('scheid', $id)->delete();
-            $row = $scheduleModel->findOrFail($id)->delete();
+            $scheduleGuest->select('scheid')->where('scheid', $id)->delete();
+            $scheduleModel->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {

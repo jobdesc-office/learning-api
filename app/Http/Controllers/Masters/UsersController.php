@@ -102,8 +102,8 @@ class UsersController extends Controller
     {
         DB::beginTransaction();
         try {
-            $rowDt = $modelUserDetail->select('userid')->where('userid', $id)->delete();
-            $row = $modelUser->findOrFail($id)->delete();
+            $modelUserDetail->select('userid')->where('userid', $id)->delete();
+            $modelUser->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
