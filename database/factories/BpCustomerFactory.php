@@ -31,14 +31,19 @@ class BpCustomerFactory extends Factory
             'sbccstmphone' => $this->getCustomer()->cstmphone,
             'sbccstmaddress' => $this->getCustomer()->cstmaddress,
             'sbccstmpic' => $this->faker->imageUrl(480, 480),
+            'sbccstmstatusid' => $this->statusId,
         ];
     }
 
     function prepareAttributes()
     {
+        $statustype = find_type()->byCode([\DBTypes::cstmstatus])
+            ->children(\DBTypes::cstmstatus);
+
         $ids = $this->getCombination()[$this->faker->unique->numberBetween(0, FactoryCount::bpCustomerCount - 1)];
         $this->customerId = $ids['cstmid'];
         $this->businessPartnerId = $ids['bpid'];
+        $this->statusId = $statustype->random()->getId();
     }
 
     function getCustomer()

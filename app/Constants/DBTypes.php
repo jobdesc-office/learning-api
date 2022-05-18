@@ -17,4 +17,6 @@ class DBTypes
     const scheduleReminder = "scheremind";
 
     const cstmtype = 'cstmtype';
+
+    const cstmstatus = 'cstmstatus';
 }

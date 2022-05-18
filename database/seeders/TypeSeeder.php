@@ -62,7 +62,15 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Manufacture', 'createdby' => 1, 'updatedby' => 1],
             ]
-        ]
+        ],
+        [
+            'typecd' => \DBTypes::cstmstatus,
+            'typename' => 'Customer Status',
+            'children' => [
+                ['typename' => 'Prospective Customer', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Customer', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**

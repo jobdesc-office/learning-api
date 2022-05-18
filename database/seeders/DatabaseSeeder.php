@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
      * */
     private function getProvincesData()
     {
-        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'))->slice(20);
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'));
 
         return $provinces->map(function ($prov) {
             return [
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
     private function getCitiesData()
     {
         $results = collect([]);
-        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'))->slice(20);
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'));
 
         $provinces->each(function ($prov) use ($results) {
             $cities = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kabupaten/$prov->id.json"));
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
     private function getSubdistrictData()
     {
         $results = collect([]);
-        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'))->slice(20);
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'));
 
         $provinces->each(function ($prov) use ($results) {
             $cities = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kabupaten/$prov->id.json"));

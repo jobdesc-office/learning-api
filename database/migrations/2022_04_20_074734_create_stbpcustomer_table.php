@@ -17,6 +17,7 @@ class CreateStbpcustomerTable extends Migration
             $table->id('sbcid');
             $table->bigInteger('sbcbpid');
             $table->bigInteger('sbccstmid');
+            $table->bigInteger('sbccstmstatusid');
             $table->string('sbccstmname', 100);
             $table->string('sbccstmphone', 255)->nullable();
             $table->string('sbccstmaddress', 255)->nullable();
