@@ -23,15 +23,6 @@ class BpCustomerController extends Controller
 
         $insert = collect($req->all())->filter();
 
-        $image = $req->file('sbccstmpic');
-        if ($image != null) {
-            $filename = Str::random(25) . $image->getClientOriginalName();
-            $res = $image->storeAs('public/images', $filename);
-            if ($res) {
-                $insert->put('sbccstmpic', url('/storage/images/' . $filename));
-            }
-        }
-
         $result = $modelBpCustomerService->createCustomer($insert);
 
         if ($result) {

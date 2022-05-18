@@ -44,4 +44,19 @@ class Customer extends Model
     {
         return $this->hasOne(Types::class, 'typeid', 'cstmtypeid');
     }
+
+    public function cstmprovince()
+    {
+        return $this->hasOne(Province::class, 'provid', 'cstmprovinceid');
+    }
+
+    public function cstmcity()
+    {
+        return $this->hasOne(City::class, 'cityid', 'cstmcityid');
+    }
+
+    public function cstmsubdistrict()
+    {
+        return $this->hasOne(Subdistrict::class, 'subdistrictid', 'cstmsubdistrictid');
+    }
 }

@@ -45,22 +45,24 @@ class BpCustomerService extends BpCustomer
 
     public function createCustomer(Collection $insertArr)
     {
+        $bpcustomer = $this->fill($insertArr->toArray());
         if ($insertArr->has('cstmid')) {
+            $bpcustomer->sbccstmid =  $insertArr->get('cstmid');
+            if ($insertArr->has('sbccstmpic') && isset($_FILES['sbccstmpic'])) {
+                $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
+            }
         } else {
             $customerService = new CustomerService;
-            $customerInsert = $insertArr->only($customerService->getFillable())->filter();
-            $result = $customerService->fill($customerInsert->toArray())->save();
+            $customer = $customerService->saveOrGet($insertArr);
+            $bpcustomer = $this->fill($insertArr->toArray());
 
-            if ($result) {
-                $this->fill($insertArr->only($this->getFillable())->toArray());
-                $this->sbccstmid = $customerService->cstmid;
-                $this->sbccstmname = $customerService->cstmname;
-                $this->sbccstmphone = $customerService->cstmphone;
-                $this->sbccstmaddress = $customerService->cstmaddress;
-                return $this->save();
-            }
+            $bpcustomer->sbccstmid =  $customer->cstmid;
+            $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
+            $bpcustomer->sbccstmname =  $customer->cstmname;
+            $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
+            $bpcustomer->sbccstmphone =  $customer->cstmphone;
         }
-        return false;
+        return $this->save();
     }
 
     public function updateCustomer($id, Collection $insertArr)

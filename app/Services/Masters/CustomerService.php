@@ -4,13 +4,14 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\Customer;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class CustomerService extends Customer
 {
     public function find($id)
     {
-        return $this->newQuery()
+        return $this->getQuery()
             ->with([
                 'cstmtype' => function ($query) {
                     $query->select('typeid', 'typename');
@@ -21,7 +22,7 @@ class CustomerService extends Customer
 
     public function getAll(Collection $whereArr)
     {
-        $query = $this->newQuery()
+        $query = $this->getQuery()
             ->with([
                 'cstmtype' => function ($query) {
                     $query->select('typeid', 'typename');
@@ -34,5 +35,44 @@ class CustomerService extends Customer
         }
 
         return $query->get();
+    }
+
+    public function getQuery()
+    {
+        return $this->newQuery()->with([
+            'cstmtype' => function ($query) {
+                $query->select('typeid', 'typename');
+            },
+            'cstmprovince' => function ($query) {
+                $query->select('provid', 'provname');
+            },
+            'cstmcity' => function ($query) {
+                $query->select('cityid', 'cityname');
+            },
+            'cstmsubdistrict' => function ($query) {
+                $query->select('subdistrictid', 'subdistrictname');
+            },
+        ]);
+    }
+
+
+    public function saveOrGet(Collection $data)
+    {
+        $data = $data->only($this->getFillable());
+        $anchor = [
+            DB::raw('TRIM(LOWER(cstmname))') => Str::lower($data->get('cstmname')),
+            DB::raw('TRIM(LOWER(cstmaddress))') => Str::lower($data->get('cstmaddress')),
+            'cstmphone' => $data->get('cstmphone'),
+            'cstmtypeid' => $data->get('cstmtypeid'),
+        ];
+        $customer = $this->getQuery()->where($anchor)->get();
+
+        if ($customer->count() > 0) {
+            return $customer->first();
+        } else {
+            $customer = $this->fill($data->toArray());
+            $customer->save();
+            return $customer;
+        }
     }
 }
