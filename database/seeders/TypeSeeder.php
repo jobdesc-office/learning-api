@@ -72,6 +72,14 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
+            'typecd' => \DBTypes::prospectType,
+            'typename' => 'Prospect Type',
+            'children' => [
+                ['typename' => 'Priority', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Non Priority', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
             'typecd' => \DBTypes::prospectStage,
             'typename' => 'Prospect Stage',
             'children' => [
@@ -89,6 +97,15 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Waiting', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'On Going', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Closed', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::prospectCategory,
+            'typename' => 'Prospect Category',
+            'children' => [
+                ['typename' => 'Expensive', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Normal', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Cheap', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
