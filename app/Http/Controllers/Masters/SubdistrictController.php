@@ -49,4 +49,11 @@ class SubdistrictController extends Controller
 
         return response()->json(['message' => \TextMessages::successDelete]);
     }
+
+    public function byName(Request $req, SubdistrictServices $modelSubdistrictServices)
+    {
+        $filtered = collect($req->all())->filter();
+        $row = $modelSubdistrictServices->byName($filtered->get('name'));
+        return response()->json($row);
+    }
 }

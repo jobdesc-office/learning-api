@@ -179,6 +179,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'country'], function () use ($router) {
+                $router->get('by-name', 'CountryController@byName');
                 $router->get('', 'CountryController@all');
                 $router->post('', 'CountryController@store');
                 $router->get('{id}', 'CountryController@show');
@@ -187,6 +188,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'province'], function () use ($router) {
+                $router->get('by-name', 'ProvinceController@byName');
                 $router->get('', 'ProvinceController@all');
                 $router->post('', 'ProvinceController@store');
                 $router->get('{id}', 'ProvinceController@show');
@@ -195,6 +197,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'city'], function () use ($router) {
+                $router->get('by-name', 'CityController@byName');
                 $router->get('', 'CityController@all');
                 $router->post('', 'CityController@store');
                 $router->get('{id}', 'CityController@show');
@@ -202,6 +205,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->delete('{id}', 'CityController@destroy');
             });
             $router->group(['prefix' => 'subdistrict'], function () use ($router) {
+                $router->get('by-name', 'SubdistrictController@byName');
                 $router->get('', 'SubdistrictController@all');
                 $router->post('', 'SubdistrictController@store');
                 $router->get('{id}', 'SubdistrictController@show');

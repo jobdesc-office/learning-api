@@ -29,4 +29,27 @@ class CountryServices extends Country
 
         return $query->get();
     }
+
+    public function byName($name)
+    {
+        $country = null;
+        $remain_count = 0;
+
+        $name_lower = Str::lower($name);
+        $countrys = $this->getQuery()->where(DB::raw('TRIM(LOWER(countryname))'), 'like', "%$name_lower%")->get();
+        foreach ($countrys as $key => $country) {
+            $remain_characters = Str::replace($name_lower, '', Str::lower($country->countryname));
+            if ($key == 0) {
+                $remain_count = strlen($remain_characters);
+                $country = $country;
+            } else {
+                if (strlen($remain_characters) < $remain_count) {
+                    $remain_count = strlen($remain_characters);
+                    $country = $country;
+                }
+            }
+        }
+
+        return $country;
+    }
 }
