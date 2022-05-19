@@ -56,6 +56,7 @@ class BpCustomerService extends BpCustomer
                 if ($insertArr->has('sbccstmpic') && isset($_FILES['sbccstmpic'])) {
                     $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
                 }
+                $bpcustomer->sbccstmid =  $customer->cstmid;
                 $bpcustomer->sbccstmname =  $customer->cstmname;
                 $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
                 $bpcustomer->sbccstmphone =  $customer->cstmphone;
