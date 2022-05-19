@@ -43,7 +43,7 @@ class CountryController extends Controller
         $row = $modelCountryServices->findOrFail($id);
 
         $update = collect($req->only($modelCountryServices->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);

@@ -46,13 +46,25 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'country'], function () use ($router) {
             // $router->get('select', 'CountryController@select');
             // $router->get('select2', 'CountryController@select2');
-            $router->get('all', 'CountryController@allUser');
+            $router->get('all', 'CountryController@all');
             $router->post('datatables', 'CountryController@datatables');
 
             $router->post('', 'CountryController@store');
             $router->get('{id}', 'CountryController@show');
             $router->put('{id}', 'CountryController@update');
             $router->delete('{id}', 'CountryController@destroy');
+        });
+
+        $router->group(['prefix' => 'province'], function () use ($router) {
+            // $router->get('select', 'ProvinceController@select');
+            // $router->get('select2', 'ProvinceController@select2');
+            $router->get('all', 'ProvinceController@all');
+            $router->post('datatables', 'ProvinceController@datatables');
+
+            $router->post('', 'ProvinceController@store');
+            $router->get('{id}', 'ProvinceController@show');
+            $router->put('{id}', 'ProvinceController@update');
+            $router->delete('{id}', 'ProvinceController@destroy');
         });
 
         $router->group(['prefix' => 'types'], function () use ($router) {
