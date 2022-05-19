@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProvinceController extends Controller
 {
+    public function datatables(ProvinceServices $provinceservice)
+    {
+        $query = $provinceservice->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 
     public function all(Request $req, ProvinceServices $bpcustomerservice)
     {
@@ -36,7 +43,7 @@ class ProvinceController extends Controller
         $row = $modelProvinceServices->findOrFail($id);
 
         $update = collect($req->only($modelProvinceServices->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);

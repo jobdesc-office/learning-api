@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class CountryServices extends Country
 {
+
+    public function datatables()
+    {
+        return $this->newQuery()->select('*');
+    }
+
     public function find($id)
     {
         return $this->newQuery()->findOrFail($id);

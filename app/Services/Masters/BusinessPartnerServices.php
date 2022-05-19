@@ -24,7 +24,10 @@ class BusinessPartnerServices extends BusinessPartner
 
     public function select($searchValue)
     {
-        return $this->searchQuery($searchValue)
+        return $this->newQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $query->where(DB::raw('TRIM(LOWER(bpname))'), 'like', "%$searchValue%");
+            })
             ->get();
     }
 
