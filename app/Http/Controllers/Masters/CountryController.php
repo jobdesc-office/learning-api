@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
+    public function datatables(CountryServices $countryservice)
+    {
+        $query = $countryservice->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 
     public function all(Request $req, CountryServices $bpcustomerservice)
     {

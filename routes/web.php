@@ -42,6 +42,19 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('pIeYujTv', 'AuthController@signOut');
 
     $router->group(['namespace' => 'Masters'], function () use ($router) {
+
+        $router->group(['prefix' => 'country'], function () use ($router) {
+            // $router->get('select', 'CountryController@select');
+            // $router->get('select2', 'CountryController@select2');
+            $router->get('all', 'CountryController@allUser');
+            $router->post('datatables', 'CountryController@datatables');
+
+            $router->post('', 'CountryController@store');
+            $router->get('{id}', 'CountryController@show');
+            $router->put('{id}', 'CountryController@update');
+            $router->delete('{id}', 'CountryController@destroy');
+        });
+
         $router->group(['prefix' => 'types'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
             $router->post('datatables', 'TypesController@datatables');
