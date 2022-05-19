@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    public function datatables(CityServices $cityservice)
+    {
+        $query = $cityservice->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 
     public function all(Request $req, CityServices $bpcustomerservice)
     {
@@ -18,7 +25,8 @@ class CityController extends Controller
 
     public function store(Request $req, CityServices $modelCityServices)
     {
-        $insert = collect($req->only($modelCityServices->getFillable()))->filter();
+        $insert = collect($req->only($modelCityServices->getFillable()))->filter()
+            ->except('updatedby');
 
         $modelCityServices->create($insert->toArray());
 
@@ -36,7 +44,7 @@ class CityController extends Controller
         $row = $modelCityServices->findOrFail($id);
 
         $update = collect($req->only($modelCityServices->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
