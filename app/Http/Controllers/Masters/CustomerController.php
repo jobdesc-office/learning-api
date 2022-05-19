@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function datatables(CustomerService $customerService)
+    {
+        $query = $customerService->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 
     public function all(Request $req, CustomerService $customerService)
     {

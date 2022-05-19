@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerService extends Customer
 {
+
+    public function datatables()
+    {
+        return $this->getQuery();
+    }
+
     public function find($id)
     {
         return $this->getQuery()
