@@ -65,6 +65,11 @@ class BpCustomerService extends BpCustomer
             }
         } else {
             $customer = $customerService->saveOrGet($insertArr);
+            $isExist = $this->where('sbccstmid', $customer->cstmid)->where('sbcbpid', $insertArr->get('sbcbpid'))->first();
+
+            if ($isExist) {
+                return false;
+            }
 
             if ($insertArr->has('sbccstmpic') && isset($_FILES['sbccstmpic'])) {
                 $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
