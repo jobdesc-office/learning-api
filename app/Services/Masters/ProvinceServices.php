@@ -30,6 +30,29 @@ class ProvinceServices extends Province
         return $query->get();
     }
 
+    public function byName($name)
+    {
+        $prov = null;
+        $remain_count = 0;
+
+        $name_lower = Str::lower($name);
+        $provs = $this->getQuery()->where(DB::raw('TRIM(LOWER(provname))'), 'like', "%$name_lower%")->get();
+        foreach ($provs as $key => $prov) {
+            $remain_characters = Str::replace($name_lower, '', Str::lower($prov->provname));
+            if ($key == 0) {
+                $remain_count = strlen($remain_characters);
+                $prov = $prov;
+            } else {
+                if (strlen($remain_characters) < $remain_count) {
+                    $remain_count = strlen($remain_characters);
+                    $prov = $prov;
+                }
+            }
+        }
+
+        return $prov;
+    }
+
     public function getQuery()
     {
         return $this->newQuery()->with([

@@ -49,4 +49,11 @@ class ProvinceController extends Controller
 
         return response()->json(['message' => \TextMessages::successDelete]);
     }
+
+    public function byName(Request $req, ProvinceServices $modelProvinceServices)
+    {
+        $filtered = collect($req->all())->filter();
+        $row = $modelProvinceServices->byName($filtered->get('name'));
+        return response()->json($row);
+    }
 }

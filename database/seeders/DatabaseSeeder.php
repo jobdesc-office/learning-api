@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         UserDetail::factory(\FactoryCount::userDetailCount)->create();
         Schedule::factory(\FactoryCount::scheduleCount)->create();
         Customer::factory(\FactoryCount::customerCount)->create();
-        BpCustomer::factory(\FactoryCount::bpCustomerCount)->create();
+        // BpCustomer::factory(\FactoryCount::bpCustomerCount)->create();
     }
 
 

@@ -49,4 +49,11 @@ class CityController extends Controller
 
         return response()->json(['message' => \TextMessages::successDelete]);
     }
+
+    public function byName(Request $req, CityServices $modelCityServices)
+    {
+        $filtered = collect($req->all())->filter();
+        $row = $modelCityServices->byName($filtered->get('name'));
+        return response()->json($row);
+    }
 }

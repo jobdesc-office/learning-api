@@ -30,6 +30,29 @@ class SubdistrictServices extends Subdistrict
         return $query->get();
     }
 
+    public function byName($name)
+    {
+        $subdistrict = null;
+        $remain_count = 0;
+
+        $name_lower = Str::lower($name);
+        $subdistricts = $this->getQuery()->where(DB::raw('TRIM(LOWER(subdistrictname))'), 'like', "%$name_lower%")->get();
+        foreach ($subdistricts as $key => $subdistrict) {
+            $remain_characters = Str::replace($name_lower, '', Str::lower($subdistrict->subdistrictname));
+            if ($key == 0) {
+                $remain_count = strlen($remain_characters);
+                $subdistrict = $subdistrict;
+            } else {
+                if (strlen($remain_characters) < $remain_count) {
+                    $remain_count = strlen($remain_characters);
+                    $subdistrict = $subdistrict;
+                }
+            }
+        }
+
+        return $subdistrict;
+    }
+
     public function getQuery()
     {
         return $this->newQuery()->with([
