@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class SubdistrictController extends Controller
 {
+    public function datatables(SubdistrictServices $subdistrictservice)
+    {
+        $query = $subdistrictservice->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 
     public function all(Request $req, SubdistrictServices $bpcustomerservice)
     {

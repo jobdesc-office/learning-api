@@ -79,6 +79,18 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CityController@destroy');
         });
 
+        $router->group(['prefix' => 'subdistrict'], function () use ($router) {
+            // $router->get('select', 'SubdistrictController@select');
+            // $router->get('select2', 'SubdistrictController@select2');
+            $router->get('all', 'SubdistrictController@all');
+            $router->post('datatables', 'SubdistrictController@datatables');
+
+            $router->post('', 'SubdistrictController@store');
+            $router->get('{id}', 'SubdistrictController@show');
+            $router->put('{id}', 'SubdistrictController@update');
+            $router->delete('{id}', 'SubdistrictController@destroy');
+        });
+
         $router->group(['prefix' => 'types'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
             $router->post('datatables', 'TypesController@datatables');

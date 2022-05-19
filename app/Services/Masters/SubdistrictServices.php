@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class SubdistrictServices extends Subdistrict
 {
+    public function datatables()
+    {
+        return $this->getQuery();
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);
