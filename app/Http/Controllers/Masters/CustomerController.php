@@ -25,7 +25,7 @@ class CustomerController extends Controller
 
     public function store(Request $req, CustomerService $modelCustomerService)
     {
-        $insert = collect($req->only($modelCustomerService->getFillable()))->filter();
+        $insert = collect($req->only($modelCustomerService->getFillable()))->filter()->except('updatedby');
 
         $modelCustomerService->create($insert->toArray());
 
@@ -43,7 +43,7 @@ class CustomerController extends Controller
         $row = $modelCustomerService->findOrFail($id);
 
         $update = collect($req->only($modelCustomerService->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
