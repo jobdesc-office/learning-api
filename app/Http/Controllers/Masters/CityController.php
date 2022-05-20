@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\CityServices;
+use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
@@ -50,12 +52,17 @@ class CityController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, CityServices $modelCityServices)
+    public function destroy($id, CityServices $modelCityServices, SubdistrictServices $subdistrictservice)
     {
-        $row = $modelCityServices->findOrFail($id);
-        $row->delete();
-
-        return response()->json(['message' => \TextMessages::successDelete]);
+        DB::beginTransaction();
+        try {
+            $subdistrictservice->select('subdistrictcityid')->where('subdistrictcityid', $id)->delete();
+            $modelCityServices->findOrFail($id)->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 
     public function byName(Request $req, CityServices $modelCityServices)
