@@ -26,7 +26,7 @@ class BusinessPartnerController extends Controller
 
     public function store(Request $req, BusinessPartner $modelBusinessPartner)
     {
-        $insert = collect($req->only($modelBusinessPartner->getFillable()))->filter();
+        $insert = collect($req->only($modelBusinessPartner->getFillable()))->filter()->except('updatedby');
 
         $modelBusinessPartner->create($insert->toArray());
 
@@ -44,7 +44,7 @@ class BusinessPartnerController extends Controller
         $row = $modelBusinessPartner->findOrFail($id);
 
         $update = collect($req->only($modelBusinessPartner->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
