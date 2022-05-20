@@ -29,7 +29,7 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'auth'], function () use ($router) {
-        $router->post('signin', 'AuthController@signin');
+        $router->post('signin', 'api\AuthController@signin');
     });
     $router->get('t2IF5xRe', function () {
         $types = new ReflectionClass(DBTypes::class);
@@ -191,10 +191,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     });
 
     $router->group(['prefix' => 'api'], function () use ($router) {
-        $router->get('RJXvksjS', 'AuthController@verifyToken');
-        $router->get('pIeYujTv', 'AuthController@signOut');
+        $router->get('RJXvksjS', 'api\AuthController@verifyToken');
+        $router->get('pIeYujTv', 'api\AuthController@signOut');
 
-        $router->group(['namespace' => 'Masters'], function () use ($router) {
+        $router->group(['namespace' => 'api\Masters'], function () use ($router) {
             $router->group(['prefix' => 'types'], function () use ($router) {
                 $router->get('by-code', 'TypesController@byCode');
             });
@@ -275,7 +275,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
         });
 
-        $router->group(['namespace' => 'Security'], function () use ($router) {
+        $router->group(['namespace' => 'api\Security'], function () use ($router) {
             $router->group(['prefix' => 'menus'], function () use ($router) {
 
                 $router->post('', 'MenusController@store');

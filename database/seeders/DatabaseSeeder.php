@@ -27,15 +27,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([TypeSeeder::class]);
 
-        $countriesData = $this->getCountriesData();
-        $provincesData = $this->getProvincesData();
-        $citiesData = $this->getCitiesData();
-        $subdistrictsdata = $this->getSubdistrictData();
+        // $countriesData = $this->getCountriesData();
+        // $provincesData = $this->getProvincesData();
+        // $citiesData = $this->getCitiesData();
+        // $subdistrictsdata = $this->getSubdistrictData();
 
-        Country::insert($countriesData);
-        Province::insert($provincesData);
-        City::insert($citiesData);
-        Subdistrict::insert($subdistrictsdata);
+        // Country::insert($countriesData);
+        // Province::insert($provincesData);
+        // City::insert($citiesData);
+        // Subdistrict::insert($subdistrictsdata);
 
         BusinessPartner::factory(\FactoryCount::bpCount)->create();
         UserDetail::factory(\FactoryCount::userDetailCount)->create();
