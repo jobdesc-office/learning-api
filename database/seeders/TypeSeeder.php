@@ -118,6 +118,16 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Land and Building Title Transfer Duty', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::prospectFollowUp,
+            'typename' => 'Prospect Follow Up',
+            'children' => [
+                ['typename' => 'By Phone', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'By Email', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'By Zoom', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'On Site', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**
