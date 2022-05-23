@@ -25,6 +25,6 @@ class Types extends Model
 
     public function parent()
     {
-        return $this->hasOne(Types::class, 'typeid', 'typemasterid');
+        return $this->belongsTo(Types::class, 'typemasterid', 'typeid');
     }
 }

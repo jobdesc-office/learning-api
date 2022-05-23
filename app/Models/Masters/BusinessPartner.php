@@ -26,16 +26,11 @@ class BusinessPartner extends Model
 
     public function bptype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'bptypeid');
-    }
-
-    public function parent()
-    {
-        return $this->hasOne(Types::class, 'typeid', 'typemasterid');
+        return $this->belongsTo(Types::class, 'bptypeid', 'typeid');
     }
 
     public function userdetail()
     {
-        return $this->belongsTo(UserDetail::class, 'bpid', 'userdtbpid');
+        return $this->hasMany(UserDetail::class, 'userdtbpid', 'bpid');
     }
 }

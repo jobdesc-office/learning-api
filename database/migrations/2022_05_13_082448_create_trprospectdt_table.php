@@ -15,10 +15,10 @@ class CreateTrprospectdtTable extends Migration
     {
         Schema::create('trprospectdt', function (Blueprint $table) {
             $table->id('prospectdtid');
-            $table->integer('prospectid');
-            $table->integer('prospectcatid');
-            $table->integer('prospecttypeid');
-            $table->date('prospectdate')->nullable();
+            $table->integer('prospectdtprospectid');
+            $table->integer('prospectdtcatid');
+            $table->integer('prospectdttypeid');
+            $table->date('prospectdtdate')->nullable();
             $table->text('prospectdtdesc')->nullable();
 
             $table->bigInteger('createdby')->nullable();

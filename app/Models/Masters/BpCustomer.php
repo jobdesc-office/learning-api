@@ -31,11 +31,11 @@ class BpCustomer extends Model
 
     public function sbcbp()
     {
-        return $this->hasOne(BusinessPartner::class, 'bpid', 'sbcbpid');
+        return $this->belongsTo(BusinessPartner::class, 'sbcbpid', 'bpid');
     }
 
     public function sbccstm()
     {
-        return $this->hasOne(Customer::class, 'cstmid', 'sbccstmid');
+        return $this->belongsTo(Customer::class, 'sbccstmid', 'cstmid');
     }
 }

@@ -42,21 +42,21 @@ class Customer extends Model
 
     public function cstmtype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'cstmtypeid');
+        return $this->belongsTo(Types::class, 'cstmtypeid', 'typeid');
     }
 
     public function cstmprovince()
     {
-        return $this->hasOne(Province::class, 'provid', 'cstmprovinceid');
+        return $this->belongsTo(Province::class, 'cstmprovinceid', 'provid');
     }
 
     public function cstmcity()
     {
-        return $this->hasOne(City::class, 'cityid', 'cstmcityid');
+        return $this->belongsTo(City::class, 'cstmcityid', 'cityid');
     }
 
     public function cstmsubdistrict()
     {
-        return $this->hasOne(Subdistrict::class, 'subdistrictid', 'cstmsubdistrictid');
+        return $this->belongsTo(Subdistrict::class, 'cstmsubdistrictid', 'subdistrictid');
     }
 }
