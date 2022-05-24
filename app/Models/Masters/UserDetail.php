@@ -36,16 +36,16 @@ class UserDetail extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class, 'userid', 'userid');
+        return $this->belongsTo(User::class, 'userid', 'userid');
     }
 
     public function usertype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'userdttypeid');
+        return $this->belongsTo(Types::class, 'userdttypeid', 'typeid');
     }
 
     public function businesspartner()
     {
-        return $this->hasOne(BusinessPartner::class, 'bpid', 'userdtbpid');
+        return $this->belongsTo(BusinessPartner::class, 'userdtbpid', 'bpid');
     }
 }

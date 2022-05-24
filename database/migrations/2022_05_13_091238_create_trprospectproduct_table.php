@@ -14,14 +14,14 @@ class CreateTrprospectproductTable extends Migration
     public function up()
     {
         Schema::create('trprospectproduct', function (Blueprint $table) {
-            $table->id('prospectproductid');
-            $table->integer('prospectid');
-            $table->double('prospectproductprice')->nullable();
-            $table->integer('prospectqty')->nullable();
-            $table->double('prospecttax')->nullable();
-            $table->double('prospectdiscount')->nullable();
-            $table->double('prospectamount')->nullable();
-            $table->integer('prospecttaxtypeid');
+            $table->id('prosproductid');
+            $table->integer('prosproductprospectid');
+            $table->double('prosproductprice')->nullable();
+            $table->integer('prosproductqty')->nullable();
+            $table->double('prosproducttax')->nullable();
+            $table->double('prosproductdiscount')->nullable();
+            $table->double('prosproductamount')->nullable();
+            $table->integer('prosproducttaxtypeid');
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

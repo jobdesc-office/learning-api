@@ -24,6 +24,7 @@ class DBTypes
     const prospectStage = 'prstage';
     const prospectStatus = 'prstatus';
     const prospectCategory = 'prcat';
+    const prospectFollowUp = "prfoll";
 
     const taxType = 'taxtype';
 }

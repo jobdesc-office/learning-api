@@ -53,21 +53,21 @@ class Schedule extends Model
 
     public function schetype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'schetypeid');
+        return $this->belongsTo(Types::class, 'schetypeid', 'typeid');
     }
 
     public function schebp()
     {
-        return $this->hasOne(BusinessPartner::class, 'bpid', 'schebpid');
+        return $this->belongsTo(BusinessPartner::class, 'schebpid', 'bpid');
     }
 
     public function schetoward()
     {
-        return $this->hasOne(User::class, 'userid', 'schetowardid');
+        return $this->belongsTo(User::class, 'schetowardid', 'userid');
     }
 
     public function schereftype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'schereftypeid');
+        return $this->belongsTo(Types::class, 'schereftypeid', 'typeid');
     }
 }
