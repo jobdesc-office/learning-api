@@ -122,6 +122,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('select2', 'UsersController@select2');
             $router->get('all', 'UsersController@allUser');
             $router->post('datatables', 'UsersController@datatables');
+            $router->get('prospect-owner', 'UsersController@prospectowner');
 
             $router->post('', 'UsersController@store');
             $router->get('{id}', 'UsersController@show');
