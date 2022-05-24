@@ -22,7 +22,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $number = $this->faker->numberBetween(0, 25);
+        $number = $this->faker->unique()->numberBetween(0, 25);
         $number = $number == 0 ? '' : $number;
         return [
             'username' => 'developer' . ($number == 0 ? '' : $number),
