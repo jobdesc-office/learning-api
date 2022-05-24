@@ -22,9 +22,11 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $number = $this->faker->numberBetween(0, 25);
+        $number = $number == 0 ? '' : $number;
         return [
-            'username' =>  'developer',
-            'userpassword' => Hash::make('user123'),
+            'username' => 'developer' . ($number == 0 ? '' : $number),
+            'userpassword' => Hash::make('user123' . $number),
             'userfullname' => $this->faker->name,
             'useremail' => $this->faker->email,
             'userphone' => $this->faker->phoneNumber,
