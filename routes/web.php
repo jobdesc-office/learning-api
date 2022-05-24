@@ -58,6 +58,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'province'], function () use ($router) {
             // $router->get('select', 'ProvinceController@select');
             // $router->get('select2', 'ProvinceController@select2');
+            $router->get('by-name', 'ProvinceController@byName');
             $router->get('all', 'ProvinceController@all');
             $router->post('datatables', 'ProvinceController@datatables');
 
@@ -70,6 +71,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'city'], function () use ($router) {
             // $router->get('select', 'CityController@select');
             // $router->get('select2', 'CityController@select2');
+            $router->get('by-name', 'CityController@byName');
             $router->get('all', 'CityController@all');
             $router->post('datatables', 'CityController@datatables');
 
@@ -82,6 +84,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'subdistrict'], function () use ($router) {
             // $router->get('select', 'SubdistrictController@select');
             // $router->get('select2', 'SubdistrictController@select2');
+            $router->get('by-name', 'SubdistrictController@byName');
             $router->get('all', 'SubdistrictController@all');
             $router->post('datatables', 'SubdistrictController@datatables');
 
