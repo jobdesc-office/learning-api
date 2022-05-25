@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 class CustomerService extends Customer
 {
 
+    public function select($searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(cstmname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function datatables()
     {
         return $this->getQuery();

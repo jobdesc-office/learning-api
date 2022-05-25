@@ -34,23 +34,6 @@ class UserServices extends User
             ->get();
     }
 
-    public function prospectowner($searchValue)
-    {
-        return $this->newQuery()->select('typeid', 'userdttypeid')
-            ->with([
-                'usertype' => function ($query) {
-                    $query->select('typeid', 'typename');
-                }
-            ])
-            ->where(function ($query) use ($searchValue) {
-                $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%")
-                    ->orWhereHas('usertype', function ($query) use ($searchValue) {
-                        $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
-                    });
-            })
-            ->get();
-    }
-
     public function getAll($whereArr)
     {
         $users = $this->newQuery()->with([

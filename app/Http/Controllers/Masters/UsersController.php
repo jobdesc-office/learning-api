@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function prospectowner(Request $req, UserServices $userServices)
+
+    public function prospectowner(Request $req, UserDetailServices $userDetailServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $userServices->select($searchValue);
+        $selects = $userDetailServices->prospectowner($searchValue);
 
         return response()->json($selects);
     }

@@ -8,6 +8,30 @@ use Illuminate\Support\Facades\DB;
 
 class UserDetailServices extends UserDetail
 {
+
+    public function prospectowner($searchValue)
+    {
+        return $this->newQuery()->select('*')
+            ->with([
+                'user' => function ($query) {
+                    $query->select('userid', 'userfullname');
+                },
+                'usertype' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'businesspartner' => function ($query) {
+                    $query->select('bpid', 'bpname');
+                },
+            ])
+            ->where(function ($query) use ($searchValue) {
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
+                // ->orWhereHas('usertype', function ($query) use ($searchValue) {
+                //     $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
+                // });
+            })
+            ->get();
+    }
+
     public function find($id)
     {
         return $this->newQuery()
