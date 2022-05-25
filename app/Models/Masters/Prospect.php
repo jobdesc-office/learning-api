@@ -31,7 +31,7 @@ class Prospect extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
-    public function prospectowner()
+    public function prospectowneruser()
     {
         return $this->belongsTo(UserDetail::class, "prospectowner", "userdtid");
     }
