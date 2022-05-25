@@ -38,7 +38,9 @@ class ProspectServices extends Prospect
     public function getQuery()
     {
         return $this->newQuery()->with([
-            'prospectowneruser',
+            'prospectowneruser' => function ($query) {
+                $query->with(['user']);
+            },
             'prospectstage' => function ($query) {
                 $query->select('typeid', 'typename');
             },
@@ -49,7 +51,9 @@ class ProspectServices extends Prospect
                 $query->select('typeid', 'typename');
             },
             'prospectbp',
-            'prospectcust'
+            'prospectcust' => function ($query) {
+                $query->with(['sbccstm']);
+            },
         ]);
     }
 }
