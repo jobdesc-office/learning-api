@@ -16,6 +16,7 @@ class CreateTrprospectproductTable extends Migration
         Schema::create('trprospectproduct', function (Blueprint $table) {
             $table->id('prosproductid');
             $table->integer('prosproductprospectid');
+            $table->integer('prosproductproductid');
             $table->double('prosproductprice')->nullable();
             $table->integer('prosproductqty')->nullable();
             $table->double('prosproducttax')->nullable();
