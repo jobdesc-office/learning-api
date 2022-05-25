@@ -121,8 +121,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('select', 'UsersController@select');
             $router->get('select2', 'UsersController@select2');
             $router->get('all', 'UsersController@allUser');
-            $router->post('datatables', 'UsersController@datatables');
             $router->get('prospect-owner', 'UsersController@prospectowner');
+            $router->post('datatables', 'UsersController@datatables');
 
             $router->post('', 'UsersController@store');
             $router->get('{id}', 'UsersController@show');
@@ -131,7 +131,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'customer'], function () use ($router) {
-            // $router->get('select', 'CustomerController@select');
+            $router->get('select', 'CustomerController@select');
             // $router->get('select2', 'CustomerController@select2');
             $router->get('all', 'CustomerController@allUser');
             $router->post('datatables', 'CustomerController@datatables');
@@ -159,6 +159,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'ScheduleController@show');
             $router->put('{id}', 'ScheduleController@update');
             $router->delete('{id}', 'ScheduleController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospect'], function () use ($router) {
+            $router->get('', 'ProspectController@all');
+
+            $router->post('', 'ProspectController@store');
+            $router->get('{id}', 'ProspectController@show');
+            $router->put('{id}', 'ProspectController@update');
+            $router->delete('{id}', 'ProspectController@destroy');
         });
     });
 
