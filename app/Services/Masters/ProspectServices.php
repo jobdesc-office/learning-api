@@ -38,7 +38,7 @@ class ProspectServices extends Prospect
     public function getQuery()
     {
         return $this->newQuery()->with([
-            'prospectowner',
+            'prospectowneruser',
             'prospectstage' => function ($query) {
                 $query->select('typeid', 'typename');
             },
