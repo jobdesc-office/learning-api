@@ -1,1 +1,0 @@
-psql "host=127.0.0.1 port=5432 dbname=ventes user=postgres password=revan1853"

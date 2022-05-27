@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectController extends Controller
 {
+    public function datatables(ProspectServices $ProspectServices)
+    {
+        $query = $ProspectServices->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
+
     public function all(Request $req, ProspectServices $ProspectServices)
     {
         $Prospects = $ProspectServices->getAll(collect($req->all()));
@@ -23,17 +31,18 @@ class ProspectController extends Controller
 
         $ProspectModel->fill($insert->toArray())->save();
 
-        if ($req->has('members') && $req->get('members') != null) {
-            $members = json_decode($req->get('members'));
+        if ($req->has('products') && $req->get('products') != null) {
+            $members = json_decode($req->get('products'));
             foreach ($members as $member) {
                 $ProspectProduct->create([
-                    'prospectid' => $ProspectModel->scheid,
-                    'prospectproductprice' => $member->scheuserid,
-                    'prospectqty' => $member->schebpid,
-                    'prospecttax' => $member->schebpid,
-                    'prospectdiscount' => $member->schebpid,
-                    'prospectamount' => $member->schebpid,
-                    'prospecttaxtypeid' => $member->schepermisid
+                    'prosproductprospectid' => $ProspectModel->prospectid,
+                    'prosproductproductid' => $member->item,
+                    'prosproductprice' => $member->price,
+                    'prosproductqty' => $member->quantity,
+                    'prosproducttax' => $member->tax,
+                    'prosproductdiscount' => $member->discount,
+                    'prosproductamount' => $member->amount,
+                    'prosproducttaxtypeid' => $member->taxtype
                 ]);
             }
         }

@@ -142,6 +142,18 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CustomerController@destroy');
         });
 
+        $router->group(['prefix' => 'product'], function () use ($router) {
+            $router->get('select', 'ProductController@select');
+            $router->get('select/{id}', 'ProductController@selectwithbp');
+            $router->get('', 'ProductController@all');
+            $router->post('datatables', 'ProductController@datatables');
+
+            $router->post('', 'ProductController@store');
+            $router->get('{id}', 'ProductController@show');
+            $router->put('{id}', 'ProductController@update');
+            $router->delete('{id}', 'ProductController@destroy');
+        });
+
         $router->group(['prefix' => 'businesspartner'], function () use ($router) {
             $router->get('select', 'BusinessPartnerController@select');
             $router->post('datatables', 'BusinessPartnerController@datatables');
@@ -163,6 +175,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'prospect'], function () use ($router) {
             $router->get('', 'ProspectController@all');
+            $router->post('datatables', 'ProspectController@datatables');
 
             $router->post('', 'ProspectController@store');
             $router->get('{id}', 'ProspectController@show');

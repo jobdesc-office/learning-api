@@ -11,6 +11,7 @@ class ProspectProduct extends Model
 
     protected $fillable = [
         "prosproductprospectid",
+        "prosproductproductid",
         "prosproductprice",
         "prosproductqty",
         "prosproducttax",
