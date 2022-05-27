@@ -14,6 +14,17 @@ class ProductServices extends Product
         return $this->getQuery();
     }
 
+    public function selectwithbp($searchValue, $id)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(productname))'), 'like', "%$searchValue%");
+            })
+            ->where('productbpid', $id)
+            ->get();
+    }
+
     public function select($searchValue)
     {
         return $this->getQuery()->select('*')

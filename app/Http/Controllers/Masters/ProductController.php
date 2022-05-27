@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
+    public function selectwithbp($id, Request $req, ProductServices $productservices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $productservices->selectwithbp($searchValue, $id);
+
+        return response()->json($selects);
+    }
+
     public function select(Request $req, ProductServices $productservices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
