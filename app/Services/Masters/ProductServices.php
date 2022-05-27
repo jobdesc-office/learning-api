@@ -14,6 +14,16 @@ class ProductServices extends Product
         return $this->getQuery();
     }
 
+    public function select($searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(productname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);

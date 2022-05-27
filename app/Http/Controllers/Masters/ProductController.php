@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    public function select(Request $req, ProductServices $productservices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $productservices->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(ProductServices $productservices)
     {
         $query = $productservices->datatables();

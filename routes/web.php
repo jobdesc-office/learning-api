@@ -143,6 +143,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'product'], function () use ($router) {
+            $router->get('select', 'ProductController@select');
             $router->get('', 'ProductController@all');
             $router->post('datatables', 'ProductController@datatables');
 
