@@ -25,16 +25,16 @@ class ProspectDetail extends Model
 
     public function prospectdtprospect()
     {
-        return $this->hasOne(Prospect::class, 'prospectdtprospectid', 'prospectid');
+        return $this->belongsTo(Prospect::class, 'prospectdtprospectid', 'prospectid');
     }
 
     public function prospectdtcat()
     {
-        return $this->hasOne(Types::class, 'prospectdtcatid', 'typeid');
+        return $this->belongsTo(Types::class, 'prospectdtcatid', 'typeid');
     }
 
     public function prospectdttype()
     {
-        return $this->hasOne(Types::class, 'prospectdttypeid', 'typeid');
+        return $this->belongsTo(Types::class, 'prospectdttypeid', 'typeid');
     }
 }
