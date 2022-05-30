@@ -14,6 +14,10 @@ class ScheduleServices extends Schedule
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
+                'scheguest' => function ($query) {
+                    $query->select('*')
+                        ->join('msuser', 'vtscheduleguest.scheuserid', '=', 'msuser.userid');
+                },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');
                 },
