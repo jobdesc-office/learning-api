@@ -26,12 +26,17 @@ class ProspectProduct extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
-    public function prosproductprospectid()
+    public function prosproductprospect()
     {
         return $this->belongsTo(Prospect::class, 'prosproductprospectid', 'prospectid');
     }
 
-    public function prosproducttaxtypeid()
+    public function prosproductproduct()
+    {
+        return $this->belongsTo(Product::class, 'prosproductproductid', 'productid');
+    }
+
+    public function prosproducttaxtype()
     {
         return $this->belongsTo(Types::class, 'prosproducttaxtypeid', 'typeid');
     }
