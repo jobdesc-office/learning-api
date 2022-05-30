@@ -35,6 +35,18 @@ class ProductServices extends Product
             ->get();
     }
 
+    public function saveOrGet(Collection $insert)
+    {
+        $insert = $insert->only($this->getFillable());
+        $product = $this->getQuery()->where('productname', $insert->get('productname'))->get();
+        if ($product->isEmpty()) {
+            $this->fill($insert->toArray())->save();
+            return $this;
+        } else {
+            return $product->first();
+        }
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);
