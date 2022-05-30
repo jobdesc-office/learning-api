@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Crypt;
-
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
