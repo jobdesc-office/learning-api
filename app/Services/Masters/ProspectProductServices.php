@@ -37,6 +37,18 @@ class ProspectProductServices extends ProspectProduct
         return $query->get();
     }
 
+    public function createProspectProduct(Collection $data)
+    {
+        $productServices = new ProductServices;
+        $product = $productServices->saveOrGet($data);
+
+        $data = $data->only($this->getFillable());
+        $this->fill($data->toArray());
+        $this->prosproductproductid = $product->productid;
+
+        return $this->save();
+    }
+
     public function getQuery()
     {
         return $this->newQuery()->with([

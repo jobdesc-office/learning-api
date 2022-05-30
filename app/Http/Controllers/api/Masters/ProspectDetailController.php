@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\ProspectProduct;
 use App\Services\Masters\ProspectDetailServices;
+use App\Services\Masters\ProspectProductServices;
 use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,10 +29,17 @@ class ProspectDetailController extends Controller
 
     public function store(Request $req, ProspectDetailServices $modelProspectDetailServices)
     {
-        $insert = collect($req->only($modelProspectDetailServices->getFillable()))->filter()
+        $insert = collect($req->toArray())->filter()
             ->except('updatedby');
 
         $modelProspectDetailServices->create($insert->toArray());
+
+        if ($insert->has('products')) {
+            foreach ($insert->get('products') as $product) {
+                $prospectProductServices = new ProspectProductServices;
+                $prospectProductServices->createProspectProduct(collect($product));
+            }
+        }
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
