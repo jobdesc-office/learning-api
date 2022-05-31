@@ -128,6 +128,15 @@ class TypeSeeder extends Seeder
                 ['typename' => 'On Site', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::contactType,
+            'typename' => 'Contact Type',
+            'children' => [
+                ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Instagram', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**

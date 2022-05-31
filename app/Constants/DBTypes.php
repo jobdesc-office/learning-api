@@ -26,5 +26,7 @@ class DBTypes
     const prospectCategory = 'prcat';
     const prospectFollowUp = "prfoll";
 
+    const contactType = "cntct";
+
     const taxType = 'taxtype';
 }
