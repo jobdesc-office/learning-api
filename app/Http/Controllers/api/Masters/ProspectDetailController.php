@@ -56,7 +56,7 @@ class ProspectDetailController extends Controller
 
         $update = collect($req->only($modelProspectDetailServices->getFillable()))->filter()
             ->except('createdby');
-        $row->update($update->toArray());
+        $row->fill($update->toArray())->save();
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
