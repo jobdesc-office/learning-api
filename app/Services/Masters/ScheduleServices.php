@@ -25,6 +25,7 @@ class ScheduleServices extends Schedule
                     $query->select('userid', 'userfullname');
                 }
             ])
+            ->orderBy('schestartdate', 'asc')
             ->where('scheenddate', null)
             ->where('schetowardid', $id)
             ->get();

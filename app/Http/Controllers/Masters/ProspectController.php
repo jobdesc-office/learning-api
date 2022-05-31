@@ -58,11 +58,11 @@ class ProspectController extends Controller
 
     public function update($id, Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
     {
-        // $Prospect = $ProspectModel->findOrFail($id);
+        $Prospect = $ProspectModel->findOrFail($id);
 
-        // $fields = collect($req->only($ProspectModel->getFillable()))->filter()
-        //     ->except('createdby');
-        // $Prospect->update($fields->toArray());
+        $fields = collect($req->only($ProspectModel->getFillable()))->filter()
+            ->except('createdby');
+        $Prospect->update($fields->toArray());
 
         // if ($req->has('members') && $req->get('members') != null) {
         //     $ProspectGuestModel->where('scheid', $id);
@@ -78,7 +78,7 @@ class ProspectController extends Controller
         //     }
         // }
 
-        // return response()->json(['message' => \TextMessages::successEdit]);
+        return response()->json(['message' => \TextMessages::successEdit]);
     }
 
     public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
