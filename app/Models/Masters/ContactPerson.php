@@ -28,6 +28,6 @@ class ContactPerson extends Model
 
     public function contactcustomer()
     {
-        return $this->belongsTo(Customer::class, "contactcustomerid", "customerid");
+        return $this->belongsTo(Customer::class, "contactcustomerid", "cstmid");
     }
 }
