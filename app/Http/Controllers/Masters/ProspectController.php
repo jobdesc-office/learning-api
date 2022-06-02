@@ -83,14 +83,14 @@ class ProspectController extends Controller
 
     public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
     {
-        // DB::beginTransaction();
-        // try {
-        //     $ProspectGuest->select('scheid')->where('scheid', $id)->delete();
-        //     $ProspectModel->findOrFail($id)->delete();
-        //     DB::commit();
-        //     return response()->json(['message' => \TextMessages::successDelete]);
-        // } catch (\Throwable $th) {
-        //     DB::rollBack();
-        // }
+        DB::beginTransaction();
+        try {
+            $ProspectProduct->select('prosproductid')->where('prosproductprospectid', $id)->delete();
+            $ProspectModel->findOrFail($id)->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }
