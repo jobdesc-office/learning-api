@@ -81,4 +81,10 @@ class ScheduleController extends Controller
             DB::rollBack();
         }
     }
+
+    public function scheduleCount(Request $req, ScheduleServices $scheduleServices)
+    {
+        $schedules = $scheduleServices->countAll(collect($req->all()));
+        return response()->json(['count' => $schedules]);
+    }
 }

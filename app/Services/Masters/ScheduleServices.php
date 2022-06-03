@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\Schedule;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ScheduleServices extends Schedule
 {
@@ -70,7 +71,7 @@ class ScheduleServices extends Schedule
             ]);
     }
 
-    public function getAll(Collection $whereArr)
+    public function filterSchedule(Collection $whereArr)
     {
         $query = $this->newQuery()
             ->with([
@@ -89,7 +90,7 @@ class ScheduleServices extends Schedule
                 }
             ]);
 
-        $scheduleWhere = $whereArr->only($this->fillable);
+        $scheduleWhere = $whereArr->only($this->getFillable());
         if ($scheduleWhere->isNotEmpty()) {
             $query = $query->where($scheduleWhere->toArray());
         }
@@ -112,6 +113,22 @@ class ScheduleServices extends Schedule
                 });
             });
         }
-        return $query->get();
+
+        if ($whereArr->has('startdate') && $whereArr->has('enddate')) {
+            $startDate = $whereArr->get('startdate');
+            $endDate = $whereArr->get('enddate');
+            $query = $query->where(DB::raw("get_schedule_from_dates(schestartdate, scheenddate, '$startDate', '$endDate')"), "true");
+        }
+        return $query;
+    }
+
+    public function getAll(Collection $whereArr)
+    {
+        return $this->filterSchedule($whereArr)->get();
+    }
+
+    public function countAll(Collection $whereArr)
+    {
+        return $this->filterSchedule($whereArr)->count();
     }
 }
