@@ -34,6 +34,8 @@ class CreateFunctoins extends Migration
         RETURN result;
         END;
         $$;
+    ");
+        DB::statement("
         CREATE OR REPLACE FUNCTION get_dates(
                 start_date1 date,
                 end_date1 date
@@ -46,7 +48,7 @@ class CreateFunctoins extends Migration
             );
         END;
         $$;
-    ");
+        ");
     }
 
     /**
@@ -63,7 +65,9 @@ class CreateFunctoins extends Migration
             start_date2 date,
             end_date2 date
         );
-        drop function if exists get_dates(start_date date, end_date date);
+        ");
+        DB::statement("
+        drop function if exists get_dates(start_date1 date, end_date1 date);
         ");
     }
 }
