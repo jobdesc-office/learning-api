@@ -2,13 +2,13 @@
     "sqltools.connections": [
         {
             "previewLimit": 50,
-            "server": "localhost",
+            "server": "/var/run/postgresql",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "Ventes DB",
+            "name": "ventes",
             "database": "ventes",
-            "username": "postgres",
-            "password": "revan1853"
+            "username": "revan",
+            "password": ""
         }
     ]
 }
