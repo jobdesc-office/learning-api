@@ -25,7 +25,7 @@ class CountryController extends Controller
 
     public function store(Request $req, CountryServices $modelCountryServices)
     {
-        $insert = collect($req->only($modelCountryServices->getFillable()))->filter();
+        $insert = collect($req->only($modelCountryServices->getFillable()))->filter()->except('updatedby');
 
         $modelCountryServices->create($insert->toArray());
 

@@ -26,7 +26,7 @@ class TypesController extends Controller
 
     public function store(Request $req, Types $modelTypes)
     {
-        $insert = collect($req->only($modelTypes->getFillable()))->filter();
+        $insert = collect($req->only($modelTypes->getFillable()))->filter()->except('updatedby');
 
         $modelTypes->fill($insert->toArray())->save();
 

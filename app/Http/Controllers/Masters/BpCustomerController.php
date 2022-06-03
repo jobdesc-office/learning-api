@@ -21,7 +21,7 @@ class BpCustomerController extends Controller
     public function store(Request $req, BpCustomerService $modelBpCustomerService)
     {
 
-        $insert = collect($req->all())->filter();
+        $insert = collect($req->all())->filter()->except('updatedby');
 
         $result = $modelBpCustomerService->createCustomer($insert);
 
@@ -41,7 +41,7 @@ class BpCustomerController extends Controller
     public function update($id, Request $req, BpCustomerService $modelBpCustomerService)
     {
         $bpCustomer = $modelBpCustomerService->findOrFail($id);
-        $insert = collect($req->all())->filter();
+        $insert = collect($req->all())->filter()->except('createdby');
 
         $image = $req->file('sbccstmpic');
         if ($image != null) {

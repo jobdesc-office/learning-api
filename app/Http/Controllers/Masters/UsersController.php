@@ -66,7 +66,7 @@ class UsersController extends Controller
 
     public function store(Request $req, User $modelUser, UserDetail $modelUserDetail)
     {
-        $insert = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')));
+        $insert = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))->except('updatedby');
 
         $resultUser = $modelUser->create($insert->toArray());
 
@@ -93,7 +93,7 @@ class UsersController extends Controller
         $row = $modelUser->findOrFail($id);
 
         $update = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         $dt = $modelUserDetail->findOrFail($id);
