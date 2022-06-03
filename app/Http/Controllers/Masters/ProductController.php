@@ -42,7 +42,7 @@ class ProductController extends Controller
 
     public function store(Request $req, ProductServices $modelProductServices)
     {
-        $insert = collect($req->only($modelProductServices->getFillable()))->filter();
+        $insert = collect($req->only($modelProductServices->getFillable()))->filter()->except('updatedby');
 
         $modelProductServices->create($insert->toArray());
 

@@ -27,7 +27,7 @@ class ProspectController extends Controller
 
     public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
     {
-        $insert = collect($req->only($ProspectModel->getFillable()))->filter();
+        $insert = collect($req->only($ProspectModel->getFillable()))->filter()->except('updatedby');
 
         $ProspectModel->fill($insert->toArray())->save();
 
@@ -58,11 +58,10 @@ class ProspectController extends Controller
 
     public function update($id, Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
     {
-        $Prospect = $ProspectModel->findOrFail($id);
 
         $fields = collect($req->only($ProspectModel->getFillable()))->filter()
             ->except('createdby');
-        $Prospect->update($fields->toArray());
+        $ProspectModel->findOrFail($id)->update($fields->toArray());
 
         // if ($req->has('members') && $req->get('members') != null) {
         //     $ProspectGuestModel->where('scheid', $id);
@@ -83,14 +82,14 @@ class ProspectController extends Controller
 
     public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
     {
-        // DB::beginTransaction();
-        // try {
-        //     $ProspectGuest->select('scheid')->where('scheid', $id)->delete();
-        //     $ProspectModel->findOrFail($id)->delete();
-        //     DB::commit();
-        //     return response()->json(['message' => \TextMessages::successDelete]);
-        // } catch (\Throwable $th) {
-        //     DB::rollBack();
-        // }
+        DB::beginTransaction();
+        try {
+            $ProspectProduct->select('prosproductid')->where('prosproductprospectid', $id)->delete();
+            $ProspectModel->findOrFail($id)->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }

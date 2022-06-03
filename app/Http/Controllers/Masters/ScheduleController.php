@@ -19,7 +19,7 @@ class ScheduleController extends Controller
 
     public function store(Request $req, Schedule $scheduleModel, ScheduleGuest $scheduleGuestModel)
     {
-        $insert = collect($req->only($scheduleModel->getFillable()))->filter();
+        $insert = collect($req->only($scheduleModel->getFillable()))->filter()->except('updatedby');
 
         $scheduleModel->fill($insert->toArray())->save();
 

@@ -25,7 +25,7 @@ class ProvinceController extends Controller
 
     public function store(Request $req, ProvinceServices $modelProvinceServices)
     {
-        $insert = collect($req->only($modelProvinceServices->getFillable()))->filter();
+        $insert = collect($req->only($modelProvinceServices->getFillable()))->filter()->except('updatedby');
 
         $modelProvinceServices->create($insert->toArray());
 

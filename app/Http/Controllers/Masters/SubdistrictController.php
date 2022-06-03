@@ -25,7 +25,7 @@ class SubdistrictController extends Controller
 
     public function store(Request $req, SubdistrictServices $modelSubdistrictServices)
     {
-        $insert = collect($req->only($modelSubdistrictServices->getFillable()))->filter();
+        $insert = collect($req->only($modelSubdistrictServices->getFillable()))->filter()->except('updatedby');
 
         $modelSubdistrictServices->create($insert->toArray());
 
@@ -43,7 +43,7 @@ class SubdistrictController extends Controller
         $row = $modelSubdistrictServices->findOrFail($id);
 
         $update = collect($req->only($modelSubdistrictServices->getFillable()))->filter()
-            ->except('updatedby');
+            ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
