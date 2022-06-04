@@ -240,12 +240,12 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'schedule'], function () use ($router) {
+                $router->get('count', 'ScheduleController@scheduleCount');
                 $router->get('', 'ScheduleController@all');
                 $router->post('', 'ScheduleController@store');
                 $router->get('{id}', 'ScheduleController@show');
                 $router->put('{id}', 'ScheduleController@update');
                 $router->delete('{id}', 'ScheduleController@destroy');
-                $router->get('count', 'ScheduleController@scheduleCount');
             });
 
             $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
