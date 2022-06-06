@@ -34,7 +34,7 @@ class CreateFunctoins extends Migration
         RETURN result;
         END;
         $$;
-    ");
+        ");
         DB::statement("
         CREATE OR REPLACE FUNCTION get_dates(
                 start_date1 date,
