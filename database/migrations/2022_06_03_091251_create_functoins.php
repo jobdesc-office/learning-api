@@ -23,9 +23,19 @@ class CreateFunctoins extends Migration
         DECLARE result BOOLEAN := false;
         DECLARE date1 DATE;
         DECLARE date2 DATE;
-        DECLARE dates1 TIMESTAMP [] := get_dates (start_date1, end_date1);
-        DECLARE dates2 TIMESTAMP [] := get_dates (start_date2, end_date2);
-        BEGIN FOREACH date1 IN ARRAY dates1 LOOP FOREACH date2 IN ARRAY dates2 LOOP result := result
+        DECLARE dates1 DATE [] := get_dates (start_date1, end_date1);
+        DECLARE dates2 DATE [];
+        BEGIN 
+        IF start_date2 IS NOT NULL AND end_date2 IS NOT NULL THEN
+            dates2 := get_dates (start_date2, end_date2);
+        END IF;
+        IF start_date2 IS NULL AND end_date2 IS NOT NULL THEN
+            dates2 := get_dates (end_date2, end_date2);
+        END IF;
+        IF start_date2 IS NOT NULL AND end_date2 IS NULL THEN
+            dates2 := get_dates (start_date2, start_date2);
+        END IF;
+        FOREACH date1 IN ARRAY dates1 LOOP FOREACH date2 IN ARRAY dates2 LOOP result := result
         OR to_char(date1, 'YYYY-MM-DD') = to_char(date2, 'YYYY-MM-DD');
         IF result THEN EXIT;
         END IF;
@@ -39,13 +49,17 @@ class CreateFunctoins extends Migration
         CREATE OR REPLACE FUNCTION get_dates(
                 start_date1 date,
                 end_date1 date
-            ) RETURNS TIMESTAMP [] LANGUAGE plpgsql AS $$ BEGIN RETURN array(
-                SELECT generate_series (
-                        start_date1::DATE,
-                        end_date1::DATE,
-                        '1 day'::INTERVAL
-                    )::TIMESTAMP
-            );
+            ) RETURNS DATE [] LANGUAGE plpgsql AS $$ 
+        DECLARE date1 DATE;
+        DECLARE date2 DATE;
+        BEGIN
+        IF start_date1 IS NULL AND end_date1 IS NOT NULL THEN
+            start_date1 := end_date1;
+        END IF;
+        IF start_date1 IS NOT NULL AND end_date1 IS NULL THEN
+            end_date1 := start_date1;
+        END IF;
+        RETURN array(SELECT generate_series(start_date1, end_date1, '1 day'::INTERVAL)::DATE)::DATE[];
         END;
         $$;
         ");
