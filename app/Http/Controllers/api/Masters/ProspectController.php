@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Services\Masters\ProspectProductServices;
 use App\Services\Masters\ProspectServices;
 use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
@@ -30,7 +31,17 @@ class ProspectController extends Controller
         $insert = collect($req->only($modelProspectServices->getFillable()))->filter()
             ->except('updatedby');
 
-        $modelProspectServices->create($insert->toArray());
+        $modelProspectServices->fill($insert->toArray())->save();
+
+        if ($insert->has('products')) {
+            foreach ($insert->get('products') as $product) {
+                $productData = collect($product);
+                $productData->put('prospectproductprospectid', $modelProspectServices->id);
+
+                $prospectProductServices = new ProspectProductServices();
+                $prospectProductServices->createProspectProduct($product);
+            }
+        }
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }

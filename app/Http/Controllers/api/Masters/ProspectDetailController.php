@@ -34,13 +34,6 @@ class ProspectDetailController extends Controller
 
         $modelProspectDetailServices->create($insert->toArray());
 
-        if ($insert->has('products')) {
-            foreach ($insert->get('products') as $product) {
-                $prospectProductServices = new ProspectProductServices;
-                $prospectProductServices->createProspectProduct(collect($product));
-            }
-        }
-
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
