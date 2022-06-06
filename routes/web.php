@@ -250,6 +250,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'schedule'], function () use ($router) {
+                $router->get('count', 'ScheduleController@scheduleCount');
                 $router->get('', 'ScheduleController@all');
                 $router->post('', 'ScheduleController@store');
                 $router->get('{id}', 'ScheduleController@show');
