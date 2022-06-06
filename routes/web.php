@@ -128,6 +128,16 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'UsersController@destroy');
         });
 
+        $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
+            $router->get('', 'BpCustomerController@all');
+            $router->post('datatables', 'BpCustomerController@datatables');
+
+            $router->post('', 'BpCustomerController@store');
+            $router->get('{id}', 'BpCustomerController@show');
+            $router->put('{id}', 'BpCustomerController@update');
+            $router->delete('{id}', 'BpCustomerController@destroy');
+        });
+
         $router->group(['prefix' => 'customer'], function () use ($router) {
             $router->get('select', 'CustomerController@select');
             // $router->get('select2', 'CustomerController@select2');

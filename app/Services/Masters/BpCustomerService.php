@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class BpCustomerService extends BpCustomer
 {
+
+    public function datatables()
+    {
+        return $this->getQuery();
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);
@@ -30,6 +36,9 @@ class BpCustomerService extends BpCustomer
     {
         return $this->newQuery()
             ->with([
+                'sbccstmstatus' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
                 'sbcbp' => function ($query) {
                     $query->select('bpid', 'bpname');
                 },
