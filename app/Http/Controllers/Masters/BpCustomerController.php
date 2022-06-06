@@ -10,6 +10,13 @@ use Illuminate\Support\Collection;
 
 class BpCustomerController extends Controller
 {
+    public function datatables(BpCustomerService $bpcustomerservice)
+    {
+        $query = $bpcustomerservice->datatables();
+
+        return datatables()->eloquent($query)
+            ->toJson();
+    }
 
     public function all(Request $req, BpCustomerService $bpcustomerservice)
     {
@@ -21,7 +28,7 @@ class BpCustomerController extends Controller
     public function store(Request $req, BpCustomerService $modelBpCustomerService)
     {
 
-        $insert = collect($req->all())->filter()->except('updatedby');
+        $insert = collect($req->all())->filter();
 
         $result = $modelBpCustomerService->createCustomer($insert);
 

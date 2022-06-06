@@ -29,6 +29,11 @@ class BpCustomer extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
+    public function sbccstmstatus()
+    {
+        return $this->hasOne(Types::class, 'typeid', 'sbccstmstatusid');
+    }
+
     public function sbcbp()
     {
         return $this->belongsTo(BusinessPartner::class, 'sbcbpid', 'bpid');
