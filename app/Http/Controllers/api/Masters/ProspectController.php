@@ -28,8 +28,7 @@ class ProspectController extends Controller
 
     public function store(Request $req, ProspectServices $modelProspectServices)
     {
-        $insert = collect($req->only($modelProspectServices->getFillable()))->filter()
-            ->except('updatedby');
+        $insert = collect($req->all())->filter()->except('updatedby');
 
         $modelProspectServices->fill($insert->toArray())->save();
 
