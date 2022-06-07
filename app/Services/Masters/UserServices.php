@@ -73,10 +73,12 @@ class UserServices extends User
         return $users->get();
     }
 
-    public function datatables()
+    public function datatables($order, $orderby)
     {
         return $this->newQuery()
-            ->select('userid', 'userfullname', 'useremail', 'userphone', 'isactive');
+            ->select('userid', 'userfullname', 'useremail', 'userphone', 'isactive')
+
+            ->orderBy($order, $orderby);
     }
 
     public function find($id)

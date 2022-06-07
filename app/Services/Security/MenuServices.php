@@ -25,14 +25,16 @@ class MenuServices extends Menu
             ->get();
     }
 
-    public function datatables()
+    public function datatables($order, $orderby)
     {
         return $this->newQuery()
             ->with([
                 'menutype' => function ($query) {
                     $query->select('typeid', 'typename');
                 }
-            ]);
+            ])
+
+            ->orderBy($order, $orderby);
     }
 
     public function find($id)
