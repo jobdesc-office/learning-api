@@ -35,7 +35,7 @@ class ProspectController extends Controller
         if ($insert->has('products')) {
             foreach ($insert->get('products') as $product) {
                 $productData = collect($product);
-                $productData->put('prospectproductprospectid', $modelProspectServices->id);
+                $productData->put('prosproductprospectid', $modelProspectServices->id);
 
                 $prospectProductServices = new ProspectProductServices();
                 $prospectProductServices->createProspectProduct($productData);
