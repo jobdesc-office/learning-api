@@ -29,7 +29,7 @@ class ProspectProductServices extends ProspectProduct
         }
 
         if ($whereArr->has('search')) {
-            $query->whereHas('prosproductproductid', function ($q) use ($whereArr) {
+            $query->whereHas('prosproductproduct', function ($q) use ($whereArr) {
                 $q->where('productname', 'like', '%' . $whereArr->get('search') . '%');
             });
         }
