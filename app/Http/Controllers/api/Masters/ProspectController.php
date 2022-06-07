@@ -38,7 +38,7 @@ class ProspectController extends Controller
                 $productData->put('prospectproductprospectid', $modelProspectServices->id);
 
                 $prospectProductServices = new ProspectProductServices();
-                $prospectProductServices->createProspectProduct($product);
+                $prospectProductServices->createProspectProduct($productData);
             }
         }
 
