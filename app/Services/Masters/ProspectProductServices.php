@@ -31,8 +31,9 @@ class ProspectProductServices extends ProspectProduct
         }
 
         if ($whereArr->has('search')) {
-            $query->whereHas('prosproductproduct', function ($q) use ($whereArr) {
-                $q->where('productname', 'like', '%' . $whereArr->get('search') . '%');
+            $search = Str::lower($whereArr->get('search'));
+            $query->whereHas('prosproductproduct', function ($q) use ($search) {
+                $q->where(DB::raw('TRIM(LOWER(productname))'), 'like', "%$search%");
             });
         }
 
