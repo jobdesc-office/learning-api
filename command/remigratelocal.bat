@@ -1,0 +1,1 @@
+php artisan migrate:fresh && "command/importlocal.bat" && php artisan db:seed
