@@ -55,7 +55,7 @@ class ScheduleServices extends Schedule
             ->findOrFail($id);
     }
 
-    public function datatables()
+    public function datatables($order, $orderby)
     {
         return $this->newQuery()->select('*')
             ->with([
@@ -68,7 +68,9 @@ class ScheduleServices extends Schedule
                 'schetoward' => function ($query) {
                     $query->select('userid', 'userfullname');
                 }
-            ]);
+            ])
+
+            ->orderBy($order, $orderby);
     }
 
     public function filterSchedule(Collection $whereArr)

@@ -9,6 +9,7 @@ use App\Services\Masters\UserServices;
 use App\Services\Masters\TypeServices;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\UserDetailServices;
+use Hamcrest\Type\IsInteger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -49,9 +50,36 @@ class UsersController extends Controller
         return response()->json($query);
     }
 
-    public function datatables(UserServices $userServices)
+    public function datatables(Request $req, UserServices $userServices)
     {
-        $query = $userServices->datatables();
+        $order = $req->get('order[0][column]');
+        $orderby = $req->get('order[0][dir]');
+
+        if ($order == 0) {
+            $order = $req->get('columns[0][data]');
+        } elseif ($order == 1) {
+            $order = $req->get('columns[1][data]');
+        } elseif ($order == 2) {
+            $order = $req->get('columns[2][data]');
+        } elseif ($order == 3) {
+            $order = $req->get('columns[3][data]');
+        } elseif ($order == 4) {
+            $order = $req->get('columns[4][data]');
+        } elseif ($order == 5) {
+            $order = $req->get('columns[5][data]');
+        } elseif ($order == 6) {
+            $order = $req->get('columns[6][data]');
+        } elseif ($order == 7) {
+            $order = $req->get('columns[7][data]');
+        } elseif ($order == 8) {
+            $order = $req->get('columns[8][data]');
+        } elseif ($order == 9) {
+            $order = $req->get('columns[9][data]');
+        } else {
+            $order = $order;
+        }
+
+        $query = $userServices->datatables($order, $orderby);
 
         return datatables()->eloquent($query)
             ->toJson();

@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class ProductServices extends Product
 {
-    public function datatables()
+    public function datatables($order, $orderby)
     {
-        return $this->getQuery();
+        return $this->getQuery()
+
+            ->orderBy($order, $orderby);
     }
 
     public function selectwithbp($searchValue, $id)

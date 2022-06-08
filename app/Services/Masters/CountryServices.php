@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\DB;
 class CountryServices extends Country
 {
 
-    public function datatables()
+    public function datatables($order, $orderby)
     {
-        return $this->newQuery()->select('*');
+        return $this->newQuery()->select('*')
+
+            ->orderBy($order, $orderby);
     }
 
     public function find($id)

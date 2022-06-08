@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class TypeChildrenServices extends Types
 {
-    public function datatablesNonFilter()
+    public function datatablesNonFilter($order, $orderby)
     {
-        return $this->newQuery()->select('*')->whereNotNull('typemasterid');
+        return $this->newQuery()->select('*')->whereNotNull('typemasterid')
+
+            ->orderBy($order, $orderby);
     }
     public function datatables($id)
     {
