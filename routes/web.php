@@ -150,6 +150,16 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CustomerController@destroy');
         });
 
+        $router->group(['prefix' => 'contact'], function () use ($router) {
+            $router->get('all', 'ContactPersonController@all');
+            $router->post('datatables', 'ContactPersonController@datatables');
+
+            $router->post('', 'ContactPersonController@store');
+            $router->get('{id}', 'ContactPersonController@show');
+            $router->put('{id}', 'ContactPersonController@update');
+            $router->delete('{id}', 'ContactPersonController@destroy');
+        });
+
         $router->group(['prefix' => 'product'], function () use ($router) {
             $router->get('select', 'ProductController@select');
             $router->get('select/{id}', 'ProductController@selectwithbp');
