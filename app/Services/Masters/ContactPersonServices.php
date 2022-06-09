@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class ContactPersonServices extends ContactPerson
 {
-    public function datatables()
+    public function datatables($order, $orderby)
     {
-        return $this->getQuery();
+        return $this->getQuery()->orderBy($order, $orderby);
     }
 
     public function find($id)
