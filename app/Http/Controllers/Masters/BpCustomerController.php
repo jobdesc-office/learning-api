@@ -10,6 +10,15 @@ use Illuminate\Support\Collection;
 
 class BpCustomerController extends Controller
 {
+
+    public function select(Request $req, BpCustomerService $bpcustomerservice)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $bpcustomerservice->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, BpCustomerService $bpcustomerservice)
     {
         $order = $req->get('order[0][column]');

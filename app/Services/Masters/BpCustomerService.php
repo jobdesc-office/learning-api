@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\DB;
 class BpCustomerService extends BpCustomer
 {
 
+    public function select($searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function datatables($order, $orderby)
     {
         return $this->getQuery()

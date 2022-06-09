@@ -129,6 +129,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
+            $router->get('select', 'BpCustomerController@select');
             $router->get('', 'BpCustomerController@all');
             $router->post('datatables', 'BpCustomerController@datatables');
 
