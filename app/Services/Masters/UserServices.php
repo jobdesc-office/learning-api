@@ -10,17 +10,10 @@ class UserServices extends User
 {
     public function select($searchValue)
     {
-        return $this->newQuery()->select('typeid', 'userdttypeid')
-            ->with([
-                'usertype' => function ($query) {
-                    $query->select('typeid', 'typename');
-                }
-            ])
+        return $this->newQuery()->select('userid', 'userfullname')
             ->where(function ($query) use ($searchValue) {
-                $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%")
-                    ->orWhereHas('usertype', function ($query) use ($searchValue) {
-                        $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
-                    });
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
             })
             ->get();
     }

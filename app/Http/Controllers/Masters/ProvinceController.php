@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ProvinceController extends Controller
 {
+
+    public function select(Request $req, ProvinceServices $provinceservice)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $provinceservice->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, ProvinceServices $provinceservice)
     {
         $order = $req->get('order[0][column]');

@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class ProvinceServices extends Province
 {
+
+    public function select($searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(provname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function datatables($order, $orderby)
     {
         return $this->getQuery()

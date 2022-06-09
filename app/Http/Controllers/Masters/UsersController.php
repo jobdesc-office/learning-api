@@ -26,18 +26,10 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
-    public function select(Request $req, TypeServices $typeServices)
+    public function select(Request $req, UserServices $userServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $typeServices->select($searchValue);
-
-        return response()->json($selects);
-    }
-
-    public function select2(Request $req, BusinessPartnerServices $businessPartnerService)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $businessPartnerService->select($searchValue);
+        $selects = $userServices->select($searchValue);
 
         return response()->json($selects);
     }

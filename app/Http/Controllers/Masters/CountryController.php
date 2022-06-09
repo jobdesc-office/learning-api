@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
+
+    public function select(Request $req, CountryServices $countryservice)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $countryservice->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, CountryServices $countryservice)
     {
         $order = $req->get('order[0][column]');

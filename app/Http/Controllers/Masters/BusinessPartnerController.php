@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class BusinessPartnerController extends Controller
 {
+
+    public function select(Request $req, BusinessPartnerServices $businessPartnerServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $businessPartnerServices->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, BusinessPartnerServices $businessPartnerServices)
     {
         $order = $req->get('order[0][column]');

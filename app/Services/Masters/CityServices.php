@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class CityServices extends City
 {
+
+    public function select($searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(cityname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function datatables($order, $orderby)
     {
         return $this->getQuery()

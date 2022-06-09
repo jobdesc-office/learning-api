@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
+
+    public function select(Request $req, CityServices $cityservice)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $cityservice->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, CityServices $cityservice)
     {
         $order = $req->get('order[0][column]');
