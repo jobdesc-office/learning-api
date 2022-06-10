@@ -19,7 +19,7 @@ class BpCustomerController extends Controller
         return response()->json($selects);
     }
 
-    public function datatables(Request $req, BpCustomerService $bpcustomerservice)
+    public function datatables(BpCustomerService $bpcustomerservice)
     {
         $query = $bpcustomerservice->datatables();
 
