@@ -16,7 +16,7 @@ class TypesController extends Controller
         return response()->json($types);
     }
 
-    public function datatables(Request $req, TypeServices $typeServices)
+    public function datatables(TypeServices $typeServices)
     {
         $query = $typeServices->datatables();
 
