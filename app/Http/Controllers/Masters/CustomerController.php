@@ -19,6 +19,7 @@ class CustomerController extends Controller
 
     public function datatables(Request $req, CustomerService $customerService)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -65,7 +66,7 @@ class CustomerController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $customerService->datatables($order, $orderby);
+        $query = $customerService->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

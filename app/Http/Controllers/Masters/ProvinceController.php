@@ -19,6 +19,7 @@ class ProvinceController extends Controller
 
     public function datatables(Request $req, ProvinceServices $provinceservice)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -65,7 +66,7 @@ class ProvinceController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $provinceservice->datatables($order, $orderby);
+        $query = $provinceservice->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

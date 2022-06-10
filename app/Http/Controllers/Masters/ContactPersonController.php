@@ -12,6 +12,7 @@ class ContactPersonController extends Controller
 {
     public function datatables(Request $req, ContactPersonServices $contactPersonServices)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -58,7 +59,7 @@ class ContactPersonController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $contactPersonServices->datatables($order, $orderby);
+        $query = $contactPersonServices->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

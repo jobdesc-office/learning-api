@@ -20,10 +20,12 @@ class CountryServices extends Country
             ->get();
     }
 
-    public function datatables($order, $orderby)
+    public function datatables($order, $orderby, $search)
     {
         return $this->newQuery()->select('*')
-
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
             ->orderBy($order, $orderby);
     }
 

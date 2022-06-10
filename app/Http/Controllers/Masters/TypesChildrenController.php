@@ -11,6 +11,7 @@ class TypesChildrenController extends Controller
 {
     public function datatablesNonFilter(Request $req, TypeChildrenServices $typeChildrenServices)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -57,7 +58,7 @@ class TypesChildrenController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $typeChildrenServices->datatablesNonFilter($order, $orderby);
+        $query = $typeChildrenServices->datatablesNonFilter($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

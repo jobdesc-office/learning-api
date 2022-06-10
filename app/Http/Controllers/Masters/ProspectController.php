@@ -13,6 +13,7 @@ class ProspectController extends Controller
 {
     public function datatables(Request $req, ProspectServices $ProspectServices)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -59,7 +60,7 @@ class ProspectController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $ProspectServices->datatables($order, $orderby);
+        $query = $ProspectServices->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

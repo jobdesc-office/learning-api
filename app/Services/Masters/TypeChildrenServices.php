@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class TypeChildrenServices extends Types
 {
-    public function datatablesNonFilter($order, $orderby)
+    public function datatablesNonFilter($order, $orderby, $search)
     {
         return $this->newQuery()->select('*')->whereNotNull('typemasterid')
-
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
             ->orderBy($order, $orderby);
     }
     public function datatables($id)

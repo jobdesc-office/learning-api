@@ -19,6 +19,7 @@ class CountryController extends Controller
 
     public function datatables(Request $req, CountryServices $countryservice)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -65,7 +66,7 @@ class CountryController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $countryservice->datatables($order, $orderby);
+        $query = $countryservice->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

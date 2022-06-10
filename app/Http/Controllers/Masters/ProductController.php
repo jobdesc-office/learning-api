@@ -27,6 +27,7 @@ class ProductController extends Controller
 
     public function datatables(Request $req, ProductServices $productservices)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -73,7 +74,7 @@ class ProductController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $productservices->datatables($order, $orderby);
+        $query = $productservices->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

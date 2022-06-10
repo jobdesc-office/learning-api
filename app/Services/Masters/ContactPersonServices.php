@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class ContactPersonServices extends ContactPerson
 {
-    public function datatables($order, $orderby)
+    public function datatables($order, $orderby, $search)
     {
-        return $this->getQuery()->orderBy($order, $orderby);
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })->orderBy($order, $orderby);
     }
 
     public function find($id)

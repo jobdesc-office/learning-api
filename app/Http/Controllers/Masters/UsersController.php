@@ -44,6 +44,7 @@ class UsersController extends Controller
 
     public function datatables(Request $req, UserServices $userServices)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -91,7 +92,7 @@ class UsersController extends Controller
                 break;
         }
 
-        $query = $userServices->datatables($order, $orderby);
+        $query = $userServices->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();

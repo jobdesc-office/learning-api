@@ -20,6 +20,7 @@ class BusinessPartnerController extends Controller
 
     public function datatables(Request $req, BusinessPartnerServices $businessPartnerServices)
     {
+        $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
 
@@ -66,7 +67,7 @@ class BusinessPartnerController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $businessPartnerServices->datatables($order, $orderby);
+        $query = $businessPartnerServices->datatables($order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();
