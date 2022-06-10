@@ -20,13 +20,9 @@ class BpCustomerService extends BpCustomer
             ->get();
     }
 
-    public function datatables($order, $orderby, $search)
+    public function datatables()
     {
-        return $this->getQuery()
-            ->where(function ($query) use ($search, $order) {
-                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
-            })
-            ->orderBy($order, $orderby);
+        return $this->getQuery();
     }
 
     public function find($id)
