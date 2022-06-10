@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectController extends Controller
 {
-    public function datatables(Request $req, ProspectServices $ProspectServices)
+    public function datatables(ProspectServices $ProspectServices)
     {
         $query = $ProspectServices->datatables();
 
