@@ -17,7 +17,7 @@ class CountryController extends Controller
         return response()->json($selects);
     }
 
-    public function datatables(Request $req, CountryServices $countryservice)
+    public function datatables(CountryServices $countryservice)
     {
         $query = $countryservice->datatables();
 
