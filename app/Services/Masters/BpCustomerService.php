@@ -6,6 +6,7 @@ use App\Models\Masters\BpCustomer;
 use App\Models\Masters\Customer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BpCustomerService extends BpCustomer
 {
@@ -29,6 +30,10 @@ class BpCustomerService extends BpCustomer
         $bpcustomerwhere = $whereArr->only($this->fillable);
         if ($bpcustomerwhere->isNotEmpty()) {
             $query = $query->where($bpcustomerwhere->toArray());
+        }
+
+        if ($whereArr->has('search')) {
+            $query = $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
 
         return $query->get();
