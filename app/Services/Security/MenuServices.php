@@ -25,7 +25,7 @@ class MenuServices extends Menu
             ->get();
     }
 
-    public function datatables($order, $orderby)
+    public function datatables($order, $orderby, $search)
     {
         return $this->newQuery()
             ->with([
@@ -33,7 +33,9 @@ class MenuServices extends Menu
                     $query->select('typeid', 'typename');
                 }
             ])
-
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
             ->orderBy($order, $orderby);
     }
 

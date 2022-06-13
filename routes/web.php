@@ -42,7 +42,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->group(['namespace' => 'Masters'], function () use ($router) {
 
         $router->group(['prefix' => 'country'], function () use ($router) {
-            // $router->get('select', 'CountryController@select');
+            $router->get('select', 'CountryController@select');
             // $router->get('select2', 'CountryController@select2');
             $router->get('all', 'CountryController@all');
             $router->post('datatables', 'CountryController@datatables');
@@ -54,7 +54,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'province'], function () use ($router) {
-            // $router->get('select', 'ProvinceController@select');
+            $router->get('select', 'ProvinceController@select');
             // $router->get('select2', 'ProvinceController@select2');
             $router->get('by-name', 'ProvinceController@byName');
             $router->get('all', 'ProvinceController@all');
@@ -67,7 +67,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'city'], function () use ($router) {
-            // $router->get('select', 'CityController@select');
+            $router->get('select', 'CityController@select');
             // $router->get('select2', 'CityController@select2');
             $router->get('by-name', 'CityController@byName');
             $router->get('all', 'CityController@all');
@@ -129,6 +129,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
+            $router->get('select', 'BpCustomerController@select');
             $router->get('', 'BpCustomerController@all');
             $router->post('datatables', 'BpCustomerController@datatables');
 

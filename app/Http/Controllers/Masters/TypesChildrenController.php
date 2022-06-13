@@ -9,38 +9,14 @@ use Illuminate\Http\Request;
 
 class TypesChildrenController extends Controller
 {
-    public function datatablesNonFilter(Request $req, TypeChildrenServices $typeChildrenServices)
+    public function datatablesNonFilter(TypeChildrenServices $typeChildrenServices)
     {
-        $order = $req->get('order[0][column]');
-        $orderby = $req->get('order[0][dir]');
+        $query = $typeChildrenServices->datatablesNonFilter();
 
-        if ($order == 0) {
-            $order = $req->get('columns[0][data]');
-        } elseif ($order == 1) {
-            $order = $req->get('columns[1][data]');
-        } elseif ($order == 2) {
-            $order = $req->get('columns[2][data]');
-        } elseif ($order == 3) {
-            $order = $req->get('columns[3][data]');
-        } elseif ($order == 4) {
-            $order = $req->get('columns[4][data]');
-        } elseif ($order == 5) {
-            $order = $req->get('columns[5][data]');
-        } elseif ($order == 6) {
-            $order = $req->get('columns[6][data]');
-        } elseif ($order == 7) {
-            $order = $req->get('columns[7][data]');
-        } elseif ($order == 8) {
-            $order = $req->get('columns[8][data]');
-        } elseif ($order == 9) {
-            $order = $req->get('columns[9][data]');
-        } else {
-            $order = $order;
-        }
-        $query = $typeChildrenServices->datatablesNonFilter($order, $orderby);
-
-        return datatables()->eloquent($query)
-            ->toJson();
+        return
+            datatables()->eloquent($query)
+            ->toJson()
+            ->getOriginalContent();
     }
     public function datatables($id, TypeChildrenServices $typeChildrenServices)
     {

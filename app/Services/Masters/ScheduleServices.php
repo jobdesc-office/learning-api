@@ -55,7 +55,7 @@ class ScheduleServices extends Schedule
             ->findOrFail($id);
     }
 
-    public function datatables($order, $orderby)
+    public function datatables($order, $orderby, $search)
     {
         return $this->newQuery()->select('*')
             ->with([
@@ -69,7 +69,9 @@ class ScheduleServices extends Schedule
                     $query->select('userid', 'userfullname');
                 }
             ])
-
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
             ->orderBy($order, $orderby);
     }
 

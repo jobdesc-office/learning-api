@@ -17,22 +17,9 @@ class TypeServices extends Types
             ->get();
     }
 
-    public function select($searchValue)
+    public function datatables()
     {
-        return $this->newQuery()->select('typeid', 'typename')
-            ->where('typemasterid', 1)
-            ->where(function ($query) use ($searchValue) {
-                $searchValue = trim(strtolower($searchValue));
-                $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
-            })
-            ->get();
-    }
-
-    public function datatables($order, $orderby)
-    {
-        return $this->newQuery()->select('*')->where('typemasterid', null)
-
-            ->orderBy($order, $orderby);
+        return $this->newQuery()->select('*');
     }
 
     public function find($id)

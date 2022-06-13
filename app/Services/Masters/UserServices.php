@@ -10,17 +10,10 @@ class UserServices extends User
 {
     public function select($searchValue)
     {
-        return $this->newQuery()->select('typeid', 'userdttypeid')
-            ->with([
-                'usertype' => function ($query) {
-                    $query->select('typeid', 'typename');
-                }
-            ])
+        return $this->newQuery()->select('userid', 'userfullname')
             ->where(function ($query) use ($searchValue) {
-                $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%")
-                    ->orWhereHas('usertype', function ($query) use ($searchValue) {
-                        $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
-                    });
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
             })
             ->get();
     }
@@ -73,12 +66,10 @@ class UserServices extends User
         return $users->get();
     }
 
-    public function datatables($order, $orderby)
+    public function datatables()
     {
         return $this->newQuery()
-            ->select('userid', 'userfullname', 'useremail', 'userphone', 'isactive')
-
-            ->orderBy($order, $orderby);
+            ->select('*');
     }
 
     public function find($id)

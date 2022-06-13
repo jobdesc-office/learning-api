@@ -8,38 +8,23 @@ use Illuminate\Http\Request;
 
 class ProvinceController extends Controller
 {
-    public function datatables(Request $req, ProvinceServices $provinceservice)
+
+    public function select(Request $req, ProvinceServices $provinceservice)
     {
-        $order = $req->get('order[0][column]');
-        $orderby = $req->get('order[0][dir]');
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $provinceservice->select($searchValue);
 
-        if ($order == 0) {
-            $order = $req->get('columns[0][data]');
-        } elseif ($order == 1) {
-            $order = $req->get('columns[1][data]');
-        } elseif ($order == 2) {
-            $order = $req->get('columns[2][data]');
-        } elseif ($order == 3) {
-            $order = $req->get('columns[3][data]');
-        } elseif ($order == 4) {
-            $order = $req->get('columns[4][data]');
-        } elseif ($order == 5) {
-            $order = $req->get('columns[5][data]');
-        } elseif ($order == 6) {
-            $order = $req->get('columns[6][data]');
-        } elseif ($order == 7) {
-            $order = $req->get('columns[7][data]');
-        } elseif ($order == 8) {
-            $order = $req->get('columns[8][data]');
-        } elseif ($order == 9) {
-            $order = $req->get('columns[9][data]');
-        } else {
-            $order = $order;
-        }
-        $query = $provinceservice->datatables($order, $orderby);
+        return response()->json($selects);
+    }
 
-        return datatables()->eloquent($query)
-            ->toJson();
+    public function datatables(ProvinceServices $provinceservice)
+    {
+        $query = $provinceservice->datatables();
+
+        return
+            datatables()->eloquent($query)
+            ->toJson()
+            ->getOriginalContent();
     }
 
     public function all(Request $req, ProvinceServices $bpcustomerservice)

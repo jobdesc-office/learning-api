@@ -11,11 +11,19 @@ use Illuminate\Support\Str;
 class BpCustomerService extends BpCustomer
 {
 
-    public function datatables($order, $orderby)
+    public function select($searchValue)
     {
-        return $this->getQuery()
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
 
-            ->orderBy($order, $orderby);
+    public function datatables()
+    {
+        return $this->getQuery();
     }
 
     public function find($id)

@@ -26,18 +26,10 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
-    public function select(Request $req, TypeServices $typeServices)
+    public function select(Request $req, UserServices $userServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $typeServices->select($searchValue);
-
-        return response()->json($selects);
-    }
-
-    public function select2(Request $req, BusinessPartnerServices $businessPartnerService)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $businessPartnerService->select($searchValue);
+        $selects = $userServices->select($searchValue);
 
         return response()->json($selects);
     }
@@ -52,37 +44,11 @@ class UsersController extends Controller
 
     public function datatables(Request $req, UserServices $userServices)
     {
-        $order = $req->get('order[0][column]');
-        $orderby = $req->get('order[0][dir]');
-
-        if ($order == 0) {
-            $order = $req->get('columns[0][data]');
-        } elseif ($order == 1) {
-            $order = $req->get('columns[1][data]');
-        } elseif ($order == 2) {
-            $order = $req->get('columns[2][data]');
-        } elseif ($order == 3) {
-            $order = $req->get('columns[3][data]');
-        } elseif ($order == 4) {
-            $order = $req->get('columns[4][data]');
-        } elseif ($order == 5) {
-            $order = $req->get('columns[5][data]');
-        } elseif ($order == 6) {
-            $order = $req->get('columns[6][data]');
-        } elseif ($order == 7) {
-            $order = $req->get('columns[7][data]');
-        } elseif ($order == 8) {
-            $order = $req->get('columns[8][data]');
-        } elseif ($order == 9) {
-            $order = $req->get('columns[9][data]');
-        } else {
-            $order = $order;
-        }
-
-        $query = $userServices->datatables($order, $orderby);
-
-        return datatables()->eloquent($query)
-            ->toJson();
+        $query = $userServices->datatables();
+        return
+            datatables()->eloquent($query)
+            ->toJson()
+            ->getOriginalContent();
     }
 
     public function all(Request $req, UserDetailServices $userDetailServices)

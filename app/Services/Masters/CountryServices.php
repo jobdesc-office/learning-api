@@ -10,11 +10,19 @@ use Illuminate\Support\Facades\DB;
 class CountryServices extends Country
 {
 
-    public function datatables($order, $orderby)
+    public function select($searchValue)
     {
         return $this->newQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(countryname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
 
-            ->orderBy($order, $orderby);
+    public function datatables()
+    {
+        return $this->newQuery()->select('*');
     }
 
     public function find($id)
