@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Masters\TypeServices;
 use App\Models\Masters\Types;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TypesController extends Controller
 {
@@ -54,9 +55,14 @@ class TypesController extends Controller
 
     public function destroy($id, Types $modelTypes)
     {
-        $row = $modelTypes->findOrFail($id);
-        $row->delete();
-
-        return response()->json(['message' => \TextMessages::successDelete]);
+        DB::beginTransaction();
+        try {
+            $modelTypes->select('typeid')->where('typemasterid', $id)->delete();
+            $modelTypes->findOrFail($id)->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }

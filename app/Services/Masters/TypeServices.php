@@ -19,7 +19,7 @@ class TypeServices extends Types
 
     public function datatables()
     {
-        return $this->newQuery()->select('*');
+        return $this->newQuery()->select('*')->where('typemasterid', null);
     }
 
     public function find($id)
