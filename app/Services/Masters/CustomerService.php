@@ -50,9 +50,13 @@ class CustomerService extends Customer
                 },
             ]);
 
-        $bpcustomerwhere = $whereArr->only($this->fillable);
+        $bpcustomerwhere = $whereArr->only($this->getFillable());
         if ($bpcustomerwhere->isNotEmpty()) {
             $query = $query->where($bpcustomerwhere->toArray());
+        }
+
+        if ($whereArr->has('search')) {
+            $query = $query->where(DB::raw('TRIM(LOWER(cstmname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
 
         return $query->get();
