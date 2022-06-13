@@ -42,10 +42,9 @@ class UsersController extends Controller
         return response()->json($query);
     }
 
-    public function datatables(UserServices $userServices)
+    public function datatables(Request $req, UserServices $userServices)
     {
         $query = $userServices->datatables();
-
         return
             datatables()->eloquent($query)
             ->toJson()
