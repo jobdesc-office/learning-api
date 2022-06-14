@@ -42,8 +42,7 @@ class ScheduleServices extends Schedule
                     $query->select('typeid', 'typename');
                 },
                 'scheguest' => function ($query) {
-                    $query->select('*')
-                        ->join('msuser', 'vtscheduleguest.scheuserid', '=', 'msuser.userid');
+                    $query->with('scheuser', 'schebp');
                 },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');
@@ -83,8 +82,7 @@ class ScheduleServices extends Schedule
                     $query->select('typeid', 'typename');
                 },
                 'scheguest' => function ($query) {
-                    $query->select('*')
-                        ->join('msuser', 'vtscheduleguest.scheuserid', '=', 'msuser.userid');
+                    $query->with('scheuser', 'schebp');
                 },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');
