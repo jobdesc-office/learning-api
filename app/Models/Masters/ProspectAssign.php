@@ -12,6 +12,7 @@ class ProspectAssign extends Model
     protected $fillable = [
         "prospectassignto",
         "prospectreportto",
+        "prospectid",
         "prospectassigndesc",
         "createdby",
         "updatedby",
