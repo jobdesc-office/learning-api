@@ -4,11 +4,10 @@ namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\ProspectAssignServices;
-use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CityController extends Controller
+class ProspectAssignController extends Controller
 {
     public function all(Request $req, ProspectAssignServices $bpcustomerservice)
     {
@@ -19,7 +18,7 @@ class CityController extends Controller
 
     public function store(Request $req, ProspectAssignServices $modelProspectAssignServices)
     {
-        $insert = collect($req->only($modelProspectAssignServices->getFillable()))->filter()
+        $insert = collect($req->all())->filter()
             ->except('updatedby');
 
         $modelProspectAssignServices->fill($insert->toArray())->save();
@@ -44,7 +43,7 @@ class CityController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectAssignServices $modelProspectAssignServices, SubdistrictServices $subdistrictservice)
+    public function destroy($id, ProspectAssignServices $modelProspectAssignServices)
     {
         $modelProspectAssignServices->findOrFail($id)->delete();
         return response()->json(['message' => \TextMessages::successDelete]);
