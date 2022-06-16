@@ -117,7 +117,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'user'], function () use ($router) {
             $router->get('select', 'UsersController@select');
-            $router->get('select2', 'UsersController@select2');
+            $router->get('select/{id}', 'UsersController@selectwithsamebp');
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');

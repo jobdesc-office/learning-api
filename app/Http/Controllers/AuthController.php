@@ -24,7 +24,8 @@ class AuthController extends Controller
             'userid' => $user->getId(),
             'userfullname' => $user->getFullName(),
             'username' => $user->getName(),
-            'role' => $user->getTypeName(),
+            'useremail' => $user->getEmail(),
+            'userphone' => $user->getPhone(),
             'userdetails' => collect($user->userDetail()->all())->map(function ($data) {
                 return [
                     'userdtid' => $data->getId(),

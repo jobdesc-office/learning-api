@@ -8,9 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class UserServices extends User
 {
+    public function selectwithsamebp($searchValue, $id)
+    {
+        return $this->newQuery()->select('*')
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
+            })
+            ->where('msuserdt.userdtbpid', $id)
+            ->get();
+    }
+
     public function select($searchValue)
     {
-        return $this->newQuery()->select('userid', 'userfullname')
+        return $this->newQuery()->select('*')
             ->where(function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");

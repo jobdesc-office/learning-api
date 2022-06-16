@@ -34,6 +34,14 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
+    public function selectwithsamebp($id, Request $req, UserServices $userServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $userServices->selectwithsamebp($searchValue, $id);
+
+        return response()->json($selects);
+    }
+
     public function allUser(Request $req, UserServices $userServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
