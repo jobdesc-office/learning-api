@@ -20,6 +20,9 @@ class CreateTrprospectdtTable extends Migration
             $table->integer('prospectdttypeid');
             $table->date('prospectdtdate')->nullable();
             $table->text('prospectdtdesc')->nullable();
+            $table->text('prospectdtloc')->nullable();
+            $table->double('prospectdtlatitude')->nullable();
+            $table->double('prospectdtlongitude')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
