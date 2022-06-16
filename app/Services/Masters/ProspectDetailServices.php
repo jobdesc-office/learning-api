@@ -9,13 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectDetailServices extends ProspectDetail
 {
-    public function datatables($order, $orderby, $search)
+    public function details($id)
     {
         return $this->getQuery()
-            ->where(function ($query) use ($search, $order) {
-                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
-            })
-            ->orderBy($order, $orderby);
+            ->where('prospectdtprospectid', $id)->orderBy('prospectdtdate', 'asc');
     }
 
     public function find($id)
