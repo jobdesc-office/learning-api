@@ -10,6 +10,7 @@ class ProspectAssign extends Model
     protected $primaryKey = "prospectassignid";
 
     protected $fillable = [
+        "prospectid",
         "prospectassignto",
         "prospectreportto",
         "prospectassigndesc",

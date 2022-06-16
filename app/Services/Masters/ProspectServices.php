@@ -41,6 +41,13 @@ class ProspectServices extends Prospect
             'prospectowneruser' => function ($query) {
                 $query->with(['user']);
             },
+            'prospectassign' => function ($query) {
+                $query->select('*')->with(['prospectassignto' => function ($query) {
+                    $query->with(['user']);
+                }, 'prospectreportto' => function ($query) {
+                    $query->with(['user']);
+                }]);
+            },
             'prospectstage' => function ($query) {
                 $query->select('typeid', 'typename');
             },

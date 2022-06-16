@@ -44,7 +44,7 @@ class ProspectDetailController extends Controller
     {
 
         $fields = collect($req->only($ProspectDetailModel->getFillable()))->filter()
-            ->except('createdby');
+            ->except('createdby', 'prospectdtprospectid');
         $ProspectDetailModel->findOrFail($id)->update($fields->toArray());
 
         // if ($req->has('members') && $req->get('members') != null) {

@@ -12,7 +12,7 @@ class ProspectDetailServices extends ProspectDetail
     public function details($id)
     {
         return $this->getQuery()
-            ->where('prospectdtprospectid', $id);
+            ->where('prospectdtprospectid', $id)->orderBy('prospectdtdate', 'asc');
     }
 
     public function find($id)
