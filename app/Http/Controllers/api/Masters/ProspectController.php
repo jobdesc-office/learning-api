@@ -68,13 +68,14 @@ class ProspectController extends Controller
         DB::beginTransaction();
         try {
             $modelProspectAssign->where('prospectid', $id)->delete();
-            $modelProspectDetail->where('prosproductprospectid', $id)->delete();
-            $modelProspectProduct->where('prospectid', $id)->delete();
+            $modelProspectProduct->where('prosproductprospectid', $id)->delete();
+            $modelProspectDetail->where('prospectdtprospectid', $id)->delete();
             $modelProspectServices->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            return response()->json(['message' => $th->getMessage()]);
         }
     }
 }
