@@ -42,9 +42,9 @@ class ProspectServices extends Prospect
                 $query->with(['user']);
             },
             'prospectassign' => function ($query) {
-                $query->select('*')->with(['prospectassignto' => function ($query) {
+                $query->select('*')->with(['prospectassign' => function ($query) {
                     $query->with(['user']);
-                }, 'prospectreportto' => function ($query) {
+                }, 'prospectreport' => function ($query) {
                     $query->with(['user']);
                 }]);
             },

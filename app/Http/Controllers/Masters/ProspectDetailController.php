@@ -47,33 +47,12 @@ class ProspectDetailController extends Controller
             ->except('createdby', 'prospectdtprospectid');
         $ProspectDetailModel->findOrFail($id)->update($fields->toArray());
 
-        // if ($req->has('members') && $req->get('members') != null) {
-        //     $ProspectGuestModel->where('scheid', $id);
-
-        //     $members = json_decode($req->get('members'));
-        //     foreach ($members as $member) {
-        //         $ProspectGuestModel->update([
-        //             'scheid' => $ProspectModel->scheid,
-        //             'scheuserid' => $member->scheuserid,
-        //             'schebpid' => $member->schebpid,
-        //             'schepermisid' => $member->schepermisid
-        //         ]);
-        //     }
-        // }
-
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
     public function destroy($id, ProspectDetail $ProspectDetailModel, ProspectProduct $ProspectProduct)
     {
-        DB::beginTransaction();
-        try {
-            $ProspectProduct->select('prosproductid')->where('prosproductprospectid', $id)->delete();
-            $ProspectDetailModel->findOrFail($id)->delete();
-            DB::commit();
-            return response()->json(['message' => \TextMessages::successDelete]);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-        }
+        $ProspectDetailModel->findOrFail($id)->delete();
+        return response()->json(['message' => \TextMessages::successDelete]);
     }
 }
