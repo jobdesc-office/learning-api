@@ -3,22 +3,12 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
-use App\Models\Masters\ProspectProduct;
 use App\Services\Masters\ProspectDetailServices;
-use App\Services\Masters\ProspectProductServices;
-use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProspectDetailController extends Controller
 {
-    public function datatables(ProspectDetailServices $cityservice)
-    {
-        $query = $cityservice->datatables();
-
-        return datatables()->eloquent($query)
-            ->toJson();
-    }
 
     public function all(Request $req, ProspectDetailServices $prospectService)
     {
@@ -54,15 +44,9 @@ class ProspectDetailController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectDetailServices $modelProspectDetailServices, SubdistrictServices $subdistrictservice)
+    public function destroy($id, ProspectDetailServices $modelProspectDetailServices)
     {
-        DB::beginTransaction();
-        try {
-            $modelProspectDetailServices->findOrFail($id)->delete();
-            DB::commit();
-            return response()->json(['message' => \TextMessages::successDelete]);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-        }
+        $modelProspectDetailServices->find($id)->delete();
+        return response()->json(['message' => \TextMessages::successDelete]);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\ContactPersonServices;
-use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,16 +51,9 @@ class ContactPersonController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ContactPersonServices $modelContactPersonServices, SubdistrictServices $subdistrictservice)
+    public function destroy($id, ContactPersonServices $modelContactPersonServices)
     {
-        DB::beginTransaction();
-        try {
-            $subdistrictservice->select('subdistrictcityid')->where('subdistrictcityid', $id)->delete();
-            $modelContactPersonServices->findOrFail($id)->delete();
-            DB::commit();
-            return response()->json(['message' => \TextMessages::successDelete]);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-        }
+        $modelContactPersonServices->find($id)->delete();
+        return response()->json(['message' => \TextMessages::successDelete]);
     }
 }

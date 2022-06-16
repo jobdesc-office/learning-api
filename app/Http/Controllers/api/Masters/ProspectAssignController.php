@@ -45,7 +45,7 @@ class ProspectAssignController extends Controller
 
     public function destroy($id, ProspectAssignServices $modelProspectAssignServices)
     {
-        $modelProspectAssignServices->findOrFail($id)->delete();
+        $modelProspectAssignServices->find($id)->delete();
         return response()->json(['message' => \TextMessages::successDelete]);
     }
 }
