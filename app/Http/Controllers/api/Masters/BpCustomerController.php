@@ -64,7 +64,7 @@ class BpCustomerController extends Controller
 
     public function destroy($id, BpCustomerService $modelBpCustomerService)
     {
-        $row = $modelBpCustomerService->findOrFail($id);
+        $row = $modelBpCustomerService->find($id);
         $row->delete();
 
         return response()->json(['message' => \TextMessages::successDelete]);

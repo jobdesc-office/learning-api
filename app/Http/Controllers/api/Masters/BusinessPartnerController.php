@@ -50,9 +50,9 @@ class BusinessPartnerController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, BusinessPartner $modelBusinessPartner)
+    public function destroy($id, BusinessPartnerServices $modelBusinessPartner)
     {
-        $row = $modelBusinessPartner->findOrFail($id);
+        $row = $modelBusinessPartner->find($id);
         $row->delete();
 
         return response()->json(['message' => \TextMessages::successDelete]);

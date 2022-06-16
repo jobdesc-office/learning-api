@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function datatables(CustomerService $customerService)
-    {
-        $query = $customerService->datatables();
-
-        return datatables()->eloquent($query)
-            ->toJson();
-    }
 
     public function all(Request $req, CustomerService $customerService)
     {
@@ -40,7 +33,7 @@ class CustomerController extends Controller
 
     public function update($id, Request $req, CustomerService $modelCustomerService)
     {
-        $row = $modelCustomerService->findOrFail($id);
+        $row = $modelCustomerService->find($id);
 
         $update = collect($req->only($modelCustomerService->getFillable()))->filter()
             ->except('updatedby');
@@ -51,7 +44,7 @@ class CustomerController extends Controller
 
     public function destroy($id, CustomerService $modelCustomerService)
     {
-        $row = $modelCustomerService->findOrFail($id);
+        $row = $modelCustomerService->find($id);
         $row->delete();
 
         return response()->json(['message' => \TextMessages::successDelete]);
