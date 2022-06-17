@@ -65,4 +65,9 @@ class Prospect extends Model
     {
         return $this->hasMany(ProspectAssign::class, "prospectid", "prospectid");
     }
+
+    public function prospectproduct()
+    {
+        return $this->hasMany(ProspectProduct::class, "prosproductprospectid", "prospectid");
+    }
 }

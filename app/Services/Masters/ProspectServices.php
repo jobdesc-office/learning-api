@@ -48,6 +48,9 @@ class ProspectServices extends Prospect
                     $query->with(['user']);
                 }]);
             },
+            'prospectproduct' => function ($query) {
+                $query->select('*')->with(['prosproductproduct', 'prosproducttaxtype']);
+            },
             'prospectstage' => function ($query) {
                 $query->select('typeid', 'typename');
             },

@@ -65,19 +65,22 @@ class ProspectController extends Controller
             ->except('createdby');
         $ProspectModel->findOrFail($id)->update($fields->toArray());
 
-        // if ($req->has('members') && $req->get('members') != null) {
-        //     $ProspectGuestModel->where('scheid', $id);
-
-        //     $members = json_decode($req->get('members'));
-        //     foreach ($members as $member) {
-        //         $ProspectGuestModel->update([
-        //             'scheid' => $ProspectModel->scheid,
-        //             'scheuserid' => $member->scheuserid,
-        //             'schebpid' => $member->schebpid,
-        //             'schepermisid' => $member->schepermisid
-        //         ]);
-        //     }
-        // }
+        $products = json_decode($req->get('products'));
+        if ($products) {
+            $ProspectProduct->where('prosproductprospectid', $id)->delete();
+            foreach ($products as $product) {
+                $ProspectProduct->create([
+                    'prosproductprospectid' => $id,
+                    'prosproductproductid' => $product->item,
+                    'prosproductprice' => $product->price,
+                    'prosproductqty' => $product->quantity,
+                    'prosproducttax' => $product->tax,
+                    'prosproductdiscount' => $product->discount,
+                    'prosproductamount' => $product->amount,
+                    'prosproducttaxtypeid' => $product->taxtype,
+                ]);
+            }
+        }
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
