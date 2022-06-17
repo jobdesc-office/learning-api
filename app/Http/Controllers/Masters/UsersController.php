@@ -146,12 +146,15 @@ class UsersController extends Controller
         $row->update($update->toArray());
 
         $roles = json_decode($req->get('roles'));
-        foreach ($roles as $role) {
-            $dt = $modelUserDetail->findOrFail($role->userdtid);
-            $dt->update([
-                'userdttypeid' => $role->roleid,
-                'userdtbpid' => $role->bpid,
-            ]);
+        if ($roles) {
+            $modelUserDetail->where('userid', $id)->delete();
+            foreach ($roles as $role) {
+                $modelUserDetail->create([
+                    'userid' => $id,
+                    'userdttypeid' => $role->roleid,
+                    'userdtbpid' => $role->bpid,
+                ]);
+            }
         }
         return response()->json(['message' => \TextMessages::successEdit]);
     }

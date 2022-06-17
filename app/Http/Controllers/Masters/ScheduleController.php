@@ -52,16 +52,15 @@ class ScheduleController extends Controller
             ->except('createdby');
         $schedule->update($fields->toArray());
 
-        if ($req->has('members') && $req->get('members') != null) {
-            $scheduleGuestModel->where('scheid', $id);
-
-            $members = json_decode($req->get('members'));
+        $members = json_decode($req->get('members'));
+        if ($members) {
+            $scheduleGuestModel->where('scheid', $id)->delete();
             foreach ($members as $member) {
-                $scheduleGuestModel->update([
-                    'scheid' => $scheduleModel->scheid,
+                $scheduleGuestModel->create([
+                    'scheid' => $id,
                     'scheuserid' => $member->scheuserid,
                     'schebpid' => $member->schebpid,
-                    'schepermisid' => $member->schepermisid
+                    'schepermisid' => $member->schepermisid,
                 ]);
             }
         }
