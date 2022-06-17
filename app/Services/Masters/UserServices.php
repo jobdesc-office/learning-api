@@ -78,14 +78,39 @@ class UserServices extends User
         return $users->get();
     }
 
-    public function datatables()
+    public function datatables($order, $orderby, $search)
     {
-        return $this->newQuery()
-            ->select('*');
+        return $this->newQuery()->with([
+            'userdetails' => function ($query) {
+                $query->select('*')->with([
+                    'usertype' => function ($query) {
+                        $query->select('typeid', 'typename');
+                    },
+                    'businesspartner' => function ($query) {
+                        $query->select('bpid', 'bpname');
+                    }
+                ]);
+            }
+        ])
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->orderBy($order, $orderby);
     }
 
     public function find($id)
     {
-        return $this->newQuery()->findOrFail($id);
+        return $this->newQuery()->with([
+            'userdetails' => function ($query) {
+                $query->select('*')->with([
+                    'usertype' => function ($query) {
+                        $query->select('typeid', 'typename');
+                    },
+                    'businesspartner' => function ($query) {
+                        $query->select('bpid', 'bpname');
+                    }
+                ]);
+            }
+        ])->findOrFail($id);
     }
 }
