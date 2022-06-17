@@ -9,7 +9,7 @@ class TypeChildrenServices extends Types
 {
     public function datatablesNonFilter()
     {
-        return $this->newQuery()->select('*');
+        return $this->newQuery()->select('*')->where('typemasterid', '!=', null);
     }
     public function datatables($id)
     {

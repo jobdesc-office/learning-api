@@ -117,7 +117,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'user'], function () use ($router) {
             $router->get('select', 'UsersController@select');
-            $router->get('select2', 'UsersController@select2');
+            $router->get('select/{id}', 'UsersController@selectwithsamebp');
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');
@@ -200,6 +200,26 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'ProspectController@show');
             $router->put('{id}', 'ProspectController@update');
             $router->delete('{id}', 'ProspectController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospectdetail'], function () use ($router) {
+            $router->get('', 'ProspectDetailController@all');
+            $router->post('details', 'ProspectDetailController@details');
+
+            $router->post('', 'ProspectDetailController@store');
+            $router->get('{id}', 'ProspectDetailController@show');
+            $router->put('{id}', 'ProspectDetailController@update');
+            $router->delete('{id}', 'ProspectDetailController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospectassign'], function () use ($router) {
+            $router->get('', 'ProspectAssignController@all');
+            $router->post('details', 'ProspectAssignController@details');
+
+            $router->post('', 'ProspectAssignController@store');
+            $router->get('{id}', 'ProspectAssignController@show');
+            $router->put('{id}', 'ProspectAssignController@update');
+            $router->delete('{id}', 'ProspectAssignController@destroy');
         });
     });
 
@@ -351,6 +371,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('{id}', 'ContactPersonController@show');
                 $router->put('{id}', 'ContactPersonController@update');
                 $router->delete('{id}', 'ContactPersonController@destroy');
+            });
+
+            $router->group(['prefix' => 'prospectassign'], function () use ($router) {
+                $router->get('', 'ProspectAssignController@all');
+                $router->post('', 'ProspectAssignController@store');
+                $router->get('{id}', 'ProspectAssignController@show');
+                $router->put('{id}', 'ProspectAssignController@update');
+                $router->delete('{id}', 'ProspectAssignController@destroy');
             });
         });
 

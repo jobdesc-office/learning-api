@@ -23,7 +23,7 @@ class SubdistrictServices extends Subdistrict
     {
         $query = $this->getQuery();
 
-        $subdistrictwhere = $whereArr->only($this->fillable);
+        $subdistrictwhere = $whereArr->only($this->getFillable());
         if ($subdistrictwhere->isNotEmpty()) {
             $query = $query->where($subdistrictwhere->toArray());
         }

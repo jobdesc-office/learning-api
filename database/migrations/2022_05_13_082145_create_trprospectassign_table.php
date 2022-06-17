@@ -15,6 +15,7 @@ class CreateTrprospectassignTable extends Migration
     {
         Schema::create('trprospectassign', function (Blueprint $table) {
             $table->id('prospectassignid');
+            $table->integer('prospectid');
             $table->integer('prospectassignto');
             $table->integer('prospectreportto');
             $table->text('prospectassigndesc')->nullable();
