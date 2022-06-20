@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\BusinessPartners\BusinessPartner;
+use App\Models\Masters\BusinessPartner;
 use App\Models\Masters\BpCustomer;
 use App\Models\Masters\City;
 use App\Models\Masters\Country;

@@ -20,7 +20,7 @@ class UserDetailServices extends UserDetail
                     $query->select('typeid', 'typename');
                 },
                 'businesspartner' => function ($query) {
-                    $query->select('bpid', 'bpname');
+                    $query->select('bpid', 'bpname', 'bpphone', 'bpemail')->with(['bptype']);
                 },
             ])
             ->where(function ($query) use ($searchValue) {
@@ -40,7 +40,7 @@ class UserDetailServices extends UserDetail
                     $query->select('typeid', 'typename');
                 },
                 'businesspartner' => function ($query) {
-                    $query->select('bpid', 'bpname');
+                    $query->select('bpid', 'bpname', 'bpphone', 'bpemail', 'bptypeid')->with(['bptype']);
                 },
                 'user' => function ($query) {
                     $query->select('*');
@@ -56,7 +56,7 @@ class UserDetailServices extends UserDetail
                 $query->select('typeid', 'typename');
             },
             'businesspartner' => function ($query) {
-                $query->select('bpid', 'bpname');
+                $query->select('bpid', 'bpname', 'bpphone', 'bpemail', 'bptypeid')->with(['bptype']);
             },
             'user' => function ($query) {
                 $query->select('*');

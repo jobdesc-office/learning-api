@@ -19,23 +19,16 @@ class AuthController extends Controller
             return response()->json(['message' => \TextMessages::failedSignIn], 400);
 
         $user = new UserColumn($authServices->authQuery()->find(\auth()->id()));
+        $user->put('userdetails', collect($user->userDetail()->all())->map(function ($data) {
+            return [
+                'userdtid' => $data->getId(),
+                'usertype' => $data->userType()->toArray(),
+                'businesspartner' => $data->businessPartner()->toArray(),
+            ];
+        })->all());
+        if ($user->getId() != null) $user->put('jwt_token', $token);
 
-        $response = collect([
-            'userid' => $user->getId(),
-            'userfullname' => $user->getFullName(),
-            'username' => $user->getName(),
-            'role' => $user->getTypeName(),
-            'userdetails' => collect($user->userDetail()->all())->map(function ($data) {
-                return [
-                    'userdtid' => $data->getId(),
-                    'usertype' => $data->userType()->toArray(),
-                    'businesspartner' => $data->businessPartner()->toArray(),
-                ];
-            })->all(),
-        ]);
-        if ($user->getId() != null) $response->put('jwt_token', $token);
-
-        return response()->json($response);
+        return response()->json($user->toArray());
     }
 
     public function verifyToken()

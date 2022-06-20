@@ -55,7 +55,7 @@ class UserServices extends User
                             $query->select('typeid', 'typename', 'typecd');
                         },
                         'businesspartner' => function ($query) {
-                            $query->select('bpid', 'bpname');
+                            $query->select('bpid', 'bpname', 'bpemail', 'bpphone')->with(['bptype']);
                         }
                     ]);
             }
@@ -87,7 +87,7 @@ class UserServices extends User
                         $query->select('typeid', 'typename');
                     },
                     'businesspartner' => function ($query) {
-                        $query->select('bpid', 'bpname');
+                        $query->select('bpid', 'bpname', 'bpemail', 'bpphone')->with(['bptype']);
                     }
                 ]);
             }
