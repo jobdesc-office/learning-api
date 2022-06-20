@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\DB;
 class BusinessPartnerServices extends BusinessPartner
 {
 
-    public function datatables()
+    public function datatables($order, $orderby, $search)
     {
-        return $this->getQuery();
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->orderBy($order, $orderby);
     }
 
     public function find($id)
