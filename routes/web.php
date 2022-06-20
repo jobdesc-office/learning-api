@@ -222,6 +222,16 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->put('{id}', 'ProspectAssignController@update');
             $router->delete('{id}', 'ProspectAssignController@destroy');
         });
+
+        $router->group(['prefix' => 'prospectproduct'], function () use ($router) {
+            $router->get('', 'ProspectProductController@all');
+            $router->post('details', 'ProspectProductController@details');
+
+            $router->post('', 'ProspectProductController@store');
+            $router->get('{id}', 'ProspectProductController@show');
+            $router->put('{id}', 'ProspectProductController@update');
+            $router->delete('{id}', 'ProspectProductController@destroy');
+        });
     });
 
     $router->group(['namespace' => 'Security'], function () use ($router) {
