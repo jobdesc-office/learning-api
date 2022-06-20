@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Collections\Users\UserColumn;
 use App\Models\Masters\User;
 use App\Models\Masters\UserDetail;
 use App\Services\Masters\UserServices;
 use App\Services\Masters\TypeServices;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\UserDetailServices;
+use App\Services\AuthServices;
 use Hamcrest\Type\IsInteger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +19,26 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
+    public function session(AuthServices $authServices)
+    {
+        $user = new UserColumn($authServices->authQuery()->find(\auth()->id()));
+        $response = collect([
+            'userid' => $user->getId(),
+            'userfullname' => $user->getFullName(),
+            'username' => $user->getName(),
+            'useremail' => $user->getEmail(),
+            'userphone' => $user->getPhone(),
+            'userdetails' => collect($user->userDetail()->all())->map(function ($data) {
+                return [
+                    'userdtid' => $data->getId(),
+                    'usertype' => $data->userType()->toArray(),
+                    'businesspartner' => $data->businessPartner()->toArray(),
+                ];
+            })->all(),
+        ]);
+
+        return response()->json($response);
+    }
 
     public function prospectowner(Request $req, UserDetailServices $userDetailServices)
     {
