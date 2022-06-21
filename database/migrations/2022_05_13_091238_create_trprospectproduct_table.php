@@ -22,7 +22,7 @@ class CreateTrprospectproductTable extends Migration
             $table->double('prosproducttax')->nullable();
             $table->double('prosproductdiscount')->nullable();
             $table->double('prosproductamount')->nullable();
-            $table->integer('prosproducttaxtypeid');
+            $table->integer('prosproducttaxtypeid')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
