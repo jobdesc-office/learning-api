@@ -16,37 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function select(Request $req, TypeServices $typeServices)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $typeServices->select($searchValue);
-
-        return response()->json($selects);
-    }
-
-    public function select2(Request $req, BusinessPartnerServices $businessPartnerService)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $businessPartnerService->select($searchValue);
-
-        return response()->json($selects);
-    }
-
-    public function allUser(Request $req, UserServices $userServices)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $query = $userServices->allUser($searchValue);
-
-        return response()->json($query);
-    }
-
-    public function datatables(UserServices $userServices)
-    {
-        $query = $userServices->datatables();
-
-        return datatables()->eloquent($query)
-            ->toJson();
-    }
 
     public function all(Request $req, UserDetailServices $userDetailServices)
     {
@@ -95,6 +64,14 @@ class UsersController extends Controller
                 'userdtbpid' => $role->bpid,
             ]);
         }
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
+    public function attachDevice($id, Request $req, User $modelUser)
+    {
+        $user = $modelUser->findOrFail($id);
+        $user->userdeviceid = $req->get('userdeviceid');
+        $user->save();
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 

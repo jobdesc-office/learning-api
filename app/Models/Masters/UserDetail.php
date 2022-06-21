@@ -2,7 +2,7 @@
 
 namespace App\Models\Masters;
 
-use App\Models\BusinessPartners\BusinessPartner;
+use App\Models\Masters\BusinessPartner;
 use Database\Factories\UserDetailFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

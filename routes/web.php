@@ -282,6 +282,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('{id}', 'UsersController@show');
                 $router->put('{id}', 'UsersController@update');
                 $router->delete('{id}', 'UsersController@destroy');
+                $router->put('{id}/attach-device', 'UsersController@attachDevice');
             });
 
             $router->group(['prefix' => 'businesspartner'], function () use ($router) {
