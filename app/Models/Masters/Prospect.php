@@ -17,7 +17,6 @@ class Prospect extends Model
         "prospectowner",
         "prospectstageid",
         "prospectstatusid",
-        "prospecttypeid",
         "prospectexpclosedate",
         "prospectbpid",
         "prospectdescription",
@@ -44,11 +43,6 @@ class Prospect extends Model
     public function prospectstatus()
     {
         return $this->belongsTo(Types::class, "prospectstatusid", "typeid");
-    }
-
-    public function prospecttype()
-    {
-        return $this->belongsTo(Types::class, "prospecttypeid", "typeid");
     }
 
     public function prospectbp()
