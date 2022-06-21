@@ -20,6 +20,7 @@ class DBTypes
 
     const cstmstatus = 'cstmstatus';
 
+    const prospectType = 'prtype';
     const prospectStage = 'prstage';
     const prospectStatus = 'prstatus';
     const prospectCategory = 'prcat';
