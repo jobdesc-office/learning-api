@@ -72,14 +72,6 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
-            'typecd' => \DBTypes::prospectType,
-            'typename' => 'Prospect Type',
-            'children' => [
-                ['typename' => 'Priority', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Non Priority', 'createdby' => 1, 'updatedby' => 1],
-            ]
-        ],
-        [
             'typecd' => \DBTypes::prospectStage,
             'typename' => 'Prospect Stage',
             'children' => [
@@ -134,7 +126,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Instagram', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Facebook', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
     ];

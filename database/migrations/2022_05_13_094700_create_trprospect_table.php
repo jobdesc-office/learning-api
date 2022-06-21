@@ -22,7 +22,6 @@ class CreateTrprospectTable extends Migration
             $table->integer('prospectowner');
             $table->integer('prospectstageid');
             $table->integer('prospectstatusid');
-            $table->integer('prospecttypeid');
             $table->date('prospectexpclosedate')->nullable();
             $table->integer('prospectbpid');
             $table->text('prospectdescription')->nullable();

@@ -46,11 +46,6 @@ class Prospect extends Model
         return $this->belongsTo(Types::class, "prospectstatusid", "typeid");
     }
 
-    public function prospecttype()
-    {
-        return $this->belongsTo(Types::class, "prospecttypeid", "typeid");
-    }
-
     public function prospectbp()
     {
         return $this->belongsTo(BusinessPartner::class, "prospectbpid", "bpid");
