@@ -79,24 +79,4 @@ class CustomerService extends Customer
             },
         ]);
     }
-
-
-    public function saveOrGet(Collection $data)
-    {
-        $data = $data->only($this->getFillable());
-        $customer = $this->getQuery()
-            ->where(DB::raw('TRIM(LOWER(cstmname))'), Str::lower($data->get('cstmname')))
-            ->where(DB::raw('TRIM(LOWER(cstmaddress))'), Str::lower($data->get('cstmaddress')))
-            ->where('cstmphone', Str::lower($data->get('cstmphone')))
-            ->where('cstmtypeid', Str::lower($data->get('cstmtypeid')))
-            ->get();
-
-        if ($customer->count() > 0) {
-            return $customer->first();
-        } else {
-            $customer = $this->fill($data->toArray());
-            $customer->save();
-            return $customer;
-        }
-    }
 }

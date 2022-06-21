@@ -92,7 +92,9 @@ class BpCustomerService extends BpCustomer
                 return false;
             }
         } else {
-            $customer = $customerService->saveOrGet($insertArr);
+            $customer = $customerService->fill($insertArr->toArray());
+            $customer->save();
+
             $isExist = $this->where('sbccstmid', $customer->cstmid)->where('sbcbpid', $insertArr->get('sbcbpid'))->first();
 
             if ($isExist) {
