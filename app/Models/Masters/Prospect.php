@@ -17,7 +17,6 @@ class Prospect extends Model
         "prospectowner",
         "prospectstageid",
         "prospectstatusid",
-        "prospecttypeid",
         "prospectexpclosedate",
         "prospectbpid",
         "prospectdescription",

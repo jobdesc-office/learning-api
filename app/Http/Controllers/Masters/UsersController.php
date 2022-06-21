@@ -48,6 +48,15 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
+    public function reset($id, UserServices $userServices)
+    {
+        $userServices->findOrFail($id)->update([
+            'userdeviceid' => '',
+        ]);
+
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
     public function select(Request $req, UserServices $userServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));

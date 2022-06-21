@@ -116,6 +116,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'user'], function () use ($router) {
+            $router->get('reset/{id}', 'UsersController@reset');
             $router->get('session', 'UsersController@session');
             $router->get('select', 'UsersController@select');
             $router->get('select/{id}', 'UsersController@selectwithsamebp');
