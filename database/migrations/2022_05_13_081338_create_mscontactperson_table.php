@@ -17,6 +17,7 @@ class CreateMscontactpersonTable extends Migration
             $table->id('contactpersonid');
             $table->integer('contactcustomerid');
             $table->integer('contacttypeid');
+            $table->string('contactname', 255);
             $table->text('contactvalueid')->nullable();
 
             $table->bigInteger('createdby')->nullable();

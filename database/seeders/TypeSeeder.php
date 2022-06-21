@@ -126,7 +126,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Instagram', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Facebook', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
     ];

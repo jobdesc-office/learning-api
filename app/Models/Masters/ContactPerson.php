@@ -13,6 +13,7 @@ class ContactPerson extends Model
         "contactcustomerid",
         "contacttypeid",
         "contactvalueid",
+        "contactname",
         "createdby",
         "updatedby",
         'isactive',
