@@ -24,7 +24,6 @@ class DBTypes
     const prospectStage = 'prstage';
     const prospectStatus = 'prstatus';
     const prospectCategory = 'prcat';
-    const prospectType = 'prtype';
     const prospectFollowUp = "prfoll";
 
     const contactType = "contact";
