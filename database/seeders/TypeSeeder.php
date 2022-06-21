@@ -92,12 +92,12 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
-            'typecd' => \DBTypes::prospectCategory,
-            'typename' => 'Prospect Category',
+            'typecd' => \DBTypes::prospectType,
+            'typename' => 'Prospect Type',
             'children' => [
-                ['typename' => 'Expensive', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Normal', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Cheap', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Meeting', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Negotiation', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Show Product', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
@@ -111,8 +111,8 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
-            'typecd' => \DBTypes::prospectFollowUp,
-            'typename' => 'Prospect Follow Up',
+            'typecd' => \DBTypes::prospectCategory,
+            'typename' => 'Prospect Category',
             'children' => [
                 ['typename' => 'By Phone', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'By Email', 'createdby' => 1, 'updatedby' => 1],
