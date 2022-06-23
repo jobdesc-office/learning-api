@@ -10,6 +10,7 @@ use App\Models\Masters\Customer;
 use App\Models\Masters\Province;
 use App\Models\Masters\Schedule;
 use App\Models\Masters\Subdistrict;
+use App\Models\Masters\Village;
 use App\Models\Masters\UserDetail;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
@@ -31,11 +32,13 @@ class DatabaseSeeder extends Seeder
         // $provincesData = $this->getProvincesData();
         // $citiesData = $this->getCitiesData();
         // $subdistrictsdata = $this->getSubdistrictData();
+        // $villagesdata = $this->getVillageData();
 
         // Country::insert($countriesData);
         // Province::insert($provincesData);
         // City::insert($citiesData);
         // Subdistrict::insert($subdistrictsdata);
+        // Village::insert($villagesdata);
 
         BusinessPartner::factory(\FactoryCount::bpCount)->create();
         UserDetail::factory(\FactoryCount::userDetailCount)->create();
@@ -121,6 +124,35 @@ class DatabaseSeeder extends Seeder
                 })->filter();
 
                 $results->push(...$subdistricts->toArray());
+            });
+        });
+        return $results->filter()->toArray();
+    }
+
+    private function getVillageData()
+    {
+        $results = collect([]);
+        $provinces = collect($this->fetchData('https://ibnux.github.io/data-indonesia/provinsi.json'));
+
+        $provinces->each(function ($prov) use ($results) {
+            $cities = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kabupaten/$prov->id.json"));
+
+            $cities->each(function ($city) use ($results) {
+                $subdistricts = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kecamatan/$city->id.json"));
+
+                $subdistricts->each(function ($subdistrict) use ($results) {
+                    $villages = collect($this->fetchData("https://ibnux.github.io/data-indonesia/kelurahan/$subdistrict->id.json"));
+
+                    $villages = $villages->map(function ($vlg) use ($subdistrict) {
+                        return [
+                            'villagename' => $vlg->nama,
+                            'villagesubdistrictid' => $subdistrict->id,
+                            'villageid' => $vlg->id,
+                        ];
+                    })->filter();
+
+                    $results->push(...$villages->toArray());
+                });
             });
         });
         return $results->filter()->toArray();
