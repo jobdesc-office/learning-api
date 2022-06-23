@@ -13,10 +13,11 @@ class Types extends Model
         "typecd",
         "typename",
         "typeseq",
-        "masterid",
-        "descriptions",
+        "typemasterid",
+        "typedesc",
         "createdby",
-        "updatedby"
+        "updatedby",
+        'isactive',
     ];
 
     const CREATED_AT = "createddate";
@@ -24,6 +25,6 @@ class Types extends Model
 
     public function parent()
     {
-        return $this->hasOne(Types::class, 'typeid', 'masterid');
+        return $this->belongsTo(Types::class, 'typemasterid', 'typeid');
     }
 }

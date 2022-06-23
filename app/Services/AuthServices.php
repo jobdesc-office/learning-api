@@ -10,20 +10,23 @@ class AuthServices extends User
 
     public function authQuery()
     {
-        return $this->newQuery()->select(['userid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid'])
+        return $this->newQuery()->select(['msuser.userid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid', 'typename'])
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->join('mstype', 'msuserdt.userdttypeid', '=', 'mstype.typeid')
             ->with([
-                'userdetails' => function($query) {
-                $query->select('userid', 'usertypeid', 'bpid')
-                    ->with([
-                        'usertype' => function($query) {
-                            $query->select('typeid', 'typename', 'typecd');
-                        },
-                        'businesspartner' => function($query) {
-                            $query->select('bpid', 'bpname');
-                        }
-                    ]);
+                'userdetails' => function ($query) {
+                    $query->select('userid', 'userdtid', 'userdttypeid', 'userdtbpid')
+                        ->with([
+                            'usertype' => function ($query) {
+                                $query->select('typeid', 'typename', 'typecd');
+                            },
+                            'businesspartner' => function ($query) {
+                                $query->select('bpid', 'bpname');
+                            }
+                        ]);
                 }
-            ]);
+            ])
+            ->where('msuser.isactive', true);
     }
 
     /**
@@ -31,7 +34,7 @@ class AuthServices extends User
      * */
     public function authUserNameOrEmail($value)
     {
-        return $this->authQuery()->where(function($query) use ($value) {
+        return $this->authQuery()->where(function ($query) use ($value) {
             $query->where('username', $value)
                 ->orWhere('useremail', $value);
         })->first();

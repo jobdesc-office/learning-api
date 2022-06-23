@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\BusinessPartners\BusinessPartner;
+use App\Models\Masters\BusinessPartner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BusinessPartnerFactory extends Factory
@@ -17,6 +17,7 @@ class BusinessPartnerFactory extends Factory
             'bppicname' => $this->faker->name(),
             'bpemail' => $this->faker->email(),
             'bpphone' => $this->faker->phoneNumber(),
+            'bptypeid' => find_type()->byCode([\DBTypes::businessPartner])->children(\DBTypes::businessPartner)->random()->getId(),
             'createdby' => 1,
             'updatedby' => 1,
         ];

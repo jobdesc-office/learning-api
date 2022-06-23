@@ -4,6 +4,7 @@ namespace App\Collections\Types;
 
 use App\Collections\CollectionFinder;
 use App\Models\Masters\Types;
+use Illuminate\Support\Facades\Log;
 
 class TypeFinder extends CollectionFinder
 {
@@ -12,7 +13,7 @@ class TypeFinder extends CollectionFinder
     {
         $this->model = new Types();
 
-        parent::__construct($key, $keys, collect($items)->map(function($data) {
+        parent::__construct($key, $keys, collect($items)->map(function ($data) {
             return new TypeColumn($data);
         }));
     }
@@ -56,17 +57,16 @@ class TypeFinder extends CollectionFinder
      * */
     public function children($keyValue = null)
     {
-        if($this->items->count() == 0)
+        if ($this->items->count() == 0)
             throw new \Exception("Data tipe tidak ditemukan");
 
-        if(is_null($keyValue))
+        if (is_null($keyValue))
             $keyValue = $this->keys->first();
 
-        $data = $this->items->filter(function($data) use ($keyValue) {
+        $data = $this->items->filter(function ($data) use ($keyValue) {
             /* @var TypeColumn $data*/
             return $data->parent()->get($this->key) == $keyValue;
         });
-
         return new TypeCollection($data->toArray());
     }
 }

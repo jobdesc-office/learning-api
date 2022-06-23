@@ -2,7 +2,7 @@
 
 namespace App\Models\Masters;
 
-use App\Models\BusinessPartners\BusinessPartner;
+use App\Models\Masters\BusinessPartner;
 use Database\Factories\UserDetailFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,12 +16,11 @@ class UserDetail extends Model
 
     protected $fillable = [
         "userid",
-        "usertypeid",
-        "bpid",
-        "branchid",
-        "deptid",
-        "referalcode",
-        "relationid",
+        "userdttypeid",
+        "userdtbpid",
+        "userdtbranchnm",
+        "userdtreferalcode",
+        "userdtrelationid",
         "createdby",
         "updatedby",
         "isactive"
@@ -35,13 +34,18 @@ class UserDetail extends Model
         return new UserDetailFactory();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userid', 'userid');
+    }
+
     public function usertype()
     {
-        return $this->hasOne(Types::class, 'typeid', 'usertypeid');
+        return $this->belongsTo(Types::class, 'userdttypeid', 'typeid');
     }
 
     public function businesspartner()
     {
-        return $this->hasOne(BusinessPartner::class, 'bpid', 'bpid');
+        return $this->belongsTo(BusinessPartner::class, 'userdtbpid', 'bpid');
     }
 }

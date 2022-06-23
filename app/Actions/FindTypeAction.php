@@ -4,15 +4,15 @@ namespace App\Actions;
 
 use App\Collections\Types\TypeFinder;
 use App\Services\TypeServices;
-use Illuminate\Support\Facades\DB;
 
 class FindTypeAction
 {
 
     static private $instance;
 
-    static public function find() {
-        if(is_null(self::$instance))
+    static public function find()
+    {
+        if (is_null(self::$instance))
             self::$instance = new FindTypeAction();
 
         return self::$instance;
@@ -42,7 +42,6 @@ class FindTypeAction
 
         $types = $this->service->whereParent($codes)
             ->get();
-
         return new TypeFinder('typecd', $code, $types->toArray());
     }
 }

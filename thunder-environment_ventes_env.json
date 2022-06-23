@@ -1,0 +1,16 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "ventes_env",
+    "dateExported": "2022-05-10T09:00:48.694Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "base_url",
+            "value": "http://10.21.1.149/ventes_api/public/api"
+        },
+        {
+            "name": "authorization",
+            "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMC4yMS4xLjY1XC92ZW50ZXNfYXBpXC9wdWJsaWNcL2FwaVwvYXV0aFwvc2lnbmluIiwiaWF0IjoxNjUyMTcxNDcwLCJleHAiOjE2NTIxNzUwNzAsIm5iZiI6MTY1MjE3MTQ3MCwianRpIjoidTA3WmVMOWhVZk41WlZRSiIsInN1YiI6MSwicHJ2IjoiYWRjNGUxZTdiNTBlNzZhNDRhZGU0ZDYxOWViZWY0NmZmY2U4NTQ5NCJ9.r3lmb5EMfeVg0XSyvUs-FY8VXNGJuR75nwv6VaDa76k"
+        }
+    ]
+}

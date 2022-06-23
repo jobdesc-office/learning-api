@@ -1,0 +1,34 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "/var/run/postgresql",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "ventes",
+            "database": "ventes",
+            "username": "revan",
+            "password": "revan1853"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "ventes hyperdata",
+            "database": "ventes",
+            "username": "postgres",
+            "password": "revan1853"
+        },
+        {
+            "previewLimit": 50,
+            "server": "/var/run/postgresql",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "home ",
+            "database": "ventes",
+            "username": "revan",
+            "password": "revan1853"
+        }
+    ]
+}

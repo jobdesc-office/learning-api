@@ -22,7 +22,7 @@ class UserDetailColumn extends Collection
 
     public function getUserTypeId()
     {
-        return $this->get('usertypeid');
+        return $this->get('userdttypeid');
     }
 
     public function userType()
