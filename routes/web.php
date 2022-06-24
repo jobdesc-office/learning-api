@@ -208,6 +208,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'prospect'], function () use ($router) {
+            $router->get('select', 'ProspectController@select');
             $router->get('', 'ProspectController@all');
             $router->post('datatables', 'ProspectController@datatables');
 

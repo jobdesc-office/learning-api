@@ -23,6 +23,17 @@ class ProspectServices extends Prospect
         return $this->getQuery()->findOrFail($id);
     }
 
+    public function select($searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where('prospectrefid', null)
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function getAll(Collection $whereArr)
     {
         $query = $this->getQuery();
@@ -60,6 +71,9 @@ class ProspectServices extends Prospect
             },
             'prospectstatus' => function ($query) {
                 $query->select('typeid', 'typename');
+            },
+            'prospectreference' => function ($query) {
+                $query->select('*')->with(['prospectcust']);
             },
             'prospectbp',
             'prospectcust' => function ($query) {

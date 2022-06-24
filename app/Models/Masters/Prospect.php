@@ -35,6 +35,11 @@ class Prospect extends Model
         return $this->belongsTo(UserDetail::class, "prospectowner", "userdtid");
     }
 
+    public function prospectreference()
+    {
+        return $this->belongsTo(Prospect::class, "prospectrefid", "prospectid");
+    }
+
     public function prospectstage()
     {
         return $this->belongsTo(Types::class, "prospectstageid", "typeid");

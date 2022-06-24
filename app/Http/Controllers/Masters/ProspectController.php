@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectController extends Controller
 {
+
+    public function select(Request $req, ProspectServices $ProspectServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $ProspectServices->select($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, ProspectServices $ProspectServices)
     {
         $search = trim(strtolower($req->get('search[value]')));
