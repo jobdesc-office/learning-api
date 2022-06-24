@@ -80,7 +80,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'subdistrict'], function () use ($router) {
-            // $router->get('select', 'SubdistrictController@select');
+            $router->get('select', 'SubdistrictController@select');
             // $router->get('select2', 'SubdistrictController@select2');
             $router->get('by-name', 'SubdistrictController@byName');
             $router->get('all', 'SubdistrictController@all');
@@ -90,6 +90,19 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'SubdistrictController@show');
             $router->put('{id}', 'SubdistrictController@update');
             $router->delete('{id}', 'SubdistrictController@destroy');
+        });
+
+        $router->group(['prefix' => 'village'], function () use ($router) {
+            // $router->get('select', 'SubdistrictController@select');
+            // $router->get('select2', 'SubdistrictController@select2');
+            $router->get('by-name', 'VillageController@byName');
+            $router->get('all', 'VillageController@all');
+            $router->post('datatables', 'VillageController@datatables');
+
+            $router->post('', 'VillageController@store');
+            $router->get('{id}', 'VillageController@show');
+            $router->put('{id}', 'VillageController@update');
+            $router->delete('{id}', 'VillageController@destroy');
         });
 
         $router->group(['prefix' => 'types'], function () use ($router) {

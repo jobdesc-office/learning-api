@@ -3,21 +3,12 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
-use App\Services\Masters\SubdistrictServices;
+use App\Services\Masters\VillageServices;
 use Illuminate\Http\Request;
 
-class SubdistrictController extends Controller
+class VillageController extends Controller
 {
-
-    public function select(Request $req, SubdistrictServices $subdistrictservice)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $subdistrictservice->select($searchValue);
-
-        return response()->json($selects);
-    }
-
-    public function datatables(Request $req, SubdistrictServices $subdistrictservice)
+    public function datatables(Request $req, VillageServices $Villageservice)
     {
         $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
@@ -66,7 +57,7 @@ class SubdistrictController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $subdistrictservice->datatables($order, $orderby, $search);
+        $query = $Villageservice->datatables($order, $orderby, $search);
 
         return
             datatables()->eloquent($query)
@@ -74,51 +65,51 @@ class SubdistrictController extends Controller
             ->getOriginalContent();
     }
 
-    public function all(Request $req, SubdistrictServices $bpcustomerservice)
+    public function all(Request $req, VillageServices $bpcustomerservice)
     {
         $whereArr = collect($req->all())->filter();
         $businesspartners = $bpcustomerservice->getAll($whereArr);
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, SubdistrictServices $modelSubdistrictServices)
+    public function store(Request $req, VillageServices $modelVillageServices)
     {
-        $insert = collect($req->only($modelSubdistrictServices->getFillable()))->filter()->except('updatedby');
+        $insert = collect($req->only($modelVillageServices->getFillable()))->filter()->except('updatedby');
 
-        $modelSubdistrictServices->create($insert->toArray());
+        $modelVillageServices->create($insert->toArray());
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, SubdistrictServices $businessPartnerService)
+    public function show($id, VillageServices $businessPartnerService)
     {
         $row = $businessPartnerService->find($id);
         return response()->json($row);
     }
 
-    public function update($id, Request $req, SubdistrictServices $modelSubdistrictServices)
+    public function update($id, Request $req, VillageServices $modelVillageServices)
     {
-        $row = $modelSubdistrictServices->findOrFail($id);
+        $row = $modelVillageServices->findOrFail($id);
 
-        $update = collect($req->only($modelSubdistrictServices->getFillable()))->filter()
+        $update = collect($req->only($modelVillageServices->getFillable()))->filter()
             ->except('createdby');
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, SubdistrictServices $modelSubdistrictServices)
+    public function destroy($id, VillageServices $modelVillageServices)
     {
-        $row = $modelSubdistrictServices->findOrFail($id);
+        $row = $modelVillageServices->findOrFail($id);
         $row->delete();
 
         return response()->json(['message' => \TextMessages::successDelete]);
     }
 
-    public function byName(Request $req, SubdistrictServices $modelSubdistrictServices)
+    public function byName(Request $req, VillageServices $modelVillageServices)
     {
         $filtered = collect($req->all())->filter();
-        $row = $modelSubdistrictServices->byName($filtered->get('name'));
+        $row = $modelVillageServices->byName($filtered->get('name'));
         return response()->json($row);
     }
 }
