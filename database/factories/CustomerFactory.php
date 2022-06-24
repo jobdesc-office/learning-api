@@ -7,6 +7,7 @@ use App\Models\Masters\Country;
 use App\Models\Masters\Customer;
 use App\Models\Masters\Province;
 use App\Models\Masters\Subdistrict;
+use App\Models\Masters\Village;
 use App\Models\Masters\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,7 @@ class CustomerFactory extends Factory
      */
     public function definition()
     {
+        $this->setVillageId();
         $this->setSubdistrictId();
         $this->setCityId();
         $this->setProvinceId();
@@ -36,6 +38,7 @@ class CustomerFactory extends Factory
             'cstmaddress' => $this->faker->address,
             'cstmprovinceid' => $this->province->provid,
             'cstmcityid' => $this->city->cityid,
+            'cstmuvid' => $this->village->villageid,
             'cstmsubdistrictid' => $this->subdistrict->subdistrictid,
             'cstmpostalcode' => $this->faker->numberBetween(30001, 39999),
             'cstmlatitude' => $this->faker->latitude,
@@ -51,9 +54,14 @@ class CustomerFactory extends Factory
         return $customertype->random()->getId();
     }
 
+    function setVillageId()
+    {
+        $this->village = Village::all()->random();
+    }
+
     function setSubdistrictId()
     {
-        $this->subdistrict = Subdistrict::all()->random();
+        $this->subdistrict = $this->village->villagesubdistrict;
     }
 
     function setCityId()

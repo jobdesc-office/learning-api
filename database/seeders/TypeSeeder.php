@@ -101,6 +101,16 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
+            'typecd' => \DBTypes::prospectCustomizeField,
+            'typename' => 'Prospect Customize Field',
+            'children' => [
+                ['typename' => 'Number', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Price', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
             'typecd' => \DBTypes::taxType,
             'typename' => 'Tax Type',
             'children' => [
