@@ -77,6 +77,9 @@ class CustomerService extends Customer
             'cstmsubdistrict' => function ($query) {
                 $query->select('subdistrictid', 'subdistrictname');
             },
+            'cstmvillage' => function ($query) {
+                $query->select('villageid', 'villagename');
+            },
         ]);
     }
 }

@@ -59,4 +59,9 @@ class Customer extends Model
     {
         return $this->belongsTo(Subdistrict::class, 'cstmsubdistrictid', 'subdistrictid');
     }
+
+    public function cstmvillage()
+    {
+        return $this->belongsTo(Village::class, 'cstmuvid', 'villageid');
+    }
 }
