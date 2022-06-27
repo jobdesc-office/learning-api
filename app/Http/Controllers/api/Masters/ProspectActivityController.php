@@ -3,50 +3,50 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
-use App\Services\Masters\ProspectDetailServices;
+use App\Services\Masters\ProspectActivityServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProspectDetailController extends Controller
+class ProspectActivityController extends Controller
 {
 
-    public function all(Request $req, ProspectDetailServices $prospectService)
+    public function all(Request $req, ProspectActivityServices $prospectService)
     {
         $whereArr = collect($req->all())->filter();
         $businesspartners = $prospectService->getAll($whereArr);
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, ProspectDetailServices $modelProspectDetailServices)
+    public function store(Request $req, ProspectActivityServices $modelProspectActivityServices)
     {
         $insert = collect($req->toArray())->filter()
             ->except('updatedby');
 
-        $modelProspectDetailServices->create($insert->toArray());
+        $modelProspectActivityServices->create($insert->toArray());
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, ProspectDetailServices $businessPartnerService)
+    public function show($id, ProspectActivityServices $businessPartnerService)
     {
         $row = $businessPartnerService->find($id);
         return response()->json($row);
     }
 
-    public function update($id, Request $req, ProspectDetailServices $modelProspectDetailServices)
+    public function update($id, Request $req, ProspectActivityServices $modelProspectActivityServices)
     {
-        $row = $modelProspectDetailServices->findOrFail($id);
+        $row = $modelProspectActivityServices->findOrFail($id);
 
-        $update = collect($req->only($modelProspectDetailServices->getFillable()))->filter()
+        $update = collect($req->only($modelProspectActivityServices->getFillable()))->filter()
             ->except('createdby');
         $row->fill($update->toArray())->save();
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectDetailServices $modelProspectDetailServices)
+    public function destroy($id, ProspectActivityServices $modelProspectActivityServices)
     {
-        $modelProspectDetailServices->find($id)->delete();
+        $modelProspectActivityServices->find($id)->delete();
         return response()->json(['message' => \TextMessages::successDelete]);
     }
 }
