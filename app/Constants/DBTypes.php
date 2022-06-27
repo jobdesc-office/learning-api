@@ -28,6 +28,7 @@ class DBTypes
     const prospectCustomizeField = 'prcf';
 
     const contactType = "contact";
+    const scheRefType = "scheref";
 
     const taxType = 'taxtype';
 }
