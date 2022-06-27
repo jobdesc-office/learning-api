@@ -218,14 +218,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'ProspectController@destroy');
         });
 
-        $router->group(['prefix' => 'prospectdetail'], function () use ($router) {
-            $router->get('', 'ProspectDetailController@all');
-            $router->post('details', 'ProspectDetailController@details');
+        $router->group(['prefix' => 'prospectactivity'], function () use ($router) {
+            $router->get('', 'ProspectActivityController@all');
+            $router->post('details', 'ProspectActivityController@details');
 
-            $router->post('', 'ProspectDetailController@store');
-            $router->get('{id}', 'ProspectDetailController@show');
-            $router->put('{id}', 'ProspectDetailController@update');
-            $router->delete('{id}', 'ProspectDetailController@destroy');
+            $router->post('', 'ProspectActivityController@store');
+            $router->get('{id}', 'ProspectActivityController@show');
+            $router->put('{id}', 'ProspectActivityController@update');
+            $router->delete('{id}', 'ProspectActivityController@destroy');
         });
 
         $router->group(['prefix' => 'prospectassign'], function () use ($router) {

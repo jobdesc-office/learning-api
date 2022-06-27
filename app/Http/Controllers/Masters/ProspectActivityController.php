@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
-use App\Models\Masters\ProspectDetail;
+use App\Models\Masters\ProspectActivity;
 use App\Models\Masters\ProspectProduct;
-use App\Services\Masters\ProspectDetailServices;
+use App\Services\Masters\ProspectActivityServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProspectDetailController extends Controller
+class ProspectActivityController extends Controller
 {
-    public function details(Request $req, ProspectDetailServices $ProspectDetailServices)
+    public function details(Request $req, ProspectActivityServices $ProspectDetailServices)
     {
         $id = $req->get('id');
         $query = $ProspectDetailServices->details($id);
@@ -19,13 +19,13 @@ class ProspectDetailController extends Controller
         return $query->get();
     }
 
-    public function all(Request $req, ProspectDetailServices $ProspectServices)
+    public function all(Request $req, ProspectActivityServices $ProspectServices)
     {
         $Prospects = $ProspectServices->getAll(collect($req->all()));
         return response()->json($Prospects);
     }
 
-    public function store(Request $req, ProspectDetail $ProspectDetailModel, ProspectProduct $ProspectProduct)
+    public function store(Request $req, ProspectActivity $ProspectDetailModel, ProspectProduct $ProspectProduct)
     {
         $insert = collect($req->only($ProspectDetailModel->getFillable()))->filter()->except('updatedby');
 
@@ -34,13 +34,13 @@ class ProspectDetailController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, ProspectDetailServices $ProspectServices)
+    public function show($id, ProspectActivityServices $ProspectServices)
     {
         $Prospect = $ProspectServices->find($id);
         return response()->json($Prospect);
     }
 
-    public function update($id, Request $req, ProspectDetail $ProspectDetailModel, ProspectProduct $ProspectProduct)
+    public function update($id, Request $req, ProspectActivity $ProspectDetailModel, ProspectProduct $ProspectProduct)
     {
 
         $fields = collect($req->only($ProspectDetailModel->getFillable()))->filter()
@@ -50,7 +50,7 @@ class ProspectDetailController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectDetail $ProspectDetailModel, ProspectProduct $ProspectProduct)
+    public function destroy($id, ProspectActivity $ProspectDetailModel, ProspectProduct $ProspectProduct)
     {
         $ProspectDetailModel->findOrFail($id)->delete();
         return response()->json(['message' => \TextMessages::successDelete]);

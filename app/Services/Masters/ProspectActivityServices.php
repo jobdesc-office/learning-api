@@ -2,12 +2,12 @@
 
 namespace App\Services\Masters;
 
-use App\Models\Masters\ProspectDetail;
+use App\Models\Masters\ProspectActivity;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class ProspectDetailServices extends ProspectDetail
+class ProspectActivityServices extends ProspectActivity
 {
     public function details($id)
     {
