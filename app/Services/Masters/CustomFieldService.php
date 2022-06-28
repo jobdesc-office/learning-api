@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\DB;
 class CustomFieldService extends CustomField
 {
 
+    public function selectWithBp($bpid)
+    {
+        return $this->getQuery()->select('*')
+            ->where('custfbpid', $bpid)
+            ->get();
+    }
+
     public function select($searchValue)
     {
         return $this->getQuery()->select('*')
