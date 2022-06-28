@@ -16,8 +16,8 @@ class CreateTrprospectActivityTable extends Migration
         Schema::create('trprospectactivity', function (Blueprint $table) {
             $table->id('prospectactivityid');
             $table->integer('prospectactivityprospectid');
-            $table->integer('prospectactivitycatid');
-            $table->integer('prospectactivitytypeid');
+            $table->integer('prospectactivitycatid')->nullable();
+            $table->integer('prospectactivitytypeid')->nullable();
             $table->date('prospectactivitydate')->nullable();
             $table->text('prospectactivitydesc')->nullable();
             $table->text('prospectactivityloc')->nullable();

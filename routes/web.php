@@ -288,6 +288,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['namespace' => 'api\Masters'], function () use ($router) {
             $router->group(['prefix' => 'types'], function () use ($router) {
                 $router->get('by-code', 'TypesController@byCode');
+                $router->get('{id}', 'TypesController@show');
             });
 
             $router->group(['prefix' => 'user'], function () use ($router) {

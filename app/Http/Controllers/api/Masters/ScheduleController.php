@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\ProspectActivity;
 use App\Models\Masters\Schedule;
 use App\Models\Masters\ScheduleGuest;
 use App\Services\Masters\ScheduleServices;
@@ -69,12 +70,21 @@ class ScheduleController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, Schedule $scheduleModel, ScheduleGuest $scheduleGuest)
+    public function destroy($id, Schedule $scheduleModel, ScheduleGuest $scheduleGuest, ProspectActivity $prospectActivity)
     {
         DB::beginTransaction();
         try {
             $scheduleGuest->select('scheid')->where('scheid', $id)->delete();
-            $scheduleModel->findOrFail($id)->delete();
+            $scheduleModel->find($id);
+
+            if ($scheduleModel->scherefid != null) {
+                $prospectActivityData = $prospectActivity->find($scheduleModel->scherefid);
+                if ($prospectActivityData != null) {
+                    $prospectActivityData->delete();
+                }
+            }
+
+            $scheduleModel->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
@@ -82,7 +92,7 @@ class ScheduleController extends Controller
         }
     }
 
-    public function scheduleCount(Request $req, ScheduleServices $scheduleServices)
+    public function scheduleCount(Request $req, ScheduleServices $scheduleServices,  ProspectActivity $prospectActivity)
     {
         $schedules = $scheduleServices->countAll(collect($req->all()));
         return response()->json(['count' => $schedules]);
