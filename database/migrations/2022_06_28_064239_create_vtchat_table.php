@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVtcustomfieldTable extends Migration
+class CreateVtchatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateVtcustomfieldTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtcustomfield', function (Blueprint $table) {
-            $table->id('custfid');
-            $table->bigInteger('custfbpid');
-            $table->string('custfname', 255);
-            $table->bigInteger('custftypeid');
-            $table->boolean('isvisiblesidebar')->default(false);
-            $table->boolean('onlyinnewprospect')->default(false);
-            $table->bigInteger('lastprospectid')->nullable();
+        Schema::create('vtchat', function (Blueprint $table) {
+            $table->id('chatid');
+            $table->bigInteger('chatbpid');
+            $table->text('chatmessage');
+            $table->string('chatrefname', 255);
+            $table->bigInteger('chatrefid');
+            $table->text('chatfile');
+            $table->timestamps('readat');
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
@@ -37,6 +37,6 @@ class CreateVtcustomfieldTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtcustomfield');
+        Schema::dropIfExists('vtchat');
     }
 }

@@ -166,6 +166,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CustomerController@destroy');
         });
 
+        $router->group(['prefix' => 'customfield'], function () use ($router) {
+            $router->get('select', 'CustomFieldController@select');
+            $router->get('selectwithbp', 'CustomFieldController@selectWithBp');
+            $router->post('datatables', 'CustomFieldController@datatables');
+
+            $router->post('', 'CustomFieldController@store');
+            $router->get('{id}', 'CustomFieldController@show');
+            $router->put('{id}', 'CustomFieldController@update');
+            $router->delete('{id}', 'CustomFieldController@destroy');
+        });
+
         $router->group(['prefix' => 'contact'], function () use ($router) {
             $router->get('all', 'ContactPersonController@all');
             $router->post('datatables', 'ContactPersonController@datatables');
@@ -236,6 +247,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'ProspectAssignController@show');
             $router->put('{id}', 'ProspectAssignController@update');
             $router->delete('{id}', 'ProspectAssignController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospectcustomfield'], function () use ($router) {
+            $router->get('', 'ProspectCustomFieldController@all');
+
+            $router->post('', 'ProspectCustomFieldController@store');
+            $router->get('{id}', 'ProspectCustomFieldController@show');
+            $router->put('{id}', 'ProspectCustomFieldController@update');
+            $router->delete('{id}', 'ProspectCustomFieldController@destroy');
         });
 
         $router->group(['prefix' => 'prospectproduct'], function () use ($router) {
