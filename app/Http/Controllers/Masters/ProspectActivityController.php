@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectActivityController extends Controller
 {
-    public function details(Request $req, ProspectActivityServices $ProspectDetailServices)
+    public function details(Request $req, ProspectActivityServices $ProspectActivityServices)
     {
         $id = $req->get('id');
-        $query = $ProspectDetailServices->details($id);
+        $query = $ProspectActivityServices->details($id);
 
         return $query->get();
     }
@@ -25,11 +25,11 @@ class ProspectActivityController extends Controller
         return response()->json($Prospects);
     }
 
-    public function store(Request $req, ProspectActivity $ProspectDetailModel, ProspectProduct $ProspectProduct)
+    public function store(Request $req, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
     {
-        $insert = collect($req->only($ProspectDetailModel->getFillable()))->filter()->except('updatedby');
+        $insert = collect($req->only($ProspectActivityModel->getFillable()))->filter()->except('updatedby');
 
-        $ProspectDetailModel->fill($insert->toArray())->save();
+        $ProspectActivityModel->fill($insert->toArray())->save();
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
@@ -40,19 +40,19 @@ class ProspectActivityController extends Controller
         return response()->json($Prospect);
     }
 
-    public function update($id, Request $req, ProspectActivity $ProspectDetailModel, ProspectProduct $ProspectProduct)
+    public function update($id, Request $req, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
     {
 
-        $fields = collect($req->only($ProspectDetailModel->getFillable()))->filter()
+        $fields = collect($req->only($ProspectActivityModel->getFillable()))->filter()
             ->except('createdby', 'prospectdtprospectid');
-        $ProspectDetailModel->findOrFail($id)->update($fields->toArray());
+        $ProspectActivityModel->findOrFail($id)->update($fields->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectActivity $ProspectDetailModel, ProspectProduct $ProspectProduct)
+    public function destroy($id, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
     {
-        $ProspectDetailModel->findOrFail($id)->delete();
+        $ProspectActivityModel->findOrFail($id)->delete();
         return response()->json(['message' => \TextMessages::successDelete]);
     }
 }

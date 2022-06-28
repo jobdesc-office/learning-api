@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\ProspectAssignServices;
-use App\Services\Masters\ProspectDetailServices;
+use App\Services\Masters\ProspectActivityServices;
 use App\Services\Masters\ProspectProductServices;
 use App\Services\Masters\ProspectServices;
 use Illuminate\Http\Request;
@@ -63,13 +63,13 @@ class ProspectController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectServices $modelProspectServices, ProspectDetailServices $modelProspectDetail, ProspectProductServices $modelProspectProduct, ProspectAssignServices $modelProspectAssign)
+    public function destroy($id, ProspectServices $modelProspectServices, ProspectActivityServices $modelProspectActivity, ProspectProductServices $modelProspectProduct, ProspectAssignServices $modelProspectAssign)
     {
         DB::beginTransaction();
         try {
             $modelProspectAssign->where('prospectid', $id)->delete();
             $modelProspectProduct->where('prosproductprospectid', $id)->delete();
-            $modelProspectDetail->where('prospectdtprospectid', $id)->delete();
+            $modelProspectActivity->where('prospectdtprospectid', $id)->delete();
             $modelProspectServices->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);

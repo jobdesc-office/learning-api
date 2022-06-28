@@ -139,6 +139,13 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Facebook', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::scheRefType,
+            'typename' => 'Schedule Reference',
+            'children' => [
+                ['typename' => 'Prospect Activity', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**
