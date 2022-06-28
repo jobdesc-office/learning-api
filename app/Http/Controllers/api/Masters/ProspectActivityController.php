@@ -22,9 +22,10 @@ class ProspectActivityController extends Controller
         $insert = collect($req->toArray())->filter()
             ->except('updatedby');
 
-        $modelProspectActivityServices->create($insert->toArray());
+        $modelProspectActivityServices->fill($insert->toArray());
+        $modelProspectActivityServices->save();
 
-        return response()->json(['message' => \TextMessages::successCreate]);
+        return response()->json($modelProspectActivityServices);
     }
 
     public function show($id, ProspectActivityServices $businessPartnerService)
