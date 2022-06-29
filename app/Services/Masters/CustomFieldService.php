@@ -31,6 +31,17 @@ class CustomFieldService extends CustomField
             ->get();
     }
 
+    public function selectBp($searchValue,  $bpid)
+    {
+        return $this->getQuery()->select('*')
+            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(custfname))'), 'like', "%$searchValue%");
+            })
+            ->get();
+    }
+
     public function datatables($order, $orderby, $search)
     {
         return $this->getQuery()

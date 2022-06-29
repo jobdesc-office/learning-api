@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 class CustomFieldController extends Controller
 {
 
+    public function selectBp($id, Request $req, CustomFieldService $CustomFieldService)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $CustomFieldService->selectBp($searchValue, $id);
+
+        return response()->json($selects);
+    }
+
     public function selectWithBp($id, Request $req, CustomFieldService $CustomFieldService)
     {
         $search = trim(strtolower($req->get('search[value]')));

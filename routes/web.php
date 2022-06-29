@@ -168,6 +168,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'customfield'], function () use ($router) {
             $router->get('select', 'CustomFieldController@select');
+            $router->get('select/{id}', 'CustomFieldController@selectBp');
             $router->post('selectwithbp/{id}', 'CustomFieldController@selectWithBp');
             $router->post('datatables', 'CustomFieldController@datatables');
 
