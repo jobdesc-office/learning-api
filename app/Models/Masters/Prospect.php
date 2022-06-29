@@ -55,7 +55,7 @@ class Prospect extends Model
         return $this->belongsTo(BusinessPartner::class, "prospectbpid", "bpid");
     }
 
-    public function prospectcusts()
+    public function prospectcust()
     {
         return $this->belongsTo(BpCustomer::class, "prospectcustid", "sbcid");
     }

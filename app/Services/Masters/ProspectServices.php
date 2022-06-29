@@ -73,10 +73,10 @@ class ProspectServices extends Prospect
                 $query->select('typeid', 'typename');
             },
             'prospectreference' => function ($query) {
-                $query->select('*')->with(['prospectcusts']);
+                $query->select('*')->with(['prospectcust']);
             },
             'prospectbp',
-            'prospectcusts' => function ($query) {
+            'prospectcust' => function ($query) {
                 $query->with(['sbccstm']);
             },
         ]);
