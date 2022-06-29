@@ -56,7 +56,7 @@ class ProspectServices extends Prospect
             'prospectowneruser' => function ($query) {
                 $query->with(['user']);
             },
-            'prospectassign' => function ($query) {
+            'prospectassigns' => function ($query) {
                 $query->select('*')->with(['prospectassign' => function ($query) {
                     $query->with(['user']);
                 }, 'prospectreport' => function ($query) {
@@ -73,10 +73,10 @@ class ProspectServices extends Prospect
                 $query->select('typeid', 'typename');
             },
             'prospectreference' => function ($query) {
-                $query->select('*')->with(['prospectcust']);
+                $query->select('*')->with(['prospectcusts']);
             },
             'prospectbp',
-            'prospectcust' => function ($query) {
+            'prospectcusts' => function ($query) {
                 $query->with(['sbccstm']);
             },
         ]);

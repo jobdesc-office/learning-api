@@ -105,7 +105,6 @@ class ContactPersonController extends Controller
     {
         DB::beginTransaction();
         try {
-            $subdistrictservice->select('subdistrictcityid')->where('subdistrictcityid', $id)->delete();
             $modelContactPersonServices->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);

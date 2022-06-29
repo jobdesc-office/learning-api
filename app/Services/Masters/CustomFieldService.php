@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\DB;
 class CustomFieldService extends CustomField
 {
 
-    public function selectWithBp($bpid)
+    public function selectWithBp($order, $orderby, $search, $bpid)
     {
-        return $this->getQuery()->select('*')
+        return $this->getQuery()
             ->where('custfbpid', $bpid)
-            ->get();
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->orderBy($order, $orderby);
     }
 
     public function select($searchValue)

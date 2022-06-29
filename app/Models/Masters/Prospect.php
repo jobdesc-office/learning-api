@@ -55,12 +55,12 @@ class Prospect extends Model
         return $this->belongsTo(BusinessPartner::class, "prospectbpid", "bpid");
     }
 
-    public function prospectcust()
+    public function prospectcusts()
     {
         return $this->belongsTo(BpCustomer::class, "prospectcustid", "sbcid");
     }
 
-    public function prospectassign()
+    public function prospectassigns()
     {
         return $this->hasMany(ProspectAssign::class, "prospectid", "prospectid");
     }

@@ -147,9 +147,9 @@ class ProspectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $ProspectAssignModel->select('prospectid')->where('prospectid', $id)->delete();
-            $ProspectActivityModel->select('prosproductid')->where('prosproductprospectid', $id)->delete();
-            $ProspectProduct->select('prospectdtprospectid')->where('prospectdtprospectid', $id)->delete();
+            $ProspectAssignModel->where('prospectid', $id)->delete();
+            $ProspectActivityModel->where('prospectactivityprospectid', $id)->delete();
+            $ProspectProduct->where('prosproductprospectid', $id)->delete();
             $ProspectModel->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);

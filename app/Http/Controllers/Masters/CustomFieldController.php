@@ -9,12 +9,59 @@ use Illuminate\Http\Request;
 class CustomFieldController extends Controller
 {
 
-    public function selectWithBp(Request $req, CustomFieldService $CustomFieldService)
+    public function selectWithBp($id, Request $req, CustomFieldService $CustomFieldService)
     {
-        $bpid = $req->get('bpid');
-        $selects = $CustomFieldService->selectWithBp($bpid);
+        $search = trim(strtolower($req->get('search[value]')));
+        $order = $req->get('order[0][column]');
+        $orderby = $req->get('order[0][dir]');
 
-        return response()->json($selects);
+        switch ($order) {
+            case 0:
+                $order = $req->get('columns[0][data]');
+                break;
+            case 1:
+                $order = $req->get('columns[1][data]');
+                break;
+            case 2:
+                $order = $req->get('columns[2][data]');
+                break;
+
+            case 3:
+                $order = $req->get('columns[3][data]');
+                break;
+
+            case 4:
+                $order = $req->get('columns[4][data]');
+                break;
+
+            case 5:
+                $order = $req->get('columns[5][data]');
+                break;
+
+            case 6:
+                $order = $req->get('columns[6][data]');
+                break;
+
+            case 7:
+                $order = $req->get('columns[7][data]');
+                break;
+
+            case 8:
+                $order = $req->get('columns[8][data]');
+                break;
+
+            case 9:
+                $order = $req->get('columns[9][data]');
+                break;
+
+            default:
+                $order = $order;
+                break;
+        }
+        $query = $CustomFieldService->selectWithBp($order, $orderby, $search, $id);
+
+        return datatables()->eloquent($query)
+            ->toJson();
     }
 
     public function select(Request $req, CustomFieldService $CustomFieldService)
