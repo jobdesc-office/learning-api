@@ -28,6 +28,7 @@ class CustomFieldService extends CustomField
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(custfname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('custfname', 'asc')
             ->get();
     }
 
@@ -39,6 +40,7 @@ class CustomFieldService extends CustomField
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(custfname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('custfname', 'asc')
             ->get();
     }
 

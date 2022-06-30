@@ -18,6 +18,7 @@ class BpCustomerService extends BpCustomer
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('sbccstmname', 'asc')
             ->get();
     }
 

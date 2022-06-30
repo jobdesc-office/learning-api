@@ -27,6 +27,7 @@ class TypeChildrenServices extends Types
             ->where(function ($query) use ($searchValue) {
                 $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
             })
+            ->orderBy('typename', 'asc')
             ->get();
     }
 
@@ -43,6 +44,7 @@ class TypeChildrenServices extends Types
                 $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
             })
             ->whereNotNull('typemasterid')
+            ->orderBy('typename', 'asc')
             ->get();
     }
 

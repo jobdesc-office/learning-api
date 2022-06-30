@@ -17,6 +17,7 @@ class UserServices extends User
                 $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
             })
             ->where('msuserdt.userdtbpid', $id)
+            ->orderBy('userfullname', 'asc')
             ->get();
     }
 
@@ -27,6 +28,7 @@ class UserServices extends User
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('userfullname', 'asc')
             ->get();
     }
 

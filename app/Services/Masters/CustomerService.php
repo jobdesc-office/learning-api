@@ -18,6 +18,7 @@ class CustomerService extends Customer
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(cstmname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('cstmname', 'asc')
             ->get();
     }
 

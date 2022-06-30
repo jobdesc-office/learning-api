@@ -25,6 +25,7 @@ class SubdistrictServices extends Subdistrict
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(subdistrictname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('subdistrictname', 'asc')
             ->get();
     }
 

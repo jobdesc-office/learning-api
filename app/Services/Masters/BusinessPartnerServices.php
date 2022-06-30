@@ -32,6 +32,7 @@ class BusinessPartnerServices extends BusinessPartner
             ->where(function ($query) use ($searchValue) {
                 $query->where(DB::raw('TRIM(LOWER(bpname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('bpname', 'asc')
             ->get();
     }
 

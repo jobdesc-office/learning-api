@@ -17,6 +17,7 @@ class CityServices extends City
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(cityname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('cityname', 'asc')
             ->get();
     }
 

@@ -17,6 +17,7 @@ class ProvinceServices extends Province
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(provname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('provname', 'asc')
             ->get();
     }
 

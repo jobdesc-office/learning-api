@@ -26,6 +26,7 @@ class ProductServices extends Product
                 $query->where(DB::raw('TRIM(LOWER(productname))'), 'like', "%$searchValue%");
             })
             ->where('productbpid', $id)
+            ->orderBy('productname', 'asc')
             ->get();
     }
 
@@ -36,6 +37,7 @@ class ProductServices extends Product
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(productname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('productname', 'asc')
             ->get();
     }
 

@@ -31,6 +31,7 @@ class ProspectServices extends Prospect
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('prospectname', 'asc')
             ->get();
     }
 

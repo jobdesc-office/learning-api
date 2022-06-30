@@ -17,6 +17,7 @@ class CountryServices extends Country
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(countryname))'), 'like', "%$searchValue%");
             })
+            ->orderBy('countryname', 'asc')
             ->get();
     }
 
