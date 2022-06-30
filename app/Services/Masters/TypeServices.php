@@ -14,6 +14,7 @@ class TypeServices extends Types
             ->whereHas('parent', function ($query) use ($code) {
                 $query->where('typecd', $code);
             })
+            ->orderBy('typename', 'asc')
             ->get();
     }
 
