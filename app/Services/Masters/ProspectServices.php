@@ -76,6 +76,9 @@ class ProspectServices extends Prospect
                 $query->select('*')->with(['prospectcust']);
             },
             'prospectbp',
+            'prospectcustomfield' => function ($query) {
+                $query->with(['customfield']);
+            },
             'prospectcust' => function ($query) {
                 $query->with(['sbccstm']);
             },

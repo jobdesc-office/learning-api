@@ -69,4 +69,9 @@ class Prospect extends Model
     {
         return $this->hasMany(ProspectProduct::class, "prosproductprospectid", "prospectid");
     }
+
+    public function prospectcustomfield()
+    {
+        return $this->hasMany(ProspectCustomField::class, "prospectid", "prospectid");
+    }
 }

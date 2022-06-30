@@ -7,6 +7,7 @@ use App\Models\Masters\Prospect;
 use App\Models\Masters\ProspectProduct;
 use App\Models\Masters\ProspectActivity;
 use App\Models\Masters\ProspectAssign;
+use App\Models\Masters\ProspectCustomField;
 use App\Services\Masters\ProspectServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -143,10 +144,11 @@ class ProspectController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectActivity $ProspectActivityModel, ProspectAssign $ProspectAssignModel)
+    public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectActivity $ProspectActivityModel, ProspectAssign $ProspectAssignModel, ProspectCustomField $ProspectCustomField)
     {
         DB::beginTransaction();
         try {
+            $ProspectCustomField->where('prospectid', $id)->delete();
             $ProspectAssignModel->where('prospectid', $id)->delete();
             $ProspectActivityModel->where('prospectactivityprospectid', $id)->delete();
             $ProspectProduct->where('prosproductprospectid', $id)->delete();
