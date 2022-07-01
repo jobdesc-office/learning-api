@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 class ProspectController extends Controller
 {
 
+    public function lastid(ProspectServices $ProspectServices)
+    {
+        $selects = $ProspectServices->lastid();
+
+        return response()->json($selects);
+    }
+
     public function select(Request $req, ProspectServices $ProspectServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));

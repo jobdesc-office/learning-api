@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectServices extends Prospect
 {
+
+    public function lastid()
+    {
+        return $this->getQuery()->get()->last();
+    }
+
     public function datatables($order, $orderby, $search)
     {
         return $this->getQuery()
