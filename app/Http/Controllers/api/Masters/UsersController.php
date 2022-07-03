@@ -51,18 +51,38 @@ class UsersController extends Controller
     public function update($id, Request $req, User $modelUser, UserDetail $modelUserDetail)
     {
         $row = $modelUser->findOrFail($id);
+        if ($req->get('userpassword') != '') {
+            $update = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))
+                ->except('createdby');
+            $row->update($update->toArray());
 
-        $update = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))
-            ->except('updatedby');
-        $row->update($update->toArray());
+            $roles = json_decode($req->get('roles'));
+            if ($roles) {
+                $modelUserDetail->where('userid', $id)->delete();
+                foreach ($roles as $role) {
+                    $modelUserDetail->create([
+                        'userid' => $id,
+                        'userdttypeid' => $role->roleid,
+                        'userdtbpid' => $role->bpid,
+                    ]);
+                }
+            }
+        } else {
+            $update = collect($req->only($modelUser->getFillable()))->filter()
+                ->except('createdby', 'userpassword');
+            $row->update($update->toArray());
 
-        $dt = $modelUserDetail->findOrFail($id);
-        $roles = json_decode($req->get('roles'));
-        foreach ($roles as $role) {
-            $dt->update([
-                'userdttypeid' => $role->roleid,
-                'userdtbpid' => $role->bpid,
-            ]);
+            $roles = json_decode($req->get('roles'));
+            if ($roles) {
+                $modelUserDetail->where('userid', $id)->delete();
+                foreach ($roles as $role) {
+                    $modelUserDetail->create([
+                        'userid' => $id,
+                        'userdttypeid' => $role->roleid,
+                        'userdtbpid' => $role->bpid,
+                    ]);
+                }
+            }
         }
         return response()->json(['message' => \TextMessages::successEdit]);
     }
