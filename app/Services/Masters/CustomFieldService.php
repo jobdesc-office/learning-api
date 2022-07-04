@@ -44,6 +44,14 @@ class CustomFieldService extends CustomField
             ->get();
     }
 
+    public function withBp($bpid)
+    {
+        return $this->getQuery()->select('*')
+            ->where('custfbpid', $bpid)
+            ->orderBy('custfname', 'asc')
+            ->get();
+    }
+
     public function datatables($order, $orderby, $search)
     {
         return $this->getQuery()

@@ -17,6 +17,14 @@ class CustomFieldController extends Controller
         return response()->json($selects);
     }
 
+    public function WithBp($id, CustomFieldService $CustomFieldService)
+    {
+        $selects = $CustomFieldService->withBp($id);
+
+        return response()->json($selects);
+    }
+
+
     public function selectWithBp($id, Request $req, CustomFieldService $CustomFieldService)
     {
         $search = trim(strtolower($req->get('search[value]')));
