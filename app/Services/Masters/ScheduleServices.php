@@ -24,6 +24,9 @@ class ScheduleServices extends Schedule
                 },
                 'schetoward' => function ($query) {
                     $query->select('userid', 'userfullname');
+                },
+                'schereftype' => function ($query) {
+                    $query->select('typeid', 'typename');
                 }
             ])
             ->orderBy('schestartdate', 'asc')
@@ -49,6 +52,9 @@ class ScheduleServices extends Schedule
                 },
                 'schetoward' => function ($query) {
                     $query->select('userid', 'userfullname');
+                },
+                'schereftype' => function ($query) {
+                    $query->select('typeid', 'typename');
                 }
             ])
             ->findOrFail($id);
