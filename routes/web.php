@@ -431,6 +431,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'ProspectAssignController@update');
                 $router->delete('{id}', 'ProspectAssignController@destroy');
             });
+
+            $router->group(['prefix' => 'chat'], function () use ($router) {
+                $router->get('', 'ChatController@all');
+                $router->post('', 'ChatController@store');
+                $router->get('{id}', 'ChatController@show');
+                $router->put('{id}', 'ChatController@update');
+                $router->delete('{id}', 'ChatController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'api\Security'], function () use ($router) {

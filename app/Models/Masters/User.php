@@ -26,6 +26,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'userphone',
         'userdeviceid',
         'userfcmtoken',
+        'usersocketid',
         'createdby',
         'updatedby',
         'isactive',
