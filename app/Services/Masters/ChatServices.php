@@ -23,7 +23,8 @@ class ChatServices extends Chat
     {
         return $this->newQuery()->with([
             'chatbp',
-            'chatreceiverid',
+            'chatreceiver',
+            'createdbyuser'
         ]);
     }
 }

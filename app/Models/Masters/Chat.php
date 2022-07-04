@@ -33,6 +33,11 @@ class Chat extends Model
         return $this->belongsTo(User::class, 'chatreceiverid', "userid");
     }
 
+    public function createdbyuser()
+    {
+        return $this->belongsTo(User::class, 'createdby', "userid");
+    }
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 }
