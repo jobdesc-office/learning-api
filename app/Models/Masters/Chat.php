@@ -23,6 +23,10 @@ class Chat extends Model
         'isactive',
     ];
 
+    protected $casts = [
+        'createddate' => 'datetime:Y-m-d h:i:s'
+    ];
+
     public function chatbp()
     {
         return $this->belongsTo(BusinessPartner::class, "chatbpid", "bpid");
@@ -31,6 +35,11 @@ class Chat extends Model
     public function chatreceiver()
     {
         return $this->belongsTo(User::class, 'chatreceiverid', "userid");
+    }
+
+    public function createdbyuser()
+    {
+        return $this->belongsTo(User::class, 'createdby', "userid");
     }
 
     const CREATED_AT = "createddate";
