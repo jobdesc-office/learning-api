@@ -58,4 +58,11 @@ class ChatController extends Controller
             DB::rollBack();
         }
     }
+
+    public function getConversation(Request $req, ChatServices $chatservices)
+    {
+        $whereArr = collect($req->all())->filter();
+        $chats = $chatservices->getConversation($whereArr->user1, $whereArr->user2);
+        return response()->json($chats);
+    }
 }

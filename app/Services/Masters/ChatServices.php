@@ -19,6 +19,19 @@ class ChatServices extends Chat
         return $query->get();
     }
 
+    public function getConversation($id1, $id2)
+    {
+        $query = $this->getQuery();
+        $query->orWhere(function ($query) use ($id1, $id2) {
+            $query->where('chatreceiverid', $id1)->where('createdby', $id2);
+        });
+        $query->orWhere(function ($query) use ($id1, $id2) {
+            $query->where('chatreceiverid', $id2)->where('createdby', $id1);
+        });
+
+        return $query->get();
+    }
+
     public function getQuery()
     {
         return $this->newQuery()->with([
