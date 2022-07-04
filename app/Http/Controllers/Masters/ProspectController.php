@@ -30,6 +30,14 @@ class ProspectController extends Controller
         return response()->json($selects);
     }
 
+    public function selectref(Request $req, ProspectServices $ProspectServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $ProspectServices->selectref($searchValue);
+
+        return response()->json($selects);
+    }
+
     public function datatables(Request $req, ProspectServices $ProspectServices)
     {
         $search = trim(strtolower($req->get('search[value]')));

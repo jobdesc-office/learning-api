@@ -27,6 +27,11 @@ class ScheduleGuest extends Model
         return $this->belongsTo(BusinessPartner::class, 'schebpid', 'bpid');
     }
 
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'scheid', 'scheid');
+    }
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 }
