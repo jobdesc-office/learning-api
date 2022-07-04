@@ -23,6 +23,10 @@ class Chat extends Model
         'isactive',
     ];
 
+    protected $casts = [
+        'createddate' => 'datetime:Y-m-d h:i:s'
+    ];
+
     public function chatbp()
     {
         return $this->belongsTo(BusinessPartner::class, "chatbpid", "bpid");
