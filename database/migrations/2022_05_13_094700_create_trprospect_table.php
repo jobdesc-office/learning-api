@@ -27,6 +27,8 @@ class CreateTrprospectTable extends Migration
             $table->text('prospectdescription')->nullable();
             $table->integer('prospectcustid');
             $table->integer('prospectrefid')->nullable();
+            $table->integer('prospectlostreasonid')->nullable();
+            $table->text('prospectlostdesc')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

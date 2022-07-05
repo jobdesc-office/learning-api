@@ -93,6 +93,15 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
+            'typecd' => \DBTypes::prospectLostReason,
+            'typename' => 'Prospect Lost Reason',
+            'children' => [
+                ['typename' => 'Competitors Prices are Cheaper', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Late Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Does Not Meet Criteria', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
             'typecd' => \DBTypes::prospectType,
             'typename' => 'Prospect Type',
             'children' => [
