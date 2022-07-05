@@ -3,9 +3,9 @@
 namespace App\Models\Masters;
 
 use DBTypes;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class ScheduleGuest extends Model
+class ScheduleGuest extends DefaultModel
 {
     protected $table = "vtscheduleguest";
     protected $primaryKey = "scheguestid";

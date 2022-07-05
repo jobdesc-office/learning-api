@@ -5,9 +5,9 @@ namespace App\Models\Masters;
 use App\Models\Masters\BusinessPartner;
 use Database\Factories\UserDetailFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class UserDetail extends Model
+class UserDetail extends DefaultModel
 {
     use HasFactory;
 

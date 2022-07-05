@@ -2,10 +2,11 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
+use App\Models\DefaultModel;
 use Tymon\JWTAuth\JWTAuth;
 
-class Chat extends Model
+class Chat extends DefaultModel
 {
     protected $table = "vtchat";
     protected $primaryKey = "chatid";
@@ -21,10 +22,6 @@ class Chat extends Model
         "createdby",
         "updatedby",
         'isactive',
-    ];
-
-    protected $casts = [
-        'createddate' => 'datetime:Y-m-d h:i:s'
     ];
 
     public function chatbp()

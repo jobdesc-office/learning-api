@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class CustomField extends Model
+class CustomField extends DefaultModel
 {
     protected $table = "vtcustomfield";
     protected $primaryKey = "custfid";

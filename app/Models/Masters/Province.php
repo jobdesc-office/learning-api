@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class Province extends Model
+class Province extends DefaultModel
 {
     protected $table = "msprovince";
     protected $primaryKey = "provid";

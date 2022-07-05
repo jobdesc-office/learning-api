@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class Country extends Model
+class Country extends DefaultModel
 {
     protected $table = "mscountry";
     protected $primaryKey = "countryid";

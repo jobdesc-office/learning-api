@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class Subdistrict extends Model
+class Subdistrict extends DefaultModel
 {
     protected $table = "mssubdistrict";
     protected $primaryKey = "subdistrictid";

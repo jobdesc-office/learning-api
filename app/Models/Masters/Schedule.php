@@ -4,9 +4,9 @@ namespace App\Models\Masters;
 
 use Database\Factories\ScheduleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class Schedule extends Model
+class Schedule extends DefaultModel
 {
     use HasFactory;
     protected $table = "vtschedule";

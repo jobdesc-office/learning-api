@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class ContactPerson extends Model
+class ContactPerson extends DefaultModel
 {
     protected $table = "mscontactperson";
     protected $primaryKey = "contactpersonid";
