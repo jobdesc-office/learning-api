@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Chat;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class ChatServices extends Chat
@@ -30,6 +31,13 @@ class ChatServices extends Chat
         });
 
         return $query->get();
+    }
+
+    public function readMessages($userid)
+    {
+        $query = $this->getQuery();
+        $query->where('createdby', $userid)->where('chatreceiverid', auth()->user()->userid);
+        return $query->update(['chatreadat' => Carbon::now()->format('Y-m-d H:i:s')]);
     }
 
     public function getQuery()

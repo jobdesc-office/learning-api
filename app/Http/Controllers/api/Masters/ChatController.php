@@ -18,15 +18,15 @@ class ChatController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, ChatServices $modelChatServices)
+    public function store(Request $req, ChatServices $chatservices)
     {
         $insert = collect($req)->filter()
             ->except('updatedby');
         $insert->put('createdby', auth()->user()->userid);
 
-        $modelChatServices->fill($insert->toArray())->save();
-
-        return response()->json(['message' => \TextMessages::successCreate]);
+        $chatservices->fill($insert->toArray())->save();
+        $chats = $chatservices->getConversation($chatservices->createdby, $chatservices->chatreceiverid);
+        return response()->json($chats);
     }
 
     public function show($id, ChatServices $chatServices)
@@ -63,6 +63,14 @@ class ChatController extends Controller
     {
         $whereArr = collect($req->all())->filter();
         $chats = $chatservices->getConversation($whereArr->get('user1'), $whereArr->get('user2'));
+        return response()->json($chats);
+    }
+
+    public function readMessage(Request $req, ChatServices $chatServices)
+    {
+        $request = collect($req->all())->filter();
+        $chatServices->readMessages($request->get('userid'));
+        $chats = $chatServices->getConversation(auth()->user()->userid, $request->get('userid'));
         return response()->json($chats);
     }
 }

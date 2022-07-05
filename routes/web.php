@@ -435,6 +435,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->group(['prefix' => 'chat'], function () use ($router) {
                 $router->get('conversation', 'ChatController@getConversation');
+                $router->get('read', 'ChatController@readMessage');
                 $router->get('', 'ChatController@all');
                 $router->post('', 'ChatController@store');
                 $router->get('{id}', 'ChatController@show');
