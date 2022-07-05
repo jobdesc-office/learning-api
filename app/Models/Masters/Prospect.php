@@ -22,6 +22,8 @@ class Prospect extends DefaultModel
         "prospectdescription",
         "prospectcustid",
         "prospectrefid",
+        "prospectlostreasonid",
+        "prospectlostdesc",
         "createdby",
         "updatedby",
         'isactive',
@@ -73,5 +75,10 @@ class Prospect extends DefaultModel
     public function prospectcustomfield()
     {
         return $this->hasMany(ProspectCustomField::class, "prospectid", "prospectid");
+    }
+
+    public function prospectlostreason()
+    {
+        return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
     }
 }

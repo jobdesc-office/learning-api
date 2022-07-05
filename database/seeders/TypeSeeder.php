@@ -156,6 +156,15 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Prospect Activity', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::prospectLostReason,
+            'typename' => 'Prospect Lost Reason',
+            'children' => [
+                ['typename' => 'Criteria does not match', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Prospect late', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Product prices are more expensive than competitors', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**
