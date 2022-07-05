@@ -46,6 +46,6 @@ class ChatServices extends Chat
             'chatbp',
             'chatreceiver',
             'createdbyuser'
-        ]);
+        ])->orderBy('createddate');
     }
 }
