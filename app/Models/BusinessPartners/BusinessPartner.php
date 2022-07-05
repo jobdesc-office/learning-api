@@ -4,9 +4,9 @@ namespace App\Models\BusinessPartners;
 
 use Database\Factories\BusinessPartnerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class BusinessPartner extends Model
+class BusinessPartner extends DefaultModel
 {
     use HasFactory;
 
@@ -27,7 +27,8 @@ class BusinessPartner extends Model
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
-    protected static function newFactory() {
+    protected static function newFactory()
+    {
         return BusinessPartnerFactory::new();
     }
 }

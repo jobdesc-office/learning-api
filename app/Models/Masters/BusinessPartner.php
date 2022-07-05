@@ -5,9 +5,9 @@ namespace App\Models\Masters;
 use App\Models\Masters\Types;
 use Database\Factories\BusinessPartnerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class BusinessPartner extends Model
+class BusinessPartner extends DefaultModel
 {
     use HasFactory;
 

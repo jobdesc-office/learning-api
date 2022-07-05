@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class Types extends Model
+class Types extends DefaultModel
 {
     protected $table = "mstype";
     protected $primaryKey = "typeid";

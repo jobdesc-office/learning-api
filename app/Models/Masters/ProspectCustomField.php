@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class ProspectCustomField extends Model
+class ProspectCustomField extends DefaultModel
 {
     protected $table = "trprospectcf";
     protected $primaryKey = "prospectcfid";

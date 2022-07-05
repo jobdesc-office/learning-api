@@ -5,9 +5,9 @@ namespace App\Models\Masters;
 use Database\Factories\BpCustomerFactory;
 use Database\Factories\ScheduleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class BpCustomer extends Model
+class BpCustomer extends DefaultModel
 {
     use HasFactory;
     protected $table = "stbpcustomer";

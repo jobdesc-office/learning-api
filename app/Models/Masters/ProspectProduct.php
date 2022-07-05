@@ -2,9 +2,9 @@
 
 namespace App\Models\Masters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class ProspectProduct extends Model
+class ProspectProduct extends DefaultModel
 {
     protected $table = "trprospectproduct";
     protected $primaryKey = "prosproductid";

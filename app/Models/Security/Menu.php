@@ -3,9 +3,9 @@
 namespace App\Models\Security;
 
 use App\Models\Masters\Types;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\DefaultModel;
 
-class Menu extends Model
+class Menu extends DefaultModel
 {
 
     protected $table = "msmenu";
