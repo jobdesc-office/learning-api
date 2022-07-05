@@ -30,7 +30,9 @@ class ProspectCustomFieldServices extends ProspectCustomField
     public function getQuery()
     {
         return $this->newQuery()->with([
-            'customfield',
+            'customfield' => function ($query) {
+                $query->with(['custftype']);
+            },
             'prospect'
         ]);
     }

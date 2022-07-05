@@ -26,6 +26,7 @@ class DBTypes
     const prospectCategory = 'prcat';
     const prospectFollowUp = "prfoll";
     const prospectCustomizeField = 'prcf';
+    const prospectLostReason = 'prlost';
 
     const contactType = "contact";
     const scheRefType = "scheref";
