@@ -14,6 +14,18 @@ use Illuminate\Support\Str;
 class BpCustomerService extends BpCustomer
 {
 
+    public function selectBp($id, $searchValue)
+    {
+        return $this->getQuery()->select('*')
+            ->where('sbcbpid', $id)
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%$searchValue%");
+            })
+            ->orderBy('sbccstmname', 'asc')
+            ->get();
+    }
+
     public function select($searchValue)
     {
         return $this->getQuery()->select('*')
