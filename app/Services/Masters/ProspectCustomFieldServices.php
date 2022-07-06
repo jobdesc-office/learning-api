@@ -4,8 +4,6 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\ProspectCustomField;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
 class ProspectCustomFieldServices extends ProspectCustomField
 {
