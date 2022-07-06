@@ -2,8 +2,11 @@
 
 namespace App\Services\Masters;
 
+use App\Collections\Files\FileFinder;
+use App\Collections\Files\FileUploader;
 use App\Models\Masters\BpCustomer;
 use App\Models\Masters\Customer;
+use DBTypes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -69,7 +72,14 @@ class BpCustomerService extends BpCustomer
                         },
                     ]);
                 },
-            ]);
+                'sbccstmpics' => function ($query) {
+                    $query->addSelect(DB::raw("*,concat('" . url() . "', '/', \"directories\", '',\"filename\") as url"));
+                },
+            ])->whereHas('sbccstmpics', function ($query) {
+                $query->whereHas('transtype', function ($query) {
+                    $query->where('typecd', DBTypes::bpcustpic);
+                });
+            });
     }
 
     public function createCustomer(Collection $insertArr)
@@ -82,9 +92,6 @@ class BpCustomerService extends BpCustomer
 
             if ($customer->save()) {
 
-                if ($insertArr->has('sbccstmpic') && isset($_FILES['sbccstmpic'])) {
-                    $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
-                }
                 $bpcustomer->sbccstmid =  $customer->cstmid;
                 $bpcustomer->sbccstmname =  $customer->cstmname;
                 $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
@@ -102,16 +109,21 @@ class BpCustomerService extends BpCustomer
                 return false;
             }
 
-            if ($insertArr->has('sbccstmpic') && isset($_FILES['sbccstmpic'])) {
-                $bpcustomer->sbccstmpic =  uploadFile('sbccstmpic');
-            }
-
             $bpcustomer->sbccstmid =  $customer->cstmid;
             $bpcustomer->sbccstmname =  $customer->cstmname;
             $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
             $bpcustomer->sbccstmphone =  $customer->cstmphone;
         }
-        return $bpcustomer->save();
+
+        $result =  $bpcustomer->save();
+
+        if ($insertArr->has('temp_path') && $insertArr->has('filename')) {
+            $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+            $file = new FileUploader($insertArr->get('temp_path'), $insertArr->get('filename'), 'images/', $transType, $bpcustomer->sbcid);
+            $result  = $result && $file->upload() != null;
+        }
+
+        return $result;
     }
 
     public function updateCustomer($id, Collection $insertArr)
@@ -134,6 +146,22 @@ class BpCustomerService extends BpCustomer
             $bpCustomer->sbccstmphone = $customer->cstmphone;
             $bpCustomer->sbccstmaddress = $customer->cstmaddress;
             $resultCustomer = $resultCustomer && $bpCustomer->save();
+
+            if ($insertArr->has('temp_path') && $insertArr->has('filename')) {
+                $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+
+                $oldFile = new FileFinder($transType, $bpCustomer->sbcid);
+                $filename = null;
+
+                if (count($oldFile->all()) > 0) {
+                    $filename = $oldFile->all()[0]->getFilename();
+                } else {
+                    $filename = $insertArr->get('filename');
+                }
+
+                $file = new FileUploader($insertArr->get('temp_path'), $filename, 'images/', $transType, $bpCustomer->sbcid);
+                $resultCustomer  = $resultCustomer && $file->upload() != null;
+            }
         }
 
         return $resultCustomer;

@@ -7,6 +7,8 @@ use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class BpCustomerController extends Controller
 {
@@ -22,6 +24,13 @@ class BpCustomerController extends Controller
     {
 
         $insert = collect($req->all())->filter();
+
+        if ($req->hasFile('sbccstmpic')) {
+            $file = $req->file('sbccstmpic');
+            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
+            $insert->put('temp_path', $file->getPathname());
+            $insert->put('filename', $filename . '.' . $file->getClientOriginalExtension());
+        }
 
         $result = $modelBpCustomerService->createCustomer($insert);
 
@@ -43,14 +52,11 @@ class BpCustomerController extends Controller
         $bpCustomer = $modelBpCustomerService->findOrFail($id);
         $insert = collect($req->all())->filter();
 
-        $image = $req->file('sbccstmpic');
-        if ($image != null) {
-            $filename = explode('/', $bpCustomer->sbccstmpic);
-            $filename = end($filename);
-            $res = $image->storeAs('public/images', $filename);
-            if ($res) {
-                $insert->put('sbccstmpic', url('/storage/images/' . $filename));
-            }
+        if ($req->hasFile('sbccstmpic')) {
+            $file = $req->file('sbccstmpic');
+            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
+            $insert->put('temp_path', $file->getPathname());
+            $insert->put('filename', $filename . '.' . $file->getClientOriginalExtension());
         }
 
         $resultCustomer = $modelBpCustomerService->updateCustomer($id, $insert);

@@ -20,7 +20,6 @@ class BpCustomer extends DefaultModel
         'sbccstmname',
         'sbccstmphone',
         'sbccstmaddress',
-        'sbccstmpic',
         'createdby',
         'updatedby',
         'isactive'
@@ -42,5 +41,10 @@ class BpCustomer extends DefaultModel
     public function sbccstm()
     {
         return $this->belongsTo(Customer::class, 'sbccstmid', 'cstmid');
+    }
+
+    public function sbccstmpics()
+    {
+        return $this->hasMany(Files::class, 'refid', 'sbcid');
     }
 }

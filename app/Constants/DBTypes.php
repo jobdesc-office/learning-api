@@ -32,4 +32,9 @@ class DBTypes
     const scheRefType = "scheref";
 
     const taxType = 'taxtype';
+
+    const transType = "transtype";
+    const bpcustpic = "cstmpic";
+    const comppics = "comppics";
+    const chatfile = "chtfile";
 }
