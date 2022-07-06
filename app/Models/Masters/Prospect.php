@@ -22,6 +22,8 @@ class Prospect extends DefaultModel
         "prospectdescription",
         "prospectcustid",
         "prospectrefid",
+        "prospectlostreasonid",
+        "prospectlostdesc",
         "createdby",
         "updatedby",
         'isactive',
@@ -48,6 +50,11 @@ class Prospect extends DefaultModel
     public function prospectstatus()
     {
         return $this->belongsTo(Types::class, "prospectstatusid", "typeid");
+    }
+
+    public function prospectlost()
+    {
+        return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
     }
 
     public function prospectbp()
