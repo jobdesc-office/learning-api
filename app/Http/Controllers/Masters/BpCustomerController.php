@@ -11,6 +11,14 @@ use Illuminate\Support\Collection;
 class BpCustomerController extends Controller
 {
 
+    public function selectBp($id, Request $req, BpCustomerService $bpcustomerservice)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $bpcustomerservice->selectBp($id, $searchValue);
+
+        return response()->json($selects);
+    }
+
     public function select(Request $req, BpCustomerService $bpcustomerservice)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
