@@ -156,6 +156,15 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Prospect Activity', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::transType,
+            'typename' => 'Trans Type',
+            'children' => [
+                ['typename' => 'Customer Picture', 'typecd' => DBTypes::bpcustpic, 'createdby' => 1, 'updatedby' => 1,],
+                ['typename' => 'Competitor Pictures', 'typecd' => DBTypes::comppics, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Chat File', 'typecd' => DBTypes::chatfile, 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**

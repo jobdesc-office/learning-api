@@ -452,6 +452,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'VillageController@update');
                 $router->delete('{id}', 'VillageController@destroy');
             });
+
+            $router->group(['prefix' => 'files'], function () use ($router) {
+                $router->get('', 'FilesController@all');
+                $router->post('', 'FilesController@store');
+                $router->get('{id}', 'FilesController@show');
+                $router->put('{id}', 'FilesController@update');
+                $router->delete('{id}', 'FilesController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'api\Security'], function () use ($router) {

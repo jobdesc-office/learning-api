@@ -21,7 +21,6 @@ class CreateStbpcustomerTable extends Migration
             $table->string('sbccstmname', 100);
             $table->string('sbccstmphone', 255)->nullable();
             $table->string('sbccstmaddress', 255)->nullable();
-            $table->string('sbccstmpic', 255)->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
