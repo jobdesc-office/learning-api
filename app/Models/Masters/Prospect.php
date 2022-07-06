@@ -81,4 +81,9 @@ class Prospect extends DefaultModel
     {
         return $this->hasMany(ProspectCustomField::class, "prospectid", "prospectid");
     }
+
+    public function prospectlostreason()
+    {
+        return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
+    }
 }

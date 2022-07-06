@@ -93,6 +93,9 @@ class ProspectServices extends Prospect
             'prospectstatus' => function ($query) {
                 $query->select('typeid', 'typename');
             },
+            'prospectlostreason' => function ($query) {
+                $query->select('typeid', 'typename');
+            },
             'prospectreference' => function ($query) {
                 $query->select('*')->with(['prospectcust']);
             },

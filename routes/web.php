@@ -442,6 +442,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'ChatController@update');
                 $router->delete('{id}', 'ChatController@destroy');
             });
+
+            $router->group(['prefix' => 'village'], function () use ($router) {
+                $router->get('by-name', 'VillageController@byName');
+                $router->get('', 'VillageController@all');
+                $router->post('', 'VillageController@store');
+                $router->get('{id}', 'VillageController@show');
+                $router->put('{id}', 'VillageController@update');
+                $router->delete('{id}', 'VillageController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'api\Security'], function () use ($router) {
