@@ -57,6 +57,11 @@ class Prospect extends DefaultModel
         return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
     }
 
+    public function prospectownerusers()
+    {
+        return $this->belongsTo(User::class, "prospectowner", "userid");
+    }
+
     public function prospectbp()
     {
         return $this->belongsTo(BusinessPartner::class, "prospectbpid", "bpid");

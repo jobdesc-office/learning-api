@@ -33,6 +33,16 @@ class ProspectAssign extends DefaultModel
         return $this->belongsTo(UserDetail::class, "prospectreportto", "userdtid");
     }
 
+    public function prospectassignss()
+    {
+        return $this->belongsTo(User::class, "prospectassignto", "userid");
+    }
+
+    public function prospectreportss()
+    {
+        return $this->belongsTo(User::class, "prospectreportto", "userid");
+    }
+
     public function prospect()
     {
         return $this->belongsTo(Prospect::class, "prospectid", "prospectid");

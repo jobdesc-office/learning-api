@@ -16,7 +16,24 @@ class BpCustomerService extends BpCustomer
 
     public function selectBp($id, $searchValue)
     {
-        return $this->getQuery()->select('*')
+        return $this
+            ->newQuery()->with([
+                'sbccstmstatus' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'sbcbp' => function ($query) {
+                    $query->select('bpid', 'bpname');
+                },
+                'sbccstm' => function ($query) {
+                    $query->select('*')->with([
+                        'cstmtype' => function ($query) {
+                            $query->select('typeid', 'typename');
+                        },
+                    ]);
+                },
+            ])
+            // ->getQuery()
+            ->select('*')
             ->where('sbcbpid', $id)
             ->where(function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
@@ -28,7 +45,24 @@ class BpCustomerService extends BpCustomer
 
     public function select($searchValue)
     {
-        return $this->getQuery()->select('*')
+        return $this
+            ->newQuery()->with([
+                'sbccstmstatus' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'sbcbp' => function ($query) {
+                    $query->select('bpid', 'bpname');
+                },
+                'sbccstm' => function ($query) {
+                    $query->select('*')->with([
+                        'cstmtype' => function ($query) {
+                            $query->select('typeid', 'typename');
+                        },
+                    ]);
+                },
+            ])
+            // ->getQuery()
+            ->select('*')
             ->where(function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%$searchValue%");
@@ -39,7 +73,23 @@ class BpCustomerService extends BpCustomer
 
     public function datatables($order, $orderby, $search)
     {
-        return $this->getQuery()
+        return $this
+            ->newQuery()->with([
+                'sbccstmstatus' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'sbcbp' => function ($query) {
+                    $query->select('bpid', 'bpname');
+                },
+                'sbccstm' => function ($query) {
+                    $query->select('*')->with([
+                        'cstmtype' => function ($query) {
+                            $query->select('typeid', 'typename');
+                        },
+                    ]);
+                },
+            ])
+            // ->getQuery()
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
