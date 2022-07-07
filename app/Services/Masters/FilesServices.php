@@ -31,6 +31,6 @@ class FilesServices extends Files
          'transtype' => function ($query) {
             $query->select('typeid', 'typename');
          }
-      ])->addSelect(DB::raw("*,concat('" . url() . "', '/', \"directories\", '',\"filename\") as url"));
+      ])->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"));
    }
 }

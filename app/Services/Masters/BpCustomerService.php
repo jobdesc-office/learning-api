@@ -135,7 +135,7 @@ class BpCustomerService extends BpCustomer
                     ]);
                 },
                 'sbccstmpics' => function ($query) {
-                    $query->addSelect(DB::raw("*,concat('" . url() . "', '/', \"directories\", '',\"filename\") as url"));
+                    $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"));
                 },
             ])->whereHas('sbccstmpics', function ($query) {
                 $query->whereHas('transtype', function ($query) {
