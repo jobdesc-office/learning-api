@@ -128,7 +128,7 @@ class ProspectController extends Controller
 
     public function show($id, ProspectServices $ProspectServices)
     {
-        $Prospect = $ProspectServices->find($id);
+        $Prospect = $ProspectServices->found($id);
         return response()->json($Prospect);
     }
 
