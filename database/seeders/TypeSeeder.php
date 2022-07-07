@@ -165,6 +165,14 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Chat File', 'typecd' => DBTypes::chatfile, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::competitorreftype,
+            'typename' => 'Competitor Reference Type',
+            'children' => [
+                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**
