@@ -40,6 +40,11 @@ class Customer extends DefaultModel
         return new CustomerFactory;
     }
 
+    public function cstmcontact()
+    {
+        return $this->hasMany(ContactPerson::class, 'contactcustomerid', 'cstmid');
+    }
+
     public function cstmtype()
     {
         return $this->belongsTo(Types::class, 'cstmtypeid', 'typeid');

@@ -32,6 +32,11 @@ class Prospect extends DefaultModel
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
+    public function prospectby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
     public function prospectowneruser()
     {
         return $this->belongsTo(UserDetail::class, "prospectowner", "userdtid");
