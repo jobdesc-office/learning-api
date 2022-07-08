@@ -21,6 +21,10 @@ class CompetitorController extends Controller
         $insert = collect($req->all())->filter()
             ->except('updatedby');
 
+        if ($req->hasFile('comptpics')) {
+            $insert->put('comptpics', $req->file('comptpics'));
+        }
+
         $competitorServices->fill($insert->toArray())->save();
 
         return response()->json(['message' => \TextMessages::successCreate]);
