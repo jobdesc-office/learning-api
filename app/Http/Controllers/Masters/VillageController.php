@@ -109,7 +109,7 @@ class VillageController extends Controller
     public function byName(Request $req, VillageServices $modelVillageServices)
     {
         $filtered = collect($req->all())->filter();
-        $row = $modelVillageServices->byName($filtered->get('name'));
+        $row = $modelVillageServices->placesByName($filtered);
         return response()->json($row);
     }
 }
