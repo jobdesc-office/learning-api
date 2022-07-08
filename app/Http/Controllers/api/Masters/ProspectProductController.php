@@ -19,10 +19,9 @@ class ProspectProductController extends Controller
 
     public function store(Request $req, ProspectProductServices $modelProspectProductServices)
     {
-        $insert = collect($req->only($modelProspectProductServices->getFillable()))->filter()
+        $insert = collect($req->all())->filter()
             ->except('updatedby');
-
-        $modelProspectProductServices->create($insert->toArray());
+        $modelProspectProductServices->createProspectProduct($insert);
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
@@ -35,11 +34,9 @@ class ProspectProductController extends Controller
 
     public function update($id, Request $req, ProspectProductServices $modelProspectProductServices)
     {
-        $row = $modelProspectProductServices->findOrFail($id);
-
-        $update = collect($req->only($modelProspectProductServices->getFillable()))->filter()
+        $update = collect($req->all())->filter()
             ->except('createdby');
-        $row->update($update->toArray());
+        $modelProspectProductServices->updateProspectProduct($id, $update);
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Services\Masters;
 
+use App\Models\Masters\Product;
 use App\Models\Masters\ProspectProduct;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -52,6 +53,13 @@ class ProspectProductServices extends ProspectProduct
         $this->prosproductproductid = $product->productid;
 
         return $this->save();
+    }
+
+    public function updateProspectProduct($id, Collection $data)
+    {
+        $prospectProduct = $this->find($id)->fill($data->toArray());
+        $prospectProduct->save();
+        Product::find($prospectProduct->prosproductproductid)->fill($data->toArray())->save();
     }
 
     public function getQuery()

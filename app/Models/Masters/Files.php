@@ -4,6 +4,7 @@ namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
 class Files extends DefaultModel
 {
@@ -29,7 +30,13 @@ class Files extends DefaultModel
    {
       parent::boot();
 
-      static::deleted(function (Files $item) {
+      static::deleted(function ($item) {
+         Log::info($item);
+         Storage::disk('public')->delete("$item->directories$item->filename");
+      });
+
+      static::deleting(function ($item) {
+         Log::info($item);
          Storage::disk('public')->delete("$item->directories$item->filename");
       });
    }

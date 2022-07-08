@@ -135,13 +135,12 @@ class BpCustomerService extends BpCustomer
                     ]);
                 },
                 'sbccstmpics' => function ($query) {
-                    $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"));
+                    $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
+                        ->whereHas('transtype', function ($query) {
+                            $query->where('typecd', DBTypes::bpcustpic);
+                        });
                 },
-            ])->whereHas('sbccstmpics', function ($query) {
-                $query->whereHas('transtype', function ($query) {
-                    $query->where('typecd', DBTypes::bpcustpic);
-                });
-            });
+            ]);
     }
 
     public function createCustomer(Collection $insertArr)

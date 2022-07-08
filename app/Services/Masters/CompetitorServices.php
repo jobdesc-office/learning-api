@@ -2,10 +2,14 @@
 
 namespace App\Services\Masters;
 
+use App\Collections\Files\FileColumn;
+use App\Collections\Files\FileFinder;
 use App\Collections\Files\FileUploader;
 use App\Models\Masters\Competitor;
+use App\Models\Masters\Files;
 use DBTypes;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -20,12 +24,36 @@ class CompetitorServices extends Competitor
    {
       $this->fill($insert->toArray())->save();
       if ($insert->has('comptpics')) {
+         $comptpic = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
          foreach ($insert->get('comptpics') as  $file) {
             $temp_path = $file->getPathname();
-            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random())) . $file->getClientOriginalExtension();
+            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random())) . '.' . $file->getClientOriginalExtension();
 
-            $comptpic = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
             $file = new FileUploader($temp_path, $filename, 'images/', $comptpic, $this->comptid);
+            $file->upload();
+         }
+      }
+   }
+
+   public function edit($id, Collection $insert)
+   {
+      $competitor = $this->find($id)->fill($insert->toArray());
+      $competitor->save();
+
+      if ($insert->has('comptpics')) {
+         $comptpic = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
+
+         $files = new FileFinder($comptpic, $competitor->comptid);
+         $ids = collect($files->all())->map(function (FileColumn $item) {
+            return $item->getId();
+         });
+         Files::whereIn('fileid', $ids->toArray())->delete();
+
+         foreach ($insert->get('comptpics') as  $file) {
+            $temp_path = $file->getPathname();
+            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random())) . '.' . $file->getClientOriginalExtension();
+
+            $file = new FileUploader($temp_path, $filename, 'images/', $comptpic, $competitor->comptid);
             $file->upload();
          }
       }
@@ -37,7 +65,7 @@ class CompetitorServices extends Competitor
 
       $competitorWhere = $whereArr->only($this->fillable);
       if ($competitorWhere->isNotEmpty()) {
-         $query = $query->where($competitorWhere->toArray());
+         $query->where($competitorWhere->toArray());
       }
 
       return $query->get();
@@ -49,7 +77,13 @@ class CompetitorServices extends Competitor
          'comptreftype' => function ($query) {
             $query->select('typeid', 'typename');
          },
-         'comptbp'
+         'comptbp',
+         'comptpics' => function ($query) {
+            $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
+               ->whereHas('transtype', function ($query) {
+                  $query->where('typecd', DBTypes::comppics);
+               });
+         },
       ]);
    }
 }

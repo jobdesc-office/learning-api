@@ -12,13 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class ProspectController extends Controller
 {
-    public function datatables(ProspectServices $cityservice)
-    {
-        $query = $cityservice->datatables();
-
-        return datatables()->eloquent($query)
-            ->toJson();
-    }
 
     public function all(Request $req, ProspectServices $prospectService)
     {

@@ -25,7 +25,7 @@ class CompetitorController extends Controller
             $insert->put('comptpics', $req->file('comptpics'));
         }
 
-        $competitorServices->fill($insert->toArray())->save();
+        $competitorServices->store($insert);
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
@@ -38,11 +38,13 @@ class CompetitorController extends Controller
 
     public function update($id, Request $req, CompetitorServices $competitorServices)
     {
-        $row = $competitorServices->findOrFail($id);
-
         $update = collect($req->all())->filter()
             ->except('createdby');
-        $row->fill($update->toArray())->save();
+        if ($req->hasFile('comptpics')) {
+            $update->put('comptpics', $req->file('comptpics'));
+        }
+
+        $competitorServices->edit($id, $update);
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
