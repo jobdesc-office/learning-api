@@ -3,6 +3,7 @@
 namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
+use Illuminate\Support\Facades\Storage;
 
 class Files extends DefaultModel
 {
@@ -23,6 +24,15 @@ class Files extends DefaultModel
 
    const CREATED_AT = "createddate";
    const UPDATED_AT = "updateddate";
+
+   public static function boot()
+   {
+      parent::boot();
+
+      static::deleted(function (Files $item) {
+         Storage::disk('public')->delete("$item->directories$item->filename");
+      });
+   }
 
    public function transtype()
    {

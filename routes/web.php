@@ -460,6 +460,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'FilesController@update');
                 $router->delete('{id}', 'FilesController@destroy');
             });
+
+            $router->group(['prefix' => 'competitor'], function () use ($router) {
+                $router->get('', 'CompetitorController@all');
+                $router->post('', 'CompetitorController@store');
+                $router->get('{id}', 'CompetitorController@show');
+                $router->put('{id}', 'CompetitorController@update');
+                $router->delete('{id}', 'CompetitorController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'api\Security'], function () use ($router) {
