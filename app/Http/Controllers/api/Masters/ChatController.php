@@ -20,6 +20,8 @@ class ChatController extends Controller
 
     public function store(Request $req, ChatServices $chatservices)
     {
+        var_dump($req->hasFile('chatfile'));
+        return;
         $insert = collect($req)->filter()
             ->except('updatedby');
         $insert->put('createdby', auth()->user()->userid);
