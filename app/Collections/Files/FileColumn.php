@@ -9,7 +9,7 @@ class FileColumn extends Collection
 
    public function getId()
    {
-      return $this->get('typeid');
+      return $this->get('fileid');
    }
 
    public function getFilename()

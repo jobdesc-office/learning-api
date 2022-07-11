@@ -33,4 +33,9 @@ class Competitor extends DefaultModel
    {
       return $this->belongsTo(Types::class, 'comptreftypeid', 'typeid');
    }
+
+   public function comptpics()
+   {
+      return $this->hasMany(Files::class, 'refid', 'comptid');
+   }
 }
