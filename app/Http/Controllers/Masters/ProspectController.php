@@ -10,6 +10,7 @@ use App\Models\Masters\ProspectAssign;
 use App\Models\Masters\ProspectCustomField;
 use App\Models\Masters\Customer;
 use App\Models\Masters\ContactPerson;
+use App\Models\Masters\Product;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\ProspectServices;
 use Illuminate\Http\Request;
@@ -153,6 +154,15 @@ class ProspectController extends Controller
                 return response()->json(['message' => \TextMessages::failedCreate]);
             }
         }
+    }
+
+    public function storeProduct(Request $req, Product $ProductModel)
+    {
+        $insert = collect($req->only($ProductModel->getFillable()))->filter()->except('updatedby');
+
+        $ProductModel->create($insert->toArray());
+
+        return response()->json(['message' => \TextMessages::successCreate]);
     }
 
     public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
