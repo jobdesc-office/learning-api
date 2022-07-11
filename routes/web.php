@@ -227,6 +227,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('selectref', 'ProspectController@selectref');
             $router->get('', 'ProspectController@all');
             $router->post('datatables', 'ProspectController@datatables');
+            $router->post('customer', 'ProspectController@storeCustomer');
+            $router->post('product', 'ProspectController@storeProduct');
 
             $router->post('', 'ProspectController@store');
             $router->get('{id}', 'ProspectController@show');

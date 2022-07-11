@@ -8,6 +8,10 @@ use App\Models\Masters\ProspectProduct;
 use App\Models\Masters\ProspectActivity;
 use App\Models\Masters\ProspectAssign;
 use App\Models\Masters\ProspectCustomField;
+use App\Models\Masters\Customer;
+use App\Models\Masters\ContactPerson;
+use App\Models\Masters\Product;
+use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\ProspectServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +103,66 @@ class ProspectController extends Controller
     {
         $Prospects = $ProspectServices->getAll(collect($req->all()));
         return response()->json($Prospects);
+    }
+
+    public function storeCustomer(Request $req, Customer $modelCustomer, ContactPerson $modelContactPerson, BpCustomerService $modelBpCustomerService)
+    {
+        $isregistered = $req->get('isregistered');
+
+        if ($isregistered == true) {
+            DB::beginTransaction();
+            try {
+                $insert = collect($req->only($modelContactPerson->getFillable()))->filter()
+                    ->except('updatedby');
+
+                $modelContactPerson->create($insert->toArray());
+                $insertt = collect($req->all())->filter();
+
+                $modelBpCustomerService->createCustomer($insertt);
+                DB::commit();
+                return response()->json(['message' => \TextMessages::successCreate]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return response()->json(['message' => \TextMessages::failedCreate]);
+            }
+        } else {
+            DB::beginTransaction();
+            try {
+                $insert = collect($req->only($modelCustomer->getFillable()))->filter()->except('updatedby');
+
+                $resultCustomer = $modelCustomer->create($insert->toArray());
+                $modelContactPerson->create([
+                    'contactcustomerid' => $resultCustomer->cstmid,
+                    'contacttypeid' => $req->get('contacttypeid'),
+                    'contactname' => $req->get('contactname'),
+                    'contactvalueid' => $req->get('contactvalueid'),
+                    'createdby' => $req->get('createdby'),
+                ]);
+                $modelBpCustomerService->create([
+                    'sbcbpid' => $req->get('sbcbpid'),
+                    'sbccstmid' => $resultCustomer->cstmid,
+                    'sbccstmstatusid' => $req->get('sbccstmstatusid'),
+                    'sbccstmname' => $resultCustomer->cstmname,
+                    'sbccstmphone' => $resultCustomer->cstmphone,
+                    'sbccstmaddress' => $resultCustomer->cstmaddress,
+                    'createdby' => $req->get('createdby'),
+                ]);
+                DB::commit();
+                return response()->json(['message' => \TextMessages::successCreate]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return response()->json(['message' => \TextMessages::failedCreate]);
+            }
+        }
+    }
+
+    public function storeProduct(Request $req, Product $ProductModel)
+    {
+        $insert = collect($req->only($ProductModel->getFillable()))->filter()->except('updatedby');
+
+        $ProductModel->create($insert->toArray());
+
+        return response()->json(['message' => \TextMessages::successCreate]);
     }
 
     public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
