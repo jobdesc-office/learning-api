@@ -15,6 +15,27 @@ use Illuminate\Support\Str;
 
 class CompetitorServices extends Competitor
 {
+
+   public function select($searchValue)
+   {
+      return $this->getQuery()->select('*')
+         ->where(function ($query) use ($searchValue) {
+            $searchValue = trim(strtolower($searchValue));
+            $query->where(DB::raw('TRIM(LOWER(comptname))'), 'like', "%$searchValue%");
+         })
+         ->orderBy('comptname', 'asc')
+         ->get();
+   }
+
+   public function datatables($order, $orderby, $search)
+   {
+      return $this->getQuery()
+         ->where(function ($query) use ($search, $order) {
+            $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+         })
+         ->orderBy($order, $orderby);
+   }
+
    public function find($id)
    {
       return $this->getQuery()->findOrFail($id);

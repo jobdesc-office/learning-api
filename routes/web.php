@@ -167,6 +167,16 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CustomerController@destroy');
         });
 
+        $router->group(['prefix' => 'competitor'], function () use ($router) {
+            $router->get('select', 'CompetitorController@select');
+            $router->post('datatables', 'CompetitorController@datatables');
+
+            $router->post('', 'CompetitorController@store');
+            $router->get('{id}', 'CompetitorController@show');
+            $router->put('{id}', 'CompetitorController@update');
+            $router->delete('{id}', 'CompetitorController@destroy');
+        });
+
         $router->group(['prefix' => 'customfield'], function () use ($router) {
             $router->get('select', 'CustomFieldController@select');
             $router->get('select/{id}', 'CustomFieldController@selectBp');
