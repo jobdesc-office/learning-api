@@ -34,34 +34,13 @@ class UserDetailServices extends UserDetail
 
     public function find($id)
     {
-        return $this->newQuery()
-            ->with([
-                'usertype' => function ($query) {
-                    $query->select('typeid', 'typename');
-                },
-                'businesspartner' => function ($query) {
-                    $query->select('bpid', 'bpname', 'bpphone', 'bpemail', 'bptypeid')->with(['bptype']);
-                },
-                'user' => function ($query) {
-                    $query->select('*');
-                }
-            ])
+        return $this->getQuery()
             ->findOrFail($id);
     }
 
     public function getAll(Collection $whereArr)
     {
-        $users = $this->newQuery()->with([
-            'usertype' => function ($query) {
-                $query->select('typeid', 'typename');
-            },
-            'businesspartner' => function ($query) {
-                $query->select('bpid', 'bpname', 'bpphone', 'bpemail', 'bptypeid')->with(['bptype']);
-            },
-            'user' => function ($query) {
-                $query->select('*');
-            }
-        ]);
+        $users = $this->getQuery();
         if (!$whereArr->only($this->getFillable())->isEmpty()) {
             $users = $users->where($whereArr->only($this->getFillable())->toArray());
         }
@@ -72,5 +51,19 @@ class UserDetailServices extends UserDetail
             });
         }
         return $users->get();
+    }
+
+    public function getQuery()
+    {
+        return $this->newQuery()
+            ->with([
+                'usertype' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'businesspartner' => function ($query) {
+                    $query->select('bpid', 'bpname', 'bpphone', 'bpemail', 'bptypeid')->with(['bptype']);
+                },
+                'user',
+            ]);
     }
 }

@@ -16,7 +16,6 @@ class Chat extends DefaultModel
         "chatmessage",
         "chatrefname",
         "chatrefid",
-        "chatfile",
         "chatreadat",
         "chatreceiverid",
         "createdby",
@@ -27,6 +26,11 @@ class Chat extends DefaultModel
     public function chatbp()
     {
         return $this->belongsTo(BusinessPartner::class, "chatbpid", "bpid");
+    }
+
+    public function chatfile()
+    {
+        return $this->hasOne(Files::class, "refid", "chatid");
     }
 
     public function chatreceiver()

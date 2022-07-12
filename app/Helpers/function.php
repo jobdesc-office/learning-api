@@ -1,27 +1,38 @@
 <?php
 
 use App\Actions\FindTypeAction;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Str;
 
 function find_type($key = 'typecd', $keys = [], $items = [])
 {
     return (new FindTypeAction());
 }
 
-function uploadFile($input_name, $file_name = null)
+class TempFile
 {
-    $path = $_FILES[$input_name]['tmp_name'];
-    $original_name = $_FILES[$input_name]['name'];
-    $mime_type = $_FILES[$input_name]['type'];
-    $error = $_FILES[$input_name]['error'];
+    /**
+     * @var resource
+     */
+    public $stream;
 
-    $image = new UploadedFile($path, $original_name, $mime_type, $error);
-
-    if ($file_name == null) {
-        $file_name = Str::random(20) . '.' . $image->getClientOriginalExtension();
+    /**
+     * @param string $data
+     */
+    public function __construct($data)
+    {
+        $this->stream = tmpfile();
+        fwrite($this->stream, $data);
     }
-    $image->storeAs('public/images', $file_name);
 
-    return url('/storage/images/' . $file_name);
+    /**
+     * @return string
+     */
+    public function getUri()
+    {
+        return stream_get_meta_data($this->stream)['uri'];
+    }
+
+    public function close()
+    {
+        fclose($this->stream);
+    }
 }

@@ -4,10 +4,11 @@ namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\ChatServices;
-use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Storage;
+use TempFile;
 
 class ChatController extends Controller
 {
@@ -21,14 +22,11 @@ class ChatController extends Controller
 
     public function store(Request $req, ChatServices $chatservices)
     {
-        var_dump($req->all());
-        return;
         $insert = collect($req)->filter()
             ->except('updatedby');
         $insert->put('createdby', auth()->user()->userid);
 
-        $chatservices->fill($insert->toArray())->save();
-        $chats = $chatservices->getConversation($chatservices->createdby, $chatservices->chatreceiverid);
+        $chats = $chatservices->storeChat($insert);
         return response()->json($chats);
     }
 
