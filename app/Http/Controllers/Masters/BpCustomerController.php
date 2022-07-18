@@ -94,9 +94,10 @@ class BpCustomerController extends Controller
     public function store(Request $req, BpCustomerService $modelBpCustomerService)
     {
 
-        $insert = collect($req->all())->filter();
+        $insert = collect($req->all());
 
-        $result = $modelBpCustomerService->createCustomer($insert);
+        $result = $modelBpCustomerService->createCustomerWeb($insert);
+        var_dump($req->all());
 
         if ($result) {
             return response()->json(['message' => \TextMessages::successCreate,]);

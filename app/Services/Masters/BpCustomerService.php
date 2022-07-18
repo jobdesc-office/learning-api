@@ -5,11 +5,11 @@ namespace App\Services\Masters;
 use App\Collections\Files\FileFinder;
 use App\Collections\Files\FileUploader;
 use App\Models\Masters\BpCustomer;
-use App\Models\Masters\Customer;
 use DBTypes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use TempFile;
 
 class BpCustomerService extends BpCustomer
 {
@@ -141,6 +141,52 @@ class BpCustomerService extends BpCustomer
                         });
                 },
             ]);
+    }
+
+    public function createCustomerWeb(Collection $insertArr)
+    {
+        $customerService = new CustomerService;
+        $bpcustomer = $this->fill($insertArr->toArray());
+        if ($insertArr->has('cstmid')) {
+            $customer = $customerService->find($insertArr->get('cstmid'));
+            $customer = $customer->fill($insertArr->toArray());
+
+            if ($customer->save()) {
+
+                $bpcustomer->sbccstmid =  $customer->cstmid;
+                $bpcustomer->sbccstmname =  $customer->cstmname;
+                $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
+                $bpcustomer->sbccstmphone =  $customer->cstmphone;
+            } else {
+                return false;
+            }
+        } else {
+            $customer = $customerService->fill($insertArr->toArray());
+            $customer->save();
+
+            $isExist = $this->where('sbccstmid', $customer->cstmid)->where('sbcbpid', $insertArr->get('sbcbpid'))->first();
+
+            if ($isExist) {
+                return false;
+            }
+
+            $bpcustomer->sbccstmid =  $customer->cstmid;
+            $bpcustomer->sbccstmname =  $customer->cstmname;
+            $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
+            $bpcustomer->sbccstmphone =  $customer->cstmphone;
+        }
+
+        $result =  $bpcustomer->save();
+        var_dump($insertArr->has('sbccstmpic'));
+        if ($insertArr->has('sbccstmpic')) {
+            // $tempfile = new TempFile();
+            $filename = $customer->cstmname;
+            $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+            $file = new FileUploader($insertArr->get('sbccstmpic'), $filename, 'files/', $transType, $bpcustomer->sbcid);
+            $result  = $result && $file->upload() != null;
+        }
+
+        return $result;
     }
 
     public function createCustomer(Collection $insertArr)
