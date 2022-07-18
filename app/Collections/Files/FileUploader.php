@@ -100,7 +100,7 @@ class FileUploader
          $data['transtypeid'] = $this->transtypeid;
          $data['refid'] = $this->refid;
          $data['directories'] = $this->directories;
-         $data['filename'] = $this->filename;
+         $data['filename'] = $this->filename . '.' . $this->file->guessExtension();
          $data['mimetype'] = $this->mime_type;
          $data['filesize'] = $this->size;
 
