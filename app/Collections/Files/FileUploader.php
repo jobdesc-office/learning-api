@@ -93,8 +93,7 @@ class FileUploader
          $this->filename = $filename;
       }
 
-      $result = $this->file->storeAs("public/$this->directories", $this->filename);
-
+      $result = $this->file->storeAs("public/$this->directories", $this->filename . '.' . $this->file->guessExtension());
       if ($result) {
          $data = [];
          $filesService = new FilesServices();

@@ -27,9 +27,9 @@ class BpCustomerController extends Controller
 
         if ($req->hasFile('sbccstmpic')) {
             $file = $req->file('sbccstmpic');
-            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
+            $filename = Str::replace(['/', '\\', '.'], '', Hash::make(Str::random()));
             $insert->put('temp_path', $file->getPathname());
-            $insert->put('filename', $filename . '.' . $file->getClientOriginalExtension());
+            $insert->put('filename', $filename);
         }
 
         $result = $modelBpCustomerService->createCustomer($insert);
@@ -54,9 +54,9 @@ class BpCustomerController extends Controller
 
         if ($req->hasFile('sbccstmpic')) {
             $file = $req->file('sbccstmpic');
-            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
+            $filename = Str::replace(['/', '\\', '.'], '', Hash::make(Str::random()));
             $insert->put('temp_path', $file->getPathname());
-            $insert->put('filename', $filename . '.' . $file->getClientOriginalExtension());
+            $insert->put('filename', $filename);
         }
 
         $resultCustomer = $modelBpCustomerService->updateCustomer($id, $insert);

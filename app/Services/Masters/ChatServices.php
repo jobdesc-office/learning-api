@@ -54,9 +54,8 @@ class ChatServices extends Chat
         if ($result) {
             if ($data->has('chatfile')) {
                 $tempfile = new TempFile($data->get('chatfile'));
-                $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
+                $filename = Str::replace(['/', '\\', '.'], '', Hash::make(Str::random()));
                 $transType = find_type()->in([DBTypes::chatfile])->get(DBTypes::chatfile)->getId();
-
                 $file = new FileUploader($tempfile->getUri(), $filename, 'files/', $transType, $chat->chatid);
                 $result  = $result && $file->upload() != null;
 
