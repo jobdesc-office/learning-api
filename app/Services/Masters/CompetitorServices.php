@@ -72,7 +72,7 @@ class CompetitorServices extends Competitor
 
          foreach ($insert->get('comptpics') as  $file) {
             $temp_path = $file->getPathname();
-            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random())) . '.' . $file->getClientOriginalExtension();
+            $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
 
             $file = new FileUploader($temp_path, $filename, 'images/', $comptpic, $competitor->comptid);
             $file->upload();
