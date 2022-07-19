@@ -70,7 +70,7 @@ class FileUploader
 
       $this->temp_path = $temp_path;
       $this->directories = $directories;
-      $this->filename = $filename;
+      $this->filename = $filename . '.' . $this->file->guessExtension();
       $this->file = new UploadedFile($temp_path, $filename);
 
       $this->mime_type = $this->file->getMimeType();
@@ -90,10 +90,10 @@ class FileUploader
       }
 
       if ($filename != null) {
-         $this->filename = $filename;
+         $this->filename = $filename . '.' . $this->file->guessExtension();
       }
 
-      $result = $this->file->storeAs("public/$this->directories", $this->filename . '.' . $this->file->guessExtension());
+      $result = $this->file->storeAs("public/$this->directories", $this->filename);
       if ($result) {
          $data = [];
          $filesService = new FilesServices();
