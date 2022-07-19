@@ -78,6 +78,9 @@ class FileUploader
       $this->size = $this->file->getSize();
    }
 
+   /**
+    * @return string
+    */
    public function getFilenameWithExtension()
    {
       $filename = $this->filename;
