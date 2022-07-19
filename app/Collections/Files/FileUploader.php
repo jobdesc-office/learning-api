@@ -79,6 +79,19 @@ class FileUploader
    }
 
    /**
+    * @return string
+    */
+   public function getFilenameWithExtension()
+   {
+      $filename = $this->filename;
+      $search = Str::contains($filename, $this->file->guessExtension());
+      if ($search) {
+         return $filename;
+      }
+      return $filename . '.' . $this->file->guessExtension();
+   }
+
+   /**
     * @param string $filename if filename is not null then it will override constructor filename
     * @param string $directories if directories is not null then it will override constructor directories
     * @return FileColumn|false
@@ -93,21 +106,21 @@ class FileUploader
          $this->filename = $filename;
       }
 
-      $result = $this->file->storeAs("public/$this->directories", $this->filename . '.' . $this->file->guessExtension());
+      $result = $this->file->storeAs("public/$this->directories", $this->getFilenameWithExtension());
       if ($result) {
          $data = [];
          $filesService = new FilesServices();
          $data['transtypeid'] = $this->transtypeid;
          $data['refid'] = $this->refid;
          $data['directories'] = $this->directories;
-         $data['filename'] = $this->filename . '.' . $this->file->guessExtension();
+         $data['filename'] = $this->getFilenameWithExtension();
          $data['mimetype'] = $this->mime_type;
          $data['filesize'] = $this->size;
 
          $anchorData = [
             'transtypeid' => $this->transtypeid,
             'refid' => $this->refid,
-            'filename' => $this->filename,
+            'filename' => $this->getFilenameWithExtension(),
          ];
          $result = $filesService->newQuery()->updateOrCreate($anchorData, $data);
          return new FileColumn($result);
