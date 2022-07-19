@@ -70,12 +70,22 @@ class FileUploader
 
       $this->temp_path = $temp_path;
       $this->directories = $directories;
-      $this->filename = $filename . '.' . $this->file->guessExtension();
+      $this->filename = $filename;
       $this->file = new UploadedFile($temp_path, $filename);
 
       $this->mime_type = $this->file->getMimeType();
       $this->is_error = $this->file->getError() != 0;
       $this->size = $this->file->getSize();
+   }
+
+   public function getFilenameWithExtension()
+   {
+      $filename = $this->filename;
+      $search = Str::contains($filename, $this->file->guessExtension());
+      if ($search) {
+         return $filename;
+      }
+      return $filename . '.' . $this->file->guessExtension();
    }
 
    /**
@@ -90,24 +100,24 @@ class FileUploader
       }
 
       if ($filename != null) {
-         $this->filename = $filename . '.' . $this->file->guessExtension();
+         $this->filename = $filename;
       }
 
-      $result = $this->file->storeAs("public/$this->directories", $this->filename);
+      $result = $this->file->storeAs("public/$this->directories", $this->getFilenameWithExtension());
       if ($result) {
          $data = [];
          $filesService = new FilesServices();
          $data['transtypeid'] = $this->transtypeid;
          $data['refid'] = $this->refid;
          $data['directories'] = $this->directories;
-         $data['filename'] = $this->filename;
+         $data['filename'] = $this->getFilenameWithExtension();
          $data['mimetype'] = $this->mime_type;
          $data['filesize'] = $this->size;
 
          $anchorData = [
             'transtypeid' => $this->transtypeid,
             'refid' => $this->refid,
-            'filename' => $this->filename,
+            'filename' => $this->getFilenameWithExtension(),
          ];
          $result = $filesService->newQuery()->updateOrCreate($anchorData, $data);
          return new FileColumn($result);
