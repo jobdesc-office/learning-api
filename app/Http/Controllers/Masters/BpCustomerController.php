@@ -97,7 +97,6 @@ class BpCustomerController extends Controller
         $insert = collect($req->all());
 
         $result = $modelBpCustomerService->createCustomerWeb($insert);
-        var_dump($req->all());
 
         if ($result) {
             return response()->json(['message' => \TextMessages::successCreate,]);
@@ -114,20 +113,10 @@ class BpCustomerController extends Controller
 
     public function update($id, Request $req, BpCustomerService $modelBpCustomerService)
     {
-        $bpCustomer = $modelBpCustomerService->findOrFail($id);
-        $insert = collect($req->all())->filter()->except('createdby');
+        $insert = collect($req->all());
+        var_dump($req->all());
 
-        $image = $req->file('sbccstmpic');
-        if ($image != null) {
-            $filename = explode('/', $bpCustomer->sbccstmpic);
-            $filename = end($filename);
-            $res = $image->storeAs('public/images', $filename);
-            if ($res) {
-                $insert->put('sbccstmpic', url('/storage/images/' . $filename));
-            }
-        }
-
-        $resultCustomer = $modelBpCustomerService->updateCustomer($id, $insert);
+        $resultCustomer = $modelBpCustomerService->updateCustomerWeb($id, $insert);
 
         if ($resultCustomer) {
             return response()->json(['message' => \TextMessages::successEdit,]);

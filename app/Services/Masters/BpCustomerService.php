@@ -177,12 +177,11 @@ class BpCustomerService extends BpCustomer
         }
 
         $result =  $bpcustomer->save();
-        var_dump($insertArr->has('sbccstmpic'));
         if ($insertArr->has('sbccstmpic')) {
             // $tempfile = new TempFile();
             $filename = $customer->cstmname;
             $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
-            $file = new FileUploader($insertArr->get('sbccstmpic'), $filename, 'files/', $transType, $bpcustomer->sbcid);
+            $file = new FileUploader($insertArr->get('sbccstmpic'), $filename, 'images/', $transType, $bpcustomer->sbcid);
             $result  = $result && $file->upload() != null;
         }
 
@@ -231,6 +230,35 @@ class BpCustomerService extends BpCustomer
         }
 
         return $result;
+    }
+
+    public function updateCustomerWeb($id, Collection $insertArr)
+    {
+        $bpCustomer = $this->findOrFail($id);
+
+        $updateCustomer = collect($insertArr->only($this->getFillable()))->filter()
+            ->except('createdby');
+        $resultCustomer = $bpCustomer->update($updateCustomer->toArray());
+
+        if ($resultCustomer) {
+            if ($insertArr->has('sbccstmpic')) {
+                $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+
+                $oldFile = new FileFinder($transType, $bpCustomer->sbcid);
+                $filename = null;
+
+                if (count($oldFile->all()) > 0) {
+                    $filename = $oldFile->all()[0]->getFilename();
+                } else {
+                    $filename = $insertArr->get('filename');
+                }
+
+                $file = new FileUploader($insertArr->get('sbccstmpic'), $filename, 'images/', $transType, $bpCustomer->sbcid);
+                $resultCustomer  = $resultCustomer && $file->upload() != null;
+            }
+        }
+
+        return $resultCustomer;
     }
 
     public function updateCustomer($id, Collection $insertArr)

@@ -151,7 +151,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->post('', 'BpCustomerController@store');
             $router->get('{id}', 'BpCustomerController@show');
-            $router->put('{id}', 'BpCustomerController@update');
+            $router->post('{id}', 'BpCustomerController@update');
             $router->delete('{id}', 'BpCustomerController@destroy');
         });
 
