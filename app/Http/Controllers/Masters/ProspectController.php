@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Collections\Files\FileUploader;
 use App\Models\Masters\Prospect;
 use App\Models\Masters\ProspectProduct;
 use App\Models\Masters\ProspectActivity;
@@ -15,6 +16,9 @@ use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\ProspectServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DBTypes;
+use Exception;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class ProspectController extends Controller
 {
@@ -108,8 +112,7 @@ class ProspectController extends Controller
     public function storeCustomer(Request $req, Customer $modelCustomer, ContactPerson $modelContactPerson, BpCustomerService $modelBpCustomerService)
     {
         $isregistered = $req->get('isregistered');
-
-        if ($isregistered == true) {
+        if ($isregistered == 'true') {
             DB::beginTransaction();
             try {
                 $insert = collect($req->only($modelContactPerson->getFillable()))->filter()
@@ -118,40 +121,47 @@ class ProspectController extends Controller
                 $modelContactPerson->create($insert->toArray());
                 $insertt = collect($req->all())->filter();
 
-                $modelBpCustomerService->createCustomer($insertt);
+                $modelBpCustomerService->createCustomerWeb($insertt);
                 DB::commit();
                 return response()->json(['message' => \TextMessages::successCreate]);
             } catch (\Throwable $th) {
                 DB::rollBack();
-                return response()->json(['message' => \TextMessages::failedCreate]);
+                return response()->json(['message' => \TextMessages::failedCreate, 'causes' => $th]);
             }
         } else {
             DB::beginTransaction();
             try {
-                $insert = collect($req->only($modelCustomer->getFillable()))->filter()->except('updatedby');
-
+                $insert = collect($req->only($modelCustomer->getFillable()))->except('updatedby');
                 $resultCustomer = $modelCustomer->create($insert->toArray());
-                $modelContactPerson->create([
-                    'contactcustomerid' => $resultCustomer->cstmid,
-                    'contacttypeid' => $req->get('contacttypeid'),
-                    'contactname' => $req->get('contactname'),
-                    'contactvalueid' => $req->get('contactvalueid'),
-                    'createdby' => $req->get('createdby'),
-                ]);
-                $modelBpCustomerService->create([
-                    'sbcbpid' => $req->get('sbcbpid'),
-                    'sbccstmid' => $resultCustomer->cstmid,
-                    'sbccstmstatusid' => $req->get('sbccstmstatusid'),
-                    'sbccstmname' => $resultCustomer->cstmname,
-                    'sbccstmphone' => $resultCustomer->cstmphone,
-                    'sbccstmaddress' => $resultCustomer->cstmaddress,
-                    'createdby' => $req->get('createdby'),
-                ]);
+                if ($resultCustomer) {
+                    $BpCustomer = $modelBpCustomerService->create([
+                        'sbcbpid' => $req->get('sbcbpid'),
+                        'sbccstmid' => $resultCustomer->cstmid,
+                        'sbccstmstatusid' => $req->get('sbccstmstatusid'),
+                        'sbccstmname' => $resultCustomer->cstmname,
+                        'sbccstmphone' => $resultCustomer->cstmphone,
+                        'sbccstmaddress' => $resultCustomer->cstmaddress,
+                        'createdby' => $req->get('createdby'),
+                    ]);
+                    $modelContactPerson->create([
+                        'contactcustomerid' => $resultCustomer->cstmid,
+                        'contacttypeid' => $req->get('contacttypeid'),
+                        'contactname' => $req->get('contactname'),
+                        'contactvalueid' => $req->get('contactvalueid'),
+                        'createdby' => $req->get('createdby'),
+                    ]);
+                    if ($req->has('sbccstmpic')) {
+                        $filename = $resultCustomer->cstmname;
+                        $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+                        $file = new FileUploader($req->file('sbccstmpic'), $filename, 'images/', $transType, $BpCustomer->sbcid);
+                        $resultCustomer  = $resultCustomer && $file->upload() != null;
+                    }
+                }
                 DB::commit();
                 return response()->json(['message' => \TextMessages::successCreate]);
-            } catch (\Throwable $th) {
+            } catch (Exception $th) {
                 DB::rollBack();
-                return response()->json(['message' => \TextMessages::failedCreate]);
+                return response()->json(['message' => \TextMessages::failedCreate, 'causes' => $th]);
             }
         }
     }

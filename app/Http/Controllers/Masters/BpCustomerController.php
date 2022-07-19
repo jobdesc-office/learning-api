@@ -114,7 +114,6 @@ class BpCustomerController extends Controller
     public function update($id, Request $req, BpCustomerService $modelBpCustomerService)
     {
         $insert = collect($req->all());
-        var_dump($req->all());
 
         $resultCustomer = $modelBpCustomerService->updateCustomerWeb($id, $insert);
 
