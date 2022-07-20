@@ -9,6 +9,7 @@ use App\Models\Masters\ScheduleGuest;
 use App\Services\Masters\ScheduleServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use TextMessages;
 
 class ScheduleController extends Controller
 {
@@ -22,21 +23,27 @@ class ScheduleController extends Controller
     {
         $insert = collect($req->only($scheduleModel->getFillable()))->filter();
 
-        $scheduleModel->fill($insert->toArray())->save();
+        $result = $scheduleModel->fill($insert->toArray())->save();
 
-        if ($req->has('members') && $req->get('members') != null) {
-            $members = json_decode($req->get('members'));
-            foreach ($members as $member) {
-                $scheduleGuestModel->create([
-                    'scheid' => $scheduleModel->scheid,
-                    'scheuserid' => $member->scheuserid,
-                    'schebpid' => $member->schebpid,
-                    'schepermisid' => $member->schepermisid
-                ]);
+        if ($result) {
+
+            if ($req->has('members') && $req->get('members') != null) {
+                $members = json_decode($req->get('members'));
+                $guestsData = collect([]);
+                foreach ($members as $member) {
+                    $guestsData->push([
+                        'scheid' => $scheduleModel->scheid,
+                        'scheuserid' => $member->scheuserid,
+                        'schebpid' => $member->schebpid,
+                        'schepermisid' => $member->schepermisid
+                    ]);
+                }
+                $scheduleGuestModel->create($guestsData->toArray());
             }
-        }
 
-        return response()->json(['message' => \TextMessages::successCreate]);
+            return response()->json($scheduleModel->toArray());
+        }
+        return response(TextMessages::failedCreate, 400);
     }
 
     public function show($id, ScheduleServices $scheduleServices)
