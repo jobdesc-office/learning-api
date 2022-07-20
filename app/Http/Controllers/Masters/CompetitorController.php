@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Collections\Files\FileUploader;
 use App\Services\Masters\CompetitorServices;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use DBTypes;
+use Exception;
+use GuzzleHttp\Psr7\MultipartStream;
 
 class CompetitorController extends Controller
 {
@@ -81,11 +86,30 @@ class CompetitorController extends Controller
 
     public function store(Request $req, CompetitorServices $modelCompetitorServices)
     {
-        $insert = collect($req->only($modelCompetitorServices->getFillable()))->filter()->except('updatedby');
+        DB::beginTransaction();
+        try {
+            $insert = collect($req->only($modelCompetitorServices->getFillable()))->filter()->except('updatedby');
 
-        $modelCompetitorServices->create($insert->toArray());
+            $competitor = $modelCompetitorServices->create($insert->toArray());
 
-        return response()->json(['message' => \TextMessages::successCreate]);
+            if ($req->hasFile('comptpics')) {
+                $pics = $req->file('comptpics');
+                var_dump($pics);
+                foreach ($pics as $pic) {
+                    $no = 0;
+                    $no++;
+                    $filename = $competitor->comptname . $no;
+                    $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
+                    $file = new FileUploader($pic->image, $filename, 'images/', $transType, $competitor->comptid);
+                    $competitor  = $competitor && $file->upload() != null;
+                    var_dump($competitor);
+                }
+            }
+            // DB::commit();
+            return response()->json(['message' => \TextMessages::successCreate]);
+        } catch (Exception $th) {
+            DB::rollBack();
+        }
     }
 
     public function show($id, CompetitorServices $CompetitorServices)
