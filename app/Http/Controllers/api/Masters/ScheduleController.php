@@ -82,16 +82,16 @@ class ScheduleController extends Controller
         DB::beginTransaction();
         try {
             $scheduleGuest->select('scheid')->where('scheid', $id)->delete();
-            $scheduleModel->find($id);
+            $schedule = $scheduleModel->find($id);
 
-            if ($scheduleModel->scherefid != null) {
-                $prospectActivityData = $prospectActivity->find($scheduleModel->scherefid);
+            if ($schedule->scherefid != null) {
+                $prospectActivityData = $prospectActivity->find($schedule->scherefid);
                 if ($prospectActivityData != null) {
                     $prospectActivityData->delete();
                 }
             }
 
-            $scheduleModel->delete();
+            $schedule->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
