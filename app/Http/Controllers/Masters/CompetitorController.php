@@ -91,20 +91,19 @@ class CompetitorController extends Controller
             $insert = collect($req->only($modelCompetitorServices->getFillable()))->filter()->except('updatedby');
 
             $competitor = $modelCompetitorServices->create($insert->toArray());
-
-            if ($req->hasFile('comptpics')) {
-                $pics = $req->file('comptpics');
-                var_dump($pics);
-                foreach ($pics as $pic) {
-                    $no = 0;
-                    $no++;
-                    $filename = $competitor->comptname . $no;
-                    $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
-                    $file = new FileUploader($pic->image, $filename, 'images/', $transType, $competitor->comptid);
-                    $competitor  = $competitor && $file->upload() != null;
-                    var_dump($competitor);
-                }
-            }
+            $pics = $req->file('comptpics');
+            var_dump($pics);
+            // if ($pics) {
+            //     for ($i = $req->get('imagetotal'); $i < -1; $i--) {
+            //         $no = 0;
+            //         $no++;
+            //         $filename = $competitor->comptname . $no;
+            //         $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
+            //         $file = new FileUploader($pics->$i, $filename, 'images/', $transType, $competitor->comptid);
+            //         $competitor  = $competitor && $file->upload() != null;
+            //         var_dump($competitor);
+            //     }
+            // }
             // DB::commit();
             return response()->json(['message' => \TextMessages::successCreate]);
         } catch (Exception $th) {
