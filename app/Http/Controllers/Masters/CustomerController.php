@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\CustomerService;
+use App\Services\Masters\ContactPersonServices;
+use App\Services\Masters\BpCustomerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -105,11 +108,18 @@ class CustomerController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, CustomerService $modelCustomerService)
+    public function destroy($id, CustomerService $modelCustomerService, ContactPersonServices $modelContactPersonServices, BpCustomerService $modelBpCustomerService)
     {
-        $row = $modelCustomerService->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $modelContactPersonServices->where('contactcustomerid', $id)->delete();
+            $modelBpCustomerService->where('sbccstmid', $id)->delete();
+            $modelCustomerService->findOrFail($id)->delete();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }
