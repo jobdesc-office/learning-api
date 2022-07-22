@@ -93,17 +93,18 @@ class CompetitorController extends Controller
             $competitor = $modelCompetitorServices->create($insert->toArray());
             $pics = $req->file('comptpics');
             var_dump($pics);
-            // if ($pics) {
-            //     for ($i = $req->get('imagetotal'); $i < -1; $i--) {
-            //         $no = 0;
-            //         $no++;
-            //         $filename = $competitor->comptname . $no;
-            //         $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
-            //         $file = new FileUploader($pics->$i, $filename, 'images/', $transType, $competitor->comptid);
-            //         $competitor  = $competitor && $file->upload() != null;
-            //         var_dump($competitor);
-            //     }
-            // }
+            if ($pics) {
+                // for ($i = $req->get('imagetotal'); $i < -1; $i--) {
+                $no = 0;
+                $no++;
+                $filename = str_replace(' ', '%20', $competitor->comptname);
+                $filename = $filename . $no;
+                $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
+                $file = new FileUploader($pics, $filename, 'images/', $transType, $competitor->comptid);
+                $competitor  = $competitor && $file->upload() != null;
+                var_dump($filename);
+                // }
+            }
             // DB::commit();
             return response()->json(['message' => \TextMessages::successCreate]);
         } catch (Exception $th) {
