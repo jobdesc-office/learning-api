@@ -179,7 +179,8 @@ class BpCustomerService extends BpCustomer
         $result =  $bpcustomer->save();
         if ($insertArr->has('sbccstmpic')) {
             // $tempfile = new TempFile();
-            $filename = $customer->cstmname;
+
+            $filename = str_replace(' ', '%20', $customer->cstmname);
             $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
             $file = new FileUploader($insertArr->get('sbccstmpic'), $filename, 'images/', $transType, $bpcustomer->sbcid);
             $result  = $result && $file->upload() != null;
