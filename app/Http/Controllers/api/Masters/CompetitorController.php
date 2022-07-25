@@ -60,7 +60,7 @@ class CompetitorController extends Controller
 
             // delete file
             $comptpic = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
-            $files = $filesServices->getQuery()->where('refid', $id)->where('reftypeid', $comptpic)->get();
+            $files = $filesServices->where('refid', $id)->where('transtypeid', $comptpic)->get();
             foreach ($files as $file) {
                 $file->delete();
             }
@@ -71,5 +71,6 @@ class CompetitorController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
         }
+        return response()->json(['message' => \TextMessages::successDelete], 400);
     }
 }

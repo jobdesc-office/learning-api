@@ -78,7 +78,7 @@ class BpCustomerController extends Controller
             $row = $modelBpCustomerService->find($id);
 
             $bpcustpic = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
-            $files = $filesServices->getQuery()->where('refid', $id)->where('reftypeid', $bpcustpic)->get();
+            $files = $filesServices->where('refid', $id)->where('trans', $bpcustpic)->get();
             foreach ($files as $file) {
                 $file->delete();
             }
