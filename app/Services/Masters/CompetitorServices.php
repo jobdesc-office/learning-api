@@ -68,7 +68,11 @@ class CompetitorServices extends Competitor
          $ids = collect($files->all())->map(function (FileColumn $item) {
             return $item->getId();
          });
-         Files::whereIn('fileid', $ids->toArray())->delete();
+
+         $files = Files::whereIn('fileid', $ids->toArray())->get();
+         foreach ($files as $file) {
+            $file->delete();
+         }
 
          foreach ($insert->get('comptpics') as  $file) {
             $temp_path = $file->getPathname();
