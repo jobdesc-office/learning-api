@@ -190,6 +190,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CustomFieldController@destroy');
         });
 
+        $router->group(['prefix' => 'file'], function () use ($router) {
+            $router->get('all', 'FilesController@all');
+            $router->post('datatables', 'FilesController@datatables');
+
+            $router->get('{id}', 'FilesController@show');
+            $router->delete('{id}', 'FilesController@destroy');
+        });
+
         $router->group(['prefix' => 'contact'], function () use ($router) {
             $router->get('all', 'ContactPersonController@all');
             $router->post('datatables', 'ContactPersonController@datatables');

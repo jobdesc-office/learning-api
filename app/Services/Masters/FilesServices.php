@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class FilesServices extends Files
 {
+
+   public function datatables($order, $orderby, $search)
+   {
+      return $this->getQuery()
+         ->where(function ($query) use ($search, $order) {
+            $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+         })
+         ->orderBy($order, $orderby);
+   }
+
    public function find($id)
    {
       return $this->getQuery()->findOrFail($id);
