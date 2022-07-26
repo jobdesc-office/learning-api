@@ -22,14 +22,13 @@ class CompetitorController extends Controller
         DB::beginTransaction();
         try {
             $files = $modelFiles->where('refid', $refid)->where('transtypeid', $transtypeid)->get();
-            $delete = $modelFiles->where('refid', $refid)->where('transtypeid', $transtypeid)->delete();
             foreach ($files as $key) {
                 $modelFiles->findOrFail($key->fileid)->delete();
             }
             return response()->json(['message' => \TextMessages::successDelete]);
             DB::commit();
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Error']);
+            return response()->json(['message' => $th]);
             DB::rollBack();
         }
     }
