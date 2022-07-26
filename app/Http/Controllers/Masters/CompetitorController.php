@@ -25,11 +25,11 @@ class CompetitorController extends Controller
             foreach ($files as $key) {
                 $modelFiles->findOrFail($key->fileid)->delete();
             }
-            return response()->json(['message' => \TextMessages::successDelete]);
             DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th]);
             DB::rollBack();
+            return response()->json(['message' => $th]);
         }
     }
 
