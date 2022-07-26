@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\CustomerService;
+use App\Services\Masters\FilesServices;
+use DB;
+use DBTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
@@ -68,11 +71,24 @@ class BpCustomerController extends Controller
         }
     }
 
-    public function destroy($id, BpCustomerService $modelBpCustomerService)
+    public function destroy($id, BpCustomerService $modelBpCustomerService, FilesServices $filesServices)
     {
-        $row = $modelBpCustomerService->find($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $row = $modelBpCustomerService->find($id);
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            $bpcustpic = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+            $files = $filesServices->where('refid', $id)->where('trans', $bpcustpic)->get();
+            foreach ($files as $file) {
+                $file->delete();
+            }
+
+            $row->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
+        return response()->json(['message' => "failed delete"], 400);
     }
 }

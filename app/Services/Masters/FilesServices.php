@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Files;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,9 @@ class FilesServices extends Files
       return $query->get();
    }
 
+   /**
+    * @return Builder
+    */
    public function getQuery()
    {
       return $this->newQuery()->with([
