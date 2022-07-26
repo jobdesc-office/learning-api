@@ -169,6 +169,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'competitor'], function () use ($router) {
             $router->get('select', 'CompetitorController@select');
+            $router->post('deleteimages', 'CompetitorController@deleteImages');
             $router->post('datatables', 'CompetitorController@datatables');
 
             $router->post('', 'CompetitorController@store');

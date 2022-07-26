@@ -11,10 +11,28 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use DBTypes;
 use Exception;
-use GuzzleHttp\Psr7\MultipartStream;
 
 class CompetitorController extends Controller
 {
+
+    public function deleteImages(Request $req, Files $modelFiles)
+    {
+        $transtypeid = $req->get('transtypeid');
+        $refid = $req->get('refid');
+        DB::beginTransaction();
+        try {
+            $files = $modelFiles->where('refid', $refid)->where('transtypeid', $transtypeid)->get();
+            $delete = $modelFiles->where('refid', $refid)->where('transtypeid', $transtypeid)->delete();
+            foreach ($files as $key) {
+                $modelFiles->findOrFail($key->fileid)->delete();
+            }
+            return response()->json(['message' => \TextMessages::successDelete]);
+            DB::commit();
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error']);
+            DB::rollBack();
+        }
+    }
 
     public function select(Request $req, CompetitorServices $CompetitorServices)
     {
