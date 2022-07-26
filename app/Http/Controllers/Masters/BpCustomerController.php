@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Masters;
 use App\Http\Controllers\Controller;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\CustomerService;
+use App\Models\Masters\Files;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use DBTypes;
 
 class BpCustomerController extends Controller
 {
@@ -124,11 +127,22 @@ class BpCustomerController extends Controller
         }
     }
 
-    public function destroy($id, BpCustomerService $modelBpCustomerService)
+    public function destroy($id, BpCustomerService $modelBpCustomerService, Files $modelFiles)
     {
-        $row = $modelBpCustomerService->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            $files = $modelFiles->where('refid', $id)->where('transtypeid', $transType)->get();
+            foreach ($files as $key) {
+                $key->delete();
+            }
+            $row = $modelBpCustomerService->findOrFail($id);
+            $row->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }

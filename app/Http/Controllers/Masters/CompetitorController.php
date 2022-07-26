@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Collections\Files\FileUploader;
+use App\Collections\Files\FileFinder;
 use App\Services\Masters\CompetitorServices;
+use App\Models\Masters\Files;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use DBTypes;
@@ -92,20 +94,17 @@ class CompetitorController extends Controller
 
             $competitor = $modelCompetitorServices->create($insert->toArray());
             $pics = $req->file('comptpics');
-            var_dump($pics);
             if ($pics) {
-                // for ($i = $req->get('imagetotal'); $i < -1; $i--) {
                 $no = 0;
-                $no++;
-                $filename = str_replace(' ', '%20', $competitor->comptname);
-                $filename = $filename . $no;
-                $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
-                $file = new FileUploader($pics, $filename, 'images/', $transType, $competitor->comptid);
-                $competitor  = $competitor && $file->upload() != null;
-                var_dump($filename);
-                // }
+                foreach ($pics as $key) {
+                    $no++;
+                    $filename = $competitor->comptname . $no;
+                    $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
+                    $file = new FileUploader($key, $filename, 'images/', $transType, $competitor->comptid);
+                    $file->upload();
+                }
             }
-            // DB::commit();
+            DB::commit();
             return response()->json(['message' => \TextMessages::successCreate]);
         } catch (Exception $th) {
             DB::rollBack();
@@ -118,22 +117,62 @@ class CompetitorController extends Controller
         return response()->json($row);
     }
 
-    public function update($id, Request $req, CompetitorServices $modelCompetitorServices)
+    public function update($id, Request $req, CompetitorServices $modelCompetitorServices, Files $modelFiles)
     {
-        $row = $modelCompetitorServices->findOrFail($id);
 
-        $update = collect($req->only($modelCompetitorServices->getFillable()))->filter()
-            ->except('createdby');
-        $row->update($update->toArray());
+        DB::beginTransaction();
+        try {
+            $row = $modelCompetitorServices->findOrFail($id);
 
-        return response()->json(['message' => \TextMessages::successEdit]);
+            $update = collect($req->only($modelCompetitorServices->getFillable()))->filter()
+                ->except('createdby');
+            $row->update($update->toArray());
+
+            if ($req->hasFile('comptpics')) {
+                $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+
+                $files = $modelFiles->where('refid', $id)->where('transtypeid', $transType)->get();
+                foreach ($files as $key) {
+                    $key->delete();
+                }
+
+                $pics = $req->file('comptpics');
+                if ($pics) {
+                    $no = 0;
+                    foreach ($pics as $key) {
+                        $no++;
+                        $filename = $row->comptname . $no;
+                        $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
+                        $file = new FileUploader($key, $filename, 'images/', $transType, $id);
+                        $file->upload();
+                    }
+                }
+            }
+
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successEdit]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 
-    public function destroy($id, CompetitorServices $modelCompetitorServices)
+    public function destroy($id, CompetitorServices $modelCompetitorServices, Files $modelFiles)
     {
-        $row = $modelCompetitorServices->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $transType = find_type()->in([DBTypes::comppics])->get(DBTypes::comppics)->getId();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            $files = $modelFiles->where('refid', $id)->where('transtypeid', $transType)->get();
+            foreach ($files as $key) {
+                $key->delete();
+            }
+
+            $row = $modelCompetitorServices->findOrFail($id);
+            $row->delete();
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }
