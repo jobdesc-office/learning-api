@@ -10,7 +10,7 @@ class TypeServices extends Types
 
     public function byCode($code)
     {
-        return $this->newQuery()->select('typeid', 'typecd', 'typename')
+        return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq')
             ->whereHas('parent', function ($query) use ($code) {
                 $query->where('typecd', $code);
             })
