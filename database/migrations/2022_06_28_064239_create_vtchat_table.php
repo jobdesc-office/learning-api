@@ -16,7 +16,7 @@ class CreateVtchatTable extends Migration
         Schema::create('vtchat', function (Blueprint $table) {
             $table->id('chatid');
             $table->bigInteger('chatbpid');
-            $table->text('chatmessage');
+            $table->text('chatmessage')->nullable();
             $table->string('chatrefname', 255)->nullable();
             $table->bigInteger('chatrefid')->nullable();
             $table->text('chatfile')->nullable();
