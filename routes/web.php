@@ -489,6 +489,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'CompetitorController@update');
                 $router->delete('{id}', 'CompetitorController@destroy');
             });
+
+            $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
+                $router->get('', 'DailyActivityController@all');
+                $router->post('', 'DailyActivityController@store');
+                $router->get('{id}', 'DailyActivityController@show');
+                $router->put('{id}', 'DailyActivityController@update');
+                $router->delete('{id}', 'DailyActivityController@destroy');
+            });
         });
 
         $router->group(['namespace' => 'api\Security'], function () use ($router) {
