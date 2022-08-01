@@ -173,6 +173,23 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::activitycategory,
+            'typename' => 'Daily Activity Category',
+            'children' => [
+                ['typename' => 'Visit Customer', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::activitytype,
+            'typename' => 'Daily Activity type',
+            'children' => [
+                ['typename' => 'Department', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Meeting', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Doing Daily Task', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Other', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
     ];
 
     /**

@@ -37,5 +37,9 @@ class DBTypes
     const transType = "transtype";
     const bpcustpic = "cstmpic";
     const comppics = "comppics";
+    const dailyactivitypics = "dayactpics";
     const chatfile = "chtfile";
+
+    const activitytype = 'dayacttype';
+    const activitycategory = 'dayactcat';
 }
