@@ -7,35 +7,36 @@ use App\Models\DefaultModel;
 class DailyActivity extends DefaultModel
 {
     protected $table = "vtdailyactivity";
-    protected $primaryKey = "dailyactivityid";
+    protected $primaryKey = "dayactid";
 
     protected $fillable = [
-        "dailyactivitycatid",
-        "dailyactivitytypeid",
-        "dailyactivityvalue",
-        "dailyactivitydate",
-        "dailyactivitydesc",
-        "dailyactivityloc",
-        "dailyactivitylatitude",
-        "dailyactivitylongitude",
+        "dayactcatid",
+        "dayacttypeid",
+        "dayactvalue",
+        "dayacttypevalue",
+        "dayactdate",
+        "dayactdesc",
+        "dayactloc",
+        "dayactlatitude",
+        "dayactlongitude",
         "createdby",
         "updatedby",
         'isactive',
     ];
 
-    public function dailyactivitycat()
+    public function dayactcat()
     {
-        return $this->belongsTo(Types::class, "dailyactivitycatid", "bpid");
+        return $this->belongsTo(Types::class, "dayactcatid", "typeid");
     }
 
-    public function dailyactivitytype()
+    public function dayacttype()
     {
-        return $this->belongsTo(Types::class, "dailyactivitytypeid", "bpid");
+        return $this->belongsTo(Types::class, "dayacttypeid", "typeid");
     }
 
-    public function dailyactivitypics()
+    public function dayactpics()
     {
-        return $this->hasOne(Files::class, "refid", "dailyactivityid");
+        return $this->hasOne(Files::class, "refid", "dayactid");
     }
 
     const CREATED_AT = "createddate";

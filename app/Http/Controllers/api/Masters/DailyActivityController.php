@@ -21,15 +21,9 @@ class DailyActivityController extends Controller
 
     public function store(Request $req, DailyActivityServices $activityServices)
     {
-        $insert = collect($req->all())->filter()
-            ->except('updatedby');
-
-        if ($req->hasFile('dailyactivitypics')) {
-            $insert->put('dailyactivitypics', $req->file('dailyactivitypics'));
+        if ($req->has('activities')) {
+            $activityServices->addAll(collect($req->all())->filter());
         }
-
-        $activityServices->store($insert);
-
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 

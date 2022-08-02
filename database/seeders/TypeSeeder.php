@@ -163,6 +163,7 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Customer Picture', 'typecd' => DBTypes::bpcustpic, 'createdby' => 1, 'updatedby' => 1,],
                 ['typename' => 'Competitor Pictures', 'typecd' => DBTypes::comppics, 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Chat File', 'typecd' => DBTypes::chatfile, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Daily Activity File', 'typecd' => DBTypes::dailyactivitypics, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
