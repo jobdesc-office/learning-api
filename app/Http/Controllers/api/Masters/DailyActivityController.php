@@ -21,6 +21,7 @@ class DailyActivityController extends Controller
 
     public function store(Request $req, DailyActivityServices $activityServices)
     {
+        dd($req);
         if ($req->has('activities')) {
             $activityServices->addAll(collect($req->all())->filter());
         }
@@ -37,8 +38,8 @@ class DailyActivityController extends Controller
     {
         $update = collect($req->all())->filter()
             ->except('createdby');
-        if ($req->hasFile('dailyactivitypics')) {
-            $update->put('dailyactivitypics', $req->file('dailyactivitypics'));
+        if ($req->hasFile('dayactpics')) {
+            $update->put('dayactpics', $req->file('dayactpics'));
         }
 
         $activityServices->edit($id, $update);

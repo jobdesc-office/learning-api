@@ -14,15 +14,16 @@ class CreateVtdailyactivityTable extends Migration
     public function up()
     {
         Schema::create('vtdailyactivity', function (Blueprint $table) {
-            $table->id('dailyactivityid');
-            $table->integer('dailyactivitycatid')->nullable();
-            $table->integer('dailyactivitytypeid')->nullable();
-            $table->text('dailyactivitytypevalue')->nullable();
-            $table->date('dailyactivitydate')->nullable();
-            $table->text('dailyactivitydesc')->nullable();
-            $table->text('dailyactivityloc')->nullable();
-            $table->double('dailyactivitylatitude')->nullable();
-            $table->double('dailyactivitylongitude')->nullable();
+            $table->id('dayactid');
+            $table->integer('dayactcatid')->nullable();
+            $table->integer('dayactcatid')->nullable();
+            $table->integer('dayacttypeid')->nullable();
+            $table->text('dayacttypevalue')->nullable();
+            $table->date('dayactdate')->nullable();
+            $table->text('dayactdesc')->nullable();
+            $table->text('dayactloc')->nullable();
+            $table->double('dayactlatitude')->nullable();
+            $table->double('dayactlongitude')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
