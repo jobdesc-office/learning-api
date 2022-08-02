@@ -3,34 +3,42 @@
 namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
+use Database\Factories\DailyActivityFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DailyActivity extends DefaultModel
 {
+    use HasFactory;
     protected $table = "vtdailyactivity";
-    protected $primaryKey = "dailyactivityid";
+    protected $primaryKey = "dayactid";
 
     protected $fillable = [
-        "dailyactivitycatid",
-        "dailyactivitytypeid",
-        "dailyactivityvalue",
-        "dailyactivitydate",
-        "dailyactivitydesc",
-        "dailyactivityloc",
-        "dailyactivitylatitude",
-        "dailyactivitylongitude",
+        "dayactcatid",
+        "dayacttypeid",
+        "dayacttypevalue",
+        "dayactdate",
+        "dayactdesc",
+        "dayactloc",
+        "dayactlatitude",
+        "dayactlongitude",
         "createdby",
         "updatedby",
         'isactive',
     ];
 
+    protected static function newFactory()
+    {
+        return new DailyActivityFactory;
+    }
+
     public function dailyactivitycat()
     {
-        return $this->belongsTo(Types::class, "dailyactivitycatid", "typeid");
+        return $this->belongsTo(Types::class, "dayactcatid", "typeid");
     }
 
     public function dailyactivitytype()
     {
-        return $this->belongsTo(Types::class, "dailyactivitytypeid", "typeid");
+        return $this->belongsTo(Types::class, "dayacttypeid", "typeid");
     }
 
     public function dailyactivitycreatedby()
@@ -40,7 +48,7 @@ class DailyActivity extends DefaultModel
 
     public function dailyactivitypics()
     {
-        return $this->hasOne(Files::class, "refid", "dailyactivityid");
+        return $this->hasOne(Files::class, "refid", "dayactid");
     }
 
     const CREATED_AT = "createddate";

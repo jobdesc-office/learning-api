@@ -63,6 +63,14 @@ class DailyActivityServices extends DailyActivity
         }
     }
 
+    public function getBp(int $id)
+    {
+        return $this->getQuery()
+            ->join('msuserdt', 'vtdailyactivity.createdby', '=', 'msuserdt.userid')
+            ->join('msuser', 'msuser.userid', '=', 'msuserdt.userid')
+            ->where('msuserdt.userdtbpid', $id)->get();
+    }
+
     public function getAll(Collection $whereArr)
     {
         $query = $this->getQuery();
@@ -83,9 +91,6 @@ class DailyActivityServices extends DailyActivity
             },
             'dailyactivitytype' => function ($query) {
                 $query->select('typeid', 'typename');
-            },
-            'dailyactivitytype' => function ($query) {
-                $query->select('userid', 'username');
             },
             'dailyactivitypics' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))

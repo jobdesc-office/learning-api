@@ -7,6 +7,7 @@ use App\Models\Masters\BpCustomer;
 use App\Models\Masters\City;
 use App\Models\Masters\Country;
 use App\Models\Masters\Customer;
+use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Province;
 use App\Models\Masters\Schedule;
 use App\Models\Masters\Subdistrict;
@@ -44,6 +45,7 @@ class DatabaseSeeder extends Seeder
         UserDetail::factory(\FactoryCount::userDetailCount)->create();
         Schedule::factory(\FactoryCount::scheduleCount)->create();
         Customer::factory(\FactoryCount::customerCount)->create();
+        DailyActivity::factory(\FactoryCount::dailyActivityCount)->create();
         // BpCustomer::factory(\FactoryCount::bpCustomerCount)->create();
     }
 
