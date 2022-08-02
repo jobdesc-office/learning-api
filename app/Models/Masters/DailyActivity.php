@@ -25,12 +25,12 @@ class DailyActivity extends DefaultModel
 
     public function dailyactivitycat()
     {
-        return $this->belongsTo(Types::class, "dailyactivitycatid", "bpid");
+        return $this->belongsTo(Types::class, "dailyactivitycatid", "typeid");
     }
 
     public function dailyactivitytype()
     {
-        return $this->belongsTo(Types::class, "dailyactivitytypeid", "bpid");
+        return $this->belongsTo(Types::class, "dailyactivitytypeid", "typeid");
     }
 
     public function dailyactivitypics()
