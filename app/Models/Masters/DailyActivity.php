@@ -3,9 +3,12 @@
 namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
+use Database\Factories\DailyActivityFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DailyActivity extends DefaultModel
 {
+    use HasFactory;
     protected $table = "vtdailyactivity";
     protected $primaryKey = "dayactid";
 
@@ -24,6 +27,10 @@ class DailyActivity extends DefaultModel
         'isactive',
     ];
 
+    protected static function newFactory()
+    {
+        return new DailyActivityFactory;
+    }
     public function dayactcat()
     {
         return $this->belongsTo(Types::class, "dayactcatid", "typeid");
@@ -35,6 +42,11 @@ class DailyActivity extends DefaultModel
     }
 
     public function dayactpics()
+    {
+        return $this->hasOne(User::class, "userid", "createdby");
+    }
+
+    public function dailyactivitypics()
     {
         return $this->hasOne(Files::class, "refid", "dayactid");
     }

@@ -167,6 +167,12 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'CustomerController@destroy');
         });
 
+        $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
+            $router->post('{id}', 'DailyActivityController@all');
+
+            $router->get('{id}', 'DailyActivityController@show');
+        });
+
         $router->group(['prefix' => 'competitor'], function () use ($router) {
             $router->get('select', 'CompetitorController@select');
             $router->post('deleteimages', 'CompetitorController@deleteImages');
