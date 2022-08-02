@@ -33,6 +33,11 @@ class DailyActivity extends DefaultModel
         return $this->belongsTo(Types::class, "dailyactivitytypeid", "typeid");
     }
 
+    public function dailyactivitycreatedby()
+    {
+        return $this->hasOne(User::class, "userid", "createdby");
+    }
+
     public function dailyactivitypics()
     {
         return $this->hasOne(Files::class, "refid", "dailyactivityid");
