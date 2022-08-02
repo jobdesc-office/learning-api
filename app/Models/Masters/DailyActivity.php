@@ -36,6 +36,11 @@ class DailyActivity extends DefaultModel
         return $this->belongsTo(Types::class, "dayactcatid", "typeid");
     }
 
+    public function dayactcust()
+    {
+        return $this->belongsTo(Customer::class, "dayactcustid", "cstmid");
+    }
+
     public function dayacttype()
     {
         return $this->belongsTo(Types::class, "dayacttypeid", "typeid");
