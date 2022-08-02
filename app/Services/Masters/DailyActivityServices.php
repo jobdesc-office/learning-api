@@ -111,13 +111,13 @@ class DailyActivityServices extends DailyActivity
     public function getQuery()
     {
         return $this->newQuery()->with([
-            'dailyactivitycat' => function ($query) {
+            'dayactcat' => function ($query) {
                 $query->select('typeid', 'typename');
             },
-            'dailyactivitytype' => function ($query) {
+            'dayacttype' => function ($query) {
                 $query->select('typeid', 'typename');
             },
-            'dailyactivitypics' => function ($query) {
+            'dayactpics' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
                     ->whereHas('transtype', function ($query) {
                         $query->where('typecd', DBTypes::dailyactivitypics);

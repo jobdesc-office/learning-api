@@ -48,11 +48,6 @@ class DailyActivity extends DefaultModel
 
     public function dayactpics()
     {
-        return $this->hasOne(User::class, "userid", "createdby");
-    }
-
-    public function dailyactivitypics()
-    {
         return $this->hasOne(Files::class, "refid", "dayactid");
     }
 
