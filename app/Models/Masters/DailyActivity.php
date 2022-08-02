@@ -30,18 +30,17 @@ class DailyActivity extends DefaultModel
     {
         return new DailyActivityFactory;
     }
-
-    public function dailyactivitycat()
+    public function dayactcat()
     {
         return $this->belongsTo(Types::class, "dayactcatid", "typeid");
     }
 
-    public function dailyactivitytype()
+    public function dayacttype()
     {
         return $this->belongsTo(Types::class, "dayacttypeid", "typeid");
     }
 
-    public function dailyactivitycreatedby()
+    public function dayactpics()
     {
         return $this->hasOne(User::class, "userid", "createdby");
     }

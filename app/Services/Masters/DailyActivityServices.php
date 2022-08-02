@@ -23,9 +23,9 @@ class DailyActivityServices extends DailyActivity
     public function store(Collection $insert)
     {
         $this->fill($insert->toArray())->save();
-        if ($insert->has('dailyactivitypics')) {
+        if ($insert->has('dayactpics')) {
             $comptpic = find_type()->in([DBTypes::dailyactivitypics])->get(DBTypes::dailyactivitypics)->getId();
-            foreach ($insert->get('dailyactivitypics') as  $file) {
+            foreach ($insert->get('dayactpics') as  $file) {
                 $temp_path = $file->getPathname();
                 $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random())) . '.' . $file->getClientOriginalExtension();
 
@@ -40,7 +40,7 @@ class DailyActivityServices extends DailyActivity
         $competitor = $this->find($id)->fill($insert->toArray());
         $competitor->save();
 
-        if ($insert->has('dailyactivitypics')) {
+        if ($insert->has('dayactpics')) {
             $comptpic = find_type()->in([DBTypes::dailyactivitypics])->get(DBTypes::dailyactivitypics)->getId();
 
             $files = new FileFinder($comptpic, $competitor->comptid);
@@ -53,7 +53,7 @@ class DailyActivityServices extends DailyActivity
                 $file->delete();
             }
 
-            foreach ($insert->get('dailyactivitypics') as  $file) {
+            foreach ($insert->get('dayactpics') as  $file) {
                 $temp_path = $file->getPathname();
                 $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random()));
 
@@ -69,6 +69,31 @@ class DailyActivityServices extends DailyActivity
             ->join('msuserdt', 'vtdailyactivity.createdby', '=', 'msuserdt.userid')
             ->join('msuser', 'msuser.userid', '=', 'msuserdt.userid')
             ->where('msuserdt.userdtbpid', $id)->get();
+    }
+    public function addAll(Collection $activities)
+    {
+        $activities->put('activities', json_decode($activities->get('activities')));
+        $data = array_map(function ($item) {
+            $item = collect($item);
+            $item->put('createdby', auth()->user()->userid);
+            $activity = new DailyActivity;
+            $activity->fill($item->filter()->all())->save();
+            return collect($activity->attributes)->put('file', $item->get('file'))->all();
+        }, $activities->get('activities'));
+
+        foreach ($data as $value) {
+            $activity = collect($value);
+            if ($activities->has($activity->get('file'))) {
+                $dayactpics = find_type()->in([DBTypes::dailyactivitypics])->get(DBTypes::dailyactivitypics)->getId();
+                foreach ($activities->get($activity->get('file')) as  $file) {
+                    $temp_path = $file->getPathname();
+                    $filename = Str::replace(['/', '\\'], '', Hash::make(Str::random())) . '.' . $file->getClientOriginalExtension();
+
+                    $file = new FileUploader($temp_path, $filename, 'images/', $dayactpics, $activity->get('dayactid'));
+                    $file->upload();
+                }
+            }
+        }
     }
 
     public function getAll(Collection $whereArr)
