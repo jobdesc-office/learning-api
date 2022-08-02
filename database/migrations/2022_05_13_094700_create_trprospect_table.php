@@ -16,6 +16,7 @@ class CreateTrprospectTable extends Migration
         Schema::create('trprospect', function (Blueprint $table) {
             $table->id('prospectid');
             $table->text('prospectname');
+            $table->text('prospectcode');
             $table->date('prospectstartdate')->nullable();
             $table->date('prospectenddate')->nullable();
             $table->double('prospectvalue')->nullable();

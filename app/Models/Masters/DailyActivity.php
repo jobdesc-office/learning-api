@@ -12,7 +12,7 @@ class DailyActivity extends DefaultModel
     protected $fillable = [
         "dayactcatid",
         "dayacttypeid",
-        "dayactvalue",
+        "dayactcustid",
         "dayacttypevalue",
         "dayactdate",
         "dayactdesc",

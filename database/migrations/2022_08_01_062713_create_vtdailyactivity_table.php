@@ -16,7 +16,7 @@ class CreateVtdailyactivityTable extends Migration
         Schema::create('vtdailyactivity', function (Blueprint $table) {
             $table->id('dayactid');
             $table->integer('dayactcatid')->nullable();
-            $table->integer('dayactcatid')->nullable();
+            $table->integer('dayactcustid')->nullable();
             $table->integer('dayacttypeid')->nullable();
             $table->text('dayacttypevalue')->nullable();
             $table->date('dayactdate')->nullable();

@@ -11,6 +11,7 @@ class Prospect extends DefaultModel
 
     protected $fillable = [
         "prospectname",
+        "prospectcode", // Kode + tahun + bulan + 00001
         "prospectstartdate",
         "prospectenddate",
         "prospectvalue",

@@ -21,7 +21,6 @@ class DailyActivityController extends Controller
 
     public function store(Request $req, DailyActivityServices $activityServices)
     {
-        dd($req);
         if ($req->has('activities')) {
             $activityServices->addAll(collect($req->all())->filter());
         }
