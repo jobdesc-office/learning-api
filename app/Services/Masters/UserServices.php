@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class UserServices extends User
 {
+
+    public function getEmployee(int $id)
+    {
+        return $this->newQuery()->select('msuser.userid', 'msuser.userfullname')
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->with([
+                'userActivity'
+            ])
+            ->where('msuserdt.userdtbpid', $id)->get();
+    }
+
     public function selectwithsamebp($searchValue, $id)
     {
         return $this->newQuery()->select('*')

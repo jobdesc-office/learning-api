@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Prospect;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +72,20 @@ class ProspectServices extends Prospect
         }
 
         return $query->get();
+    }
+
+    public function generateCode()
+    {
+        $code = "PRS";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+
+        $count = Prospect::count() + 1;
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$increment";;
     }
 
     public function getQuery()

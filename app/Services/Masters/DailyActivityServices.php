@@ -70,6 +70,7 @@ class DailyActivityServices extends DailyActivity
             ->join('msuser', 'msuser.userid', '=', 'msuserdt.userid')
             ->where('msuserdt.userdtbpid', $id)->get();
     }
+
     public function addAll(Collection $activities)
     {
         $activities->put('activities', json_decode($activities->get('activities')));
@@ -111,6 +112,7 @@ class DailyActivityServices extends DailyActivity
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'dayactcust',
             'dayactcat' => function ($query) {
                 $query->select('typeid', 'typename');
             },

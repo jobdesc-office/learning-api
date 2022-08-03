@@ -65,4 +65,9 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
     {
         return $this->hasMany(UserDetail::class, 'userid', 'userid');
     }
+
+    public function userActivity()
+    {
+        return $this->hasMany(DailyActivity::class, 'createdby', 'userid');
+    }
 }
