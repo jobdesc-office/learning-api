@@ -23,7 +23,7 @@ class ProspectController extends Controller
     public function store(Request $req, ProspectServices $modelProspectServices)
     {
         $insert = collect($req->all())->filter()->except('updatedby');
-
+        $insert->put('prospectcode', $modelProspectServices->generateCode());
         $modelProspectServices->fill($insert->toArray())->save();
 
         if ($insert->has('products')) {
