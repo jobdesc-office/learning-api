@@ -168,7 +168,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
-            $router->post('{id}', 'DailyActivityController@all');
+            $router->get('bp/{id}', 'DailyActivityController@all');
 
             $router->get('{id}', 'DailyActivityController@show');
         });
