@@ -114,6 +114,7 @@ class DailyActivityServices extends DailyActivity
             'dayactcat' => function ($query) {
                 $query->select('typeid', 'typename');
             },
+            'dayactcust',
             'dayacttype' => function ($query) {
                 $query->select('typeid', 'typename');
             },

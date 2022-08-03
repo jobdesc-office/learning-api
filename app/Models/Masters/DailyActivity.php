@@ -27,6 +27,11 @@ class DailyActivity extends DefaultModel
         'isactive',
     ];
 
+    protected $casts = [
+        'dayactlatitude' => 'double',
+        'dayactlongitude' => 'double',
+    ];
+
     protected static function newFactory()
     {
         return new DailyActivityFactory;
