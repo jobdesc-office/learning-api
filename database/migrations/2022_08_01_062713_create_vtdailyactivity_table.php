@@ -21,6 +21,7 @@ class CreateVtdailyactivityTable extends Migration
             $table->text('dayacttypevalue')->nullable();
             $table->date('dayactdate')->nullable();
             $table->text('dayactdesc')->nullable();
+            $table->text('dayactloclabel')->nullable();
             $table->text('dayactloc')->nullable();
             $table->double('dayactlatitude')->nullable();
             $table->double('dayactlongitude')->nullable();

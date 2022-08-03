@@ -19,6 +19,7 @@ class DailyActivity extends DefaultModel
         "dayacttypevalue",
         "dayactdate",
         "dayactdesc",
+        "dayactloclabel",
         "dayactloc",
         "dayactlatitude",
         "dayactlongitude",
