@@ -15,6 +15,7 @@ class DailyActivity extends DefaultModel
     protected $fillable = [
         "dayactcatid",
         "dayacttypeid",
+        "dayactcustid",
         "dayacttypevalue",
         "dayactdate",
         "dayactdesc",
@@ -33,6 +34,11 @@ class DailyActivity extends DefaultModel
     public function dayactcat()
     {
         return $this->belongsTo(Types::class, "dayactcatid", "typeid");
+    }
+
+    public function dayactcust()
+    {
+        return $this->belongsTo(Customer::class, "dayactcustid", "cstmid");
     }
 
     public function dayacttype()
