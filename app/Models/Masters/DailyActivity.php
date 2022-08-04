@@ -19,12 +19,18 @@ class DailyActivity extends DefaultModel
         "dayacttypevalue",
         "dayactdate",
         "dayactdesc",
+        "dayactloclabel",
         "dayactloc",
         "dayactlatitude",
         "dayactlongitude",
         "createdby",
         "updatedby",
         'isactive',
+    ];
+
+    protected $casts = [
+        'dayactlatitude' => 'double',
+        'dayactlongitude' => 'double',
     ];
 
     protected static function newFactory()

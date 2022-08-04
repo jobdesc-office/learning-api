@@ -181,6 +181,8 @@ class TypeSeeder extends Seeder
             'typename' => 'Daily Activity Category',
             'children' => [
                 ['typename' => 'Visit Customer', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Meeting at Home', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Meeting at Office', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
