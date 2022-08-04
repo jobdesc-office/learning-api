@@ -166,7 +166,9 @@ class ProspectServices extends Prospect
             },
             'prospectcust' => function ($query) {
                 $query->with(['sbccstm' => function ($query) {
-                    $query->with(['cstmcontact']);
+                    $query->with(['cstmcontact' => function ($query) {
+                        $query->with(['contacttype']);
+                    }]);
                 }]);
             },
         ]);
