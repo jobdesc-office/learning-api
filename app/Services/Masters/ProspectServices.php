@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use DBTypes;
 
 class ProspectServices extends Prospect
 {
@@ -170,6 +171,12 @@ class ProspectServices extends Prospect
                         $query->with(['contacttype']);
                     }]);
                 }]);
+            },
+            'prospectfiles' => function ($query) {
+                $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
+                    ->whereHas('transtype', function ($query) {
+                        $query->where('typecd', DBTypes::prospectfile);
+                    });
             },
         ]);
     }
