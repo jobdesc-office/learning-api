@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Services\Masters\FilesServices;
 use App\Services\Masters\SubdistrictServices;
+use App\Collections\Files\FileUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DBTypes;
+use Exception;
 
 class FilesController extends Controller
 {
@@ -73,6 +77,31 @@ class FilesController extends Controller
         $whereArr = collect($req->all())->filter();
         $businesspartners = $bpcustomerservice->getAll($whereArr);
         return response()->json($businesspartners);
+    }
+
+    public function storeProspect(Request $req, FilesServices $fileServices)
+    {
+        DB::beginTransaction();
+        try {
+            $id = $req->get('id');
+            $name = $req->get('name');
+            $pics = $req->file('files');
+            if ($pics) {
+                $no = 0;
+                foreach ($pics as $key) {
+                    $no++;
+                    $mytime = Carbon::now()->format('Y-m-d H-i-s');
+                    $filename = $name . $mytime;
+                    $transType = find_type()->in([DBTypes::prospectfile])->get(DBTypes::prospectfile)->getId();
+                    $file = new FileUploader($key, $filename, 'prospect/', $transType, $id);
+                    $file->upload();
+                }
+            }
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successCreate]);
+        } catch (Exception $th) {
+            DB::rollBack();
+        }
     }
 
     public function show($id, FilesServices $businessPartnerService)
