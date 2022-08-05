@@ -175,10 +175,11 @@ class ProspectController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
+    public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectServices $modelProspectServices)
     {
         $insert = collect($req->only($ProspectModel->getFillable()))->filter()->except('updatedby');
 
+        $insert->put('prospectcode', $modelProspectServices->generateCode());
         $ProspectModel->fill($insert->toArray())->save();
 
         if ($req->has('products') && $req->get('products') != null) {
