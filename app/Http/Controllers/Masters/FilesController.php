@@ -91,7 +91,7 @@ class FilesController extends Controller
                 foreach ($pics as $key) {
                     $no++;
                     $mytime = Carbon::now()->format('Y-m-d H-i-s');
-                    $filename = $name . $mytime;
+                    $filename =  $name . '-' . $no . '-' . $mytime;
                     $transType = find_type()->in([DBTypes::prospectfile])->get(DBTypes::prospectfile)->getId();
                     $file = new FileUploader($key, $filename, 'prospect/', $transType, $id);
                     $file->upload();
@@ -110,11 +110,10 @@ class FilesController extends Controller
         return response()->json($row);
     }
 
-    public function destroy($id, FilesServices $modelFileServices, SubdistrictServices $subdistrictservice)
+    public function destroy($id, FilesServices $modelFileServices)
     {
         DB::beginTransaction();
         try {
-            $subdistrictservice->select('subdistrictFileid')->where('subdistrictFileid', $id)->delete();
             $modelFileServices->findOrFail($id)->delete();
             DB::commit();
             return response()->json(['message' => \TextMessages::successDelete]);

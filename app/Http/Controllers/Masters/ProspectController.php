@@ -12,6 +12,7 @@ use App\Models\Masters\ProspectCustomField;
 use App\Models\Masters\Customer;
 use App\Models\Masters\ContactPerson;
 use App\Models\Masters\Product;
+use App\Models\Masters\Files;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\ProspectServices;
 use Illuminate\Http\Request;
@@ -234,10 +235,11 @@ class ProspectController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectActivity $ProspectActivityModel, ProspectAssign $ProspectAssignModel, ProspectCustomField $ProspectCustomField)
+    public function destroy($id, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectActivity $ProspectActivityModel, ProspectAssign $ProspectAssignModel, ProspectCustomField $ProspectCustomField, Files $modelFile)
     {
         DB::beginTransaction();
         try {
+            $modelFile->where('transtypeid', find_type()->in([DBTypes::prospectfile])->get(DBTypes::prospectfile)->getId())->where('refid', $id)->delete();
             $ProspectCustomField->where('prospectid', $id)->delete();
             $ProspectAssignModel->where('prospectid', $id)->delete();
             $ProspectActivityModel->where('prospectactivityprospectid', $id)->delete();
@@ -247,6 +249,7 @@ class ProspectController extends Controller
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            return response()->json(['message' => \TextMessages::failedDelete, 'error' => $th]);
         }
     }
 }

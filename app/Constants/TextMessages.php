@@ -10,4 +10,5 @@ class TextMessages
     const successEdit = 'Data updated successfully';
     const failedEdit = 'Data failed to update';
     const successDelete = 'Data deleted successfully';
+    const failedDelete = 'Data failed to delete';
 }
