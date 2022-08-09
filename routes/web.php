@@ -107,6 +107,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'types'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
+            $router->get('bySeq', 'TypesController@bySeq');
             $router->post('datatables', 'TypesController@datatables');
 
             $router->post('', 'TypesController@store');
@@ -200,6 +201,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'file'], function () use ($router) {
             $router->get('all', 'FilesController@all');
             $router->post('datatables', 'FilesController@datatables');
+
+            $router->post('prospect', 'FilesController@storeProspect');
 
             $router->get('{id}', 'FilesController@show');
             $router->delete('{id}', 'FilesController@destroy');

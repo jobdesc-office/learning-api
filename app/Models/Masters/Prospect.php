@@ -97,4 +97,9 @@ class Prospect extends DefaultModel
     {
         return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
     }
+
+    public function prospectfiles()
+    {
+        return $this->hasMany(Files::class, 'refid', 'prospectid');
+    }
 }

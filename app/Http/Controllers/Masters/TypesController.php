@@ -17,6 +17,12 @@ class TypesController extends Controller
         return response()->json($types);
     }
 
+    public function bySeq(Request $req, TypeServices $typeServices)
+    {
+        $types = $typeServices->bySeq($req->get('typecd'));
+        return response()->json($types);
+    }
+
     public function datatables(Request $req, TypeServices $typeServices)
     {
         $search = trim(strtolower($req->get('search[value]')));

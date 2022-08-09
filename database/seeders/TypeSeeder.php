@@ -75,10 +75,11 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::prospectStage,
             'typename' => 'Prospect Stage',
             'children' => [
-                ['typename' => 'Meeting', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Proposal', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Negociation', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Complete', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Qualified', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Contact Made', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Demo Scheduled', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Proposal Made', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Negotiations Started', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
@@ -118,6 +119,7 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Price', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Text', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
@@ -164,6 +166,7 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Competitor Pictures', 'typecd' => DBTypes::comppics, 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Chat File', 'typecd' => DBTypes::chatfile, 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Daily Activity File', 'typecd' => DBTypes::dailyactivitypics, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Prospect File', 'typecd' => DBTypes::prospectfile, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

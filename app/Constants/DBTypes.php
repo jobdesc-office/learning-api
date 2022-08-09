@@ -39,6 +39,7 @@ class DBTypes
     const comppics = "comppics";
     const dailyactivitypics = "dayactpics";
     const chatfile = "chtfile";
+    const prospectfile = "prosfile";
 
     const activitytype = 'dayacttype';
     const activitycategory = 'dayactcat';

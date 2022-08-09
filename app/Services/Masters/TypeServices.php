@@ -18,6 +18,16 @@ class TypeServices extends Types
             ->get();
     }
 
+    public function bySeq($code)
+    {
+        return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq')
+            ->whereHas('parent', function ($query) use ($code) {
+                $query->where('typecd', $code);
+            })
+            ->orderBy('typeseq', 'asc')
+            ->get();
+    }
+
     public function datatables($order, $orderby, $search)
     {
         return $this->newQuery()->select('*')->where('typemasterid', null)
