@@ -71,4 +71,10 @@ class ProspectController extends Controller
             return response()->json(['message' => $th->getMessage()]);
         }
     }
+
+    public function prospectCount(Request $req, ProspectServices $prospectServices)
+    {
+        $prospects = $prospectServices->countAll(collect($req->all()));
+        return response()->json(['count' => $prospects]);
+    }
 }

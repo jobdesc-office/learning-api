@@ -113,6 +113,18 @@ class DailyActivityServices extends DailyActivity
         return $query->get();
     }
 
+    public function countAll(Collection $whereArr)
+    {
+        $query = $this->getQuery();
+
+        $dailyactivityWhere = $whereArr->only($this->fillable);
+        if ($dailyactivityWhere->isNotEmpty()) {
+            $query = $query->where($dailyactivityWhere->toArray());
+        }
+
+        return $query->count();
+    }
+
     public function getQuery()
     {
         return $this->newQuery()->with([

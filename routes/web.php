@@ -425,6 +425,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'prospect'], function () use ($router) {
+                $router->get('count', 'ProspectController@prospectCount');
                 $router->get('', 'ProspectController@all');
                 $router->post('', 'ProspectController@store');
                 $router->get('{id}', 'ProspectController@show');
@@ -500,6 +501,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
+                $router->get('count', 'DailyActivityController@dailyActivityCount');
                 $router->get('', 'DailyActivityController@all');
                 $router->post('', 'DailyActivityController@store');
                 $router->get('{id}', 'DailyActivityController@show');

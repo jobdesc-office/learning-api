@@ -75,6 +75,18 @@ class ProspectServices extends Prospect
         return $query->get();
     }
 
+    public function countAll(Collection $whereArr)
+    {
+        $query = $this->getQuery();
+
+        $prospectwhere = $whereArr->only($this->fillable);
+        if ($prospectwhere->isNotEmpty()) {
+            $query = $query->where($prospectwhere->toArray());
+        }
+
+        return $query->count();
+    }
+
     public function generateCode()
     {
         $code = "PRS";
