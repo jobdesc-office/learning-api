@@ -116,6 +116,10 @@ class DailyActivityServices extends DailyActivity
             $query->where($competitorWhere->toArray());
         }
 
+        if ($whereArr->has("search")) {
+            $query = $query->where(DB::raw('TRIM(LOWER(dayactdesc))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
+        }
+
         return $query->get();
     }
 
