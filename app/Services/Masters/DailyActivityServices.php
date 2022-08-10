@@ -101,9 +101,9 @@ class DailyActivityServices extends DailyActivity
     {
         $query = $this->getQuery();
 
-        $competitorWhere = $whereArr->only($this->fillable);
-        if ($competitorWhere->isNotEmpty()) {
-            $query->where($competitorWhere->toArray());
+        $dailyactivityWhere = $whereArr->only($this->fillable);
+        if ($dailyactivityWhere->isNotEmpty()) {
+            $query = $query->where($dailyactivityWhere->toArray());
         }
 
         if ($whereArr->has("search")) {
