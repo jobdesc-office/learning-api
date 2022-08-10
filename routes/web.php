@@ -137,6 +137,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');
+            $router->post('datatables/{id}', 'UsersController@datatablesbp');
 
             $router->post('', 'UsersController@store');
             $router->get('{id}', 'UsersController@show');
@@ -170,6 +171,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
             $router->get('bp/{id}', 'DailyActivityController@all');
+            $router->post('datatables/{id}', 'DailyActivityController@datatables');
 
             $router->get('{id}', 'DailyActivityController@show');
         });
@@ -191,6 +193,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('withbp/{id}', 'CustomFieldController@WithBp');
             $router->post('selectwithbp/{id}', 'CustomFieldController@selectWithBp');
             $router->post('datatables', 'CustomFieldController@datatables');
+            $router->post('datatables/{id}', 'CustomFieldController@datatablesbp');
 
             $router->post('', 'CustomFieldController@store');
             $router->get('{id}', 'CustomFieldController@show');
@@ -241,7 +244,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'schedule'], function () use ($router) {
-            $router->get('', 'ScheduleController@all');
+            $router->get('bp/{id}', 'ScheduleController@all');
 
             $router->post('', 'ScheduleController@store');
             $router->get('{id}', 'ScheduleController@show');
@@ -254,6 +257,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('select', 'ProspectController@select');
             $router->get('selectref', 'ProspectController@selectref');
             $router->get('', 'ProspectController@all');
+            $router->post('datatables/{id}', 'ProspectController@datatablesbp');
             $router->post('datatables', 'ProspectController@datatables');
             $router->post('customer', 'ProspectController@storeCustomer');
             $router->post('product', 'ProspectController@storeProduct');

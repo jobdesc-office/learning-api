@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
-    public function all(Request $req, ScheduleServices $scheduleServices)
+    public function all($id, Request $req, ScheduleServices $scheduleServices)
     {
-        $schedules = $scheduleServices->getAll(collect($req->all()));
+        $schedules = $scheduleServices->getAllWeb(collect($req->all()), $id);
         return response()->json($schedules);
     }
 

@@ -88,7 +88,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Open', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Waiting', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'On Going', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'In Progress', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Closed Won', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Closed Lost', 'createdby' => 1, 'updatedby' => 1],
             ]
