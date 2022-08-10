@@ -75,11 +75,12 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::prospectStage,
             'typename' => 'Prospect Stage',
             'children' => [
-                ['typename' => 'Qualified', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Contact Made', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Demo Scheduled', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Proposal Made', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Negotiations Started', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Make Contact', 'typeseq' => 1, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Qualify Compatibility', 'typeseq' => 2, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Analyze Needs', 'typeseq' => 3, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Pitch', 'typeseq' => 4, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Deliver proposal', 'typeseq' => 5, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Negotiate', 'typeseq' => 6, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

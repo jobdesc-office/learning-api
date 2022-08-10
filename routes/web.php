@@ -216,6 +216,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('datatables', 'ContactPersonController@datatables');
 
             $router->post('', 'ContactPersonController@store');
+            $router->post('/massStore', 'ContactPersonController@massStore');
             $router->get('{id}', 'ContactPersonController@show');
             $router->put('{id}', 'ContactPersonController@update');
             $router->delete('{id}', 'ContactPersonController@destroy');
