@@ -21,6 +21,16 @@ class CustomFieldService extends CustomField
             ->orderBy($order, $orderby);
     }
 
+    public function datatablesbp($id, $order, $orderby, $search)
+    {
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->where('custfbpid', $id)
+            ->orderBy($order, $orderby);
+    }
+
     public function select($searchValue)
     {
         return $this->getQuery()->select('*')

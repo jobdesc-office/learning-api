@@ -74,6 +74,21 @@ class ContactPersonController extends Controller
         return response()->json($businesspartners);
     }
 
+    public function massStore(Request $req, ContactPersonServices $modelContactPersonServices)
+    {
+        $roles = json_decode($req->get('contact'));
+        foreach ($roles as $role) {
+            $modelContactPersonServices->create([
+                'contactname' => $req->get('contactname'),
+                'contactcustomerid' => $req->get('contactcustomerid'),
+                'contacttypeid' => $role->contacttypeid,
+                'contactvalueid' => $role->contactvalueid,
+            ]);
+        }
+
+        return response()->json(['message' => \TextMessages::successCreate]);
+    }
+
     public function store(Request $req, ContactPersonServices $modelContactPersonServices)
     {
         $insert = collect($req->only($modelContactPersonServices->getFillable()))->filter()

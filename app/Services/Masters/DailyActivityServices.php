@@ -63,11 +63,21 @@ class DailyActivityServices extends DailyActivity
         }
     }
 
+    public function datatables($id)
+    {
+        return $this->getQuery()
+            ->select('vtdailyactivity.*')
+            ->join('msuser', 'vtdailyactivity.createdby', '=', 'msuser.userid')
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->where('msuserdt.userdtbpid', $id);
+    }
+
     public function getBp(int $id)
     {
         return $this->getQuery()
-            ->join('msuserdt', 'vtdailyactivity.createdby', '=', 'msuserdt.userid')
-            ->join('msuser', 'msuser.userid', '=', 'msuserdt.userid')
+            ->select('vtdailyactivity.*')
+            ->join('msuser', 'vtdailyactivity.createdby', '=', 'msuser.userid')
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
             ->where('msuserdt.userdtbpid', $id)->get();
     }
 
@@ -128,6 +138,7 @@ class DailyActivityServices extends DailyActivity
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'dayactuser',
             'dayactcust',
             'dayactcat' => function ($query) {
                 $query->select('typeid', 'typename');

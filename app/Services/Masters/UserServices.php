@@ -11,11 +11,8 @@ class UserServices extends User
 
     public function getEmployee(int $id)
     {
-        return $this->newQuery()->select('msuser.userid', 'msuser.userfullname')
+        return $this->newQuery()->select('msuser.*')
             ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
-            ->with([
-                'userActivity'
-            ])
             ->where('msuserdt.userdtbpid', $id)->get();
     }
 
@@ -105,6 +102,30 @@ class UserServices extends User
                 ]);
             }
         ])
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->orderBy($order, $orderby);
+    }
+
+    public function datatablesbp($id, $order, $orderby, $search)
+    {
+        return $this->newQuery()->select('msuser.*')->with([
+            'userdetails' => function ($query) {
+                $query->select('*')->with([
+                    'usertype' => function ($query) {
+                        $query->select('typeid', 'typename');
+                    },
+                    'businesspartner' => function ($query) {
+                        $query->select('bpid', 'bpname', 'bpemail', 'bpphone')->with(['bptype']);
+                    }
+                ]);
+            }
+        ])
+
+
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->where('msuserdt.userdtbpid', $id)
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })

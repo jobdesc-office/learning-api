@@ -26,6 +26,16 @@ class ProspectServices extends Prospect
             ->orderBy($order, $orderby);
     }
 
+    public function datatablesbp($id, $order, $orderby, $search)
+    {
+        return $this->getQueery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->where('prospectbpid', $id)
+            ->orderBy($order, $orderby);
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);
