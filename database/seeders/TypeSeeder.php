@@ -87,11 +87,22 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::prospectStatus,
             'typename' => 'Prospect Status',
             'children' => [
-                ['typename' => 'Open', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Waiting', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'In Progress', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Open', 'typeseq' => 1, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'In Progress', 'typeseq' => 2,  'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Hold', 'typeseq' => 3, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Closed', 'typeseq' => 4, 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Closed Won', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Closed Lost', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Force Closed', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::prospectCustLabel,
+            'typename' => 'Prospect Customer Label',
+            'children' => [
+                ['typename' => 'Cold', 'typeseq' => 1, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Warm', 'typeseq' => 2,  'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Hot', 'typeseq' => 3, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

@@ -18,9 +18,9 @@ class CreateVtcustomfieldTable extends Migration
             $table->bigInteger('custfbpid');
             $table->string('custfname', 255);
             $table->bigInteger('custftypeid');
-            $table->boolean('isvisiblesidebar')->default(false);
-            $table->boolean('onlyinnewprospect')->default(false);
-            $table->bigInteger('lastprospectid')->nullable();
+            $table->boolean('allprospect')->default(false);
+            $table->boolean('onlythisprospect')->default(false);
+            $table->bigInteger('thisprospectid')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
