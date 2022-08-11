@@ -127,6 +127,9 @@ class ProspectServices extends Prospect
             'prospectproduct' => function ($query) {
                 $query->select('*')->with(['prosproductproduct', 'prosproducttaxtype']);
             },
+            'prospectcustlabel' => function ($query) {
+                $query->select('typeid', 'typename');
+            },
             'prospectstage' => function ($query) {
                 $query->select('typeid', 'typename');
             },
