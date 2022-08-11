@@ -49,11 +49,6 @@ class Prospect extends DefaultModel
         return $this->belongsTo(Prospect::class, "prospectrefid", "prospectid");
     }
 
-    public function prospectcustlabel()
-    {
-        return $this->belongsTo(Types::class, "prospectcustlabel", "typeid");
-    }
-
     public function prospectstage()
     {
         return $this->belongsTo(Types::class, "prospectstageid", "typeid");
