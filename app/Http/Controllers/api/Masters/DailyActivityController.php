@@ -67,4 +67,10 @@ class DailyActivityController extends Controller
         }
         return response()->json(['message' => \TextMessages::successDelete], 400);
     }
+
+    public function dailyActivityCount(Request $req, DailyActivityServices $activityServices)
+    {
+        $activitys = $activityServices->countAll(collect($req->all()));
+        return response()->json(['count' => $activitys]);
+    }
 }

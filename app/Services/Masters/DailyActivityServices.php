@@ -111,9 +111,9 @@ class DailyActivityServices extends DailyActivity
     {
         $query = $this->getQuery();
 
-        $competitorWhere = $whereArr->only($this->fillable);
-        if ($competitorWhere->isNotEmpty()) {
-            $query->where($competitorWhere->toArray());
+        $dailyactivityWhere = $whereArr->only($this->fillable);
+        if ($dailyactivityWhere->isNotEmpty()) {
+            $query = $query->where($dailyactivityWhere->toArray());
         }
 
         if ($whereArr->has("search")) {
@@ -121,6 +121,18 @@ class DailyActivityServices extends DailyActivity
         }
 
         return $query->get();
+    }
+
+    public function countAll(Collection $whereArr)
+    {
+        $query = $this->getQuery();
+
+        $dailyactivityWhere = $whereArr->only($this->fillable);
+        if ($dailyactivityWhere->isNotEmpty()) {
+            $query = $query->where($dailyactivityWhere->toArray());
+        }
+
+        return $query->count();
     }
 
     public function getQuery()

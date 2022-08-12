@@ -24,6 +24,7 @@ class ProspectController extends Controller
     {
         $insert = collect($req->all())->filter()->except('updatedby');
         $insert->put('prospectcode', $modelProspectServices->generateCode());
+        $insert->put('createdby',  auth()->user()->userid);
         $modelProspectServices->fill($insert->toArray())->save();
 
         if ($insert->has('products')) {
@@ -51,6 +52,7 @@ class ProspectController extends Controller
 
         $update = collect($req->only($modelProspectServices->getFillable()))->filter()
             ->except('createdby');
+        $update->put('updatedby',  auth()->user()->userid);
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
@@ -70,5 +72,11 @@ class ProspectController extends Controller
             DB::rollBack();
             return response()->json(['message' => $th->getMessage()]);
         }
+    }
+
+    public function prospectCount(Request $req, ProspectServices $prospectServices)
+    {
+        $prospects = $prospectServices->countAll(collect($req->all()));
+        return response()->json(['count' => $prospects]);
     }
 }

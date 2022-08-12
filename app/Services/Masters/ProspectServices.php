@@ -85,6 +85,18 @@ class ProspectServices extends Prospect
         return $query->get();
     }
 
+    public function countAll(Collection $whereArr)
+    {
+        $query = $this->getQuery();
+
+        $prospectwhere = $whereArr->only($this->fillable);
+        if ($prospectwhere->isNotEmpty()) {
+            $query = $query->where($prospectwhere->toArray());
+        }
+
+        return $query->count();
+    }
+
     public function generateCode()
     {
         $code = "PRS";
@@ -115,10 +127,10 @@ class ProspectServices extends Prospect
             'prospectproduct' => function ($query) {
                 $query->select('*')->with(['prosproductproduct', 'prosproducttaxtype']);
             },
-            'prospectcustlabel' => function ($query) {
+            'prospectstage' => function ($query) {
                 $query->select('typeid', 'typename');
             },
-            'prospectstage' => function ($query) {
+            'prospectcustlabeltype' => function ($query) {
                 $query->select('typeid', 'typename');
             },
             'prospectlost' => function ($query) {

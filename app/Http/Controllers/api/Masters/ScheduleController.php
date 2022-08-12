@@ -99,7 +99,7 @@ class ScheduleController extends Controller
         }
     }
 
-    public function scheduleCount(Request $req, ScheduleServices $scheduleServices,  ProspectActivity $prospectActivity)
+    public function scheduleCount(Request $req, ScheduleServices $scheduleServices)
     {
         $schedules = $scheduleServices->countAll(collect($req->all()));
         return response()->json(['count' => $schedules]);
