@@ -161,6 +161,9 @@ class ProspectServices extends Prospect
             'prospectlost' => function ($query) {
                 $query->select('typeid', 'typename');
             },
+            'prospectcustlabel' => function ($query) {
+                $query->select('typeid', 'typename');
+            },
             'prospectownerusers' => function ($query) {
                 $query->with(['userdetails']);
             },
