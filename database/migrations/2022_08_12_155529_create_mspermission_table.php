@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMsmenuTable extends Migration
+class CreateMspermissionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateMsmenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('msmenu', function (Blueprint $table) {
-            $table->id('menuid');
-            $table->bigInteger('masterid')->nullable();
-            $table->bigInteger('menutypeid');
-            $table->string('menunm', 100);
-            $table->string('menuicon', 100)->nullable();
-            $table->string('menuroute', 100)->nullable();
-            $table->string('menucolor', 100)->nullable();
-            $table->integer('menuseq')->nullable();
+        Schema::create('mspermission', function (Blueprint $table) {
+            $table->id('permisid');
+            $table->bigInteger('roleid');
+            $table->bigInteger('permismenuid');
+            $table->bigInteger('permisfeatid');
+            $table->boolean('hasaccess')->default(false);
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
@@ -38,6 +35,6 @@ class CreateMsmenuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msmenu');
+        Schema::dropIfExists('mspermission');
     }
 }
