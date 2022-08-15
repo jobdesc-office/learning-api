@@ -320,6 +320,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'MenusController@destroy');
         });
 
+        $router->group(['prefix' => 'feature'], function () use ($router) {
+            $router->post('datatables/{id}', 'FeaturesController@datatables');
+
+            $router->post('', 'FeaturesController@store');
+            $router->get('{id}', 'FeaturesController@show');
+            $router->put('{id}', 'FeaturesController@update');
+            $router->delete('{id}', 'FeaturesController@destroy');
+        });
+
         $router->group(['prefix' => 'home'], function () use ($router) {
             $router->get('{id}', 'HomeController@index');
             // $router->post('datatables', 'MenusController@datatables');
