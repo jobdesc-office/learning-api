@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
 use App\Models\Security\Feature;
+use App\Models\Security\Permission;
 use App\Services\Security\FeatureServices;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FeaturesController extends Controller
 {
@@ -117,11 +119,17 @@ class FeaturesController extends Controller
      *
      * @return JsonResponse
      * */
-    public function destroy($id, Feature $modelMenu)
+    public function destroy($id, Feature $modelMenu, Permission $modelPermission)
     {
-        $row = $modelMenu->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $modelPermission->where('permisfeatid', $id)->delete();
+            $modelMenu->findOrFail($id)->delete();
+            DB::commit();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }

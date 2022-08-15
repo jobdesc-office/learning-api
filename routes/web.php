@@ -108,6 +108,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'types'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
             $router->get('bySeq', 'TypesController@bySeq');
+            $router->get('getAllRoles', 'TypesController@getAllRoles');
             $router->post('datatables', 'TypesController@datatables');
 
             $router->post('', 'TypesController@store');

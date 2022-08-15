@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
 use App\Models\Security\Menu;
+use App\Models\Security\Feature;
+use App\Models\Security\Permission;
 use App\Services\Security\MenuServices;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenusController extends Controller
 {
@@ -81,10 +84,39 @@ class MenusController extends Controller
      *
      * @return JsonResponse
      * */
-    public function store(Request $req, Menu $modelMenu)
+    public function store(Request $req, Menu $modelMenu, Feature $modelFeature, Permission $modelPermission)
     {
         $insert = collect($req->only($modelMenu->getFillable()))->filter();
-        $modelMenu->create($insert->toArray());
+        $result = $modelMenu->create($insert->toArray());
+
+        $cruds = json_decode($req->get('crud'));
+        $roles = json_decode($req->get('roles'));
+        if ($cruds != null) {
+            DB::beginTransaction();
+            try {
+                foreach ($cruds as $crud) {
+                    $resultFeature = $modelFeature->create([
+                        'featmenuid' => $result->menuid,
+                        'feattitle' => $crud->feattitle,
+                        'featslug' => $crud->featslug,
+                        'featuredesc' => $crud->featuredesc,
+                        'createdby' => $result->createdby,
+                        'isactive' => $result->isactive,
+                    ]);
+                    foreach ($roles as $role) {
+                        $modelPermission->create([
+                            'roleid' => $role->typeid,
+                            'permismenuid' => $result->menuid,
+                            'permisfeatid' => $resultFeature->featid,
+                        ]);
+                    }
+                }
+                DB::commit();
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return response()->json(['message' => $th]);
+            }
+        }
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
@@ -125,11 +157,18 @@ class MenusController extends Controller
      *
      * @return JsonResponse
      * */
-    public function destroy($id, Menu $modelMenu)
+    public function destroy($id, Menu $modelMenu, Feature $modelFeature, Permission $modelPermission)
     {
-        $row = $modelMenu->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $modelFeature->where('featmenuid', $id)->delete();
+            $modelPermission->where('permismenuid', $id)->delete();
+            $modelMenu->findOrFail($id)->delete();
+            DB::commit();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 }

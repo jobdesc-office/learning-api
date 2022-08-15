@@ -5,6 +5,7 @@ class DBTypes
 
     const role = 'role';
     const roleSuperAdmin = 'rolespa';
+    const roleEmployee = 'roleemp';
 
     const businessPartner = 'bptype';
 

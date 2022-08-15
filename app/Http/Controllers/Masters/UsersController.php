@@ -207,12 +207,14 @@ class UsersController extends Controller
         $resultUser = $modelUser->create($insert->toArray());
 
         $roles = json_decode($req->get('roles'));
-        foreach ($roles as $role) {
-            $modelUserDetail->create([
-                'userid' => $resultUser->userid,
-                'userdttypeid' => $role->roleid,
-                'userdtbpid' => $role->bpid,
-            ]);
+        if ($roles != null) {
+            foreach ($roles as $role) {
+                $modelUserDetail->create([
+                    'userid' => $resultUser->userid,
+                    'userdttypeid' => $role->roleid,
+                    'userdtbpid' => $role->bpid,
+                ]);
+            }
         }
 
         return response()->json(['message' => \TextMessages::successCreate]);
