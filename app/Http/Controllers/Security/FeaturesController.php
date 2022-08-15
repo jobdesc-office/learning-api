@@ -75,10 +75,19 @@ class FeaturesController extends Controller
      *
      * @return JsonResponse
      * */
-    public function store(Request $req, Feature $modelMenu)
+    public function store(Request $req, Feature $modelMenu, Permission $modelPermission)
     {
         $insert = collect($req->only($modelMenu->getFillable()))->filter();
-        $modelMenu->create($insert->toArray());
+        $result = $modelMenu->create($insert->toArray());
+        $roles = json_decode($req->get('roles'));
+        foreach ($roles as $role) {
+            $modelPermission->create([
+                'roleid' => $role->typeid,
+                'permismenuid' => $result->featmenuid,
+                'permisfeatid' => $result->featid,
+            ]);
+        }
+
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
