@@ -27,4 +27,9 @@ class Feature extends DefaultModel
     {
         return $this->hasOne(Menu::class, 'menuid', 'featmenuid');
     }
+
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'permisfeatid', 'featid');
+    }
 }

@@ -330,6 +330,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'FeaturesController@destroy');
         });
 
+        $router->group(['prefix' => 'permission'], function () use ($router) {
+            $router->post('role', 'PermissionController@role');
+            $router->get('menu', 'PermissionController@menu');
+            $router->get('permission', 'PermissionController@permission');
+
+            $router->post('', 'PermissionController@store');
+            $router->get('{id}', 'PermissionController@show');
+            $router->put('{id}', 'PermissionController@update');
+            $router->delete('{id}', 'PermissionController@destroy');
+        });
+
         $router->group(['prefix' => 'home'], function () use ($router) {
             $router->get('{id}', 'HomeController@index');
             // $router->post('datatables', 'MenusController@datatables');

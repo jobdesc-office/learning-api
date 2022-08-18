@@ -39,6 +39,26 @@ class MenuServices extends Menu
             ->orderBy($order, $orderby);
     }
 
+    public function allMenuParent(int $roleid)
+    {
+        return $this->newQuery()
+            ->where('masterid', null)
+            ->orderBy('menunm', 'asc')
+            ->with([
+                'menutype' => function ($query) {
+                    $query->select('typeid', 'typename');
+                }, 'children' => function ($query) use ($roleid) {
+                    $query->orderBy('menunm', 'asc')->with(['features' => function ($query) use ($roleid) {
+                        $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+                    }]);
+                },
+                'features' => function ($query) use ($roleid) {
+                    $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+                }
+            ])
+            ->get();
+    }
+
     public function find($id)
     {
         return $this->newQuery()->select('menuid', 'menutypeid', 'menunm', 'masterid', 'menuicon', 'menuroute', 'menucolor', 'menuseq')

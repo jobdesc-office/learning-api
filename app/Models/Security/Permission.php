@@ -3,6 +3,7 @@
 namespace App\Models\Security;
 
 use App\Models\DefaultModel;
+use App\Models\Masters\Types;
 
 class Permission extends DefaultModel
 {
@@ -34,6 +35,6 @@ class Permission extends DefaultModel
 
     public function feature()
     {
-        return $this->belongsTo(Feature::class, 'permisfeatid', 'menuid');
+        return $this->belongsTo(Feature::class, 'permisfeatid', 'featid');
     }
 }

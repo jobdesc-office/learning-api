@@ -36,4 +36,14 @@ class Menu extends DefaultModel
     {
         return $this->hasOne(Menu::class, 'menuid', 'masterid');
     }
+
+    public function features()
+    {
+        return $this->hasMany(Feature::class, 'featmenuid', 'menuid');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Menu::class, 'masterid', 'menuid');
+    }
 }

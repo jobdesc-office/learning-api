@@ -36,7 +36,7 @@ class TypeServices extends Types
 
     public function byParentId($code)
     {
-        return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq')
+        return $this->newQuery()
             ->where('typemasterid', $code)
             ->orderBy('typename', 'asc')
             ->get();
