@@ -311,6 +311,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     });
 
     $router->group(['namespace' => 'Security'], function () use ($router) {
+
+        $router->get('450905094', 'PermissionController@permission');
+
         $router->group(['prefix' => 'menus'], function () use ($router) {
             $router->get('select', 'MenusController@select');
             $router->post('datatables', 'MenusController@datatables');
@@ -333,7 +336,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'permission'], function () use ($router) {
             $router->post('role', 'PermissionController@role');
             $router->get('menu', 'PermissionController@menu');
-            $router->get('permission', 'PermissionController@permission');
 
             $router->post('', 'PermissionController@store');
             $router->get('{id}', 'PermissionController@show');

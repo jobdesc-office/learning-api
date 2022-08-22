@@ -36,8 +36,7 @@ class PermissionController extends Controller
     public function permission(Request $req, PermissionServices $permissionServices)
     {
         $roleid = $req->get('roleid');
-        $menuid = $req->get('menuid');
-        $roles = $permissionServices->permission($roleid, $menuid);
+        $roles = $permissionServices->permission($roleid);
 
         return response()->json($roles);
     }
