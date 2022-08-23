@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 class TypeServices extends Types
 {
 
+    public function byCodes($code)
+    {
+        return $this->newQuery()->select('typeid')
+            ->where('typecd', $code)->get();
+    }
+
     public function byCode($code)
     {
         return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq')
@@ -25,6 +31,14 @@ class TypeServices extends Types
                 $query->where('typecd', $code);
             })
             ->orderBy('typeseq', 'asc')
+            ->get();
+    }
+
+    public function byParentId($code)
+    {
+        return $this->newQuery()
+            ->where('typemasterid', $code)
+            ->orderBy('typename', 'asc')
             ->get();
     }
 

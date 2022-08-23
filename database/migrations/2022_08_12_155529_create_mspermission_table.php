@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMsfilesTable extends Migration
+class CreateMspermissionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateMsfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('msfiles', function (Blueprint $table) {
-            $table->id('fileid');
-            $table->bigInteger('transtypeid');
-            $table->bigInteger('refid');
-            $table->text('directories');
-            $table->string('filename', 100);
-            $table->string('mimetype', 100);
-            $table->double('filesize');
-            $table->text('remark')->nullable();
+        Schema::create('mspermission', function (Blueprint $table) {
+            $table->id('permisid');
+            $table->bigInteger('roleid');
+            $table->bigInteger('permismenuid');
+            $table->bigInteger('permisfeatid');
+            $table->boolean('hasaccess')->default(false);
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
@@ -38,6 +35,6 @@ class CreateMsfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msfiles');
+        Schema::dropIfExists('mspermission');
     }
 }

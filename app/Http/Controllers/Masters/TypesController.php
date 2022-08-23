@@ -7,6 +7,7 @@ use App\Services\Masters\TypeServices;
 use App\Models\Masters\Types;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DBTypes;
 
 class TypesController extends Controller
 {
@@ -20,6 +21,12 @@ class TypesController extends Controller
     public function bySeq(Request $req, TypeServices $typeServices)
     {
         $types = $typeServices->bySeq($req->get('typecd'));
+        return response()->json($types);
+    }
+
+    public function getAllRoles(TypeServices $typeServices)
+    {
+        $types = $typeServices->byParentId(find_type()->in([DBTypes::role])->get(DBTypes::role)->getId());
         return response()->json($types);
     }
 

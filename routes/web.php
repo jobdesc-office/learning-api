@@ -108,6 +108,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'types'], function () use ($router) {
             $router->get('by-code', 'TypesController@byCode');
             $router->get('bySeq', 'TypesController@bySeq');
+            $router->get('getAllRoles', 'TypesController@getAllRoles');
             $router->post('datatables', 'TypesController@datatables');
 
             $router->post('', 'TypesController@store');
@@ -310,6 +311,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     });
 
     $router->group(['namespace' => 'Security'], function () use ($router) {
+
+        $router->get('450905094', 'PermissionController@permission');
+
         $router->group(['prefix' => 'menus'], function () use ($router) {
             $router->get('select', 'MenusController@select');
             $router->post('datatables', 'MenusController@datatables');
@@ -318,6 +322,25 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'MenusController@show');
             $router->put('{id}', 'MenusController@update');
             $router->delete('{id}', 'MenusController@destroy');
+        });
+
+        $router->group(['prefix' => 'feature'], function () use ($router) {
+            $router->post('datatables/{id}', 'FeaturesController@datatables');
+
+            $router->post('', 'FeaturesController@store');
+            $router->get('{id}', 'FeaturesController@show');
+            $router->put('{id}', 'FeaturesController@update');
+            $router->delete('{id}', 'FeaturesController@destroy');
+        });
+
+        $router->group(['prefix' => 'permission'], function () use ($router) {
+            $router->post('role', 'PermissionController@role');
+            $router->get('menu', 'PermissionController@menu');
+
+            $router->post('', 'PermissionController@store');
+            $router->get('{id}', 'PermissionController@show');
+            $router->put('{id}', 'PermissionController@update');
+            $router->delete('{id}', 'PermissionController@destroy');
         });
 
         $router->group(['prefix' => 'home'], function () use ($router) {

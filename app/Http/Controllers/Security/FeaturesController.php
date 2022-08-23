@@ -3,27 +3,18 @@
 namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
-use App\Models\Security\Menu;
 use App\Models\Security\Feature;
 use App\Models\Security\Permission;
-use App\Services\Security\MenuServices;
+use App\Services\Security\FeatureServices;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MenusController extends Controller
+class FeaturesController extends Controller
 {
 
-    public function select(Request $req, MenuServices $menuServices)
-    {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $menuServices->select($searchValue);
-
-        return response()->json($selects);
-    }
-
-    public function datatables(Request $req, MenuServices $menuServices)
+    public function datatables($id, Request $req, FeatureServices $FeatureServices)
     {
         $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
@@ -72,7 +63,7 @@ class MenusController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $menuServices->datatables($order, $orderby, $search);
+        $query = $FeatureServices->datatables($id, $order, $orderby, $search);
 
         return datatables()->eloquent($query)
             ->toJson();
@@ -84,52 +75,32 @@ class MenusController extends Controller
      *
      * @return JsonResponse
      * */
-    public function store(Request $req, Menu $modelMenu, Feature $modelFeature, Permission $modelPermission)
+    public function store(Request $req, Feature $modelMenu, Permission $modelPermission)
     {
         $insert = collect($req->only($modelMenu->getFillable()))->filter();
         $result = $modelMenu->create($insert->toArray());
-
-        $cruds = json_decode($req->get('crud'));
         $roles = json_decode($req->get('roles'));
-        if ($cruds != null) {
-            DB::beginTransaction();
-            try {
-                foreach ($cruds as $crud) {
-                    $resultFeature = $modelFeature->create([
-                        'featmenuid' => $result->menuid,
-                        'feattitle' => $crud->feattitle,
-                        'featslug' => $crud->featslug,
-                        'featuredesc' => $crud->featuredesc,
-                        'createdby' => $result->createdby,
-                        'isactive' => $result->isactive,
-                    ]);
-                    foreach ($roles as $role) {
-                        $modelPermission->create([
-                            'roleid' => $role->typeid,
-                            'permismenuid' => $result->menuid,
-                            'permisfeatid' => $resultFeature->featid,
-                        ]);
-                    }
-                }
-                DB::commit();
-            } catch (\Throwable $th) {
-                DB::rollBack();
-                return response()->json(['message' => $th]);
-            }
+        foreach ($roles as $role) {
+            $modelPermission->create([
+                'roleid' => $role->typeid,
+                'permismenuid' => $result->featmenuid,
+                'permisfeatid' => $result->featid,
+            ]);
         }
+
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
     /**
      * @param mixed $id
-     * @param MenuServices $menuServices
+     * @param FeatureServices $FeatureServices
      *
      * @return JsonResponse
      * */
-    public function show($id, MenuServices $menuServices)
+    public function show($id, FeatureServices $FeatureServices)
     {
-        $row = $menuServices->find($id);
+        $row = $FeatureServices->find($id);
         return response()->json($row);
     }
 
@@ -140,7 +111,7 @@ class MenusController extends Controller
      *
      * @return JsonResponse
      * */
-    public function update($id, Request $req, Menu $modelMenu)
+    public function update($id, Request $req, Feature $modelMenu)
     {
         $row = $modelMenu->findOrFail($id);
 
@@ -157,12 +128,11 @@ class MenusController extends Controller
      *
      * @return JsonResponse
      * */
-    public function destroy($id, Menu $modelMenu, Feature $modelFeature, Permission $modelPermission)
+    public function destroy($id, Feature $modelMenu, Permission $modelPermission)
     {
         DB::beginTransaction();
         try {
-            $modelFeature->where('featmenuid', $id)->delete();
-            $modelPermission->where('permismenuid', $id)->delete();
+            $modelPermission->where('permisfeatid', $id)->delete();
             $modelMenu->findOrFail($id)->delete();
             DB::commit();
 
