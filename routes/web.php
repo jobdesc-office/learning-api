@@ -209,6 +209,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('prospect', 'FilesController@storeProspect');
 
             $router->get('{id}', 'FilesController@show');
+            $router->put('{id}', 'FilesController@update');
             $router->delete('{id}', 'FilesController@destroy');
         });
 

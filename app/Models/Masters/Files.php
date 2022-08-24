@@ -18,6 +18,7 @@ class Files extends DefaultModel
       "filename",
       'mimetype',
       "filesize",
+      "remark",
       "createdby",
       "updatedby",
       "isactive",
