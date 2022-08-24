@@ -110,6 +110,15 @@ class BpCustomerService extends BpCustomer
             $query = $query->where($bpcustomerwhere->toArray());
         }
 
+        // search by customer fields
+        $customerServices = new CustomerService();
+        $customerwhere = $whereArr->only($customerServices->fillable);
+        if ($customerwhere->isNotEmpty()) {
+            $query = $query->whereHas('sbccstm', function ($query) use ($customerwhere) {
+                $query->where($customerwhere->toArray());
+            });
+        }
+
         if ($whereArr->has('search')) {
             $query = $query->where(DB::raw('TRIM(LOWER(sbccstmname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }

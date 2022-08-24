@@ -51,9 +51,9 @@ class CustomerService extends Customer
                 },
             ]);
 
-        $bpcustomerwhere = $whereArr->only($this->getFillable());
-        if ($bpcustomerwhere->isNotEmpty()) {
-            $query = $query->where($bpcustomerwhere->toArray());
+        $customerwhere = $whereArr->only($this->getFillable());
+        if ($customerwhere->isNotEmpty()) {
+            $query = $query->where($customerwhere->toArray());
         }
 
         if ($whereArr->has('search')) {
