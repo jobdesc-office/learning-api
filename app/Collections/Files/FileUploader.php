@@ -65,6 +65,11 @@ class FileUploader
     * updated by
     */
    protected $updated_by;
+   /**
+    * @var string
+    * description of file
+    */
+   protected $remark;
 
    /**
     * @param string $temp_path temporary path
@@ -73,12 +78,13 @@ class FileUploader
     * @param int $transtypeid trans type id of file
     * @param int $refid file owner/reference
     */
-   public function __construct($temp_path, $filename,  $directories = null, $transtypeid = null, $refid = null, $created_by = null, $updated_by = null)
+   public function __construct($temp_path, $filename,  $directories = null, $transtypeid = null, $refid = null, $remark = "", $created_by = null, $updated_by = null)
    {
       $this->transtypeid = $transtypeid;
       $this->refid = $refid;
       $this->created_by = $created_by;
       $this->updated_by = $updated_by;
+      $this->remark = $remark;
 
       $this->temp_path = $temp_path;
       $this->directories = $directories;
@@ -128,6 +134,7 @@ class FileUploader
          $data['filename'] = $this->getFilenameWithExtension();
          $data['mimetype'] = $this->mime_type;
          $data['filesize'] = $this->size;
+         $data['remark'] = $this->remark;
          $data['createdby'] = $this->created_by != null ? $this->created_by : auth()->user()->userid;
          $data['updateby'] = $this->update_by;
 
