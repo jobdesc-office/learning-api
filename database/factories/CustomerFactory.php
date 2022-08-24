@@ -11,6 +11,7 @@ use App\Models\Masters\Village;
 use App\Models\Masters\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Log;
 
 class CustomerFactory extends Factory
 {
@@ -28,21 +29,20 @@ class CustomerFactory extends Factory
      */
     public function definition()
     {
-        $this->setVillageId();
-        $this->setSubdistrictId();
-        $this->setCityId();
-        $this->setProvinceId();
+        $json = file_get_contents("./customers.json");
+        $data = json_decode($json)[$this->faker->unique()->numberBetween(0, 882)];
+
         return [
             'cstmname' => $this->faker->company,
             'cstmphone' => $this->faker->phoneNumber,
             'cstmaddress' => $this->faker->address,
-            'cstmprovinceid' => $this->province->provid,
-            'cstmcityid' => $this->city->cityid,
-            'cstmuvid' => $this->village->villageid,
-            'cstmsubdistrictid' => $this->subdistrict->subdistrictid,
+            'cstmprovinceid' => $data->ids->province,
+            'cstmcityid' => $data->ids->city,
+            'cstmuvid' => $data->ids->village,
+            'cstmsubdistrictid' => $data->ids->subdistrict,
             'cstmpostalcode' => $this->faker->numberBetween(30001, 39999),
-            'cstmlatitude' => $this->faker->latitude,
-            'cstmlongitude' => $this->faker->longitude,
+            'cstmlatitude' =>  $data->coordinate[0],
+            'cstmlongitude' => $data->coordinate[1],
             'cstmtypeid' => $this->getTypeId(),
         ];
     }
@@ -52,25 +52,5 @@ class CustomerFactory extends Factory
         $customertype = find_type()->byCode([\DBTypes::cstmtype])
             ->children(\DBTypes::cstmtype);
         return $customertype->random()->getId();
-    }
-
-    function setVillageId()
-    {
-        $this->village = Village::all()->random();
-    }
-
-    function setSubdistrictId()
-    {
-        $this->subdistrict = $this->village->villagesubdistrict;
-    }
-
-    function setCityId()
-    {
-        $this->city = $this->subdistrict->subdistrictcity;
-    }
-
-    function setProvinceId()
-    {
-        $this->province = $this->city->cityprov;
     }
 }
