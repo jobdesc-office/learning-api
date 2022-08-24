@@ -110,6 +110,17 @@ class FilesController extends Controller
         return response()->json($row);
     }
 
+    public function update($id, Request $req, FilesServices $modelCustomFieldService)
+    {
+        $row = $modelCustomFieldService->findOrFail($id);
+
+        $update = collect($req->only($modelCustomFieldService->getFillable()))->filter()
+            ->except('createdby');
+        $row->update($update->toArray());
+
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
     public function destroy($id, FilesServices $modelFileServices)
     {
         DB::beginTransaction();
