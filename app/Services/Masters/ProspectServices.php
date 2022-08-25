@@ -79,11 +79,11 @@ class ProspectServices extends Prospect
             $query = $query->where($prospectwhere->toArray());
         }
 
-        $prospectAssignFillable = (new ProspectAssign())->fillable;
-        $prospectassignwhere = $whereArr->only($prospectAssignFillable);
+        $prospectAssignModel = new ProspectAssign;
+        $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
         if ($prospectassignwhere->isNotEmpty()) {
-            $query = $query->whereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                $query->where($prospectassignwhere);
+            $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
+                $query->where($prospectassignwhere->toArray());
             });
         }
 
