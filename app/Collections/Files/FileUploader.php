@@ -136,7 +136,7 @@ class FileUploader
          $data['filesize'] = $this->size;
          $data['remark'] = $this->remark;
          $data['createdby'] = $this->created_by != null ? $this->created_by : auth()->user()->userid;
-         $data['updateby'] = $this->update_by;
+         $data['updateby'] = $this->updated_by;
 
          $anchorData = [
             'transtypeid' => $this->transtypeid,

@@ -25,6 +25,7 @@ class ProspectActivity extends DefaultModel
         "prospectactivitytypeid",
         "prospectactivitydate",
         "prospectactivitydesc",
+        "prospectactivityinfo",
         "prospectactivityloc",
         "prospectactivitylatitude",
         "prospectactivitylongitude",

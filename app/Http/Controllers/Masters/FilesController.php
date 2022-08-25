@@ -86,21 +86,27 @@ class FilesController extends Controller
             $id = $req->get('id');
             $name = $req->get('name');
             $pics = $req->file('files');
-            if ($pics) {
-                $no = 0;
-                foreach ($pics as $key) {
-                    $no++;
-                    $mytime = Carbon::now()->format('Y-m-d H-i-s');
-                    $filename =  $name . '-' . $no . '-' . $mytime;
-                    $transType = find_type()->in([DBTypes::prospectfile])->get(DBTypes::prospectfile)->getId();
-                    $file = new FileUploader($key, $filename, 'prospect/', $transType, $id);
-                    $file->upload();
-                }
+            $remark = json_decode($req->get('remark'));
+            $no = 0;
+            $list = [];
+            foreach ($remark as $key) {
+                $list[] = $key->remark;
             }
+            foreach ($pics as $keys) {
+
+                $mytime = Carbon::now()->format('Y-m-d H-i-s');
+                $filename =  $name . '-' . $no . '-' . $mytime;
+                $transType = find_type()->in([DBTypes::prospectfile])->get(DBTypes::prospectfile)->getId();
+                $file = new FileUploader($keys, $filename, 'prospect/', $transType, $id, $list[$no], $req->get('createdby'), $req->get('updatedby'));
+                $file->upload();
+                $no++;
+            }
+
             DB::commit();
             return response()->json(['message' => \TextMessages::successCreate]);
         } catch (Exception $th) {
             DB::rollBack();
+            var_dump($th);
         }
     }
 
