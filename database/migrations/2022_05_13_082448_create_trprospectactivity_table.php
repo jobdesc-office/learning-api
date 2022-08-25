@@ -20,6 +20,7 @@ class CreateTrprospectActivityTable extends Migration
             $table->integer('prospectactivitytypeid')->nullable();
             $table->date('prospectactivitydate')->nullable();
             $table->text('prospectactivitydesc')->nullable();
+            $table->text('prospectactivityinfo')->nullable();
             $table->text('prospectactivityloc')->nullable();
             $table->double('prospectactivitylatitude')->nullable();
             $table->double('prospectactivitylongitude')->nullable();
