@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Prospect;
+use App\Models\Masters\ProspectAssign;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -76,6 +77,14 @@ class ProspectServices extends Prospect
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
             $query = $query->where($prospectwhere->toArray());
+        }
+
+        $prospectAssignFillable = (new ProspectAssign())->fillable;
+        $prospectassignwhere = $whereArr->only($prospectAssignFillable);
+        if ($prospectassignwhere->isNotEmpty()) {
+            $query = $query->whereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
+                $query->where($prospectassignwhere);
+            });
         }
 
         if ($whereArr->has("search")) {
