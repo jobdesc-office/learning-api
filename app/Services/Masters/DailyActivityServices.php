@@ -116,6 +116,15 @@ class DailyActivityServices extends DailyActivity
             $query = $query->where($dailyactivityWhere->toArray());
         }
 
+        if ($whereArr->has('bpid')) {
+            $bpid = $whereArr->get('bpid');
+            $query = $query->whereHas('dayactuser', function ($query) use ($bpid) {
+                $query->whereHas('userdetails', function ($query) use ($bpid) {
+                    $query->where('userdtbpid', $bpid);
+                });
+            });
+        }
+
         if ($whereArr->has("search")) {
             $query = $query->where(DB::raw('TRIM(LOWER(dayactdesc))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
