@@ -2,6 +2,7 @@
 
 namespace App\Services\Masters;
 
+use App\Models\Masters\BpCustomer;
 use App\Models\Masters\Customer;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
