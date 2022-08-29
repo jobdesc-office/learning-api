@@ -47,6 +47,18 @@ class ChatServices extends Chat
         return $query->update(['chatreadat' => Carbon::now()->format('Y-m-d H:i:s')]);
     }
 
+    public function getUsersUnreadMessages(Collection $request)
+    {
+        $query = $this->getQuery();
+        $result = [];
+        $receiverids = json_decode($request->get('chatreceiverids'));
+        foreach ($receiverids as $receiverid) {
+            $query = $query->where('createdby', auth()->user()->userid)->where('chatreceiverid', $receiverid)->where('chatreadat', null);
+            $result[$receiverid] = $query->count();
+        }
+        return $result;
+    }
+
     public function storeChat(Collection $data)
     {
         $chat = $this->fill($data->toArray());

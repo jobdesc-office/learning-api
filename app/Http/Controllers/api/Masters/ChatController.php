@@ -74,4 +74,11 @@ class ChatController extends Controller
         $chats = $chatServices->getConversation(auth()->user()->userid, $request->get('userid'));
         return response()->json($chats);
     }
+
+    public function usersUnreadMessages(Request $req, ChatServices $chatServices)
+    {
+        $request = collect($req->all())->filter();
+        $result = $chatServices->getUsersUnreadMessages($request);
+        return response()->json($result);
+    }
 }

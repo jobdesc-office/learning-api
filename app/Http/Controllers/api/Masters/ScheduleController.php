@@ -19,7 +19,7 @@ class ScheduleController extends Controller
         return response()->json($schedules);
     }
 
-    public function store(Request $req, Schedule $scheduleModel, ScheduleGuest $scheduleGuestModel)
+    public function store(Request $req, Schedule $scheduleModel)
     {
         $insert = collect($req->only($scheduleModel->getFillable()))->filter();
 
@@ -29,16 +29,16 @@ class ScheduleController extends Controller
 
             if ($req->has('members') && $req->get('members') != null) {
                 $members = json_decode($req->get('members'));
-                $guestsData = collect([]);
                 foreach ($members as $member) {
-                    $guestsData->push([
+                    $guest = new ScheduleGuest;
+                    $guest->fill([
                         'scheid' => $scheduleModel->scheid,
                         'scheuserid' => $member->scheuserid,
                         'schebpid' => $member->schebpid,
                         'schepermisid' => $member->schepermisid
                     ]);
+                    $guest->save();
                 }
-                $scheduleGuestModel->create($guestsData->toArray());
             }
 
             return response()->json($scheduleModel->toArray());

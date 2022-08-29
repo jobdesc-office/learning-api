@@ -169,6 +169,7 @@ class TypeSeeder extends Seeder
             'typename' => 'Schedule Reference',
             'children' => [
                 ['typename' => 'Prospect Activity', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

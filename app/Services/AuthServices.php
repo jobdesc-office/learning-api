@@ -10,7 +10,7 @@ class AuthServices extends User
 
     public function authQuery()
     {
-        return $this->newQuery()->select(['msuser.userid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid', 'typename'])
+        return $this->newQuery()->select(['msuser.userid', 'userdtbpid', 'username', 'userpassword', 'userfullname', 'useremail', 'userphone', 'userdeviceid', 'typename'])
             ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
             ->join('mstype', 'msuserdt.userdttypeid', '=', 'mstype.typeid')
             ->with([
