@@ -32,12 +32,10 @@ class Files extends DefaultModel
       parent::boot();
 
       static::deleted(function ($item) {
-         Log::info($item);
          Storage::disk('public')->delete("$item->directories$item->filename");
       });
 
       static::deleting(function ($item) {
-         Log::info($item);
          Storage::disk('public')->delete("$item->directories$item->filename");
       });
    }

@@ -21,9 +21,9 @@ class ProspectActivityController extends Controller
     {
         $insert = collect($req->toArray())->filter()
             ->except('updatedby');
-
-        $modelProspectActivityServices->fill($insert->toArray());
-        $modelProspectActivityServices->save();
+        $modelProspectActivityServices->create($insert->toArray());
+        // $modelProspectActivityServices->fill($insert->toArray());
+        // $modelProspectActivityServices->save();
 
         return response()->json($modelProspectActivityServices);
     }

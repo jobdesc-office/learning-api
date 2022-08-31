@@ -3,6 +3,7 @@
 namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
+use Log;
 
 class ProspectActivity extends DefaultModel
 {
@@ -36,6 +37,26 @@ class ProspectActivity extends DefaultModel
 
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
+
+    public static function boot()
+    {
+        static::creating(function ($model) {
+            Log::info("new Value: " . $model->prospectactivitydesc);
+            $old = ProspectActivity::find($model->prospectactivityid);
+            Log::info($old);
+            // Log::info("old Value: " . $old['prospectactivitydesc']);
+        });
+
+        static::updating(function ($model) {
+            Log::info($model);
+        });
+
+        static::deleting(function ($model) {
+            Log::info($model);
+        });
+
+        parent::boot();
+    }
 
     public function prospectactivityprospect()
     {
