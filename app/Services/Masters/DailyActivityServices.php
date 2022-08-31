@@ -69,6 +69,7 @@ class DailyActivityServices extends DailyActivity
             ->select('vtdailyactivity.*')
             ->join('msuser', 'vtdailyactivity.createdby', '=', 'msuser.userid')
             ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->orderBy('vtdailyactivity.dayactdate', 'asc')
             ->where('msuserdt.userdtbpid', $id);
     }
 

@@ -151,6 +151,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('select/{id}', 'BpCustomerController@selectBp');
             $router->get('', 'BpCustomerController@all');
             $router->post('datatables', 'BpCustomerController@datatables');
+            $router->post('datatables/{id}', 'BpCustomerController@datatablesbp');
 
             $router->post('', 'BpCustomerController@store');
             $router->get('{id}', 'BpCustomerController@show');
@@ -181,6 +182,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('select', 'CompetitorController@select');
             $router->post('deleteimages', 'CompetitorController@deleteImages');
             $router->post('datatables', 'CompetitorController@datatables');
+            $router->post('datatables/{id}', 'CompetitorController@datatablesbp');
 
             $router->post('', 'CompetitorController@store');
             $router->get('{id}', 'CompetitorController@show');
