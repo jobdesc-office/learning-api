@@ -36,6 +36,16 @@ class CompetitorServices extends Competitor
          ->orderBy($order, $orderby);
    }
 
+   public function datatablesbp($id, $order, $orderby, $search)
+   {
+      return $this->getQuery()
+         ->where('comptbpid', $id)
+         ->where(function ($query) use ($search, $order) {
+            $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+         })
+         ->orderBy($order, $orderby);
+   }
+
    public function find($id)
    {
       return $this->getQuery()->findOrFail($id);
