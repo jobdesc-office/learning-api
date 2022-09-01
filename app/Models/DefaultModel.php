@@ -31,9 +31,8 @@ class DefaultModel extends Model
    public static function boot()
    {
       static::updating(function ($model) {
-         $old = new static([$model->primaryKey => $model->getId()]);
-         $old = $old->get()->first();
-
+         $old = new static();
+         $old = $old->find($model->getId());
          $history = new History($old, $model);
          $history->store();
       });

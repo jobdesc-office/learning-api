@@ -67,8 +67,8 @@ class History
 
       foreach ($histories->toArray() as $value) {
          $fieldname = $value[0];
-         $newValue = $value[1];
-         $oldValue = $value[2];
+         $oldValue = $value[1];
+         $newValue = $value[2];
 
          $tbHistory = $this->findOrCreate($fieldname);
          $this->createHistory($tbHistory, $oldValue, $newValue);
