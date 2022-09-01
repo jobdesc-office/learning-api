@@ -11,7 +11,7 @@ class Prospect extends DefaultModel
 
     protected $fillable = [
         "prospectname",
-        "prospectcode", // Kode + tahun + bulan + 00001
+        "prospectcode",
         "prospectstartdate",
         "prospectenddate",
         "prospectvalue",
@@ -29,6 +29,25 @@ class Prospect extends DefaultModel
         "createdby",
         "updatedby",
         'isactive',
+    ];
+
+    protected $alias = [
+        "prospectname" => "Name",
+        "prospectcode" => "Code",
+        "prospectstartdate" => "Start Date",
+        "prospectenddate" => "End Date",
+        "prospectvalue" => "Value",
+        "prospectowner" => "Owner",
+        "prospectstageid" => "Stage Id",
+        "prospectstatusid" => "Status Id",
+        "prospectexpclosedate" => "Expectated Close Date",
+        "prospectbpid" => "Business Partner Id",
+        "prospectdescription" => "Description",
+        "prospectcustid" => "Customer Id",
+        "prospectrefid" => "Reference Id",
+        "prospectlostreasonid" => "Lost Reason Id",
+        "prospectlostdesc" => "Lost Description",
+        "prospectcustlabel" => "Customer Label",
     ];
 
     const CREATED_AT = "createddate";

@@ -32,6 +32,17 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
         'isactive',
     ];
 
+    protected $alias = [
+        'username' => "Username",
+        'userpassword' => "Password",
+        'userfullname' => "Fullname",
+        'useremail' => "Email",
+        'userphone' => "Phone",
+        'userdeviceid' => "Device Id",
+        'userfcmtoken' => "Firebase Cloud Messaging Token",
+        'usersocketid' => "Socket Client Id",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

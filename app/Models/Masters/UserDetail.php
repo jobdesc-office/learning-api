@@ -26,6 +26,15 @@ class UserDetail extends DefaultModel
         "isactive"
     ];
 
+    protected $alias = [
+        "userid" => "User Id",
+        "userdttypeid" => "Type Id",
+        "userdtbpid" => "Business Partner Id",
+        "userdtbranchnm" => "Branch Name",
+        "userdtreferalcode" => "Referal Code",
+        "userdtrelationid" => "Relation Id",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

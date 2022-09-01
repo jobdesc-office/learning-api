@@ -28,6 +28,19 @@ class DailyActivity extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "dayactcatid" => "Category Id",
+        "dayacttypeid" => "Type Id",
+        "dayactcustid" => "Customer Id",
+        "dayacttypevalue" => "Subject",
+        "dayactdate" => "Date",
+        "dayactdesc" => "Description",
+        "dayactloclabel" => "Location Label",
+        "dayactloc" => "Location",
+        "dayactlatitude" => "Latitude",
+        "dayactlongitude" => "Longitude",
+    ];
+
     protected $casts = [
         'dayactlatitude' => 'double',
         'dayactlongitude' => 'double',

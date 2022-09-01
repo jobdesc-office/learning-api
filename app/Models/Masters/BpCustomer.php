@@ -2,8 +2,6 @@
 
 namespace App\Models\Masters;
 
-use Database\Factories\BpCustomerFactory;
-use Database\Factories\ScheduleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\DefaultModel;
 
@@ -23,6 +21,15 @@ class BpCustomer extends DefaultModel
         'createdby',
         'updatedby',
         'isactive'
+    ];
+
+    protected $alias = [
+        'sbcbpid' => "Business Partner Id",
+        'sbccstmid' => "Id",
+        'sbccstmstatusid' => "Status Id",
+        'sbccstmname' => "Name",
+        'sbccstmphone' => "Phone",
+        'sbccstmaddress' => "Address",
     ];
 
     const CREATED_AT = "createddate";

@@ -20,6 +20,14 @@ class Types extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "typecd" => "Code",
+        "typename" => "Name",
+        "typeseq" => "Sequence",
+        "typemasterid" => "Master Id",
+        "typedesc" => "Description",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

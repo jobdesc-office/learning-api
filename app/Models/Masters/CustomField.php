@@ -21,6 +21,18 @@ class CustomField extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "custfbpid",
+        "custfname",
+        "custftypeid",
+        "allprospect",
+        "onlythisprospect",
+        "thisprospectid",
+        "createdby",
+        "updatedby",
+        'isactive',
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

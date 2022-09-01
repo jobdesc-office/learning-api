@@ -32,6 +32,22 @@ class Customer extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        'cstmprefix' => "Prefix",
+        'cstmname' => "Name",
+        'cstmphone' => "Phone",
+        'cstmaddress' => "Address",
+        'cstmtypeid' => "Type Id",
+        'cstmprovinceid' => "Province Id",
+        'cstmcityid' => "City Id",
+        'cstmsubdistrictid' => "Subdistrict Id",
+        'cstmuvid' => "Urban Village Id",
+        'cstmpostalcode' => "Postal Code",
+        'cstmlatitude' => "Latitude",
+        'cstmlongitude' => "Longitude",
+        'referalcode' => "Referal Code",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

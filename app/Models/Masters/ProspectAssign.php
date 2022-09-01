@@ -20,6 +20,13 @@ class ProspectAssign extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "prospectid" => "Prospect Id",
+        "prospectassignto" => "Assign To",
+        "prospectreportto" => "Report To",
+        "prospectassigndesc" => "Description",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

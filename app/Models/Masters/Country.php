@@ -16,6 +16,10 @@ class Country extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "countryname" => "Name",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

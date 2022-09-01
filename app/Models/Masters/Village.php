@@ -17,6 +17,11 @@ class Village extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "villagesubdistrictid" => "Subdistrict Id",
+        "villagename" => "Name",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
