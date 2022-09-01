@@ -12,7 +12,7 @@ class ProspectActivityServices extends ProspectActivity
     public function details($id)
     {
         return $this->getQuery()
-            ->where('prospectactivityprospectid', $id)->orderBy('prospectactivitydate', 'asc');
+            ->where('prospectactivityprospectid', $id)->orderBy('prospectactivitydate', 'desc');
     }
 
     public function find($id)
