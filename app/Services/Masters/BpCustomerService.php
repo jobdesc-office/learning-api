@@ -18,6 +18,8 @@ class BpCustomerService extends BpCustomer
     {
         return $this
             ->newQuery()->with([
+                'bpcustcreatedby',
+                'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -47,6 +49,8 @@ class BpCustomerService extends BpCustomer
     {
         return $this
             ->newQuery()->with([
+                'bpcustcreatedby',
+                'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -75,6 +79,8 @@ class BpCustomerService extends BpCustomer
     {
         return $this
             ->newQuery()->with([
+                'bpcustcreatedby',
+                'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -100,6 +106,8 @@ class BpCustomerService extends BpCustomer
     {
         return $this
             ->newQuery()->with([
+                'bpcustcreatedby',
+                'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -156,6 +164,8 @@ class BpCustomerService extends BpCustomer
     {
         return $this->newQuery()
             ->with([
+                'bpcustcreatedby',
+                'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },

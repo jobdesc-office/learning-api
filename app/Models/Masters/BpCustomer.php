@@ -47,4 +47,14 @@ class BpCustomer extends DefaultModel
     {
         return $this->hasMany(Files::class, 'refid', 'sbcid');
     }
+
+    public function bpcustcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function bpcustupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }
