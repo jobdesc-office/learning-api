@@ -42,4 +42,14 @@ class BusinessPartner extends DefaultModel
     {
         return $this->hasMany(UserDetail::class, 'userdtbpid', 'bpid');
     }
+
+    public function bpcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function bpupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }
