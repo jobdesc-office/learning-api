@@ -38,4 +38,14 @@ class Competitor extends DefaultModel
    {
       return $this->hasMany(Files::class, 'refid', 'comptid');
    }
+
+   public function comptcreatedby()
+   {
+      return $this->belongsTo(User::class, "createdby", "userid");
+   }
+
+   public function comptupdatedby()
+   {
+      return $this->belongsTo(User::class, "updatedby", "userid");
+   }
 }
