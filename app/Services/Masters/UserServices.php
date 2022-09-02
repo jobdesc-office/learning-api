@@ -52,6 +52,8 @@ class UserServices extends User
     public function getAll($whereArr)
     {
         $users = $this->newQuery()->with([
+            'usercreatedby',
+            'userupdatedby',
             'userdetails' => function ($query) use ($whereArr) {
 
                 $userDetailFillable = (new UserDetail())->getFillable();
@@ -91,6 +93,8 @@ class UserServices extends User
     public function datatables($order, $orderby, $search)
     {
         return $this->newQuery()->with([
+            'usercreatedby',
+            'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
                     'usertype' => function ($query) {
@@ -111,6 +115,8 @@ class UserServices extends User
     public function datatablesbp($id, $order, $orderby, $search)
     {
         return $this->newQuery()->select('msuser.*')->with([
+            'usercreatedby',
+            'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
                     'usertype' => function ($query) {
@@ -135,6 +141,8 @@ class UserServices extends User
     public function find($id)
     {
         return $this->newQuery()->with([
+            'usercreatedby',
+            'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
                     'usertype' => function ($query) {
