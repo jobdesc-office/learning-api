@@ -8,6 +8,7 @@ class TrHistory extends DefaultModel
 {
     protected $table = "trhistory";
     protected $primaryKey = "historyid";
+    protected static $history = false;
 
     protected $fillable = [
         "historytbhistoryid",

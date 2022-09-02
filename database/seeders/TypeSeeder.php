@@ -222,9 +222,11 @@ class TypeSeeder extends Seeder
     public function run(Types $type)
     {
         foreach ($this->data as $data) {
-            $parent = $type->create(collect($data)->only($type->getFillable())->toArray());
-            if (isset($data['children']))
-                $this->seedChildren($type, $parent->typeid, $data['children']);
+            $type->withoutEvents(function () use ($data, $type) {
+                $parent = $type->create(collect($data)->only($type->getFillable())->toArray());
+                if (isset($data['children']))
+                    $this->seedChildren($type, $parent->typeid, $data['children']);
+            });
         }
     }
 
@@ -240,11 +242,13 @@ class TypeSeeder extends Seeder
     public function seedChildren(Types $config, $parentId, array $children)
     {
         foreach ($children as $child) {
-            $child['typemasterid'] = $parentId;
-            $result = $config->create(collect($child)->only($config->getFillable())->toArray());
+            $config->withoutEvents(function () use ($parentId, $child, $config) {
+                $child['typemasterid'] = $parentId;
+                $result = $config->create(collect($child)->only($config->getFillable())->toArray());
 
-            if (isset($child['children']))
-                $this->seedChildren($config, $result->typeid, $child['children']);
+                if (isset($child['children']))
+                    $this->seedChildren($config, $result->typeid, $child['children']);
+            });
         }
     }
 }

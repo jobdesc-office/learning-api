@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\Prospect;
 use App\Services\Masters\ProspectAssignServices;
 use App\Services\Masters\ProspectActivityServices;
 use App\Services\Masters\ProspectProductServices;
 use App\Services\Masters\ProspectServices;
+use App\Services\Masters\TrHistoryServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -78,5 +80,10 @@ class ProspectController extends Controller
     {
         $prospects = $prospectServices->countAll(collect($req->all()));
         return response()->json(['count' => $prospects]);
+    }
+
+    public function prospectHistories(Request $request, TrHistoryServices $trHistoryServices, Prospect $prospect)
+    {
+        return $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
     }
 }
