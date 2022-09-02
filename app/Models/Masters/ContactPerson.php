@@ -31,4 +31,14 @@ class ContactPerson extends DefaultModel
     {
         return $this->belongsTo(Customer::class, "contactcustomerid", "cstmid");
     }
+
+    public function contactcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function contactupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }
