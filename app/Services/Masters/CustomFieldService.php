@@ -104,6 +104,8 @@ class CustomFieldService extends CustomField
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'custfcreatedby',
+            'custfupdatedby',
             'businesspartner' => function ($query) {
                 $query->select('bpid', 'bpname');
             },
