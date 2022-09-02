@@ -27,4 +27,14 @@ class Types extends DefaultModel
     {
         return $this->belongsTo(Types::class, 'typemasterid', 'typeid');
     }
+
+    public function typecreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function typeupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }
