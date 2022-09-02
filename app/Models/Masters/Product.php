@@ -14,6 +14,11 @@ class Product extends DefaultModel
         "productbpid",
     ];
 
+    protected $alias = [
+        "productname" => "Name",
+        "productbpid" => "Business Partner Id",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

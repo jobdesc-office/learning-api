@@ -17,6 +17,11 @@ class Province extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "provcountryid" => "Country Id",
+        "provname" => "Name",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

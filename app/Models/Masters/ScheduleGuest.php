@@ -17,6 +17,13 @@ class ScheduleGuest extends DefaultModel
         "schepermisid"
     ];
 
+    protected $alias = [
+        "scheid" => "Schedule Id",
+        "scheuserid" => "User Id",
+        "schebpid" => "Business Partner Id",
+        "schepermisid" => "Permission Id",
+    ];
+
     public function scheuser()
     {
         return $this->belongsTo(User::class, 'scheuserid', 'userid');

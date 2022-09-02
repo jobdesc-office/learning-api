@@ -15,12 +15,12 @@ class CreateTrhistoryTable extends Migration
     {
         Schema::create('trhistory', function (Blueprint $table) {
             $table->id('historyid');
-            $table->bigInteger('tbhistoryid')->nullable();
-            $table->bigInteger('refid')->nullable();
-            $table->text('remark')->nullable();
-            $table->text('oldvalue')->nullable();
-            $table->text('newvalue')->nullable();
-            $table->bigInteger('bpid')->nullable();
+            $table->bigInteger('historytbhistoryid')->nullable();
+            $table->bigInteger('historyrefid')->nullable();
+            $table->text('historyremark')->nullable();
+            $table->text('historyoldvalue')->nullable();
+            $table->text('historynewvalue')->nullable();
+            $table->bigInteger('historybpid')->nullable();
             $table->string('historysource', 100)->nullable();
 
             $table->bigInteger('createdby')->nullable();

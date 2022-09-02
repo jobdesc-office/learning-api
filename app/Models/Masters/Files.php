@@ -24,6 +24,16 @@ class Files extends DefaultModel
       "isactive",
    ];
 
+   protected $alias = [
+      "transtypeid" => "Reference Type Id",
+      "refid" => "Reference Id",
+      "directories" => "Directories",
+      "filename" => "Filename",
+      'mimetype' => "Mime Type",
+      "filesize" => "File Size",
+      "remark" => "Remark",
+   ];
+
    const CREATED_AT = "createddate";
    const UPDATED_AT = "updateddate";
 

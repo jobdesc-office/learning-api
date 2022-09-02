@@ -23,6 +23,17 @@ class ProspectProduct extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "prosproductprospectid" => "Prospect Id",
+        "prosproductproductid" => "Product Id",
+        "prosproductprice" => "Price",
+        "prosproductqty" => "Quantity",
+        "prosproducttax" => "Tax",
+        "prosproductdiscount" => "Discount",
+        "prosproductamount" => "Amount",
+        "prosproducttaxtypeid" => "Tax Type Id",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

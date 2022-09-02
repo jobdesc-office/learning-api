@@ -17,6 +17,11 @@ class Subdistrict extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "subdistrictcityid" => "City Id",
+        "subdistrictname" => "Name",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

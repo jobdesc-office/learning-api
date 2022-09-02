@@ -25,6 +25,14 @@ class BusinessPartner extends DefaultModel
         'isactive'
     ];
 
+    protected $alias = [
+        'bpname' => "Name",
+        "bptypeid" => "Type Id",
+        'bppicname' => "Picture",
+        "bpemail" => "Email",
+        "bpphone" => "phone",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

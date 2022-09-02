@@ -37,6 +37,28 @@ class Schedule extends DefaultModel
         'isactive'
     ];
 
+    protected $alias = [
+        "schenm" => "Name",
+        "schestartdate" => "Start Date",
+        "scheenddate" => "End Date",
+        "schestarttime" => "Start Time",
+        "scheendtime" => "End Time",
+        "schetypeid" => "Type Id",
+        "scheactdate" => "Actual Date",
+        "schetowardid" => "Toward Id",
+        "schebpid" => "Business Partner Id",
+        "schereftypeid" => "Reference Type Id",
+        "scherefid" => "Reference Id",
+        "scheallday" => "All Day",
+        "scheloc" => "Location",
+        "scheprivate" => "Private",
+        "scheonline" => "Online",
+        "schetz" => "Timezone",
+        "scheremind" => "Remind",
+        "schedesc" => "Description",
+        "scheonlink" => "Online Link",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

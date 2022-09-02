@@ -15,11 +15,11 @@ class CreateSttbhistoryTable extends Migration
     {
         Schema::create('sttbhistory', function (Blueprint $table) {
             $table->id('tbhistoryid');
-            $table->string('tbname', 100)->nullable();
-            $table->string('tbfield', 100)->nullable();
-            $table->string('asfield', 100)->nullable();
-            $table->string('calfunc', 100)->nullable();
-            $table->text('remarkformat')->nullable();
+            $table->string('tbhistorytbname', 100)->nullable();
+            $table->string('tbhistorytbfield', 100)->nullable();
+            $table->string('tbhistoryasfield', 100)->nullable();
+            $table->string('tbhistorycallfunc', 100)->nullable();
+            $table->text('tbhistoryremarkformat')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

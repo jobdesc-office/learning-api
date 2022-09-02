@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\DailyActivity;
+use App\Models\Masters\Prospect;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\FilesServices;
+use App\Services\Masters\TrHistoryServices;
 use DB;
 use DBTypes;
 use Illuminate\Http\Request;
@@ -72,5 +75,10 @@ class DailyActivityController extends Controller
     {
         $activitys = $activityServices->countAll(collect($req->all()));
         return response()->json(['count' => $activitys]);
+    }
+
+    public function dailyActivityHistories(Request $request, TrHistoryServices $trHistoryServices, DailyActivity $dailyActivity)
+    {
+        return $trHistoryServices->findHistories($request->get('dayactid'), $dailyActivity->getTable(), $request->get('bpid'));
     }
 }

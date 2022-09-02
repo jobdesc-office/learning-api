@@ -18,6 +18,12 @@ class ProspectCustomField extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "prospectid" => "Prospect Id",
+        "prospectcustfid" => "Custom Field Id",
+        "prospectcfvalue" => "Custom Field Value",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

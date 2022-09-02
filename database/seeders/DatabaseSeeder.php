@@ -16,6 +16,7 @@ use App\Models\Masters\UserDetail;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -41,11 +42,11 @@ class DatabaseSeeder extends Seeder
         // Subdistrict::insert($subdistrictsdata);
         // Village::insert($villagesdata);
 
-        BusinessPartner::factory(\FactoryCount::bpCount)->create();
-        UserDetail::factory(\FactoryCount::userDetailCount)->create();
-        Schedule::factory(\FactoryCount::scheduleCount)->create();
-        Customer::factory(\FactoryCount::customerCount)->create();
-        DailyActivity::factory(\FactoryCount::dailyActivityCount)->create();
+        BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
+        UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
+        Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();
+        Customer::factory(\FactoryCount::customerCount)->createQuietly();
+        DailyActivity::factory(\FactoryCount::dailyActivityCount)->createQuietly();
         // BpCustomer::factory(\FactoryCount::bpCustomerCount)->create();
     }
 

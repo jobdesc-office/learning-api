@@ -19,6 +19,13 @@ class ContactPerson extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        "contactcustomerid" => "Customer Id",
+        "contacttypeid" => "Type Id",
+        "contactvalueid" => "Value",
+        "contactname" => "Name",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 

@@ -21,6 +21,15 @@ class Competitor extends DefaultModel
       "isactive",
    ];
 
+   protected $alias = [
+      "comptbpid" => "Business Partner Id",
+      "comptreftypeid" => "Reference Type Id",
+      "comptrefid" => "Reference Id",
+      "comptname" => "Name",
+      'comptproductname' => "Product Name",
+      "description" => "Description",
+   ];
+
    const CREATED_AT = "createddate";
    const UPDATED_AT = "updateddate";
 

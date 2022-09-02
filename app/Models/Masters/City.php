@@ -17,6 +17,11 @@ class City extends DefaultModel
         'isactive',
     ];
 
+    protected $alias = [
+        'cityname' => "Name",
+        'cityprovid' => "Province Id",
+    ];
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
