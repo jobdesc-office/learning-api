@@ -11,7 +11,7 @@ class FeatureServices extends Feature
     public function datatables($id, $order, $orderby, $search)
     {
         return $this->newQuery()
-            ->with(['menu'])
+            ->with(['menu', 'featcreatedby', 'featupdatedby'])
             ->where('featmenuid', $id)
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
@@ -22,7 +22,7 @@ class FeatureServices extends Feature
     public function find($id)
     {
         return $this->newQuery()->select('*')
-            ->with(['menu'])
+            ->with(['menu', 'featcreatedby', 'featupdatedby'])
             ->findOrFail($id);
     }
 }

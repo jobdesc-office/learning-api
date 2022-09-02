@@ -2,6 +2,7 @@
 
 namespace App\Models\Security;
 
+use App\Models\Masters\User;
 use App\Models\DefaultModel;
 
 class Feature extends DefaultModel
@@ -31,5 +32,15 @@ class Feature extends DefaultModel
     public function permissions()
     {
         return $this->hasMany(Permission::class, 'permisfeatid', 'featid');
+    }
+
+    public function featcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function featupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
     }
 }
