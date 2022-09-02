@@ -29,6 +29,7 @@ class DBTypes
     const prospectFollowUp = "prfoll";
     const prospectCustomizeField = 'prcf';
     const prospectLostReason = 'prlost';
+
     const competitorreftype = "comptref";
 
     const contactType = "contact";
