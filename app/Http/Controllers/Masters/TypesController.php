@@ -106,7 +106,7 @@ class TypesController extends Controller
     {
         $row = $modelTypes->findOrFail($id);
 
-        $update = collect($req->only($modelTypes->getFillable()))->filter()
+        $update = collect($req->only($modelTypes->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

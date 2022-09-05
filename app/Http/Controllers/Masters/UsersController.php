@@ -230,7 +230,7 @@ class UsersController extends Controller
     {
         $row = $modelUser->findOrFail($id);
         if ($req->get('userpassword') != '') {
-            $update = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))
+            $update = collect($req->only($modelUser->getFillable()))->put('userpassword', Hash::make($req->get('userpassword')))
                 ->except('createdby');
             $row->update($update->toArray());
 

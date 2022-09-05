@@ -103,7 +103,7 @@ class CityController extends Controller
     {
         $row = $modelCityServices->findOrFail($id);
 
-        $update = collect($req->only($modelCityServices->getFillable()))->filter()
+        $update = collect($req->only($modelCityServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

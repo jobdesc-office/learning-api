@@ -196,7 +196,7 @@ class CompetitorController extends Controller
         try {
             $row = $modelCompetitorServices->findOrFail($id);
 
-            $update = collect($req->only($modelCompetitorServices->getFillable()))->filter()
+            $update = collect($req->only($modelCompetitorServices->getFillable()))
                 ->except('createdby');
             $row->update($update->toArray());
 

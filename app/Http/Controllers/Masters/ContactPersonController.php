@@ -109,7 +109,7 @@ class ContactPersonController extends Controller
     {
         $row = $modelContactPersonServices->findOrFail($id);
 
-        $update = collect($req->only($modelContactPersonServices->getFillable()))->filter()
+        $update = collect($req->only($modelContactPersonServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

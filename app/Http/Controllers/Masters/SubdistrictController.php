@@ -100,7 +100,7 @@ class SubdistrictController extends Controller
     {
         $row = $modelSubdistrictServices->findOrFail($id);
 
-        $update = collect($req->only($modelSubdistrictServices->getFillable()))->filter()
+        $update = collect($req->only($modelSubdistrictServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

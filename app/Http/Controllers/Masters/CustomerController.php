@@ -101,7 +101,7 @@ class CustomerController extends Controller
     {
         $row = $modelCustomerService->findOrFail($id);
 
-        $update = collect($req->only($modelCustomerService->getFillable()))->filter()
+        $update = collect($req->only($modelCustomerService->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

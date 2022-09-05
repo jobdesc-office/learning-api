@@ -101,8 +101,9 @@ class BusinessPartnerController extends Controller
     {
         $row = $modelBusinessPartner->findOrFail($id);
 
-        $update = collect($req->only($modelBusinessPartner->getFillable()))->filter()
+        $update = collect($req->only($modelBusinessPartner->getFillable()))
             ->except('createdby');
+        var_dump($update->toArray());
         $row->update($update->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
