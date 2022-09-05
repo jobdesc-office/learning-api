@@ -54,4 +54,14 @@ class ProspectAssign extends DefaultModel
     {
         return $this->belongsTo(Prospect::class, "prospectid", "prospectid");
     }
+
+    public function prospectassigncreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function prospectassignupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

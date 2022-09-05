@@ -29,4 +29,14 @@ class Subdistrict extends DefaultModel
     {
         return $this->belongsTo(City::class, 'subdistrictcityid', 'cityid');
     }
+
+    public function subdistrictcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function subdistrictupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

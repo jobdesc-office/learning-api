@@ -26,4 +26,14 @@ class Product extends DefaultModel
     {
         return $this->belongsTo(BusinessPartner::class, 'productbpid', 'bpid');
     }
+
+    public function productcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function productupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

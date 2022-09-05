@@ -29,4 +29,14 @@ class Village extends DefaultModel
     {
         return $this->belongsTo(Subdistrict::class, 'villagesubdistrictid', 'subdistrictid');
     }
+
+    public function villagecreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function villageupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

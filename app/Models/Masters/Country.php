@@ -27,4 +27,14 @@ class Country extends DefaultModel
     {
         return $this->hasMany(Province::class, 'provcountryid', 'countryid');
     }
+
+    public function countrycreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function countryupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }
