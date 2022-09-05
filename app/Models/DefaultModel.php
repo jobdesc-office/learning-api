@@ -22,7 +22,8 @@ class DefaultModel extends Model
     */
    public function getAlias($fieldName)
    {
-      return $this->alias[$fieldName];
+      if (isset($this->alias[$fieldName])) return $this->alias[$fieldName];
+      return null;
    }
 
    public function getId()
@@ -45,7 +46,7 @@ class DefaultModel extends Model
          if (static::$history) {
             $old = new static();
             $old->setAttribute($old->primaryKey, $model->getId());
-            $history = new History($old, $model, true, "FIELD value has been created at DATE");
+            $history = new History($old, $model, true, "FIELD value has been created at DATE by USER");
             $history->store();
          }
       });
@@ -54,7 +55,7 @@ class DefaultModel extends Model
          if (static::$history) {
             $old = new static();
             $old->setAttribute($old->primaryKey, $model->getId());
-            $history = new History($old, $model, true, "FIELD value has been deleted at DATE");
+            $history = new History($old, $model, true, "FIELD value has been deleted at DATE by USER");
             $history->store();
          }
       });

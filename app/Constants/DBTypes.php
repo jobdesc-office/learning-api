@@ -26,7 +26,6 @@ class DBTypes
     const prospectStatus = 'prstatus';
     const prospectCustLabel = 'prcustlab';
     const prospectCategory = 'prcat';
-    const prospectFollowUp = "prfoll";
     const prospectCustomizeField = 'prcf';
     const prospectLostReason = 'prlost';
 

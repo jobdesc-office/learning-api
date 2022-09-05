@@ -17,6 +17,7 @@ class TrHistoryServices extends TrHistory
    {
       return $this->newQuery()->with([
          'historytbhistory',
+         'historyuser',
       ]);
    }
 }

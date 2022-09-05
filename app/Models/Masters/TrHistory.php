@@ -28,6 +28,11 @@ class TrHistory extends DefaultModel
         return $this->belongsTo(TbHistory::class, 'historytbhistoryid', 'tbhistoryid');
     }
 
+    public function historyuser()
+    {
+        return $this->belongsTo(User::class, 'createdby', 'userid');
+    }
+
     const CREATED_AT = "createddate";
 
     public $timestamps = false;
