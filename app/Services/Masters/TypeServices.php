@@ -11,6 +11,10 @@ class TypeServices extends Types
     public function byCodes($code)
     {
         return $this->newQuery()->select('typeid')
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->where('typecd', $code)->get();
     }
 
@@ -20,6 +24,10 @@ class TypeServices extends Types
             ->whereHas('parent', function ($query) use ($code) {
                 $query->where('typecd', $code);
             })
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->orderBy('typename', 'asc')
             ->get();
     }
@@ -30,6 +38,10 @@ class TypeServices extends Types
             ->whereHas('parent', function ($query) use ($code) {
                 $query->where('typecd', $code);
             })
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->orderBy('typeseq', 'asc')
             ->get();
     }
@@ -37,6 +49,10 @@ class TypeServices extends Types
     public function byParentId($code)
     {
         return $this->newQuery()
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->where('typemasterid', $code)
             ->orderBy('typename', 'asc')
             ->get();
@@ -45,6 +61,10 @@ class TypeServices extends Types
     public function datatables($order, $orderby, $search)
     {
         return $this->newQuery()->select('*')->where('typemasterid', null)
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
@@ -54,6 +74,10 @@ class TypeServices extends Types
     public function find($id)
     {
         return $this->newQuery()
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->findOrFail($id);
     }
 }

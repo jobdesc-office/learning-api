@@ -109,6 +109,8 @@ class CompetitorServices extends Competitor
    public function getQuery()
    {
       return $this->newQuery()->with([
+         'comptcreatedby',
+         'comptupdatedby',
          'comptreftype' => function ($query) {
             $query->select('typeid', 'typename');
          },

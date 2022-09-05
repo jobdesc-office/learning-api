@@ -12,6 +12,8 @@ class ScheduleServices extends Schedule
     {
         $query = $this->newQuery()->select('*')
             ->with([
+                'schecreatedby',
+                'scheupdatedby',
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -41,11 +43,13 @@ class ScheduleServices extends Schedule
     {
         return $this->newQuery()
             ->with([
+                'schecreatedby',
+                'scheupdatedby',
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
                 'scheguest' => function ($query) {
-                    $query->with('scheuser', 'schebp');
+                    $query->with('scheuser', 'scheguestbp');
                 },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');
@@ -64,6 +68,8 @@ class ScheduleServices extends Schedule
     {
         return $this->newQuery()->select('*')
             ->with([
+                'schecreatedby',
+                'scheupdatedby',
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -88,7 +94,7 @@ class ScheduleServices extends Schedule
                     $query->select('typeid', 'typename');
                 },
                 'scheguest' => function ($query) {
-                    $query->with('scheuser', 'schebp');
+                    $query->with('scheuser', 'scheguestbp');
                 },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');
@@ -135,11 +141,13 @@ class ScheduleServices extends Schedule
         $query = $this->newQuery()
             ->where('schebpid', $id)
             ->with([
+                'schecreatedby',
+                'scheupdatedby',
                 'schetype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
                 'scheguest' => function ($query) {
-                    $query->with('scheuser', 'schebp');
+                    $query->with('scheuser', 'scheguestbp');
                 },
                 'schebp' => function ($query) {
                     $query->select('bpid', 'bpname');

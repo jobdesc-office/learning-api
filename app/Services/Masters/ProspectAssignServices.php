@@ -29,6 +29,8 @@ class ProspectAssignServices extends ProspectAssign
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'prospectassigncreatedby',
+            'prospectassignupdatedby',
             'prospectassign' => function ($query) {
                 $query->with(['user', 'usertype', 'businesspartner']);
             },

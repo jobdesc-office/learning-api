@@ -108,7 +108,7 @@ class ProductController extends Controller
     {
         $row = $modelProductServices->findOrFail($id);
 
-        $update = collect($req->only($modelProductServices->getFillable()))->filter()
+        $update = collect($req->only($modelProductServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

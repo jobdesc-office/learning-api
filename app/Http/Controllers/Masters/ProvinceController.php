@@ -100,7 +100,7 @@ class ProvinceController extends Controller
     {
         $row = $modelProvinceServices->findOrFail($id);
 
-        $update = collect($req->only($modelProvinceServices->getFillable()))->filter()
+        $update = collect($req->only($modelProvinceServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

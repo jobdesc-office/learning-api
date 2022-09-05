@@ -79,7 +79,9 @@ class CityServices extends City
         return $this->newQuery()->with([
             'cityprov' => function ($query) {
                 $query->select('provid', 'provname');
-            }
+            },
+            'citycreatedby',
+            'cityupdatedby',
         ]);
     }
 }

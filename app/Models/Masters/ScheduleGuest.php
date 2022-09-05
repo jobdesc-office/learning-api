@@ -29,7 +29,7 @@ class ScheduleGuest extends DefaultModel
         return $this->belongsTo(User::class, 'scheuserid', 'userid');
     }
 
-    public function schebp()
+    public function scheguestbp()
     {
         return $this->belongsTo(BusinessPartner::class, 'schebpid', 'bpid');
     }

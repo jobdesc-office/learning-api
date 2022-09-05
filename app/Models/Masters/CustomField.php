@@ -45,4 +45,14 @@ class CustomField extends DefaultModel
     {
         return $this->belongsTo(Types::class, 'custftypeid', 'typeid');
     }
+
+    public function custfcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function custfupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

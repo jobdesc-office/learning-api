@@ -3,6 +3,7 @@
 namespace App\Models\Security;
 
 use App\Models\Masters\Types;
+use App\Models\Masters\User;
 use App\Models\DefaultModel;
 
 class Menu extends DefaultModel
@@ -45,5 +46,15 @@ class Menu extends DefaultModel
     public function children()
     {
         return $this->hasMany(Menu::class, 'masterid', 'menuid');
+    }
+
+    public function menucreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function menuupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
     }
 }

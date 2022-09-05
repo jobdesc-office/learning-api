@@ -65,4 +65,14 @@ class ProspectActivity extends DefaultModel
     {
         return $this->belongsTo(Types::class, 'prospectactivitytypeid', 'typeid');
     }
+
+    public function prospectactivitycreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function prospectactivityupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

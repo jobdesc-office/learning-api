@@ -100,7 +100,7 @@ class CountryController extends Controller
     {
         $row = $modelCountryServices->findOrFail($id);
 
-        $update = collect($req->only($modelCountryServices->getFillable()))->filter()
+        $update = collect($req->only($modelCountryServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

@@ -92,4 +92,14 @@ class Schedule extends DefaultModel
     {
         return $this->belongsTo(Types::class, 'schereftypeid', 'typeid');
     }
+
+    public function schecreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function scheupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

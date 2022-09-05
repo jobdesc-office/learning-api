@@ -29,4 +29,14 @@ class Province extends DefaultModel
     {
         return $this->belongsTo(Country::class, 'provcountryid', 'countryid');
     }
+
+    public function provincecreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function provinceupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

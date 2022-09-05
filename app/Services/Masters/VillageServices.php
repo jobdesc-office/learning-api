@@ -99,7 +99,9 @@ class VillageServices extends Village
         return $this->newQuery()->with([
             'villagesubdistrict' => function ($query) {
                 $query->select('subdistrictid', 'subdistrictname');
-            }
+            },
+            'villagecreatedby',
+            'villageupdatedby',
         ]);
     }
 }

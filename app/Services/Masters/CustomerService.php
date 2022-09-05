@@ -67,6 +67,8 @@ class CustomerService extends Customer
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'custcreatedby',
+            'custupdatedby',
             'cstmtype' => function ($query) {
                 $query->select('typeid', 'typename');
             },

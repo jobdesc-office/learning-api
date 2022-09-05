@@ -29,4 +29,14 @@ class City extends DefaultModel
     {
         return $this->belongsTo(Province::class, 'cityprovid', 'provid');
     }
+
+    public function citycreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function cityupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

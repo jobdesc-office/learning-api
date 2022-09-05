@@ -48,7 +48,7 @@ class ScheduleController extends Controller
     {
         $schedule = $scheduleModel->findOrFail($id);
 
-        $fields = collect($req->only($scheduleModel->getFillable()))->filter()
+        $fields = collect($req->only($scheduleModel->getFillable()))
             ->except('createdby');
         $schedule->update($fields->toArray());
 

@@ -51,4 +51,14 @@ class ProspectProduct extends DefaultModel
     {
         return $this->belongsTo(Types::class, 'prosproducttaxtypeid', 'typeid');
     }
+
+    public function prospectproductcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function prospectproductupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }

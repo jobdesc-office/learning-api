@@ -79,7 +79,9 @@ class ProvinceServices extends Province
         return $this->newQuery()->with([
             'provcountry' => function ($query) {
                 $query->select('countryid', 'countryname');
-            }
+            },
+            'provincecreatedby',
+            'provinceupdatedby',
         ]);
     }
 }

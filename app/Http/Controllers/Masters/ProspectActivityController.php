@@ -43,7 +43,7 @@ class ProspectActivityController extends Controller
     public function update($id, Request $req, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
     {
 
-        $fields = collect($req->only($ProspectActivityModel->getFillable()))->filter()
+        $fields = collect($req->only($ProspectActivityModel->getFillable()))
             ->except('createdby', 'prospectdtprospectid');
         $ProspectActivityModel->findOrFail($id)->update($fields->toArray());
 

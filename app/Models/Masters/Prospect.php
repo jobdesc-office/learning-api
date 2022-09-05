@@ -58,6 +58,11 @@ class Prospect extends DefaultModel
         return $this->belongsTo(User::class, "createdby", "userid");
     }
 
+    public function prospectupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
+
     public function prospectowneruser()
     {
         return $this->belongsTo(UserDetail::class, "prospectowner", "userdtid");

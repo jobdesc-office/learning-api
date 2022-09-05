@@ -268,7 +268,7 @@ class ProspectController extends Controller
     public function update($id, Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
     {
 
-        $fields = collect($req->only($ProspectModel->getFillable()))->filter()
+        $fields = collect($req->only($ProspectModel->getFillable()))
             ->except('createdby');
         $ProspectModel->findOrFail($id)->update($fields->toArray());
 

@@ -16,7 +16,7 @@ class ScheduleGuestServices extends ScheduleGuest
                 'scheuser' => function ($query) {
                     $query->select('userid', 'userfullname');
                 },
-                'schebp' => function ($query) {
+                'scheguestbp' => function ($query) {
                     $query->select('bpid', 'bpname');
                 },
                 'schedule' => function ($query) use ($id) {

@@ -42,6 +42,8 @@ class ContactPersonServices extends ContactPerson
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'contactcreatedby',
+            'contactupdatedby',
             'contactcustomer',
             'contacttype' => function ($query) {
                 $query->select('typeid', 'typename');

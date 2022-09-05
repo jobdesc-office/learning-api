@@ -224,7 +224,7 @@ class CustomFieldController extends Controller
     {
         $row = $modelCustomFieldService->findOrFail($id);
 
-        $update = collect($req->only($modelCustomFieldService->getFillable()))->filter()
+        $update = collect($req->only($modelCustomFieldService->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

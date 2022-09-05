@@ -91,7 +91,7 @@ class VillageController extends Controller
     {
         $row = $modelVillageServices->findOrFail($id);
 
-        $update = collect($req->only($modelVillageServices->getFillable()))->filter()
+        $update = collect($req->only($modelVillageServices->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
 

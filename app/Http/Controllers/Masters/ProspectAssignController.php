@@ -36,7 +36,7 @@ class ProspectAssignController extends Controller
     public function update($id, Request $req, ProspectAssign $ProspectAssignModel)
     {
 
-        $fields = collect($req->only($ProspectAssignModel->getFillable()))->filter()
+        $fields = collect($req->only($ProspectAssignModel->getFillable()))
             ->except('createdby', 'prospectid');
         $ProspectAssignModel->findOrFail($id)->update($fields->toArray());
 

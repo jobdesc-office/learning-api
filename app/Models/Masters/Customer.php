@@ -85,4 +85,14 @@ class Customer extends DefaultModel
     {
         return $this->belongsTo(Village::class, 'cstmuvid', 'villageid');
     }
+
+    public function custcreatedby()
+    {
+        return $this->belongsTo(User::class, "createdby", "userid");
+    }
+
+    public function custupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
 }
