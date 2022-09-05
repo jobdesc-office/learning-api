@@ -86,14 +86,15 @@ class MenusController extends Controller
      * */
     public function store(Request $req, Menu $modelMenu, Feature $modelFeature, Permission $modelPermission)
     {
-        $insert = collect($req->only($modelMenu->getFillable()))->filter();
-        $result = $modelMenu->create($insert->toArray());
+        DB::beginTransaction();
+        try {
+            $insert = collect($req->only($modelMenu->getFillable()))->filter()->except('updatedby');
+            var_dump($insert);
 
-        $cruds = json_decode($req->get('crud'));
-        $roles = json_decode($req->get('roles'));
-        if ($cruds != null) {
-            DB::beginTransaction();
-            try {
+            $result = $modelMenu->create($insert->toArray());
+            $cruds = json_decode($req->get('crud'));
+            $roles = json_decode($req->get('roles'));
+            if ($cruds != null) {
                 foreach ($cruds as $crud) {
                     $resultFeature = $modelFeature->create([
                         'featmenuid' => $result->menuid,
@@ -111,14 +112,14 @@ class MenusController extends Controller
                         ]);
                     }
                 }
-                DB::commit();
-            } catch (\Throwable $th) {
-                DB::rollBack();
-                return response()->json(['message' => $th]);
             }
-        }
+            DB::commit();
 
-        return response()->json(['message' => \TextMessages::successCreate]);
+            return response()->json(['message' => \TextMessages::successCreate]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['message' => $th]);
+        }
     }
 
     /**
@@ -169,6 +170,7 @@ class MenusController extends Controller
             return response()->json(['message' => \TextMessages::successDelete]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            return response()->json(['message' => $th]);
         }
     }
 }

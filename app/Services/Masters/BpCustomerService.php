@@ -193,17 +193,21 @@ class BpCustomerService extends BpCustomer
         $customerService = new CustomerService;
         $bpcustomer = $this->fill($insertArr->toArray());
         if ($insertArr->has('cstmid')) {
-            $customer = $customerService->find($insertArr->get('cstmid'));
-            $customer = $customer->fill($insertArr->toArray());
+            try {
+                $customer = $customerService->find($insertArr->get('cstmid'));
+                $customer = $customer->fill($insertArr->toArray());
+                if ($customer->save()) {
 
-            if ($customer->save()) {
-
-                $bpcustomer->sbccstmid =  $customer->cstmid;
-                $bpcustomer->sbccstmname =  $customer->cstmname;
-                $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
-                $bpcustomer->sbccstmphone =  $customer->cstmphone;
-            } else {
-                return false;
+                    $bpcustomer->sbccstmid =  $customer->cstmid;
+                    $bpcustomer->sbccstmname =  $customer->cstmname;
+                    $bpcustomer->sbccstmaddress =  $customer->cstmaddress;
+                    $bpcustomer->sbccstmphone =  $customer->cstmphone;
+                } else {
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                var_dump($th);
+                return $th;
             }
         } else {
             $customer = $customerService->fill($insertArr->toArray());

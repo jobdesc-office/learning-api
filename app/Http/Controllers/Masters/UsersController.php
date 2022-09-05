@@ -246,7 +246,7 @@ class UsersController extends Controller
                 }
             }
         } else {
-            $update = collect($req->only($modelUser->getFillable()))->filter()
+            $update = collect($req->only($modelUser->getFillable()))
                 ->except('createdby', 'userpassword');
             $row->update($update->toArray());
 
