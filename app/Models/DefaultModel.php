@@ -22,7 +22,8 @@ class DefaultModel extends Model
     */
    public function getAlias($fieldName)
    {
-      return $this->alias[$fieldName];
+      if (isset($this->alias[$fieldName])) return $this->alias[$fieldName];
+      return null;
    }
 
    public function getId()

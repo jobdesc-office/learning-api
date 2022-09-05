@@ -56,10 +56,9 @@ class History
 
    public function store()
    {
-      $oldData = $this->oldModel->toArray();
       $newData = $this->newModel->toArray();
 
-      $histories = collect($newData)->map(function ($value, $field) use ($oldData) {
+      $histories = collect($newData)->map(function ($value, $field) {
          if ($this->oldModel->getAttribute($field) != $value && !in_array($field, History::UNTRACKABLE_FIELD)) {
             return [$field, $this->oldModel->getAttribute($field), $value];
          }
@@ -73,7 +72,7 @@ class History
          $newValue = $value[2];
 
          $tbHistory = $this->findOrCreate($fieldname);
-         $this->createHistory($tbHistory, $oldValue, $newValue);
+         if ($tbHistory != null) $this->createHistory($tbHistory, $oldValue, $newValue);
       }
    }
 
@@ -85,29 +84,32 @@ class History
       $tbname = $this->oldModel->getTable();
       $aliasField = $this->oldModel->getAlias($fieldname);
 
-      $data = [
-         'tbhistorytbname' => $tbname,
-         'tbhistorytbfield' => $fieldname,
-         'tbhistoryasfield' => $aliasField,
-         'tbhistoryremarkformat' => History::DEFAULT_REMARK,
-         'createdby' => auth()->user()->id,
-      ];
-      if ($this->remark != null) $data['tbhistoryremarkformat'] = $this->remark;
+      if ($aliasField != null) {
+         $data = [
+            'tbhistorytbname' => $tbname,
+            'tbhistorytbfield' => $fieldname,
+            'tbhistoryasfield' => $aliasField,
+            'tbhistoryremarkformat' => History::DEFAULT_REMARK,
+            'createdby' => auth()->user()->id,
+         ];
+         if ($this->remark != null) $data['tbhistoryremarkformat'] = $this->remark;
 
-      $historyParent = TbHistory::where($data)->get();
+         $historyParent = TbHistory::where($data)->get();
 
-      if ($historyParent->count() > 0) {
-         return $historyParent->first();
-      } else {
-         if ($this->createParentIfNull) {
-            $tbHistory = new TbHistory();
-            $tbHistory->fill($data);
-            $tbHistory->save();
+         if ($historyParent->count() > 0) {
+            return $historyParent->first();
+         } else {
+            if ($this->createParentIfNull) {
+               $tbHistory = new TbHistory();
+               $tbHistory->fill($data);
+               $tbHistory->save();
 
-            return $tbHistory;
+               return $tbHistory;
+            }
+            return null;
          }
-         return null;
       }
+      return null;
    }
 
    /**
