@@ -178,6 +178,7 @@ class ProspectServices extends Prospect
     public function getQueery()
     {
         return $this->newQuery()->with([
+            'prospectupdatedby',
             'prospectassigns' => function ($query) {
                 $query->select('*')->with(['prospectassignss', 'prospectreportss']);
             },

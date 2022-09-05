@@ -35,6 +35,8 @@ class ProspectActivityServices extends ProspectActivity
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'prospectactivitycreatedby',
+            'prospectactivityupdatedby',
             'prospectactivityprospect',
             'prospectactivitycat' => function ($query) {
                 $query->select('typeid', 'typename');

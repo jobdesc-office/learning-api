@@ -78,7 +78,9 @@ class SubdistrictServices extends Subdistrict
         return $this->newQuery()->with([
             'subdistrictcity' => function ($query) {
                 $query->select('cityid', 'cityname');
-            }
+            },
+            'subdistrictcreatedby',
+            'subdistrictupdatedby',
         ]);
     }
 }

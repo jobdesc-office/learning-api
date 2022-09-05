@@ -63,7 +63,9 @@ class ProductServices extends Product
         return $this->newQuery()->with([
             'businesspartner' => function ($query) {
                 $query->select('bpid', 'bpname');
-            }
+            },
+            'productcreatedby',
+            'productupdatedby',
         ]);
     }
 }

@@ -65,6 +65,8 @@ class ProspectProductServices extends ProspectProduct
     public function getQuery()
     {
         return $this->newQuery()->with([
+            'prospectproductcreatedby',
+            'prospectproductupdatedby',
             'prosproductproduct',
             'prosproductprospect',
             'prosproducttaxtype' => function ($query) {

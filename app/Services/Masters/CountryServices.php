@@ -32,7 +32,10 @@ class CountryServices extends Country
 
     public function find($id)
     {
-        return $this->newQuery()->findOrFail($id);
+        return $this->newQuery()->with([
+            'countrycreatedby',
+            'countryupdatedby',
+        ])->findOrFail($id);
     }
 
     public function getAll(Collection $whereArr)
