@@ -45,7 +45,7 @@ class DefaultModel extends Model
          if (static::$history) {
             $old = new static();
             $old->setAttribute($old->primaryKey, $model->getId());
-            $history = new History($old, $model, true, "FIELD value has been created at DATE");
+            $history = new History($old, $model, true, "FIELD value has been created at DATE by USER");
             $history->store();
          }
       });
@@ -54,7 +54,7 @@ class DefaultModel extends Model
          if (static::$history) {
             $old = new static();
             $old->setAttribute($old->primaryKey, $model->getId());
-            $history = new History($old, $model, true, "FIELD value has been deleted at DATE");
+            $history = new History($old, $model, true, "FIELD value has been deleted at DATE by USER");
             $history->store();
          }
       });

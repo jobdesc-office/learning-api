@@ -3,12 +3,13 @@
 use App\Models\DefaultModel;
 use App\Models\Masters\TbHistory;
 use App\Models\Masters\TrHistory;
+use App\Models\Masters\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class History
 {
-   const DEFAULT_REMARK = "FIELD value has been changed from \"VALUE.OLD\" to \"VALUE.NEW\" at DATE";
+   const DEFAULT_REMARK = "FIELD value has been changed from \"VALUE.OLD\" to \"VALUE.NEW\" at DATE by USER";
    const UNTRACKABLE_FIELD = ['createddate', 'updateddate', 'createdby', 'updatedby', 'isactive'];
 
    /**
@@ -41,7 +42,7 @@ class History
     * @param DefaultModel $oldModel
     * @param DefaultModel $newModel
     * @param boolean $createIfNull create parent if null
-    * @param string|null $remark remark should contains VALUE.OLD, VALUE.NEW, FIELD, DATE 
+    * @param string|null $remark remark should contains VALUE.OLD, VALUE.NEW, FIELD, DATE , USER
     */
    public function __construct($oldModel, $newModel, $createParentIfNull = true, $remark = null)
    {
@@ -89,6 +90,7 @@ class History
          'tbhistorytbfield' => $fieldname,
          'tbhistoryasfield' => $aliasField,
          'tbhistoryremarkformat' => History::DEFAULT_REMARK,
+         'createdby' => auth()->user()->id,
       ];
       if ($this->remark != null) $data['tbhistoryremarkformat'] = $this->remark;
 
@@ -117,6 +119,7 @@ class History
       $remark = Str::replace('VALUE.OLD', $oldvalue, $remark);
       $remark = Str::replace('VALUE.NEW', $newvalue, $remark);
       $remark = Str::replace('FIELD', $tbhistory->tbhistoryasfield, $remark);
+      $remark = Str::replace('USER', auth()->user()->userfullname, $remark);
 
       $date = Carbon::now()->format('F d ,Y h:i A');
       $remark = Str::replace('DATE', $date, $remark);
