@@ -16,9 +16,10 @@ class CreateStbptypeTable extends Migration
         Schema::create('stbptype', function (Blueprint $table) {
             $table->id('sbtid');
             $table->bigInteger('sbtbpid');
-            $table->text('sbtname');
+            $table->text('sbtname')->nullable();
+            $table->integer('sbtseq')->nullable();
             $table->bigInteger('sbttypemasterid');
-            $table->text('sbttypename');
+            $table->text('sbttypename')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

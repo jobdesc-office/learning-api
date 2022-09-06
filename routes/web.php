@@ -311,6 +311,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->put('{id}', 'ProspectProductController@update');
             $router->delete('{id}', 'ProspectProductController@destroy');
         });
+
+        $router->group(['prefix' => 'stbptype'], function () use ($router) {
+            $router->post('datatables', 'StbptypeController@datatables');
+
+            $router->post('', 'StbptypeController@store');
+            $router->get('{id}', 'StbptypeController@show');
+            $router->put('{id}', 'StbptypeController@update');
+            $router->delete('{id}', 'StbptypeController@destroy');
+        });
     });
 
     $router->group(['namespace' => 'Security'], function () use ($router) {
