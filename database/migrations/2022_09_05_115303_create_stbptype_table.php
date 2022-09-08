@@ -20,6 +20,7 @@ class CreateStbptypeTable extends Migration
             $table->integer('sbtseq')->nullable();
             $table->bigInteger('sbttypemasterid');
             $table->text('sbttypename')->nullable();
+            $table->text('sbtremark')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

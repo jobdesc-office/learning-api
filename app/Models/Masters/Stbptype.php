@@ -15,6 +15,7 @@ class Stbptype extends DefaultModel
         "sbtseq",
         "sbttypemasterid",
         "sbttypename",
+        "sbtremark",
         "createdby",
         "updatedby",
         'isactive',
@@ -26,6 +27,7 @@ class Stbptype extends DefaultModel
         "sbtseq" => "Sequel",
         "sbttypemasterid" => "Type Id",
         "sbttypename" => "Type Name",
+        "sbtremark" => "Marker",
     ];
 
     const CREATED_AT = "createddate";

@@ -12,6 +12,12 @@ use DBTypes;
 class TypesController extends Controller
 {
 
+    public function byCodeMaster(Request $req, TypeServices $typeServices)
+    {
+        $types = $typeServices->byCodeMaster($req->get('typecd'));
+        return response($types);
+    }
+
     public function byCode(Request $req, TypeServices $typeServices)
     {
         $types = $typeServices->byCode($req->get('typecd'));

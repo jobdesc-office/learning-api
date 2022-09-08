@@ -21,7 +21,7 @@ class StbptypeServices extends Stbptype
         return $this->getQuery()
             ->orderBy('sbtname', 'asc')
             ->where('sbtbpid', $bpid)
-            ->where('sbttypemasterid', $typeid);
+            ->where('sbttypemasterid', $typeid)->get();
     }
 
     public function datatablesBySeq($typeid, $bpid)

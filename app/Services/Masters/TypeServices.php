@@ -20,7 +20,7 @@ class TypeServices extends Types
 
     public function byCode($code)
     {
-        return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq')
+        return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq', 'typemasterid')
             ->whereHas('parent', function ($query) use ($code) {
                 $query->where('typecd', $code);
             })
@@ -29,6 +29,17 @@ class TypeServices extends Types
                 'typeupdatedby',
             ])
             ->orderBy('typename', 'asc')
+            ->get();
+    }
+
+    public function byCodeMaster($code)
+    {
+        return $this->newQuery()
+            ->where('typecd', $code)
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
             ->get();
     }
 
