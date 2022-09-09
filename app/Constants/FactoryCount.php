@@ -9,4 +9,5 @@ class FactoryCount
     const dailyActivityCount = 50;
     const userDetailCount = 25;
     const bpCustomerCount = 132;
+    const contactCount = 50;
 }

@@ -3,9 +3,13 @@
 namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
+use Database\Factories\ContactFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ContactPerson extends DefaultModel
 {
+    use HasFactory;
+
     protected $table = "mscontactperson";
     protected $primaryKey = "contactpersonid";
 
@@ -28,6 +32,11 @@ class ContactPerson extends DefaultModel
 
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
+
+    protected static function newFactory()
+    {
+        return new ContactFactory();
+    }
 
     public function contacttype()
     {
