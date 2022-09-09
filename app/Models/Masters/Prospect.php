@@ -2,12 +2,20 @@
 
 namespace App\Models\Masters;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\DefaultModel;
+use Database\Factories\ProspectFactory;
 
 class Prospect extends DefaultModel
 {
+    use HasFactory;
     protected $table = "trprospect";
     protected $primaryKey = "prospectid";
+
+    protected static function newFactory()
+    {
+        return new ProspectFactory();
+    }
 
     protected $fillable = [
         "prospectname",

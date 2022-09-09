@@ -2,7 +2,7 @@
 
 class FactoryCount
 {
-
+    const prospectCount = 5;
     const bpCount = 5;
     const customerCount = 800;
     const scheduleCount = 50;
