@@ -199,6 +199,7 @@ class CompetitorController extends Controller
             $update = collect($req->only($modelCompetitorServices->getFillable()))
                 ->except('createdby');
             $row->update($update->toArray());
+            var_dump($req->hasFile('comptpics'));
 
             if ($req->hasFile('comptpics')) {
                 $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
@@ -225,6 +226,7 @@ class CompetitorController extends Controller
             return response()->json(['message' => \TextMessages::successEdit]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            return response()->json(['message' => $th]);
         }
     }
 

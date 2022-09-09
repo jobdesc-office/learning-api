@@ -8,6 +8,7 @@ use App\Models\Masters\Customer;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Schedule;
 use App\Models\Masters\UserDetail;
+use App\Models\Masters\Prospect;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         Customer::factory(\FactoryCount::customerCount)->createQuietly();
         DailyActivity::factory(\FactoryCount::dailyActivityCount)->createQuietly();
         ContactPerson::factory(\FactoryCount::contactCount)->createQuietly();
+        Prospect::factory(\FactoryCount::prospectCount)->createQuietly();
 
         $this->call([BpCustomerSeeder::class]);
         $this->call([BpTypeSeeder::class]);
