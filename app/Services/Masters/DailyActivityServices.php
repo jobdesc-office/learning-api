@@ -119,10 +119,8 @@ class DailyActivityServices extends DailyActivity
 
         if ($whereArr->has('bpid')) {
             $bpid = $whereArr->get('bpid');
-            $query = $query->whereHas('dayactuser', function ($query) use ($bpid) {
-                $query->whereHas('userdetails', function ($query) use ($bpid) {
-                    $query->where('userdtbpid', $bpid);
-                });
+            $query = $query->whereHas('dayactcust', function ($query) use ($bpid) {
+                $query->where('sbcbpid', $bpid);
             });
         }
 

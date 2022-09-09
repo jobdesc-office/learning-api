@@ -92,6 +92,7 @@ class BpCustomerController extends Controller
         $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
+        $statusid = $req->get('statusid');
 
         switch ($order) {
             case 0:
@@ -136,7 +137,7 @@ class BpCustomerController extends Controller
                 $order = $order;
                 break;
         }
-        $query = $bpcustomerservice->datatablesbp($id, $order, $orderby, $search);
+        $query = $bpcustomerservice->datatablesbp($id, $order, $orderby, $search, ['sbccstmstatusid' => $statusid]);
 
         return
             datatables()->eloquent($query)

@@ -102,7 +102,7 @@ class BpCustomerService extends BpCustomer
             ->orderBy($order, $orderby);
     }
 
-    public function datatablesbp($id, $order, $orderby, $search)
+    public function datatablesbp($id, $order, $orderby, $search, $where)
     {
         return $this
             ->newQuery()->with([
@@ -127,6 +127,7 @@ class BpCustomerService extends BpCustomer
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
+            // ->where($where)
             ->orderBy($order, $orderby);
     }
 

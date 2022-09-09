@@ -31,7 +31,7 @@ class DailyActivity extends DefaultModel
     protected $alias = [
         "dayactcatid" => "Category Id",
         "dayacttypeid" => "Type Id",
-        "dayactcustid" => "Customer Id",
+        "dayactcustid" => "BpCustomer Id",
         "dayacttypevalue" => "Subject",
         "dayactdate" => "Date",
         "dayactdesc" => "Description",
@@ -63,7 +63,7 @@ class DailyActivity extends DefaultModel
 
     public function dayactcust()
     {
-        return $this->belongsTo(Customer::class, "dayactcustid", "cstmid");
+        return $this->belongsTo(BpCustomer::class, "dayactcustid", "cstmid");
     }
 
     public function dayacttype()
