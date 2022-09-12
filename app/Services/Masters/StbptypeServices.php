@@ -3,17 +3,19 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Stbptype;
-use DBTypes;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-class StbptypeServices extends Stbptype
+class StBpTypeServices extends Stbptype
 {
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);
+    }
+
+    public function byCode($code)
+    {
+        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
+            $query->where('typecd', $code);
+        })->get();
     }
 
     public function datatables($typeid, $bpid)

@@ -387,6 +387,11 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('{id}', 'TypesController@show');
             });
 
+            $router->group(['prefix' => 'bptypes'], function () use ($router) {
+                $router->get('by-code', 'BpTypeController@byCode');
+                $router->get('{id}', 'BpTypeController@show');
+            });
+
             $router->group(['prefix' => 'user'], function () use ($router) {
                 $router->get('', 'UsersController@all');
                 $router->post('', 'UsersController@store');

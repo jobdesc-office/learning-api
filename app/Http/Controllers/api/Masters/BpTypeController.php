@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Controllers\api\masters;
+
+use App\Http\Controllers\Controller;
+use App\Services\Masters\StBpTypeServices;
+use Illuminate\Http\Request;
+
+class BpTypeController extends Controller
+{
+
+   public function byCode(Request $req, StBpTypeServices $typeServices)
+   {
+      $types = $typeServices->byCode($req->get('typecd'));
+      return response()->json($types);
+   }
+
+   public function show($id, StBpTypeServices $typeServices)
+   {
+      $row = $typeServices->find($id);
+      return response()->json($row);
+   }
+}

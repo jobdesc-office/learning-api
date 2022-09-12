@@ -58,7 +58,7 @@ class DailyActivity extends DefaultModel
 
     public function dayactcat()
     {
-        return $this->belongsTo(Types::class, "dayactcatid", "typeid");
+        return $this->belongsTo(Stbptype::class, "dayactcatid", "typeid");
     }
 
     public function dayactcust()
@@ -68,7 +68,7 @@ class DailyActivity extends DefaultModel
 
     public function dayacttype()
     {
-        return $this->belongsTo(Types::class, "dayacttypeid", "typeid");
+        return $this->belongsTo(Stbptype::class, "dayacttypeid", "typeid");
     }
 
     public function dayactpics()
