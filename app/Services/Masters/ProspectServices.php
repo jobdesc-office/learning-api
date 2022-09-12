@@ -145,22 +145,22 @@ class ProspectServices extends Prospect
                 $query->select('*')->with(['prosproductproduct', 'prosproducttaxtype']);
             },
             'prospectstage' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectcustlabeltype' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectlost' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             // 'prospectownerusers' => function ($query) {
             //     $query->with(['userdetails']);
             // },
             'prospectstatus' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectlostreason' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectreference' => function ($query) {
                 $query->select('*')->with(['prospectcust']);
@@ -189,19 +189,19 @@ class ProspectServices extends Prospect
                 $query->select('typeid', 'typename', 'typeseq');
             },
             'prospectlost' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectcustlabeltype' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectownerusers' => function ($query) {
                 $query->with(['userdetails']);
             },
             'prospectstatus' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectlostreason' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'prospectreference' => function ($query) {
                 $query->select('*');

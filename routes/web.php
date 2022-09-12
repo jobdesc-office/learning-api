@@ -315,6 +315,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'stbptype'], function () use ($router) {
             $router->post('datatables', 'StbptypeController@datatables');
+            $router->post('datatablesseq', 'StbptypeController@datatablesseq');
 
             $router->post('', 'StbptypeController@store');
             $router->get('{id}', 'StbptypeController@show');

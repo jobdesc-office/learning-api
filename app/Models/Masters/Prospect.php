@@ -83,22 +83,22 @@ class Prospect extends DefaultModel
 
     public function prospectstage()
     {
-        return $this->belongsTo(Stbptype::class, "prospectstageid", "typeid");
+        return $this->belongsTo(Types::class, "prospectstageid", "typeid");
     }
 
     public function prospectstatus()
     {
-        return $this->belongsTo(Stbptype::class, "prospectstatusid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectstatusid", "sbtid");
     }
 
     public function prospectcustlabeltype()
     {
-        return $this->belongsTo(Stbptype::class, "prospectcustlabel", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectcustlabel", "sbtid");
     }
 
     public function prospectlost()
     {
-        return $this->belongsTo(Stbptype::class, "prospectlostreasonid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectlostreasonid", "sbtid");
     }
 
     public function prospectownerusers()
@@ -133,7 +133,7 @@ class Prospect extends DefaultModel
 
     public function prospectlostreason()
     {
-        return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectlostreasonid", "sbtid");
     }
 
     public function prospectfiles()
