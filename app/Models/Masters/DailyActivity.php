@@ -51,6 +51,11 @@ class DailyActivity extends DefaultModel
         return new DailyActivityFactory;
     }
 
+    public function dayactupdatedby()
+    {
+        return $this->belongsTo(User::class, "updatedby", "userid");
+    }
+
     public function dayactuser()
     {
         return $this->belongsTo(User::class, "createdby", "userid");

@@ -149,6 +149,7 @@ class DailyActivityServices extends DailyActivity
     {
         return $this->newQuery()->with([
             'dayactuser',
+            'dayactupdatedby',
             'dayactcust',
             'dayactcat' => function ($query) {
                 $query->select('typeid', 'typename');
