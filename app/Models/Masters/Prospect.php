@@ -83,22 +83,22 @@ class Prospect extends DefaultModel
 
     public function prospectstage()
     {
-        return $this->belongsTo(Types::class, "prospectstageid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectstageid", "typeid");
     }
 
     public function prospectstatus()
     {
-        return $this->belongsTo(Types::class, "prospectstatusid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectstatusid", "typeid");
     }
 
     public function prospectcustlabeltype()
     {
-        return $this->belongsTo(Types::class, "prospectcustlabel", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectcustlabel", "typeid");
     }
 
     public function prospectlost()
     {
-        return $this->belongsTo(Types::class, "prospectlostreasonid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectlostreasonid", "typeid");
     }
 
     public function prospectownerusers()
