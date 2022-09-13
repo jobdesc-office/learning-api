@@ -4,9 +4,9 @@ namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
 
-class DspByBp extends DefaultModel
+class DspByCust extends DefaultModel
 {
-   protected $table = "dspbybp";
+   protected $table = "dspbycust";
 
    protected $connection = 'pgsql2';
 

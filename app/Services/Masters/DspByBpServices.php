@@ -2,10 +2,10 @@
 
 namespace App\Services\Masters;
 
-use App\Models\Masters\DspByBp;
+use App\Models\Masters\DspByCust;
 use Illuminate\Support\Collection;
 
-class DspByBpServices extends DspByBp
+class DspByCustServices extends DspByCust
 {
 
    function reportByBp(Collection $collection)
