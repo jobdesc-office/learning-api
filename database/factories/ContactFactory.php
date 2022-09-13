@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Masters\BpCustomer;
 use App\Models\Masters\ContactPerson;
 use App\Models\Masters\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +24,7 @@ class ContactFactory extends Factory
     */
    public function definition()
    {
-      $customer = Customer::all()->random();
+      $customer = BpCustomer::all()->random();
       $type = $this->getType();
       $value = "";
 
@@ -36,7 +37,7 @@ class ContactFactory extends Factory
       }
 
       return [
-         "contactcustomerid" => $customer->cstmid,
+         "contactcustomerid" => $customer->sbcid,
          "contacttypeid" => $type->getId(),
          "contactvalueid" => $value,
          "contactname" => $this->faker->name(),
