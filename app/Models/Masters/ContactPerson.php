@@ -14,7 +14,7 @@ class ContactPerson extends DefaultModel
     protected $primaryKey = "contactpersonid";
 
     protected $fillable = [
-        "contactcustomerid",
+        "contactbpcustomerid",
         "contacttypeid",
         "contactvalueid",
         "contactname",
@@ -24,7 +24,7 @@ class ContactPerson extends DefaultModel
     ];
 
     protected $alias = [
-        "contactcustomerid" => "Customer Id",
+        "contactbpcustomerid" => "Customer Id",
         "contacttypeid" => "Type Id",
         "contactvalueid" => "Value",
         "contactname" => "Name",
@@ -45,7 +45,7 @@ class ContactPerson extends DefaultModel
 
     public function contactcustomer()
     {
-        return $this->belongsTo(Customer::class, "contactcustomerid", "cstmid");
+        return $this->belongsTo(BpCustomer::class, "contactbpcustomerid", "sbcid");
     }
 
     public function contactcreatedby()

@@ -15,7 +15,7 @@ class CreateMscontactpersonTable extends Migration
     {
         Schema::create('mscontactperson', function (Blueprint $table) {
             $table->id('contactpersonid');
-            $table->integer('contactcustomerid');
+            $table->integer('contactbpcustomerid');
             $table->integer('contacttypeid');
             $table->string('contactname', 255);
             $table->text('contactvalueid')->nullable();
