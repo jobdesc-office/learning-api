@@ -150,11 +150,11 @@ class DailyActivityServices extends DailyActivity
             'dayactupdatedby',
             'dayactcust',
             'dayactcat' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'dayactcust',
             'dayacttype' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
             'dayactpics' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
