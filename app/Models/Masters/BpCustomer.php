@@ -50,6 +50,11 @@ class BpCustomer extends DefaultModel
         return $this->belongsTo(Customer::class, 'sbccstmid', 'cstmid');
     }
 
+    public function sbccontact()
+    {
+        return $this->hasMany(ContactPerson::class, 'contactbpcustomerid', 'sbcid');
+    }
+
     public function sbccstmpics()
     {
         return $this->hasMany(Files::class, 'refid', 'sbcid');
