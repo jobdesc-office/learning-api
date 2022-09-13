@@ -11,6 +11,7 @@ class DefaultModel extends Model
 {
    protected $alias = [];
    protected static $history = true;
+   protected $connection = 'pgsql';
 
    protected function serializeDate(DateTimeInterface $date)
    {
