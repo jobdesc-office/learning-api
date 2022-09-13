@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\DspByBp;
 use App\Models\Masters\Prospect;
 use App\Services\Masters\ProspectAssignServices;
 use App\Services\Masters\ProspectActivityServices;
@@ -85,5 +86,11 @@ class ProspectController extends Controller
     public function prospectHistories(Request $request, TrHistoryServices $trHistoryServices, Prospect $prospect)
     {
         return $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
+    }
+
+    public function tes(Request $request)
+    {
+        $data = DspByBp::where('prospectbpid', $request->get('bpid'))->get();
+        return response()->json($data);
     }
 }

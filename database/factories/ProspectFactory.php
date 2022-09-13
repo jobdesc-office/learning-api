@@ -19,12 +19,14 @@ class ProspectFactory extends Factory
         $user = UserDetail::whereHas('user', function ($query) {
             $query->where('username', 'developer');
         })->get()->first();
+        $value = $this->faker->numberBetween(1000000, 9999999);
+        $startDate = $this->faker->dateTime();
         return [
             'prospectname' => $this->faker->name(),
             'prospectcode' => $this->faker->dateTime,
             'prospectstartdate' => $this->faker->dateTime,
             'prospectenddate' => $this->faker->dateTime,
-            'prospectvalue' => '30000000',
+            'prospectvalue' => $value,
             'prospectowner' => $user->userid,
             'prospectstageid' => $this->getStage()->getId(),
             'prospectstatusid' => $this->getStatus()->getId(),
