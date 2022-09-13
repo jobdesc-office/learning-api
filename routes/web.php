@@ -472,7 +472,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'prospect'], function () use ($router) {
-                $router->get('tes', 'ProspectController@tes');
+                $router->get('report', 'ProspectController@report');
                 $router->get('count', 'ProspectController@prospectCount');
                 $router->get('histories', 'ProspectController@prospectHistories');
                 $router->get('', 'ProspectController@all');

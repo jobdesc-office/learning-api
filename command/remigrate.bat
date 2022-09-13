@@ -1,1 +1,1 @@
-php artisan migrate:fresh && "command/import.bat" && php artisan db:seed
+php artisan migrate:rollback && php artisan migrate && "command/import.bat" && php artisan db:seed

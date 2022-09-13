@@ -88,7 +88,7 @@ class ProspectController extends Controller
         return $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
     }
 
-    public function tes(Request $request)
+    public function report(Request $request)
     {
         $data = DspByBp::where('prospectbpid', $request->get('bpid'));
         if ($request->has('prospectyy')) $data->where('prospectyy', $request->get('prospectyy'));
