@@ -4,7 +4,7 @@ namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
 
-class DspByStage extends DefaultModel
+class DspByCustLabel extends DefaultModel
 {
    protected $table = "DspByCust";
 
@@ -13,7 +13,7 @@ class DspByStage extends DefaultModel
    protected $fillable = [
       "prospectbpid",
       "prospectbpname",
-      "prospectstage",
+      "prospectcustlabel",
       "prospectyy",
       "prospectmm",
       "prospectvalue",
@@ -25,7 +25,7 @@ class DspByStage extends DefaultModel
    protected $alias = [
       "prospectbpid" => "",
       "prospectbpname" => "",
-      "prospectstage" => "",
+      "prospectcustlabel" => "",
       "prospectyy" => "",
       "prospectmm" => "",
       "prospectvalue" => "",
@@ -45,8 +45,8 @@ class DspByStage extends DefaultModel
       return $this->belongsTo(BusinessPartner::class, 'prospectbpid', 'bpid');
    }
 
-   public function prospectstagetype()
+   public function prospectcustlabeltype()
    {
-      return $this->belongsTo(Stbptype::class, 'prospectstage', 'sbtid');
+      return $this->belongsTo(Stbptype::class, 'prospectcustlabel', 'sbtid');
    }
 }
