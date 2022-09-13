@@ -93,7 +93,6 @@ class ProspectController extends Controller
         $data = DspByBp::where('prospectbpid', $request->get('bpid'));
         if ($request->has('prospectyy')) $data->where('prospectyy', $request->get('prospectyy'));
         if ($request->has('prospectmm')) $data->where('prospectmm', $request->get('prospectmm'));
-        dd($data->get());
         return response()->json($data->get());
     }
 }

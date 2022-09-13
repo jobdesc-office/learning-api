@@ -8,6 +8,8 @@ class DspByBp extends DefaultModel
 {
    protected $table = "dspbybp";
 
+   protected $connection = 'pgsql2';
+
    protected $fillable = [
       "prospectbpid",
       "prospectbpname",
