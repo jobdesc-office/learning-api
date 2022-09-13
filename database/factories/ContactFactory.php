@@ -37,7 +37,7 @@ class ContactFactory extends Factory
       }
 
       return [
-         "contactcustomerid" => $customer->sbcid,
+         "contactbpcustomerid" => $customer->sbcid,
          "contacttypeid" => $type->getId(),
          "contactvalueid" => $value,
          "contactname" => $this->faker->name(),
