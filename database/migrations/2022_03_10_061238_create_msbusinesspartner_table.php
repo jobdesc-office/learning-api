@@ -13,7 +13,7 @@ class CreateMsbusinesspartnerTable extends Migration
      */
     public function up()
     {
-        Schema::create('msbusinesspartner', function (Blueprint $table) {
+        pgsql()->create('msbusinesspartner', function (Blueprint $table) {
             $table->id('bpid');
             $table->string('bpname', 100);
             $table->bigInteger('bptypeid');
@@ -36,6 +36,6 @@ class CreateMsbusinesspartnerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msbusinesspartner');
+        pgsql()->dropIfExists('msbusinesspartner');
     }
 }

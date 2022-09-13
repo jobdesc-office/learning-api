@@ -13,7 +13,7 @@ class CreateVtscheduleTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtschedule', function (Blueprint $table) {
+        pgsql()->create('vtschedule', function (Blueprint $table) {
             $table->id('scheid');
             $table->string('schenm', 50)->nullable();
             $table->date('schestartdate')->nullable();
@@ -50,6 +50,6 @@ class CreateVtscheduleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtschedule');
+        pgsql()->dropIfExists('vtschedule');
     }
 }

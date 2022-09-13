@@ -13,7 +13,7 @@ class CreateProvince extends Migration
      */
     public function up()
     {
-        Schema::create('msprovince', function (Blueprint $table) {
+        pgsql()->create('msprovince', function (Blueprint $table) {
             $table->id('provid');
             $table->bigInteger('provcountryid')->nullable();
             $table->string('provname', 150)->nullable();
@@ -33,6 +33,6 @@ class CreateProvince extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msprovince');
+        pgsql()->dropIfExists('msprovince');
     }
 }

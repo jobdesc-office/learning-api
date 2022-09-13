@@ -13,7 +13,7 @@ class CreateMsuserdtTable extends Migration
      */
     public function up()
     {
-        Schema::create('msuserdt', function (Blueprint $table) {
+        pgsql()->create('msuserdt', function (Blueprint $table) {
             $table->id('userdtid');
             $table->bigInteger('userid');
             $table->bigInteger('userdttypeid');
@@ -37,6 +37,6 @@ class CreateMsuserdtTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msuserdt');
+        pgsql()->dropIfExists('msuserdt');
     }
 }

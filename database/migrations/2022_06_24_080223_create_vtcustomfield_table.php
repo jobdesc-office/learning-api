@@ -13,7 +13,7 @@ class CreateVtcustomfieldTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtcustomfield', function (Blueprint $table) {
+        pgsql()->create('vtcustomfield', function (Blueprint $table) {
             $table->id('custfid');
             $table->bigInteger('custfbpid');
             $table->string('custfname', 255);
@@ -37,6 +37,6 @@ class CreateVtcustomfieldTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtcustomfield');
+        pgsql()->dropIfExists('vtcustomfield');
     }
 }

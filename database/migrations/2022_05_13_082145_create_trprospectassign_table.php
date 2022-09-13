@@ -13,7 +13,7 @@ class CreateTrprospectassignTable extends Migration
      */
     public function up()
     {
-        Schema::create('trprospectassign', function (Blueprint $table) {
+        pgsql()->create('trprospectassign', function (Blueprint $table) {
             $table->id('prospectassignid');
             $table->integer('prospectid');
             $table->integer('prospectassignto');
@@ -35,6 +35,6 @@ class CreateTrprospectassignTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trprospectassign');
+        pgsql()->dropIfExists('trprospectassign');
     }
 }

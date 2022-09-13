@@ -13,7 +13,7 @@ class CreateVtchatTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtchat', function (Blueprint $table) {
+        pgsql()->create('vtchat', function (Blueprint $table) {
             $table->id('chatid');
             $table->bigInteger('chatbpid');
             $table->text('chatmessage')->nullable();
@@ -38,6 +38,6 @@ class CreateVtchatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtchat');
+        pgsql()->dropIfExists('vtchat');
     }
 }

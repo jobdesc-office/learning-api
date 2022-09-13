@@ -1,6 +1,7 @@
 <?php
 return [
-   'default' => 'pgsql',
+   'default' => env('DB_CONNECTION'),
+   'migrations' => 'migrations',
    'connections' => [
       'pgsql' => [
          'driver' => env('DB_CONNECTION'),

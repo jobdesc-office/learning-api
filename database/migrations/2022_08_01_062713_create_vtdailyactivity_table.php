@@ -13,7 +13,7 @@ class CreateVtdailyactivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtdailyactivity', function (Blueprint $table) {
+        pgsql()->create('vtdailyactivity', function (Blueprint $table) {
             $table->id('dayactid');
             $table->integer('dayactcatid')->nullable();
             $table->integer('dayactcustid')->nullable();
@@ -41,6 +41,6 @@ class CreateVtdailyactivityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtdailyactivity');
+        pgsql()->dropIfExists('vtdailyactivity');
     }
 }

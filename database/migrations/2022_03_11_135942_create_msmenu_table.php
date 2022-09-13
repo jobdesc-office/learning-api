@@ -13,7 +13,7 @@ class CreateMsmenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('msmenu', function (Blueprint $table) {
+        pgsql()->create('msmenu', function (Blueprint $table) {
             $table->id('menuid');
             $table->bigInteger('masterid')->nullable();
             $table->bigInteger('menutypeid');
@@ -38,6 +38,6 @@ class CreateMsmenuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msmenu');
+        pgsql()->dropIfExists('msmenu');
     }
 }

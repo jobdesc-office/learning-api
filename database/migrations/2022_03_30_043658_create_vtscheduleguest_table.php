@@ -14,7 +14,7 @@ class CreateVtscheduleguestTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtscheduleguest', function (Blueprint $table) {
+        pgsql()->create('vtscheduleguest', function (Blueprint $table) {
             $table->id('scheguestid');
             $table->integer('scheid')->nullable();
             $table->integer('scheuserid')->nullable();
@@ -36,6 +36,6 @@ class CreateVtscheduleguestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtscheduleguest');
+        pgsql()->dropIfExists('vtscheduleguest');
     }
 }

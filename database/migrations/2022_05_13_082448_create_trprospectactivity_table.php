@@ -13,7 +13,7 @@ class CreateTrprospectActivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('trprospectactivity', function (Blueprint $table) {
+        pgsql()->create('trprospectactivity', function (Blueprint $table) {
             $table->id('prospectactivityid');
             $table->integer('prospectactivityprospectid');
             $table->integer('prospectactivitycatid')->nullable();
@@ -40,6 +40,6 @@ class CreateTrprospectActivityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trprospectactivity');
+        pgsql()->dropIfExists('trprospectactivity');
     }
 }

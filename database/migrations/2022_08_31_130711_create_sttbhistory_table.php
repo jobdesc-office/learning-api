@@ -13,7 +13,7 @@ class CreateSttbhistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('sttbhistory', function (Blueprint $table) {
+        pgsql()->create('sttbhistory', function (Blueprint $table) {
             $table->id('tbhistoryid');
             $table->string('tbhistorytbname', 100)->nullable();
             $table->string('tbhistorytbfield', 100)->nullable();
@@ -36,6 +36,6 @@ class CreateSttbhistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sttbhistory');
+        pgsql()->dropIfExists('sttbhistory');
     }
 }

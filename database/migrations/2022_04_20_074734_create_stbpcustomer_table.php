@@ -13,7 +13,7 @@ class CreateStbpcustomerTable extends Migration
      */
     public function up()
     {
-        Schema::create('stbpcustomer', function (Blueprint $table) {
+        pgsql()->create('stbpcustomer', function (Blueprint $table) {
             $table->id('sbcid');
             $table->bigInteger('sbcbpid');
             $table->bigInteger('sbccstmid');
@@ -37,6 +37,6 @@ class CreateStbpcustomerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stbpcustomer');
+        pgsql()->dropIfExists('stbpcustomer');
     }
 }

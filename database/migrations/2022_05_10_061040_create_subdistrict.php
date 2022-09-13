@@ -13,7 +13,7 @@ class CreateSubdistrict extends Migration
      */
     public function up()
     {
-        Schema::create('mssubdistrict', function (Blueprint $table) {
+        pgsql()->create('mssubdistrict', function (Blueprint $table) {
             $table->id('subdistrictid');
             $table->bigInteger('subdistrictcityid')->nullable();
             $table->string('subdistrictname', 150)->nullable();
@@ -33,6 +33,6 @@ class CreateSubdistrict extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mssubdistrict');
+        pgsql()->dropIfExists('mssubdistrict');
     }
 }

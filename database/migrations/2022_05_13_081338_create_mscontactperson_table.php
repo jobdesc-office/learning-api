@@ -13,7 +13,7 @@ class CreateMscontactpersonTable extends Migration
      */
     public function up()
     {
-        Schema::create('mscontactperson', function (Blueprint $table) {
+        pgsql()->create('mscontactperson', function (Blueprint $table) {
             $table->id('contactpersonid');
             $table->integer('contactbpcustomerid');
             $table->integer('contacttypeid');
@@ -35,6 +35,6 @@ class CreateMscontactpersonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mscontactperson');
+        pgsql()->dropIfExists('mscontactperson');
     }
 }

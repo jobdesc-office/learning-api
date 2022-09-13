@@ -13,7 +13,7 @@ class CreateTrprospectproductTable extends Migration
      */
     public function up()
     {
-        Schema::create('trprospectproduct', function (Blueprint $table) {
+        pgsql()->create('trprospectproduct', function (Blueprint $table) {
             $table->id('prosproductid');
             $table->integer('prosproductprospectid');
             $table->integer('prosproductproductid');
@@ -39,6 +39,6 @@ class CreateTrprospectproductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trprospectproduct');
+        pgsql()->dropIfExists('trprospectproduct');
     }
 }

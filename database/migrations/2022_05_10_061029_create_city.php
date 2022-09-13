@@ -13,7 +13,7 @@ class CreateCity extends Migration
      */
     public function up()
     {
-        Schema::create('mscity', function (Blueprint $table) {
+        pgsql()->create('mscity', function (Blueprint $table) {
             $table->id('cityid');
             $table->bigInteger('cityprovid')->nullable();
             $table->string('cityname', 150)->nullable();
@@ -33,6 +33,6 @@ class CreateCity extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mscity');
+        pgsql()->dropIfExists('mscity');
     }
 }

@@ -13,7 +13,7 @@ class CreateMstypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('mstype', function (Blueprint $table) {
+        pgsql()->create('mstype', function (Blueprint $table) {
             $table->id('typeid');
             $table->string('typecd', 10)->nullable();
             $table->string('typename', 100);
@@ -36,6 +36,6 @@ class CreateMstypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mstype');
+        pgsql()->dropIfExists('mstype');
     }
 }

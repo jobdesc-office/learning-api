@@ -13,7 +13,7 @@ class CreateStbptypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('stbptype', function (Blueprint $table) {
+        pgsql()->create('stbptype', function (Blueprint $table) {
             $table->id('sbtid');
             $table->bigInteger('sbtbpid');
             $table->text('sbtname')->nullable();
@@ -37,6 +37,6 @@ class CreateStbptypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stbptype');
+        pgsql()->dropIfExists('stbptype');
     }
 }

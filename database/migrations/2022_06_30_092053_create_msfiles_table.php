@@ -13,7 +13,7 @@ class CreateMsfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('msfiles', function (Blueprint $table) {
+        pgsql()->create('msfiles', function (Blueprint $table) {
             $table->id('fileid');
             $table->bigInteger('transtypeid');
             $table->bigInteger('refid');
@@ -38,6 +38,6 @@ class CreateMsfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msfiles');
+        pgsql()->dropIfExists('msfiles');
     }
 }

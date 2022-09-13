@@ -13,7 +13,7 @@ class CreateMsvillageTable extends Migration
      */
     public function up()
     {
-        Schema::create('msvillage', function (Blueprint $table) {
+        pgsql()->create('msvillage', function (Blueprint $table) {
             $table->id('villageid');
             $table->bigInteger('villagesubdistrictid');
             $table->string('villagename', 255);
@@ -33,6 +33,6 @@ class CreateMsvillageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msvillage');
+        pgsql()->dropIfExists('msvillage');
     }
 }

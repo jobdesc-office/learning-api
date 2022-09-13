@@ -13,7 +13,7 @@ class CreateCountry extends Migration
      */
     public function up()
     {
-        Schema::create('mscountry', function (Blueprint $table) {
+        pgsql()->create('mscountry', function (Blueprint $table) {
             $table->id('countryid');
             $table->string('countryname', 50)->nullable();
 
@@ -32,6 +32,6 @@ class CreateCountry extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mscountry');
+        pgsql()->dropIfExists('mscountry');
     }
 }

@@ -13,7 +13,7 @@ class CreateMsproductTable extends Migration
      */
     public function up()
     {
-        Schema::create('msproduct', function (Blueprint $table) {
+        pgsql()->create('msproduct', function (Blueprint $table) {
             $table->id('productid');
             $table->string('productname');
             $table->integer('productbpid');
@@ -33,6 +33,6 @@ class CreateMsproductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msproduct');
+        pgsql()->dropIfExists('msproduct');
     }
 }

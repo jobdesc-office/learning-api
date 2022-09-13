@@ -13,7 +13,7 @@ class CreateMsfeatureTable extends Migration
      */
     public function up()
     {
-        Schema::create('msfeature', function (Blueprint $table) {
+        pgsql()->create('msfeature', function (Blueprint $table) {
             $table->id('featid');
             $table->bigInteger('featmenuid');
             $table->string('feattitle', 100);
@@ -35,6 +35,6 @@ class CreateMsfeatureTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msfeature');
+        pgsql()->dropIfExists('msfeature');
     }
 }

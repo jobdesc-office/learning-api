@@ -39,6 +39,16 @@
             "database": "ventes",
             "username": "postgres",
             "password": "P@ssw0rd"
+        },
+        {
+            "previewLimit": 50,
+            "server": "10.21.1.90",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "vents90rp",
+            "database": "ventesrp",
+            "password": "P@ssw0rd",
+            "username": "postgres"
         }
     ]
 }

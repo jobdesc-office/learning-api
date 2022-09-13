@@ -13,7 +13,7 @@ class CreateMsuserTable extends Migration
      */
     public function up()
     {
-        Schema::create('msuser', function (Blueprint $table) {
+        pgsql()->create('msuser', function (Blueprint $table) {
             $table->id('userid');
             $table->string('username', 50);
             $table->text('userpassword');
@@ -39,6 +39,6 @@ class CreateMsuserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msuser');
+        pgsql()->dropIfExists('msuser');
     }
 }

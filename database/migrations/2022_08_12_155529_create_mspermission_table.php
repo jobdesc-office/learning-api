@@ -13,7 +13,7 @@ class CreateMspermissionTable extends Migration
      */
     public function up()
     {
-        Schema::create('mspermission', function (Blueprint $table) {
+        pgsql()->create('mspermission', function (Blueprint $table) {
             $table->id('permisid');
             $table->bigInteger('roleid');
             $table->bigInteger('permismenuid');
@@ -35,6 +35,6 @@ class CreateMspermissionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mspermission');
+        pgsql()->dropIfExists('mspermission');
     }
 }

@@ -13,7 +13,7 @@ class CreateVtcompetitorTable extends Migration
      */
     public function up()
     {
-        Schema::create('vtcompetitor', function (Blueprint $table) {
+        pgsql()->create('vtcompetitor', function (Blueprint $table) {
             $table->id('comptid');
             $table->bigInteger('comptbpid')->nullable();
             $table->bigInteger('comptreftypeid')->nullable();
@@ -37,6 +37,6 @@ class CreateVtcompetitorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vtcompetitor');
+        pgsql()->dropIfExists('vtcompetitor');
     }
 }

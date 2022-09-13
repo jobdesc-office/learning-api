@@ -7,6 +7,16 @@ function find_type($key = 'typecd', $keys = [], $items = [])
     return (new FindTypeAction());
 }
 
+function pgsql()
+{
+    return Schema::connection('pgsql');
+}
+
+function pgsql2()
+{
+    return Schema::connection('pgsql2');
+}
+
 class TempFile
 {
     /**

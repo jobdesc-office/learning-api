@@ -13,7 +13,7 @@ class CreateTrhistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('trhistory', function (Blueprint $table) {
+        pgsql()->create('trhistory', function (Blueprint $table) {
             $table->id('historyid');
             $table->bigInteger('historytbhistoryid')->nullable();
             $table->bigInteger('historyrefid')->nullable();
@@ -36,6 +36,6 @@ class CreateTrhistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trhistory');
+        pgsql()->dropIfExists('trhistory');
     }
 }

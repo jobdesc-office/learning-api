@@ -13,7 +13,7 @@ class CreateMscustomerTable extends Migration
      */
     public function up()
     {
-        Schema::create('mscustomer', function (Blueprint $table) {
+        pgsql()->create('mscustomer', function (Blueprint $table) {
             $table->id('cstmid');
             $table->string('cstmprefix', 100)->nullable();
             $table->string('cstmname', 100);
@@ -44,6 +44,6 @@ class CreateMscustomerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mscustomer');
+        pgsql()->dropIfExists('mscustomer');
     }
 }
