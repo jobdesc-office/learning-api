@@ -45,7 +45,7 @@ class ContactPerson extends DefaultModel
 
     public function contactcustomer()
     {
-        return $this->belongsTo(Customer::class, "contactcustomerid", "cstmid");
+        return $this->belongsTo(BpCustomer::class, "contactcustomerid", "cstmid");
     }
 
     public function contactcreatedby()

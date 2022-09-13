@@ -90,7 +90,9 @@ class ProspectController extends Controller
 
     public function tes(Request $request)
     {
-        $data = DspByBp::where('prospectbpid', $request->get('bpid'))->get();
-        return response()->json($data);
+        $data = DspByBp::where('prospectbpid', $request->get('bpid'));
+        if ($request->has('prospectyy')) $data->where('prospectyy', $request->get('prospectyy'));
+        if ($request->has('prospectmm')) $data->where('prospectmm', $request->get('prospectmm'));
+        return response()->json($data->get());
     }
 }
