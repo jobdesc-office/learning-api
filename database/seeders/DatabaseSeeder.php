@@ -32,11 +32,11 @@ class DatabaseSeeder extends Seeder
         Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();
         Customer::factory(\FactoryCount::customerCount)->createQuietly();
         DailyActivity::factory(\FactoryCount::dailyActivityCount)->createQuietly();
-        Prospect::factory(\FactoryCount::prospectCount)->createQuietly();
 
         $this->call([BpCustomerSeeder::class]);
 
 
         ContactPerson::factory(\FactoryCount::contactCount)->createQuietly();
+        Prospect::factory(\FactoryCount::prospectCount)->createQuietly();
     }
 }

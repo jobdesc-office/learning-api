@@ -5,10 +5,12 @@ namespace Database\Factories;
 use App\Models\Masters\Prospect;
 use App\Models\Masters\UserDetail;
 use App\Models\Masters\Customer;
+use App\Models\Masters\Stbptype;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use FactoryCount;
 use DBTypes;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ProspectFactory extends Factory
 {
