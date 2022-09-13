@@ -1,10 +1,16 @@
 <?php
 
 use App\Actions\FindTypeAction;
+use App\Actions\FindBpTypeAction;
 
 function find_type($key = 'typecd', $keys = [], $items = [])
 {
     return (new FindTypeAction());
+}
+
+function find_bptype($key = 'typecd', $keys = [], $items = [])
+{
+    return (new FindBpTypeAction());
 }
 
 function pgsql()

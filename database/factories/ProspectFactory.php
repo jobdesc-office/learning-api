@@ -5,10 +5,12 @@ namespace Database\Factories;
 use App\Models\Masters\Prospect;
 use App\Models\Masters\UserDetail;
 use App\Models\Masters\Customer;
+use App\Models\Masters\Stbptype;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use FactoryCount;
 use DBTypes;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ProspectFactory extends Factory
 {
@@ -44,8 +46,7 @@ class ProspectFactory extends Factory
 
     function getStatus()
     {
-        $customertype = find_type()->byCode([\DBTypes::prospectStatus])
-            ->children(\DBTypes::prospectStatus);
+        $customertype = Stbptype::all()->where('sbttypemasterid', null, find_type()->in([DBTypes::prospectStatus])->get(DBTypes::prospectStatus)->getId());
         return $customertype->random();
     }
 
@@ -58,8 +59,7 @@ class ProspectFactory extends Factory
 
     function getLabel()
     {
-        $customertype = find_type()->byCode([\DBTypes::prospectCustLabel])
-            ->children(\DBTypes::prospectCustLabel);
+        $customertype = Stbptype::all()->where('sbttypemasterid', null, find_type()->in([DBTypes::prospectCustLabel])->get(DBTypes::prospectCustLabel)->getId());
         return $customertype->random();
     }
 }
