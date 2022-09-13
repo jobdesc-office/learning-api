@@ -212,10 +212,8 @@ class ProspectServices extends Prospect
                 $query->with(['customfield', 'prospect']);
             },
             'prospectcust' => function ($query) {
-                $query->with(['sbccstm' => function ($query) {
-                    $query->with(['cstmcontact' => function ($query) {
-                        $query->with(['contacttype']);
-                    }]);
+                $query->with(['sbccstm', 'sbccontact' => function ($query) {
+                    $query->with(['contacttype']);
                 }]);
             },
             'prospectfiles' => function ($query) {
