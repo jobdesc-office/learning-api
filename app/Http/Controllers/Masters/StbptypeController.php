@@ -25,11 +25,8 @@ class StbptypeController extends Controller
     {
         $typeid = $req->get('typeid');
         $bpid = $req->get('bpid');
-        // $query = $stbptypeServices->datatables($typeid, $bpid);
-        // return
-        //     datatables()->eloquent($query)
-        //     ->toJson()
-        //     ->getOriginalContent();
+        $query = $stbptypeServices->datatablesBySeq($typeid, $bpid);
+        return response()->json($query);
     }
 
     public function show($id, StbptypeServices $stbptypeServices)
