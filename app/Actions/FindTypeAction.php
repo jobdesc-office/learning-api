@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Collections\Types\TypeFinder;
+use App\Services\Masters\StBpTypeServices;
 use App\Services\TypeServices;
 
 class FindTypeAction
@@ -42,6 +43,13 @@ class FindTypeAction
 
         $types = $this->service->whereParent($codes)
             ->get();
+        return new TypeFinder('typecd', $code, $types->toArray());
+    }
+
+    public function childrenByCode($code)
+    {
+        $codes = is_array($code) ? $code : func_get_args();
+        $types = (new StBpTypeServices)->whereParent($codes);
         return new TypeFinder('typecd', $code, $types->toArray());
     }
 }

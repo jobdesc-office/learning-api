@@ -6,6 +6,7 @@ use FactoryCount;
 use Carbon\Carbon;
 use App\Models\Masters\DailyActivity;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Log;
 
 class DailyActivityFactory extends Factory
 {
@@ -25,8 +26,8 @@ class DailyActivityFactory extends Factory
     {
         $this->prepareAttributes();
         return [
-            'dayactcatid' => find_type()->byCode([\DBTypes::activitytype])->children(\DBTypes::activitytype)->random()->getId(),
-            'dayacttypeid' => find_type()->byCode([\DBTypes::activitycategory])->children(\DBTypes::activitycategory)->random()->getId(),
+            'dayactcatid' => find_type()->childrenByCode([\DBTypes::activitytype])->randomChildren()->getChildrenId(),
+            'dayacttypeid' => find_type()->childrenByCode([\DBTypes::activitycategory])->randomChildren()->getChildrenId(),
             'dayacttypevalue' => $this->faker->text(),
             'dayactdate' => $this->getActDate(),
             'dayactdesc' => $this->faker->text(),

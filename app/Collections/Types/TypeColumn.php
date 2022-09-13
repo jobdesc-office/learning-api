@@ -17,6 +17,16 @@ class TypeColumn extends Collection
         return $this->get('typename');
     }
 
+    public function getChildrenId()
+    {
+        return $this->get('sbtid');
+    }
+
+    public function getChildrenName()
+    {
+        return $this->get('sbttypename');
+    }
+
     public function getCode()
     {
         return $this->get('typecd');

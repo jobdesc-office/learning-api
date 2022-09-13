@@ -475,6 +475,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('report', 'ProspectController@report');
                 $router->get('count', 'ProspectController@prospectCount');
                 $router->get('histories', 'ProspectController@prospectHistories');
+                $router->get('report/{id}/years', 'ProspectController@reportYear');
                 $router->get('', 'ProspectController@all');
                 $router->post('', 'ProspectController@store');
                 $router->get('{id}', 'ProspectController@show');
