@@ -42,7 +42,7 @@ class ProspectActivityServices extends ProspectActivity
                 $query->select('typeid', 'typename');
             },
             'prospectactivitytype' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
         ]);
     }

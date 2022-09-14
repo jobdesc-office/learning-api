@@ -80,7 +80,7 @@ class ContactPersonController extends Controller
         foreach ($roles as $role) {
             $modelContactPersonServices->create([
                 'contactname' => $req->get('contactname'),
-                'contactcustomerid' => $req->get('contactcustomerid'),
+                'contactbpcustomerid' => $req->get('contactbpcustomerid'),
                 'contacttypeid' => $role->contacttypeid,
                 'contactvalueid' => $role->contactvalueid,
             ]);

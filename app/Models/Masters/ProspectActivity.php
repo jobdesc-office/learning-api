@@ -63,7 +63,7 @@ class ProspectActivity extends DefaultModel
 
     public function prospectactivitytype()
     {
-        return $this->belongsTo(Stbptype::class, 'prospectactivitytypeid', 'typeid');
+        return $this->belongsTo(Stbptype::class, 'prospectactivitytypeid', 'sbtid');
     }
 
     public function prospectactivitycreatedby()
