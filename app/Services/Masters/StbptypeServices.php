@@ -18,6 +18,14 @@ class StBpTypeServices extends Stbptype
         })->get();
     }
 
+    public function whereParent($code)
+    {
+        return $this->getQuery()
+            ->whereHas('stbptypetype', function ($query) use ($code) {
+                $query->whereIn('typecd', array_merge([], $code));
+            })->get();
+    }
+
     public function datatables($typeid, $bpid)
     {
         return $this->getQuery()

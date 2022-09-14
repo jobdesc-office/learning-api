@@ -27,6 +27,14 @@ class TypeFinder extends CollectionFinder
     }
 
     /**
+     * @return TypeColumn
+     */
+    public function randomChildren()
+    {
+        return collect($this->all())->random();
+    }
+
+    /**
      * @param string|null $keyValue
      * @param callable|null $callback
      * @return TypeColumn

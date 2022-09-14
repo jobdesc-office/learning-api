@@ -475,11 +475,23 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('report', 'ProspectController@report');
                 $router->get('count', 'ProspectController@prospectCount');
                 $router->get('histories', 'ProspectController@prospectHistories');
+                $router->get('report/{id}/years', 'ProspectController@reportYear');
                 $router->get('', 'ProspectController@all');
                 $router->post('', 'ProspectController@store');
                 $router->get('{id}', 'ProspectController@show');
                 $router->put('{id}', 'ProspectController@update');
                 $router->delete('{id}', 'ProspectController@destroy');
+            });
+
+            $router->group(['prefix' => 'insight'], function () use ($router) {
+                $router->get('bycust/{id}/years', 'InsightController@reportByCustYears');
+                $router->get('bycust/{id}', 'InsightController@reportByCust');
+                $router->get('bystage/{id}/years', 'InsightController@reportByStageYears');
+                $router->get('bystage/{id}', 'InsightController@reportByStage');
+                $router->get('bystatus/{id}/years', 'InsightController@reportByStatusYears');
+                $router->get('bystatus/{id}', 'InsightController@reportByStatus');
+                $router->get('bycustlabel/{id}/years', 'InsightController@reportByCustLabelYears');
+                $router->get('bycustlabel/{id}', 'InsightController@reportByCustLabel');
             });
 
             $router->group(['prefix' => 'prospectactivity'], function () use ($router) {

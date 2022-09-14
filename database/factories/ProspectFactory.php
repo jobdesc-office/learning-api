@@ -33,12 +33,12 @@ class ProspectFactory extends Factory
             'prospectenddate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectvalue' => $this->faker->numberBetween(100000, 10000000000),
             'prospectowner' => $user->userid,
-            'prospectstageid' => $this->getStage()->getId(),
-            'prospectstatusid' => $this->getStatus()->getId(),
+            'prospectstageid' => $this->getStage()->getChildrenId(),
+            'prospectstatusid' => $this->getStatus()->getChildrenId(),
             'prospectexpclosedate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectbpid' => $this->faker->numberBetween(1, FactoryCount::bpCount),
             // 'prospectbpid' => $user->userdtbpid,
-            'prospectcustlabel' => $this->getLabel()->getId(),
+            'prospectcustlabel' => $this->getLabel()->getChildrenId(),
             'prospectcustid' => $customer->cstmid,
             'createdby' => $user->userid,
         ];
@@ -46,20 +46,22 @@ class ProspectFactory extends Factory
 
     function getStatus()
     {
-        $customertype = Stbptype::all()->where('sbttypemasterid', null, find_type()->in([DBTypes::prospectStatus])->get(DBTypes::prospectStatus)->getId());
-        return $customertype->random();
+        $customertype = find_type()->childrenByCode([\DBTypes::prospectStatus])
+            ->randomChildren();
+        return $customertype;
     }
 
     function getStage()
     {
-        $customertype = find_type()->byCode([\DBTypes::prospectStage])
-            ->children(\DBTypes::prospectStage);
-        return $customertype->random();
+        $customertype = find_type()->childrenByCode([\DBTypes::prospectStage])
+            ->randomChildren();
+        return $customertype;
     }
 
     function getLabel()
     {
-        $customertype = Stbptype::all()->where('sbttypemasterid', null, find_type()->in([DBTypes::prospectCustLabel])->get(DBTypes::prospectCustLabel)->getId());
-        return $customertype->random();
+        $customertype = find_type()->childrenByCode([\DBTypes::prospectCustLabel])
+            ->randomChildren();
+        return $customertype;
     }
 }

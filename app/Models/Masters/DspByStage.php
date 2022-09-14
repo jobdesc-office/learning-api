@@ -4,17 +4,16 @@ namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
 
-class DspByBp extends DefaultModel
+class DspByStage extends DefaultModel
 {
-   protected $table = "dspbybp";
+   protected $table = "DspByCust";
 
    protected $connection = 'pgsql2';
 
    protected $fillable = [
       "prospectbpid",
       "prospectbpname",
-      "prospectcustid",
-      "prospectcustname",
+      "prospectstage",
       "prospectyy",
       "prospectmm",
       "prospectvalue",
@@ -26,8 +25,7 @@ class DspByBp extends DefaultModel
    protected $alias = [
       "prospectbpid" => "",
       "prospectbpname" => "",
-      "prospectcustid" => "",
-      "prospectcustname" => "",
+      "prospectstage" => "",
       "prospectyy" => "",
       "prospectmm" => "",
       "prospectvalue" => "",
@@ -47,8 +45,8 @@ class DspByBp extends DefaultModel
       return $this->belongsTo(BusinessPartner::class, 'prospectbpid', 'bpid');
    }
 
-   public function prospectcust()
+   public function prospectstagetype()
    {
-      return $this->belongsTo(BpCustomer::class, 'prospectcustid', 'sbcid');
+      return $this->belongsTo(Stbptype::class, 'prospectstage', 'sbtid');
    }
 }

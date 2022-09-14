@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
-use App\Models\Masters\DspByBp;
+use App\Models\Masters\DspByCust;
 use App\Models\Masters\Prospect;
+use App\Services\Masters\DspByCustServices;
 use App\Services\Masters\ProspectAssignServices;
 use App\Services\Masters\ProspectActivityServices;
 use App\Services\Masters\ProspectProductServices;
@@ -88,11 +89,14 @@ class ProspectController extends Controller
         return $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
     }
 
-    public function report(Request $request)
+    public function report(Request $request, DspByCustServices $service)
     {
-        $data = DspByBp::where('prospectbpid', $request->get('bpid'));
-        if ($request->has('prospectyy')) $data->where('prospectyy', $request->get('prospectyy'));
-        if ($request->has('prospectmm')) $data->where('prospectmm', $request->get('prospectmm'));
-        return response()->json($data->get());
+        $data = collect($request->all())->filter();
+        return response()->json($service->reportByBp($data));
+    }
+
+    public function reportYear($id, Request $request, DspByCustServices $service)
+    {
+        return response()->json($service->getReportYearsByBp($id));
     }
 }
