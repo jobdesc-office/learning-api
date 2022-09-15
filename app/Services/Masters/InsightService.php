@@ -10,8 +10,7 @@ abstract class InsightService
    public function getReportByBp($bpid, Collection $collection)
    {
       $query = $this->getQuery()->where('prospectbpid', $bpid);
-      if ($collection->has('prospectyy')) $query = $query->where('prospectyy', $collection->get('prospectyy'));
-      if ($collection->has('prospectmm')) $query = $query->where('prospectmm', $collection->get('prospectmm'));
+      $query = $query->where($collection->filter()->all());
       return $query->get();
    }
 

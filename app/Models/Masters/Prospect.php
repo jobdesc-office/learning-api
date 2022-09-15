@@ -83,7 +83,7 @@ class Prospect extends DefaultModel
 
     public function prospectstage()
     {
-        return $this->belongsTo(Types::class, "prospectstageid", "typeid");
+        return $this->belongsTo(Stbptype::class, "prospectstageid", "sbtid");
     }
 
     public function prospectstatus()
