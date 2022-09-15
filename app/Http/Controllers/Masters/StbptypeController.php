@@ -11,6 +11,18 @@ use Illuminate\Http\Request;
 class StbptypeController extends Controller
 {
 
+    public function byCode(Request $req, StbptypeServices $stbptypeServices)
+    {
+        $types = $stbptypeServices->byCode($req->get('typecd'));
+        return response()->json($types);
+    }
+
+    public function bySeq(Request $req, StbptypeServices $stbptypeServices)
+    {
+        $types = $stbptypeServices->bySeq($req->get('typecd'));
+        return response()->json($types);
+    }
+
     public function datatables(Request $req, StbptypeServices $stbptypeServices)
     {
         $typeid = $req->get('typeid');

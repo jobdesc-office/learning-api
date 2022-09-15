@@ -32,7 +32,7 @@
         },
         {
             "previewLimit": 50,
-            "server": "10.21.1.90",
+            "server": "10.21.1.30",
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "ventes90",
@@ -42,7 +42,7 @@
         },
         {
             "previewLimit": 50,
-            "server": "10.21.1.90",
+            "server": "10.21.1.30",
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "vents90rp",

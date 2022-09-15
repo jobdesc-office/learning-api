@@ -15,7 +15,15 @@ class StBpTypeServices extends Stbptype
     {
         return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
             $query->where('typecd', $code);
-        })->get();
+        })->orderBy('sbttypename', 'asc')->get();
+    }
+
+    public function bySeq($code)
+    {
+        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
+            $query->where('typecd', $code);
+        })
+            ->orderBy('sbtseq', 'asc')->get();
     }
 
     public function whereParent($code)
