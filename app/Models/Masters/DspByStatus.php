@@ -6,7 +6,7 @@ use App\Models\DefaultModel;
 
 class DspByStatus extends DefaultModel
 {
-   protected $table = "DspByCust";
+   protected $table = "dspbystatus";
 
    protected $connection = 'pgsql2';
 

@@ -88,15 +88,4 @@ class ProspectController extends Controller
     {
         return $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
     }
-
-    public function report(Request $request, DspByCustServices $service)
-    {
-        $data = collect($request->all())->filter();
-        return response()->json($service->reportByBp($data));
-    }
-
-    public function reportYear($id, Request $request, DspByCustServices $service)
-    {
-        return response()->json($service->getReportYearsByBp($id));
-    }
 }

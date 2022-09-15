@@ -484,14 +484,12 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'insight'], function () use ($router) {
-                $router->get('bycust/{id}/years', 'InsightController@reportByCustYears');
                 $router->get('bycust/{id}', 'InsightController@reportByCust');
-                $router->get('bystage/{id}/years', 'InsightController@reportByStageYears');
                 $router->get('bystage/{id}', 'InsightController@reportByStage');
-                $router->get('bystatus/{id}/years', 'InsightController@reportByStatusYears');
                 $router->get('bystatus/{id}', 'InsightController@reportByStatus');
-                $router->get('bycustlabel/{id}/years', 'InsightController@reportByCustLabelYears');
                 $router->get('bycustlabel/{id}', 'InsightController@reportByCustLabel');
+                $router->get('byowner/{id}', 'InsightController@reportByOwner');
+                $router->get('bybp/{id}/years', 'InsightController@reportYears');
             });
 
             $router->group(['prefix' => 'prospectactivity'], function () use ($router) {

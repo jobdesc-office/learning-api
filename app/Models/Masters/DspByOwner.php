@@ -4,16 +4,19 @@ namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
 
-class DspByCustLabel extends DefaultModel
+class DspByOwner extends DefaultModel
 {
-   protected $table = "dspbycustlabel";
+   protected $table = "dspbyowner";
 
    protected $connection = 'pgsql2';
 
    protected $fillable = [
       "prospectbpid",
       "prospectbpname",
-      "prospectcustlabel",
+      "prospectownerid",
+      "prospectowner",
+      "prospectstatus",
+      "prospectstage",
       "prospectyy",
       "prospectmm",
       "prospectvalue",
@@ -25,7 +28,10 @@ class DspByCustLabel extends DefaultModel
    protected $alias = [
       "prospectbpid" => "",
       "prospectbpname" => "",
-      "prospectcustlabel" => "",
+      "prospectownerid" => "",
+      "prospectowner" => "",
+      "prospectstatus" => "",
+      "prospectstage" => "",
       "prospectyy" => "",
       "prospectmm" => "",
       "prospectvalue" => "",
@@ -45,8 +51,8 @@ class DspByCustLabel extends DefaultModel
       return $this->belongsTo(BusinessPartner::class, 'prospectbpid', 'bpid');
    }
 
-   public function prospectcustlabeltype()
+   public function prospectowneruser()
    {
-      return $this->belongsTo(Stbptype::class, 'prospectcustlabel', 'sbtid');
+      return $this->belongsTo(UserDetail::class, 'prospectownerid', 'userdtid');
    }
 }

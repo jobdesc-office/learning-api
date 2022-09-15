@@ -32,7 +32,7 @@ class ProspectFactory extends Factory
             'prospectstartdate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectenddate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectvalue' => $this->faker->numberBetween(100000, 10000000000),
-            'prospectowner' => $user->userid,
+            'prospectowner' => $user->userdtid,
             'prospectstageid' => $this->getStage()->getChildrenId(),
             'prospectstatusid' => $this->getStatus()->getChildrenId(),
             'prospectexpclosedate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
