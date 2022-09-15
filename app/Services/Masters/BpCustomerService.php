@@ -131,6 +131,36 @@ class BpCustomerService extends BpCustomer
             ->orderBy($order, $orderby);
     }
 
+    public function datatablesbppros($id, $order, $orderby, $search, $where)
+    {
+        return $this
+            ->newQuery()->with([
+                'bpcustcreatedby',
+                'bpcustupdatedby',
+                'sbccstmstatus' => function ($query) {
+                    $query->select('typeid', 'typename');
+                },
+                'sbcbp' => function ($query) {
+                    $query->select('bpid', 'bpname');
+                },
+                'sbccstm' => function ($query) {
+                    $query->select('*')->with([
+                        'cstmtype' => function ($query) {
+                            $query->select('typeid', 'typename');
+                        },
+                    ]);
+                },
+            ])
+            // ->getQuery()
+            ->where('sbcbpid', $id)
+            ->where('sbccstmstatusid', $where)
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            // ->where($where)
+            ->orderBy($order, $orderby);
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);

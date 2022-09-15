@@ -21,6 +21,9 @@ class DBTypes
 
     const cstmstatus = 'cstmstatus';
 
+    const cstmstatuspros = 'cstmstatpr';
+    const cstmstatuscust = 'cstmstatcu';
+
     const prospectType = 'prtype';
     const prospectStage = 'prstage';
     const prospectStatus = 'prstatus';

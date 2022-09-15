@@ -18,6 +18,16 @@ class ProductServices extends Product
             ->orderBy($order, $orderby);
     }
 
+    public function datatablesbp($id, $order, $orderby, $search)
+    {
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->where('productbpid', $id)
+            ->orderBy($order, $orderby);
+    }
+
     public function selectwithbp($searchValue, $id)
     {
         return $this->getQuery()->select('*')

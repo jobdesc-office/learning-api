@@ -153,6 +153,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('', 'BpCustomerController@all');
             $router->post('datatables', 'BpCustomerController@datatables');
             $router->post('datatables/{id}', 'BpCustomerController@datatablesbp');
+            $router->post('datatablespro/{id}', 'BpCustomerController@datatablesbppros');
+            $router->post('datatablescust/{id}', 'BpCustomerController@datatablesbpcust');
 
             $router->post('', 'BpCustomerController@store');
             $router->get('{id}', 'BpCustomerController@show');
@@ -161,6 +163,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'customer'], function () use ($router) {
+            $router->post('customer', 'CustomerController@storeCustomer');
             $router->get('select', 'CustomerController@select');
             // $router->get('select2', 'CustomerController@select2');
             $router->get('all', 'CustomerController@allUser');
@@ -232,6 +235,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('select/{id}', 'ProductController@selectwithbp');
             $router->get('', 'ProductController@all');
             $router->post('datatables', 'ProductController@datatables');
+            $router->post('datatables/{id}', 'ProductController@datatablesbp');
 
             $router->post('', 'ProductController@store');
             $router->get('{id}', 'ProductController@show');

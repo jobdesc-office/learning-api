@@ -6,8 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Services\Masters\CustomerService;
 use App\Services\Masters\ContactPersonServices;
 use App\Services\Masters\BpCustomerService;
+use App\Models\Masters\Customer;
+use App\Models\Masters\ContactPerson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Collections\Files\FileUploader;
+use App\Models\Masters\BpCustomer;
+use DBTypes;
+use Exception;
 
 class CustomerController extends Controller
 {
@@ -82,6 +88,62 @@ class CustomerController extends Controller
         return response()->json($businesspartners);
     }
 
+    public function storeCustomer(Request $req, Customer $modelCustomer, BpCustomerService $modelBpCustomerService)
+    {
+        $isregistered = $req->get('isregistered');
+        $stat = $req->get('sbccstmstatusid');
+        switch ($stat) {
+            case 'Pro':
+                $stat = find_type()->in([DBTypes::cstmstatuspros])->get(DBTypes::cstmstatuspros)->getId();
+                break;
+
+            default:
+                $stat = find_type()->in([DBTypes::cstmstatuscust])->get(DBTypes::cstmstatuscust)->getId();
+                break;
+        }
+        if ($isregistered == 'true') {
+            DB::beginTransaction();
+            try {
+                $insertt = collect($req->all())->filter()->put('sbccstmstatusid', $stat);
+
+                $modelBpCustomerService->createCustomerWeb($insertt);
+                DB::commit();
+                return response()->json(['message' => \TextMessages::successCreate]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return response()->json(['message' => \TextMessages::failedCreate, 'causes' => $th]);
+            }
+        } else {
+            DB::beginTransaction();
+            try {
+                $insert = collect($req->only($modelCustomer->getFillable()))->except('updatedby');
+                $resultCustomer = $modelCustomer->create($insert->toArray());
+                if ($resultCustomer) {
+                    $BpCustomer = $modelBpCustomerService->create([
+                        'sbcbpid' => $req->get('sbcbpid'),
+                        'sbccstmid' => $resultCustomer->cstmid,
+                        'sbccstmstatusid' => $stat,
+                        'sbccstmname' => $resultCustomer->cstmname,
+                        'sbccstmphone' => $resultCustomer->cstmphone,
+                        'sbccstmaddress' => $resultCustomer->cstmaddress,
+                        'createdby' => $req->get('createdby'),
+                    ]);
+                    if ($req->has('sbccstmpic')) {
+                        $filename = $resultCustomer->cstmname;
+                        $transType = find_type()->in([DBTypes::bpcustpic])->get(DBTypes::bpcustpic)->getId();
+                        $file = new FileUploader($req->file('sbccstmpic'), $filename, 'images/', $transType, $BpCustomer->sbcid);
+                        $resultCustomer  = $resultCustomer && $file->upload() != null;
+                    }
+                }
+                DB::commit();
+                return response()->json(['message' => \TextMessages::successCreate]);
+            } catch (Exception $th) {
+                DB::rollBack();
+                return response()->json(['message' => \TextMessages::failedCreate, 'causes' => $th]);
+            }
+        }
+    }
+
     public function store(Request $req, CustomerService $modelCustomerService)
     {
         $insert = collect($req->only($modelCustomerService->getFillable()))->filter()->except('updatedby');
@@ -97,15 +159,27 @@ class CustomerController extends Controller
         return response()->json($row);
     }
 
-    public function update($id, Request $req, CustomerService $modelCustomerService)
+    public function update($id, Request $req, CustomerService $modelCustomerService, BpCustomer $bp)
     {
-        $row = $modelCustomerService->findOrFail($id);
+        DB::beginTransaction();
+        try {
+            $row = $modelCustomerService->findOrFail($id);
+            $bp->select('*')->where('sbccstmid', $id)->update([
+                'sbccstmname' => $req->get('cstmname'),
+                'sbccstmphone' => $req->get('cstmphone'),
+                'sbccstmaddress' => $req->get('cstmaddress'),
+            ]);
 
-        $update = collect($req->only($modelCustomerService->getFillable()))
-            ->except('createdby');
-        $row->update($update->toArray());
+            $update = collect($req->only($modelCustomerService->getFillable()))
+                ->except('createdby');
+            $row->update($update->toArray());
 
-        return response()->json(['message' => \TextMessages::successEdit]);
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['message' => $th]);
+        }
     }
 
     public function destroy($id, CustomerService $modelCustomerService, ContactPersonServices $modelContactPersonServices, BpCustomerService $modelBpCustomerService)

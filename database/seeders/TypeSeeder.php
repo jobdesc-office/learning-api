@@ -68,8 +68,8 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::cstmstatus,
             'typename' => 'Customer Status',
             'children' => [
-                ['typename' => 'Customer', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Prospective Customer', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::cstmstatuspros, 'typename' => 'Customer', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::cstmstatuscust, 'typename' => 'Prospective Customer', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
