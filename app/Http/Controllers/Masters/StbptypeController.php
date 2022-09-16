@@ -13,13 +13,15 @@ class StbptypeController extends Controller
 
     public function byCode(Request $req, StbptypeServices $stbptypeServices)
     {
-        $types = $stbptypeServices->byCode($req->get('typecd'));
+        $bpid = $req->get('bpid');
+        $types = $stbptypeServices->byCode($req->get('typecd'), $bpid);
         return response()->json($types);
     }
 
     public function bySeq(Request $req, StbptypeServices $stbptypeServices)
     {
-        $types = $stbptypeServices->bySeq($req->get('typecd'));
+        $bpid = $req->get('bpid');
+        $types = $stbptypeServices->bySeq($req->get('typecd'), $bpid);
         return response()->json($types);
     }
 

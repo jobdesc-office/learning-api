@@ -186,22 +186,22 @@ class ProspectServices extends Prospect
                 $query->select('*')->with(['prosproductproduct', 'prosproducttaxtype']);
             },
             'prospectstage' => function ($query) {
-                $query->select('sbtid', 'sbttypename', 'sbtseq');
+                $query->select('sbtid', 'sbttypename', 'sbtseq', 'sbtremark');
             },
             'prospectlost' => function ($query) {
-                $query->select('sbtid', 'sbttypename');
+                $query->select('sbtid', 'sbttypename', 'sbtremark');
             },
             'prospectcustlabeltype' => function ($query) {
-                $query->select('sbtid', 'sbttypename');
+                $query->select('sbtid', 'sbttypename', 'sbtremark');
             },
             'prospectownerusers' => function ($query) {
                 $query->with(['userdetails']);
             },
             'prospectstatus' => function ($query) {
-                $query->select('sbtid', 'sbttypename');
+                $query->select('sbtid', 'sbttypename', 'sbtremark');
             },
             'prospectlostreason' => function ($query) {
-                $query->select('sbtid', 'sbttypename');
+                $query->select('sbtid', 'sbttypename', 'sbtremark');
             },
             'prospectreference' => function ($query) {
                 $query->select('*');

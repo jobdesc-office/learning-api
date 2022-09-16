@@ -11,18 +11,21 @@ class StBpTypeServices extends Stbptype
         return $this->getQuery()->findOrFail($id);
     }
 
-    public function byCode($code)
-    {
-        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
-            $query->where('typecd', $code);
-        })->orderBy('sbttypename', 'asc')->get();
-    }
-
-    public function bySeq($code)
+    public function byCode($code, $bpid)
     {
         return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
             $query->where('typecd', $code);
         })
+            ->where('sbtbpid', $bpid)
+            ->orderBy('sbttypename', 'asc')->get();
+    }
+
+    public function bySeq($code, $bpid)
+    {
+        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
+            $query->where('typecd', $code);
+        })
+            ->where('sbtbpid', $bpid)
             ->orderBy('sbtseq', 'asc')->get();
     }
 
