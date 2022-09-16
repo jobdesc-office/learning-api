@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\BusinessPartner;
 use App\Services\Masters\BusinessPartnerServices;
+use App\Models\Masters\Stbptype;
+use Database\Seeders\BpTypeSeeder;
 use Illuminate\Http\Request;
+use DBTypes;
 
 class BusinessPartnerController extends Controller
 {
@@ -82,12 +85,13 @@ class BusinessPartnerController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, BusinessPartner $modelBusinessPartner)
+    public function store(Request $req, BusinessPartner $modelBusinessPartner, Stbptype $stbptype)
     {
         $insert = collect($req->only($modelBusinessPartner->getFillable()))->filter()->except('updatedby');
 
-        $modelBusinessPartner->create($insert->toArray());
-
+        $bp = $modelBusinessPartner->create($insert->toArray());
+        $seeder = new BpTypeSeeder;
+        $seeder->run($bp->bpid);
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
