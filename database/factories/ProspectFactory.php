@@ -6,6 +6,7 @@ use App\Models\Masters\Prospect;
 use App\Models\Masters\UserDetail;
 use App\Models\Masters\Customer;
 use App\Models\Masters\Stbptype;
+use App\Services\Masters\ProspectServices;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use FactoryCount;
 use DBTypes;
@@ -28,7 +29,7 @@ class ProspectFactory extends Factory
         $minute = [0, 15, 30, 45, 59][rand(0, 4)];
         return [
             'prospectname' => $this->faker->name(),
-            'prospectcode' => $this->faker->dateTime,
+            'prospectcode' => (new ProspectServices)->generateCode(),
             'prospectstartdate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectenddate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectvalue' => $this->faker->numberBetween(100000, 10000000000),
