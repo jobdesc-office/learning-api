@@ -17,6 +17,7 @@ class StBpTypeServices extends Stbptype
             $query->where('typecd', $code);
         })
             ->where('sbtbpid', $bpid)
+            ->where('isactive', true)
             ->orderBy('sbttypename', 'asc')->get();
     }
 
@@ -26,6 +27,7 @@ class StBpTypeServices extends Stbptype
             $query->where('typecd', $code);
         })
             ->where('sbtbpid', $bpid)
+            ->where('isactive', true)
             ->orderBy('sbtseq', 'asc')->get();
     }
 

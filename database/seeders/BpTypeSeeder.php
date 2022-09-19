@@ -93,6 +93,22 @@ class BpTypeSeeder extends Seeder
             ['sbttypename' => 'Other', 'createdby' => 1, 'updatedby' => 1],
          ]
       ],
+      [
+         'parent' => \DBTypes::contactType,
+         'sbtname' => 'Contact Type',
+         'children' => [
+            ['sbttypename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
+            ['sbttypename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+            ['sbttypename' => 'Facebook', 'createdby' => 1, 'updatedby' => 1],
+         ]
+      ],
+      [
+         'parent' => \DBTypes::cstmtype,
+         'sbtname' => 'Customer Type',
+         'children' => [
+            ['sbttypename' => 'Manufacture', 'createdby' => 1, 'updatedby' => 1],
+         ]
+      ],
    ];
 
    /**
@@ -100,19 +116,22 @@ class BpTypeSeeder extends Seeder
     *
     * @return void
     */
-   public function run()
+   public function run($id = null)
    {
-      $user = UserDetail::whereHas('user', function ($query) {
-         $query->where('username', 'developer');
-      })->get()->first();
+      if ($id == null) {
+         $id = UserDetail::whereHas('user', function ($query) {
+            $query->where('username', 'developer');
+         })->get()->first()->userdtbpid;
+      }
+
       foreach ($this->data as $data) {
-         StBpType::withoutEvents(function () use ($data, $user) {
+         StBpType::withoutEvents(function () use ($data, $id) {
             $masterid = find_type()->in($data['parent'])->get($data['parent'])->getId();
             foreach ($data['children'] as $child) {
                $type = new Stbptype;
                $typeData = $type->fill(collect($child)->only($type->getFillable())->toArray());
                $typeData->sbtname = $data['sbtname'];
-               $typeData->sbtbpid = $user->userdtbpid;
+               $typeData->sbtbpid = $id;
                $typeData->sbttypemasterid = $masterid;
                $typeData->save();
             }

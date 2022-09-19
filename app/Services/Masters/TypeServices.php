@@ -18,6 +18,24 @@ class TypeServices extends Types
             ->where('typecd', $code)->get();
     }
 
+    public function byCodeAdd($code, $searchValue)
+    {
+        return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq', 'typemasterid')
+            ->whereHas('parent', function ($query) use ($code) {
+                $query->where('typecd', $code);
+            })
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
+            })
+            ->with([
+                'typecreatedby',
+                'typeupdatedby',
+            ])
+            ->orderBy('typename', 'asc')
+            ->get();
+    }
+
     public function byCode($code)
     {
         return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq', 'typemasterid')

@@ -18,6 +18,14 @@ class TypesController extends Controller
         return response($types);
     }
 
+    public function byCodeAdd(Request $req, TypeServices $typeServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $masterid = $typeServices->byCodes($req->get('typecd'));
+        $types = $typeServices->byCodeAdd($req->get('typecd'), $searchValue);
+        return response()->json($types, 200, ['searchValue' => $searchValue, 'masterid' => json_encode($masterid)]);
+    }
+
     public function byCode(Request $req, TypeServices $typeServices)
     {
         $types = $typeServices->byCode($req->get('typecd'));
