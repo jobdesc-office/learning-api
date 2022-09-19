@@ -76,16 +76,19 @@ class ProspectServices extends Prospect
 
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
-            $query = $query->where($prospectwhere->toArray());
-        }
+            $query = $query->where(function ($query) use ($prospectwhere, $whereArr) {
+                $query = $query->where($prospectwhere->toArray());
 
-        $prospectAssignModel = new ProspectAssign;
-        $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
-        if ($prospectassignwhere->isNotEmpty()) {
-            $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                $query->orWhere($prospectassignwhere->toArray());
+                $prospectAssignModel = new ProspectAssign;
+                $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
+                if ($prospectassignwhere->isNotEmpty()) {
+                    $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
+                        $query->orWhere($prospectassignwhere->toArray());
+                    });
+                }
             });
         }
+
 
         if ($whereArr->has("search")) {
             $query = $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
