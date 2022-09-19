@@ -93,6 +93,22 @@ class BpTypeSeeder extends Seeder
             ['sbttypename' => 'Other', 'createdby' => 1, 'updatedby' => 1],
          ]
       ],
+      [
+         'parent' => \DBTypes::cstmtype,
+         'sbtname' => 'Customer Type',
+         'children' => [
+            ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
+            ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+            ['typename' => 'Facebook', 'createdby' => 1, 'updatedby' => 1],
+         ]
+      ],
+      [
+         'parent' => \DBTypes::contactType,
+         'sbtname' => 'Contact Type',
+         'children' => [
+            ['sbttypename' => 'Manufacture', 'createdby' => 1, 'updatedby' => 1],
+         ]
+      ],
    ];
 
    /**
