@@ -58,6 +58,13 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
+            'typecd' => \DBTypes::cstmtype,
+            'typename' => 'Customer Type',
+            'children' => [
+                ['typename' => 'Manufacture', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
             'typecd' => \DBTypes::cstmstatus,
             'typename' => 'Customer Status',
             'children' => [
@@ -146,6 +153,15 @@ class TypeSeeder extends Seeder
                 ['typename' => 'By Email', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'By Zoom', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'On Site', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::contactType,
+            'typename' => 'Contact Type',
+            'children' => [
+                ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Facebook', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
