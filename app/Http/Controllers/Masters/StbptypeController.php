@@ -18,6 +18,16 @@ class StbptypeController extends Controller
         return response()->json($types);
     }
 
+    public function byCodeAdd(Request $req, StbptypeServices $typeServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $masterid = find_type()->in([$req->get('typecd')])->get($req->get('typecd'))->getId();
+        $master = find_type()->in([$req->get('typecd')])->get($req->get('typecd'))->getName();
+        $bpid = $req->get('bpid');
+        $types = $typeServices->byCodeAdd($req->get('typecd'), $bpid, $searchValue);
+        return response()->json($types, 200, ['searchValue' => $searchValue, 'masterid' => json_encode($masterid), 'master' => json_encode($master)]);
+    }
+
     public function bySeq(Request $req, StbptypeServices $stbptypeServices)
     {
         $bpid = $req->get('bpid');
