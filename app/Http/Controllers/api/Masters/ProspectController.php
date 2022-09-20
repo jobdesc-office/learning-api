@@ -5,9 +5,12 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\DspByCust;
 use App\Models\Masters\Prospect;
+use App\Models\Masters\ProspectCustomField;
+use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DspByCustServices;
 use App\Services\Masters\ProspectAssignServices;
 use App\Services\Masters\ProspectActivityServices;
+use App\Services\Masters\ProspectCustomFieldServices;
 use App\Services\Masters\ProspectProductServices;
 use App\Services\Masters\ProspectServices;
 use App\Services\Masters\TrHistoryServices;
@@ -38,6 +41,17 @@ class ProspectController extends Controller
 
                 $prospectProductServices = new ProspectProductServices();
                 $prospectProductServices->createProspectProduct($productData);
+            }
+        }
+
+        if ($insert->has('customfields')) {
+            foreach ($insert->get('customfields') as $customField) {
+                $customFieldData = collect($customField);
+                $customFieldData->put('prospectid', $modelProspectServices->prospectid);
+
+                $customFieldModel = new ProspectCustomField();
+                $customFieldModel->fill($customFieldData->toArray());
+                $customFieldModel->save();
             }
         }
 
@@ -87,5 +101,11 @@ class ProspectController extends Controller
     public function prospectHistories(Request $request, TrHistoryServices $trHistoryServices, Prospect $prospect)
     {
         return $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
+    }
+
+    public function prospectcustomfield($id, CustomFieldService $service)
+    {
+        $customField = $service->byBp($id);
+        return response()->json($customField);
     }
 }

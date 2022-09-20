@@ -62,6 +62,13 @@ class CustomFieldService extends CustomField
             ->get();
     }
 
+    public function byBp($bpid)
+    {
+        return $this->getQuery()
+            ->where('custfbpid', $bpid)
+            ->get();
+    }
+
     public function datatables($order, $orderby, $search)
     {
         return $this->getQuery()

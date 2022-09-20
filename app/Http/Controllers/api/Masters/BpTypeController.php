@@ -11,7 +11,7 @@ class BpTypeController extends Controller
 
    public function byCode(Request $req, StBpTypeServices $typeServices)
    {
-      $types = $typeServices->byCode($req->get('typecd'));
+      $types = $typeServices->byCode($req->get('typecd'), $req->get('bpid'));
       return response()->json($types);
    }
 
