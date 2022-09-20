@@ -1,3 +1,4 @@
+"prospectbpid","prospectbpname","prospectcustid","prospectcustname","prospectyy","prospectmm","prospectvalue"
 1,Gutmann-Breitenberg,24,Koss-Runte,2022.00,9.00,4535133427
 1,Gutmann-Breitenberg,29,"Baumbach, Christiansen and Dickinson",2022.00,5.00,3807076313
 1,Gutmann-Breitenberg,74,"Roob, Koepp and Durgan",2022.00,8.00,4555119101
@@ -32,7 +33,7 @@
 2,"Walsh, Cummings and Zemlak",590,Strosin-Goodwin,2022.00,10.00,1802217843
 2,"Walsh, Cummings and Zemlak",595,Halvorson-Hintz,2022.00,6.00,1163383931
 2,"Walsh, Cummings and Zemlak",610,"Rempel, Dickens and Kihn",2022.00,5.00,129250257
-2,"Walsh, Cummings and Zemlak",612,,2022.00,6.00,829252764
+2,"Walsh, Cummings and Zemlak",612,"Rempel, Dickens and Kihn",2022.00,6.00,829252764
 2,"Walsh, Cummings and Zemlak",749,Smitham Inc,2022.00,5.00,4664559928
 2,"Walsh, Cummings and Zemlak",759,"Toy, Walsh and Schaden",2022.00,7.00,5219607245
 3,"Roob, Champlin and Kerluke",20,"Hamill, Collier and Lockman",2022.00,6.00,1000846784
