@@ -1,0 +1,99 @@
+"prospectbpid","prospectbpname","prospectownerid","prospectowner","prospectstatus","prospectstage","prospectyy","prospectmm","prospectvalue"
+1,Gutmann-Stracke,22,Coy Heller,Closed,Qualify Compatibility,2022.00,1.00,9703589448
+1,Gutmann-Stracke,22,Coy Heller,Closed,Qualify Compatibility,2022.00,5.00,9670602452
+1,Gutmann-Stracke,22,Coy Heller,Closed,Qualify Compatibility,2022.00,10.00,4478525643
+1,Gutmann-Stracke,22,Coy Heller,Closed Lost,Negotiate,2022.00,4.00,3956052528
+1,Gutmann-Stracke,22,Coy Heller,Closed Lost,Negotiate,2022.00,12.00,4914863537
+1,Gutmann-Stracke,22,Coy Heller,Closed Lost,Pitch,2022.00,8.00,8936841
+1,Gutmann-Stracke,22,Coy Heller,Closed Lost,Pitch,2022.00,12.00,4577553649
+1,Gutmann-Stracke,22,Coy Heller,Closed Won,Analyze Needs,2022.00,8.00,3877830222
+1,Gutmann-Stracke,22,Coy Heller,Closed Won,Deliver proposal,2022.00,2.00,9327866684
+1,Gutmann-Stracke,22,Coy Heller,Closed Won,Pitch,2022.00,12.00,2068536661
+1,Gutmann-Stracke,22,Coy Heller,Closed Won,Qualify Compatibility,2022.00,10.00,4934519167
+1,Gutmann-Stracke,22,Coy Heller,Closed Won,Qualify Compatibility,2022.00,11.00,298236087
+1,Gutmann-Stracke,22,Coy Heller,Force Closed,Deliver proposal,2022.00,11.00,9536838641
+1,Gutmann-Stracke,22,Coy Heller,Force Closed,Make Contact,2022.00,6.00,8829303578
+1,Gutmann-Stracke,22,Coy Heller,Force Closed,Make Contact,2022.00,10.00,9697243482
+1,Gutmann-Stracke,22,Coy Heller,Force Closed,Qualify Compatibility,2022.00,2.00,3873372396
+1,Gutmann-Stracke,22,Coy Heller,Hold,Make Contact,2022.00,10.00,929043381
+1,Gutmann-Stracke,22,Coy Heller,Hold,Qualify Compatibility,2022.00,3.00,8207739820
+1,Gutmann-Stracke,22,Coy Heller,In Progress,Pitch,2022.00,1.00,4287504212
+1,Gutmann-Stracke,22,Coy Heller,In Progress,Pitch,2022.00,9.00,7125963088
+1,Gutmann-Stracke,22,Coy Heller,In Progress,Qualify Compatibility,2022.00,2.00,9396683481
+1,Gutmann-Stracke,22,Coy Heller,Open,Analyze Needs,2022.00,2.00,4801718469
+1,Gutmann-Stracke,22,Coy Heller,Open,Analyze Needs,2022.00,3.00,9694967363
+1,Gutmann-Stracke,22,Coy Heller,Open,Deliver proposal,2022.00,1.00,7062567585
+1,Gutmann-Stracke,22,Coy Heller,Open,Deliver proposal,2022.00,9.00,5176865929
+1,Gutmann-Stracke,22,Coy Heller,Open,Make Contact,2022.00,9.00,12344
+1,Gutmann-Stracke,22,Coy Heller,Open,Negotiate,2022.00,5.00,5556181547
+3,Jacobson Ltd,22,Coy Heller,Closed,Pitch,2022.00,6.00,5349583863
+3,Jacobson Ltd,22,Coy Heller,Closed,Qualify Compatibility,2022.00,1.00,7637869331
+3,Jacobson Ltd,22,Coy Heller,Closed Lost,Deliver proposal,2022.00,7.00,6233550793
+3,Jacobson Ltd,22,Coy Heller,Closed Lost,Negotiate,2022.00,11.00,4203219137
+3,Jacobson Ltd,22,Coy Heller,Closed Won,Make Contact,2022.00,1.00,5715523247
+3,Jacobson Ltd,22,Coy Heller,Force Closed,Negotiate,2022.00,7.00,4423474459
+3,Jacobson Ltd,22,Coy Heller,Force Closed,Qualify Compatibility,2022.00,8.00,6522852230
+3,Jacobson Ltd,22,Coy Heller,Hold,Deliver proposal,2022.00,2.00,5045107042
+3,Jacobson Ltd,22,Coy Heller,Hold,Negotiate,2022.00,2.00,2896567566
+3,Jacobson Ltd,22,Coy Heller,Hold,Qualify Compatibility,2022.00,9.00,6065421796
+3,Jacobson Ltd,22,Coy Heller,In Progress,Deliver proposal,2022.00,6.00,9461503068
+3,Jacobson Ltd,22,Coy Heller,In Progress,Make Contact,2022.00,4.00,854998733
+3,Jacobson Ltd,22,Coy Heller,In Progress,Negotiate,2022.00,7.00,6344254965
+3,Jacobson Ltd,22,Coy Heller,Open,Analyze Needs,2022.00,10.00,199175954
+3,Jacobson Ltd,22,Coy Heller,Open,Deliver proposal,2022.00,2.00,6905570360
+3,Jacobson Ltd,22,Coy Heller,Open,Negotiate,2022.00,2.00,5843525845
+3,Jacobson Ltd,22,Coy Heller,Open,Qualify Compatibility,2022.00,6.00,3353852275
+3,Jacobson Ltd,22,Coy Heller,Open,Qualify Compatibility,2022.00,7.00,6714031892
+4,Trantow Ltd,22,Coy Heller,Closed,Analyze Needs,2022.00,11.00,7099483717
+4,Trantow Ltd,22,Coy Heller,Closed,Deliver proposal,2022.00,4.00,4265720357
+4,Trantow Ltd,22,Coy Heller,Closed,Qualify Compatibility,2022.00,3.00,7029498056
+4,Trantow Ltd,22,Coy Heller,Closed Lost,Analyze Needs,2022.00,6.00,7278690309
+4,Trantow Ltd,22,Coy Heller,Closed Lost,Qualify Compatibility,2022.00,10.00,5179749396
+4,Trantow Ltd,22,Coy Heller,Closed Won,Make Contact,2022.00,8.00,8648069274
+4,Trantow Ltd,22,Coy Heller,Closed Won,Pitch,2022.00,10.00,8633650245
+4,Trantow Ltd,22,Coy Heller,Force Closed,Deliver proposal,2022.00,3.00,2289592414
+4,Trantow Ltd,22,Coy Heller,Force Closed,Make Contact,2022.00,12.00,7893735415
+4,Trantow Ltd,22,Coy Heller,Force Closed,Pitch,2022.00,11.00,2711909420
+4,Trantow Ltd,22,Coy Heller,Hold,Make Contact,2022.00,6.00,4067240432
+4,Trantow Ltd,22,Coy Heller,Hold,Pitch,2022.00,10.00,3363337763
+4,Trantow Ltd,22,Coy Heller,Hold,Qualify Compatibility,2022.00,2.00,373211162
+4,Trantow Ltd,22,Coy Heller,Hold,Qualify Compatibility,2022.00,4.00,9483814955
+4,Trantow Ltd,22,Coy Heller,In Progress,Make Contact,2022.00,5.00,867007806
+4,Trantow Ltd,22,Coy Heller,Open,Deliver proposal,2022.00,5.00,7752980050
+4,Trantow Ltd,22,Coy Heller,Open,Make Contact,2022.00,12.00,1529522887
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Closed,Analyze Needs,2022.00,1.00,9861746477
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Closed,Deliver proposal,2022.00,4.00,3820799487
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Closed Lost,Analyze Needs,2022.00,1.00,9534544550
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Closed Lost,Qualify Compatibility,2022.00,8.00,5670136130
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Closed Won,Make Contact,2022.00,11.00,6101741956
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Closed Won,Pitch,2022.00,2.00,3386915572
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Hold,Analyze Needs,2022.00,9.00,9507201282
+5,"Witting, Lemke and Hagenes",20,Coy Heller,In Progress,Analyze Needs,2022.00,4.00,9657955269
+5,"Witting, Lemke and Hagenes",20,Coy Heller,In Progress,Analyze Needs,2022.00,7.00,4009121042
+5,"Witting, Lemke and Hagenes",20,Coy Heller,In Progress,Deliver proposal,2022.00,6.00,8532455541
+5,"Witting, Lemke and Hagenes",20,Coy Heller,In Progress,Negotiate,2022.00,10.00,4692056113
+5,"Witting, Lemke and Hagenes",20,Coy Heller,In Progress,Pitch,2022.00,4.00,1302819744
+5,"Witting, Lemke and Hagenes",20,Coy Heller,In Progress,Qualify Compatibility,2022.00,12.00,549480474
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Analyze Needs,2022.00,9.00,549656042
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Deliver proposal,2022.00,5.00,6359278801
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Pitch,2022.00,9.00,6155979541
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Pitch,2022.00,10.00,386297872
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Qualify Compatibility,2022.00,4.00,2793322770
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Qualify Compatibility,2022.00,5.00,2001061953
+5,"Witting, Lemke and Hagenes",20,Coy Heller,Open,Qualify Compatibility,2022.00,6.00,2354496517
+2,Schiller-Windler,10,Coy Heller,Closed,Analyze Needs,2022.00,6.00,9327025396
+2,Schiller-Windler,10,Coy Heller,Closed,Deliver proposal,2022.00,7.00,6268533028
+2,Schiller-Windler,10,Coy Heller,Closed,Negotiate,2022.00,9.00,6075117803
+2,Schiller-Windler,10,Coy Heller,Closed Lost,Deliver proposal,2022.00,7.00,9663162146
+2,Schiller-Windler,10,Coy Heller,Closed Won,Deliver proposal,2022.00,9.00,3439891652
+2,Schiller-Windler,10,Coy Heller,Closed Won,Make Contact,2022.00,5.00,9161674650
+2,Schiller-Windler,10,Coy Heller,Closed Won,Make Contact,2022.00,12.00,4694825557
+2,Schiller-Windler,10,Coy Heller,Closed Won,Negotiate,2022.00,6.00,4581474828
+2,Schiller-Windler,10,Coy Heller,Closed Won,Qualify Compatibility,2022.00,4.00,4029647786
+2,Schiller-Windler,10,Coy Heller,Force Closed,Make Contact,2022.00,10.00,2427912926
+2,Schiller-Windler,10,Coy Heller,Hold,Pitch,2022.00,1.00,5297109275
+2,Schiller-Windler,10,Coy Heller,In Progress,Analyze Needs,2022.00,8.00,8254843618
+2,Schiller-Windler,10,Coy Heller,In Progress,Deliver proposal,2022.00,5.00,8251496514
+2,Schiller-Windler,10,Coy Heller,In Progress,Make Contact,2022.00,2.00,2532307070
+2,Schiller-Windler,10,Coy Heller,In Progress,Pitch,2022.00,8.00,7904934166
+2,Schiller-Windler,10,Coy Heller,Open,Negotiate,2022.00,12.00,6377805937

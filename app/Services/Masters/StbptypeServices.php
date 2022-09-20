@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Stbptype;
+use Illuminate\Support\Facades\DB;
 
 class StBpTypeServices extends Stbptype
 {
@@ -16,6 +17,20 @@ class StBpTypeServices extends Stbptype
         return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
             $query->where('typecd', $code);
         })
+            ->where('sbtbpid', $bpid)
+            ->where('isactive', true)
+            ->orderBy('sbttypename', 'asc')->get();
+    }
+
+    public function byCodeAdd($code, $bpid, $searchValue)
+    {
+        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
+            $query->where('typecd', $code);
+        })
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(sbttypename))'), 'like', "%$searchValue%");
+            })
             ->where('sbtbpid', $bpid)
             ->where('isactive', true)
             ->orderBy('sbttypename', 'asc')->get();
