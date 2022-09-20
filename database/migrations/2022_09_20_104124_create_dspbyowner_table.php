@@ -13,17 +13,17 @@ class CreateDspbyownerTable extends Migration
      */
     public function up()
     {
-        pgsql()->create('dspbyowner', function (Blueprint $table) {
-            $table->bigInteger('prospectbpid');
-            $table->string('prospectbpname', 100);
-            $table->bigInteger('prospectownerid');
-            $table->string('prospectowner', 100);
-            $table->text('prospectstatus');
-            $table->text('prospectstage');
-            $table->decimal('prospectyy', 8, 2);
-            $table->decimal('prospectmm', 8, 2);
-            $table->double('prospectvalue');
-        });
+        // pgsql()->create('dspbyowner', function (Blueprint $table) {
+        //     $table->bigInteger('prospectbpid');
+        //     $table->string('prospectbpname', 100);
+        //     $table->bigInteger('prospectownerid');
+        //     $table->string('prospectowner', 100);
+        //     $table->text('prospectstatus');
+        //     $table->text('prospectstage');
+        //     $table->decimal('prospectyy', 8, 2);
+        //     $table->decimal('prospectmm', 8, 2);
+        //     $table->double('prospectvalue');
+        // });
     }
 
     /**

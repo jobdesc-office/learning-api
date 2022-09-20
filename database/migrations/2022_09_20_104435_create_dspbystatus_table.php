@@ -13,14 +13,14 @@ class CreateDspbystatusTable extends Migration
      */
     public function up()
     {
-        pgsql()->create('dspbystatus', function (Blueprint $table) {
-            $table->bigInteger('prospectbpid');
-            $table->string('prospectbpname', 100);
-            $table->text('prospectstatus');
-            $table->decimal('prospectyy', 8, 2);
-            $table->decimal('prospectmm', 8, 2);
-            $table->double('prospectvalue');
-        });
+        // pgsql()->create('dspbystatus', function (Blueprint $table) {
+        //     $table->bigInteger('prospectbpid');
+        //     $table->string('prospectbpname', 100);
+        //     $table->text('prospectstatus');
+        //     $table->decimal('prospectyy', 8, 2);
+        //     $table->decimal('prospectmm', 8, 2);
+        //     $table->double('prospectvalue');
+        // });
     }
 
     /**

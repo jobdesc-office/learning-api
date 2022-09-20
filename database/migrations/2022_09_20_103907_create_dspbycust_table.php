@@ -13,15 +13,15 @@ class CreateDspbycustTable extends Migration
      */
     public function up()
     {
-        pgsql()->create('dspbycust', function (Blueprint $table) {
-            $table->bigInteger('prospectbpid');
-            $table->string('prospectbpname', 100);
-            $table->bigInteger('prospectcustid');
-            $table->string('prospectcustname', 100);
-            $table->decimal('prospectyy', 8, 2);
-            $table->decimal('prospectmm', 8, 2);
-            $table->double('prospectvalue');
-        });
+        // pgsql()->create('dspbycust', function (Blueprint $table) {
+        //     $table->bigInteger('prospectbpid');
+        //     $table->string('prospectbpname', 100);
+        //     $table->bigInteger('prospectcustid');
+        //     $table->string('prospectcustname', 100);
+        //     $table->decimal('prospectyy', 8, 2);
+        //     $table->decimal('prospectmm', 8, 2);
+        //     $table->double('prospectvalue');
+        // });
     }
 
     /**

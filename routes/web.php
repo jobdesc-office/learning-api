@@ -367,12 +367,13 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'home'], function () use ($router) {
             $router->get('{id}', 'HomeController@index');
-            // $router->post('datatables', 'MenusController@datatables');
 
-            // $router->post('', 'MenusController@store');
-            // $router->get('{id}', 'MenusController@show');
-            // $router->put('{id}', 'MenusController@update');
-            // $router->delete('{id}', 'MenusController@destroy');
+            $router->get('bycust/{id}', 'HomeController@reportByCust');
+            $router->get('bystage/{id}', 'HomeController@reportByStage');
+            $router->get('bystatus/{id}', 'HomeController@reportByStatus');
+            $router->get('bycustlabel/{id}', 'HomeController@reportByCustLabel');
+            $router->get('byowner/{id}', 'HomeController@reportByOwner');
+            $router->get('bybp/{id}/years', 'HomeController@reportYears');
         });
 
         $router->group(['prefix' => 'profile'], function () use ($router) {
