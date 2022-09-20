@@ -19,7 +19,7 @@ class CreateDspbystatusTable extends Migration
             $table->text('prospectstatus');
             $table->decimal('prospectyy', 8, 2);
             $table->decimal('prospectmm', 8, 2);
-            $table->double('prospecvalue');
+            $table->double('prospectvalue');
         });
     }
 

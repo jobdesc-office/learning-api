@@ -22,7 +22,7 @@ class CreateDspbyownerTable extends Migration
             $table->text('prospectstage');
             $table->decimal('prospectyy', 8, 2);
             $table->decimal('prospectmm', 8, 2);
-            $table->double('prospecvalue');
+            $table->double('prospectvalue');
         });
     }
 
