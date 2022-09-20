@@ -48,4 +48,5 @@ class DBTypes
 
     const activitytype = 'dayacttype';
     const activitycategory = 'dayactcat';
+    const activityCustomField = 'actcf';
 }

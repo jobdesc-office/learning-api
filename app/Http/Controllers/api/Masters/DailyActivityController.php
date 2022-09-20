@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Prospect;
+use App\Services\Masters\ActivityCustomFieldService;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\FilesServices;
 use App\Services\Masters\TrHistoryServices;
@@ -80,5 +81,10 @@ class DailyActivityController extends Controller
     public function dailyActivityHistories(Request $request, TrHistoryServices $trHistoryServices, DailyActivity $dailyActivity)
     {
         return $trHistoryServices->findHistories($request->get('dayactid'), $dailyActivity->getTable(), $request->get('bpid'));
+    }
+
+    public function dailyActivityCustomField(Request $request, ActivityCustomFieldService $service)
+    {
+        return response()->json($service->getAll(collect($request->all())->filter()));
     }
 }

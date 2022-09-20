@@ -1,15 +1,12 @@
-select *
-from "trprospect"
-where ("prospectowner" = 22)
-   or exists (
-      select *
-      from "trprospectassign"
-      where "trprospect"."prospectid" = "trprospectassign"."prospectid"
-         or (
-            (
-               "prospectassignto" = 22
-               or "prospectreportto" = 22
-            )
-         )
+INSERT INTO activitycustomfield (
+      custfid,
+      custfbpid,
+      custfname,
+      custftypeid
    )
-limit 10
+VALUES (
+      default,
+      3,
+      'Activity Subject',
+      61
+   );

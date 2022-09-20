@@ -26,9 +26,7 @@ class DailyActivityFactory extends Factory
     {
         $this->prepareAttributes();
         return [
-            'dayactcatid' => find_type()->childrenByCode([\DBTypes::activitytype])->randomChildren()->getChildrenId(),
-            'dayacttypeid' => find_type()->childrenByCode([\DBTypes::activitycategory])->randomChildren()->getChildrenId(),
-            'dayacttypevalue' => $this->faker->text(),
+            'dayactcatid' => find_type()->childrenByCode([\DBTypes::activitycategory])->randomChildren()->getChildrenId(),
             'dayactdate' => $this->getActDate(),
             'dayactdesc' => $this->faker->text(),
             'dayactloc' => $this->getLocation(),

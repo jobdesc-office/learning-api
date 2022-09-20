@@ -136,6 +136,17 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
+            'typecd' => \DBTypes::activityCustomField,
+            'typename' => 'Activity Customize Field',
+            'children' => [
+                ['typename' => 'Number', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Price', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Text', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
             'typecd' => \DBTypes::taxType,
             'typename' => 'Tax Type',
             'children' => [

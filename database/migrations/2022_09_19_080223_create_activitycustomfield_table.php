@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVtdailyactivityTable extends Migration
+class CreateActivitycustomfieldtable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateVtdailyactivityTable extends Migration
      */
     public function up()
     {
-        pgsql()->create('vtdailyactivity', function (Blueprint $table) {
-            $table->id('dayactid');
-            $table->integer('dayactcatid')->nullable();
-            $table->integer('dayactcustid')->nullable();
-            $table->date('dayactdate')->nullable();
-            $table->text('dayactdesc')->nullable();
-            $table->text('dayactloclabel')->nullable();
-            $table->text('dayactloc')->nullable();
-            $table->double('dayactlatitude')->nullable();
-            $table->double('dayactlongitude')->nullable();
+        pgsql()->create('activitycustomfield', function (Blueprint $table) {
+            $table->id('custfid');
+            $table->bigInteger('custfbpid');
+            $table->string('custfname', 255);
+            $table->bigInteger('custftypeid');
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
@@ -39,6 +34,6 @@ class CreateVtdailyactivityTable extends Migration
      */
     public function down()
     {
-        pgsql()->dropIfExists('vtdailyactivity');
+        pgsql()->dropIfExists('activitycustomfield');
     }
 }

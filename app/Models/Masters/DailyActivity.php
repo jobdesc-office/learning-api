@@ -14,9 +14,7 @@ class DailyActivity extends DefaultModel
 
     protected $fillable = [
         "dayactcatid",
-        "dayacttypeid",
         "dayactcustid",
-        "dayacttypevalue",
         "dayactdate",
         "dayactdesc",
         "dayactloclabel",
@@ -71,14 +69,14 @@ class DailyActivity extends DefaultModel
         return $this->belongsTo(BpCustomer::class, "dayactcustid", "cstmid");
     }
 
-    public function dayacttype()
-    {
-        return $this->belongsTo(Stbptype::class, "dayacttypeid", "sbtid");
-    }
-
     public function dayactpics()
     {
         return $this->hasOne(Files::class, "refid", "dayactid");
+    }
+
+    public function activitycustomfield()
+    {
+        return $this->hasMany(ActivityCF::class, "activityid", "dayactid");
     }
 
     const CREATED_AT = "createddate";

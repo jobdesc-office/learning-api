@@ -5,6 +5,7 @@ namespace App\Services\Masters;
 use App\Collections\Files\FileColumn;
 use App\Collections\Files\FileFinder;
 use App\Collections\Files\FileUploader;
+use App\Models\Masters\ActivityCF;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Files;
 use DBTypes;
@@ -90,7 +91,7 @@ class DailyActivityServices extends DailyActivity
             $item->put('createdby', auth()->user()->userid);
             $activity = new DailyActivity;
             $activity->fill($item->filter()->all())->save();
-            return collect($activity->attributes)->put('file', $item->get('file'))->all();
+            return collect($activity->attributes)->put('file', $item->get('file'))->put('customfields', $item->get('customfields'))->all();
         }, $activities->get('activities'));
 
         foreach ($data as $value) {
@@ -103,6 +104,15 @@ class DailyActivityServices extends DailyActivity
 
                     $file = new FileUploader($temp_path, $filename, 'images/', $dayactpics, $activity->get('dayactid'));
                     $file->upload();
+                }
+            }
+
+            if ($activity->has('customfields')) {
+                foreach ($activity->get('customfields') as $customfield) {
+                    $activitycf = new ActivityCF;
+                    $activitycf->fill(collect($customfield)->all());
+                    $activitycf->activityid =  $activity->get('dayactid');
+                    $activitycf->save();
                 }
             }
         }
@@ -153,8 +163,8 @@ class DailyActivityServices extends DailyActivity
                 $query->select('sbtid', 'sbttypename');
             },
             'dayactcust',
-            'dayacttype' => function ($query) {
-                $query->select('sbtid', 'sbttypename');
+            "activitycustomfield" => function ($query) {
+                $query->with('customfield');
             },
             'dayactpics' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
