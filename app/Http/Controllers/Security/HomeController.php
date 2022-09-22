@@ -25,8 +25,9 @@ class HomeController extends Controller
 
     public function reportByCust($id, Request $request, DspByCustService $service)
     {
+        $order = $request->header('order') ?? 'desc';
         $data = collect($request->all())->filter();
-        return response()->json($service->getReportByBp($id, $data));
+        return response()->json($service->getReportByBp($id, $data, $order));
     }
 
     public function reportByStage($id, Request $request, DspByStageService $service)

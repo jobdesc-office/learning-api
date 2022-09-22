@@ -1,0 +1,97 @@
+"featid","featmenuid","feattitle","featslug","featuredesc","createdby","createddate","updatedby","updateddate","isactive"
+1,1,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:37:57,1,2022-09-22 10:37:57,t
+2,2,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:38:17,1,2022-09-22 10:38:17,t
+3,2,Create,create,Users can Create Data,12,2022-09-22 10:38:17,1,2022-09-22 10:38:17,t
+4,2,Read,read,Users can Read Data,12,2022-09-22 10:38:17,1,2022-09-22 10:38:17,t
+5,2,Update,update,Users can Update Data,12,2022-09-22 10:38:17,1,2022-09-22 10:38:17,t
+6,2,Delete,delete,Users can Delete Data,12,2022-09-22 10:38:17,1,2022-09-22 10:38:17,t
+7,3,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:39:16,1,2022-09-22 10:39:16,t
+8,4,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:39:40,1,2022-09-22 10:39:40,t
+9,4,Create,create,Users can Create Data,12,2022-09-22 10:39:40,1,2022-09-22 10:39:40,t
+10,4,Read,read,Users can Read Data,12,2022-09-22 10:39:40,1,2022-09-22 10:39:40,t
+11,4,Update,update,Users can Update Data,12,2022-09-22 10:39:40,1,2022-09-22 10:39:40,t
+12,4,Delete,delete,Users can Delete Data,12,2022-09-22 10:39:40,1,2022-09-22 10:39:40,t
+13,5,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:40:07,1,2022-09-22 10:40:07,t
+14,5,Create,create,Users can Create Data,12,2022-09-22 10:40:07,1,2022-09-22 10:40:07,t
+15,5,Read,read,Users can Read Data,12,2022-09-22 10:40:07,1,2022-09-22 10:40:07,t
+16,5,Update,update,Users can Update Data,12,2022-09-22 10:40:07,1,2022-09-22 10:40:07,t
+17,5,Delete,delete,Users can Delete Data,12,2022-09-22 10:40:07,1,2022-09-22 10:40:07,t
+18,6,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:40:29,1,2022-09-22 10:40:29,t
+19,6,Create,create,Users can Create Data,12,2022-09-22 10:40:29,1,2022-09-22 10:40:29,t
+20,6,Read,read,Users can Read Data,12,2022-09-22 10:40:29,1,2022-09-22 10:40:29,t
+21,6,Update,update,Users can Update Data,12,2022-09-22 10:40:29,1,2022-09-22 10:40:29,t
+22,6,Delete,delete,Users can Delete Data,12,2022-09-22 10:40:29,1,2022-09-22 10:40:29,t
+23,7,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:41:03,1,2022-09-22 10:41:03,t
+24,7,Create,create,Users can Create Data,12,2022-09-22 10:41:03,1,2022-09-22 10:41:03,t
+25,7,Read,read,Users can Read Data,12,2022-09-22 10:41:03,1,2022-09-22 10:41:03,t
+26,7,Update,update,Users can Update Data,12,2022-09-22 10:41:03,1,2022-09-22 10:41:03,t
+27,7,Delete,delete,Users can Delete Data,12,2022-09-22 10:41:03,1,2022-09-22 10:41:03,t
+28,8,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:41:25,1,2022-09-22 10:41:25,t
+29,8,Create,create,Users can Create Data,12,2022-09-22 10:41:25,1,2022-09-22 10:41:25,t
+30,8,Read,read,Users can Read Data,12,2022-09-22 10:41:25,1,2022-09-22 10:41:25,t
+31,8,Update,update,Users can Update Data,12,2022-09-22 10:41:25,1,2022-09-22 10:41:25,t
+32,8,Delete,delete,Users can Delete Data,12,2022-09-22 10:41:25,1,2022-09-22 10:41:25,t
+33,9,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:41:38,1,2022-09-22 10:41:38,t
+34,9,Create,create,Users can Create Data,12,2022-09-22 10:41:38,1,2022-09-22 10:41:38,t
+35,9,Read,read,Users can Read Data,12,2022-09-22 10:41:38,1,2022-09-22 10:41:38,t
+36,9,Update,update,Users can Update Data,12,2022-09-22 10:41:38,1,2022-09-22 10:41:38,t
+37,9,Delete,delete,Users can Delete Data,12,2022-09-22 10:41:39,1,2022-09-22 10:41:39,t
+38,10,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:42:19,1,2022-09-22 10:42:19,t
+39,11,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:42:38,1,2022-09-22 10:42:38,t
+40,12,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:43:05,1,2022-09-22 10:43:05,t
+41,12,Create,create,Users can Create Data,12,2022-09-22 10:43:05,1,2022-09-22 10:43:05,t
+42,12,Read,read,Users can Read Data,12,2022-09-22 10:43:05,1,2022-09-22 10:43:05,t
+43,12,Update,update,Users can Update Data,12,2022-09-22 10:43:05,1,2022-09-22 10:43:05,t
+44,12,Delete,delete,Users can Delete Data,12,2022-09-22 10:43:05,1,2022-09-22 10:43:05,t
+45,13,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:43:39,1,2022-09-22 10:43:39,t
+46,13,Create,create,Users can Create Data,12,2022-09-22 10:43:39,1,2022-09-22 10:43:39,t
+47,13,Read,read,Users can Read Data,12,2022-09-22 10:43:39,1,2022-09-22 10:43:39,t
+48,13,Update,update,Users can Update Data,12,2022-09-22 10:43:39,1,2022-09-22 10:43:39,t
+49,13,Delete,delete,Users can Delete Data,12,2022-09-22 10:43:39,1,2022-09-22 10:43:39,t
+55,15,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:45:07,1,2022-09-22 10:45:07,t
+57,15,Read,read,Users can Read Data,12,2022-09-22 10:45:07,1,2022-09-22 10:45:07,t
+59,15,Delete,delete,Users can Delete Data,12,2022-09-22 10:45:07,1,2022-09-22 10:45:07,t
+60,16,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:46:08,1,2022-09-22 10:46:08,t
+62,16,Read,read,Users can Read Data,12,2022-09-22 10:46:08,1,2022-09-22 10:46:08,t
+63,16,Update,update,Users can Update Data,12,2022-09-22 10:46:08,1,2022-09-22 10:46:08,t
+65,17,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:47:11,1,2022-09-22 10:47:11,t
+66,18,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:47:34,1,2022-09-22 10:47:34,t
+67,18,Create,create,Users can Create Data,12,2022-09-22 10:47:34,1,2022-09-22 10:47:34,t
+68,18,Read,read,Users can Read Data,12,2022-09-22 10:47:34,1,2022-09-22 10:47:34,t
+69,18,Update,update,Users can Update Data,12,2022-09-22 10:47:34,1,2022-09-22 10:47:34,t
+70,18,Delete,delete,Users can Delete Data,12,2022-09-22 10:47:34,1,2022-09-22 10:47:34,t
+71,19,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:48:24,1,2022-09-22 10:48:24,t
+72,19,Create,create,Users can Create Data,12,2022-09-22 10:48:24,1,2022-09-22 10:48:24,t
+73,19,Read,read,Users can Read Data,12,2022-09-22 10:48:24,1,2022-09-22 10:48:24,t
+74,19,Update,update,Users can Update Data,12,2022-09-22 10:48:24,1,2022-09-22 10:48:24,t
+75,19,Delete,delete,Users can Delete Data,12,2022-09-22 10:48:24,1,2022-09-22 10:48:24,t
+76,20,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:48:44,1,2022-09-22 10:48:44,t
+77,20,Create,create,Users can Create Data,12,2022-09-22 10:48:44,1,2022-09-22 10:48:44,t
+78,20,Read,read,Users can Read Data,12,2022-09-22 10:48:44,1,2022-09-22 10:48:44,t
+79,20,Update,update,Users can Update Data,12,2022-09-22 10:48:44,1,2022-09-22 10:48:44,t
+80,20,Delete,delete,Users can Delete Data,12,2022-09-22 10:48:44,1,2022-09-22 10:48:44,t
+81,21,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:49:08,1,2022-09-22 10:49:08,t
+82,21,Create,create,Users can Create Data,12,2022-09-22 10:49:08,1,2022-09-22 10:49:08,t
+83,21,Read,read,Users can Read Data,12,2022-09-22 10:49:08,1,2022-09-22 10:49:08,t
+84,21,Update,update,Users can Update Data,12,2022-09-22 10:49:08,1,2022-09-22 10:49:08,t
+85,21,Delete,delete,Users can Delete Data,12,2022-09-22 10:49:08,1,2022-09-22 10:49:08,t
+86,22,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:49:28,1,2022-09-22 10:49:28,t
+87,22,Create,create,Users can Create Data,12,2022-09-22 10:49:28,1,2022-09-22 10:49:28,t
+88,22,Read,read,Users can Read Data,12,2022-09-22 10:49:28,1,2022-09-22 10:49:28,t
+89,22,Update,update,Users can Update Data,12,2022-09-22 10:49:28,1,2022-09-22 10:49:28,t
+90,22,Delete,delete,Users can Delete Data,12,2022-09-22 10:49:28,1,2022-09-22 10:49:28,t
+91,23,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:49:43,1,2022-09-22 10:49:43,t
+92,23,Create,create,Users can Create Data,12,2022-09-22 10:49:43,1,2022-09-22 10:49:43,t
+93,23,Read,read,Users can Read Data,12,2022-09-22 10:49:43,1,2022-09-22 10:49:43,t
+94,23,Update,update,Users can Update Data,12,2022-09-22 10:49:43,1,2022-09-22 10:49:43,t
+95,23,Delete,delete,Users can Delete Data,12,2022-09-22 10:49:43,1,2022-09-22 10:49:43,t
+96,24,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:49:59,1,2022-09-22 10:49:59,t
+97,24,Create,create,Users can Create Data,12,2022-09-22 10:49:59,1,2022-09-22 10:49:59,t
+98,24,Read,read,Users can Read Data,12,2022-09-22 10:49:59,1,2022-09-22 10:49:59,t
+99,24,Update,update,Users can Update Data,12,2022-09-22 10:49:59,1,2022-09-22 10:49:59,t
+100,24,Delete,delete,Users can Delete Data,12,2022-09-22 10:50:00,1,2022-09-22 10:50:00,t
+101,25,Viewable,viewable,This Feature is Viewable by Users,12,2022-09-22 10:50:15,1,2022-09-22 10:50:15,t
+102,25,Create,create,Users can Create Data,12,2022-09-22 10:50:15,1,2022-09-22 10:50:15,t
+103,25,Read,read,Users can Read Data,12,2022-09-22 10:50:15,1,2022-09-22 10:50:15,t
+104,25,Update,update,Users can Update Data,12,2022-09-22 10:50:15,1,2022-09-22 10:50:15,t
+105,25,Delete,delete,Users can Delete Data,12,2022-09-22 10:50:15,1,2022-09-22 10:50:15,t

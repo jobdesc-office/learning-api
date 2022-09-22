@@ -7,16 +7,16 @@ use Illuminate\Support\Collection;
 
 abstract class InsightService
 {
-   public function getReportByBp($bpid, Collection $collection)
+   public function getReportByBp($bpid, Collection $collection, $order = 'asc')
    {
-      $query = $this->getQuery()->where('prospectbpid', $bpid);
+      $query = $this->getQuery()->where('prospectbpid', $bpid)->orderBy('prospectvalue', $order);
       $query = $query->where($collection->filter()->all());
       return $query->get();
    }
 
-   public function getReportYearByBp($bpid)
+   public function getReportYearByBp($bpid, $order = 'asc')
    {
-      $query = $this->getQuery()->where('prospectbpid', $bpid);
+      $query = $this->getQuery()->where('prospectbpid', $bpid)->orderBy('prospectvalue', 'desc');
       return $query->select('prospectyy')->groupBy('prospectyy')->get()->map(function ($data) {
          return $data->prospectyy;
       });
