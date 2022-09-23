@@ -13,24 +13,26 @@ class CustomField extends DefaultModel
         "custfbpid",
         "custfname",
         "custftypeid",
-        "allprospect",
-        "onlythisprospect",
-        "thisprospectid",
+        "alldata",
+        "onlythisdata",
+        "thisdataid",
+        "custfreftypeid",
         "createdby",
         "updatedby",
         'isactive',
     ];
 
     protected $alias = [
-        "custfbpid",
-        "custfname",
-        "custftypeid",
-        "allprospect",
-        "onlythisprospect",
-        "thisprospectid",
-        "createdby",
-        "updatedby",
-        'isactive',
+        "custfbpid" => "",
+        "custfname" => "",
+        "custftypeid" => "",
+        "alldata" => "",
+        "onlythisdata" => "",
+        "thisdataid" => "",
+        "custfreftypeid" => "",
+        "createdby" => "",
+        "updatedby" => "",
+        'isactive' => "",
     ];
 
     const CREATED_AT = "createddate";
@@ -44,6 +46,11 @@ class CustomField extends DefaultModel
     public function custftype()
     {
         return $this->belongsTo(Types::class, 'custftypeid', 'typeid');
+    }
+
+    public function custfreftype()
+    {
+        return $this->belongsTo(Types::class, 'custfreftypeid', 'typeid');
     }
 
     public function custfcreatedby()

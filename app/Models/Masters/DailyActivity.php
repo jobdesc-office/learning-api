@@ -66,7 +66,7 @@ class DailyActivity extends DefaultModel
 
     public function dayactcust()
     {
-        return $this->belongsTo(BpCustomer::class, "dayactcustid", "cstmid");
+        return $this->belongsTo(BpCustomer::class, "dayactcustid", "sbcid");
     }
 
     public function dayactpics()

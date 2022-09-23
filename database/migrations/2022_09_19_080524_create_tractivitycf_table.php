@@ -2,9 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-class CreateActivitycustomfieldtable extends Migration
+class CreateActivitycftable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +12,11 @@ class CreateActivitycustomfieldtable extends Migration
      */
     public function up()
     {
-        pgsql()->create('activitycustomfield', function (Blueprint $table) {
-            $table->id('custfid');
-            $table->bigInteger('custfbpid');
-            $table->string('custfname', 255);
-            $table->bigInteger('custftypeid');
+        pgsql()->create('tractivitycf', function (Blueprint $table) {
+            $table->id('activitycfid');
+            $table->bigInteger('activityid');
+            $table->bigInteger('activitycustfid');
+            $table->string('activitycfvalue', 255);
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
@@ -34,6 +33,6 @@ class CreateActivitycustomfieldtable extends Migration
      */
     public function down()
     {
-        pgsql()->dropIfExists('activitycustomfield');
+        pgsql()->dropIfExists('tractivitycf');
     }
 }

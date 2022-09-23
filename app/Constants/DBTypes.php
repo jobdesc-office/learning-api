@@ -29,9 +29,10 @@ class DBTypes
     const prospectStatus = 'prstatus';
     const prospectCustLabel = 'prcustlab';
     const prospectCategory = 'prcat';
-    const prospectCustomizeField = 'prcf';
     const prospectLostReason = 'prlost';
 
+    const customizeField = 'custf';
+    const customizeFieldRefType = 'cfref';
     const competitorreftype = "comptref";
 
     const contactType = "contact";

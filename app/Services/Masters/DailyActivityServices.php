@@ -120,25 +120,32 @@ class DailyActivityServices extends DailyActivity
 
     public function getAll(Collection $whereArr)
     {
-        $query = $this->getQuery();
+        try {
 
-        $dailyactivityWhere = $whereArr->only($this->fillable);
-        if ($dailyactivityWhere->isNotEmpty()) {
-            $query = $query->where($dailyactivityWhere->toArray());
+            $query = $this->getQuery();
+
+            $dailyactivityWhere = $whereArr->only($this->fillable);
+            if ($dailyactivityWhere->isNotEmpty()) {
+                $query = $query->where($dailyactivityWhere->toArray());
+            }
+
+            if ($whereArr->has('bpid')) {
+                $bpid = $whereArr->get('bpid');
+                $query = $query->whereHas('dayactuser', function ($query) use ($bpid) {
+                    $query = $query->whereHas('userdetails', function ($query) use ($bpid) {
+                        $query->where('userdtbpid', $bpid);
+                    });
+                });
+            }
+
+            if ($whereArr->has("search")) {
+                $query = $query->where(DB::raw('TRIM(LOWER(dayactdesc))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
+            }
+
+            return $query->get();
+        } catch (\Throwable $e) {
+            dd($e);
         }
-
-        if ($whereArr->has('bpid')) {
-            $bpid = $whereArr->get('bpid');
-            $query = $query->whereHas('dayactcust', function ($query) use ($bpid) {
-                $query->where('sbcbpid', $bpid);
-            });
-        }
-
-        if ($whereArr->has("search")) {
-            $query = $query->where(DB::raw('TRIM(LOWER(dayactdesc))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
-        }
-
-        return $query->get();
     }
 
     public function countAll(Collection $whereArr)

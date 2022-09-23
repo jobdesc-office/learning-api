@@ -497,6 +497,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('bycust/{id}', 'InsightController@reportByCust');
                 $router->get('bystage/{id}', 'InsightController@reportByStage');
                 $router->get('bystatus/{id}', 'InsightController@reportByStatus');
+                $router->get('bystatusdt/{id}', 'InsightController@reportByStatusDt');
+                $router->get('bystagedt/{id}', 'InsightController@reportByStageDt');
+                $router->get('bycustlabeldt/{id}', 'InsightController@reportByCustLabelDt');
                 $router->get('bycustlabel/{id}', 'InsightController@reportByCustLabel');
                 $router->get('byowner/{id}', 'InsightController@reportByOwner');
                 $router->get('bybp/{id}/years', 'InsightController@reportYears');
