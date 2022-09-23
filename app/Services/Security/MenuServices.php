@@ -54,9 +54,16 @@ class MenuServices extends Menu
                 'menutype' => function ($query) {
                     $query->select('typeid', 'typename');
                 }, 'children' => function ($query) use ($roleid) {
-                    $query->orderBy('menunm', 'asc')->with(['features' => function ($query) use ($roleid) {
-                        $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
-                    }]);
+                    $query->orderBy('menunm', 'asc')->with([
+                        'features' => function ($query) use ($roleid) {
+                            $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+                        },
+                        'children' => function ($query) use ($roleid) {
+                            $query->orderBy('menunm', 'asc')->with(['features' => function ($query) use ($roleid) {
+                                $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+                            }]);
+                        }
+                    ]);
                 },
                 'features' => function ($query) use ($roleid) {
                     $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
