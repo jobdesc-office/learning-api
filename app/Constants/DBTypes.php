@@ -32,8 +32,10 @@ class DBTypes
     const prospectLostReason = 'prlost';
 
     const customizeField = 'custf';
-    const customizeFieldRefType = 'cfref';
     const competitorreftype = "comptref";
+    const customizeFieldRefType = 'cfref';
+    const prospectCustomField = 'proscfrf';
+    const activityCustomField = 'actcfrf';
 
     const contactType = "contact";
     const scheRefType = "scheref";
@@ -49,5 +51,4 @@ class DBTypes
 
     const activitytype = 'dayacttype';
     const activitycategory = 'dayactcat';
-    const activityCustomField = 'actcf';
 }
