@@ -125,14 +125,22 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
-            'typecd' => \DBTypes::prospectCustomizeField,
-            'typename' => 'Prospect Customize Field',
+            'typecd' => \DBTypes::customizeField,
+            'typename' => 'Customize Field',
             'children' => [
                 ['typename' => 'Number', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Price', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Text', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::customizeFieldRefType,
+            'typename' => 'Customize Field Ref Type',
+            'children' => [
+                ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

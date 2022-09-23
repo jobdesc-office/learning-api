@@ -105,6 +105,7 @@ class ProspectController extends Controller
 
     public function prospectcustomfield($id, CustomFieldService $service)
     {
+        // todo get custom field based on prospect ref id
         $customField = $service->byBp($id);
         return response()->json($customField);
     }

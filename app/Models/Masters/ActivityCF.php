@@ -6,7 +6,7 @@ use App\Models\DefaultModel;
 
 class ActivityCF extends DefaultModel
 {
-    protected $table = "activitycf";
+    protected $table = "tractivitycf";
     protected $primaryKey = "activitycfid";
 
     protected $fillable = [
@@ -34,6 +34,6 @@ class ActivityCF extends DefaultModel
 
     public function customfield()
     {
-        return $this->belongsTo(ActivityCustomField::class, 'activitycustfid', 'custfid');
+        return $this->belongsTo(CustomField::class, 'activitycustfid', 'custfid');
     }
 }
