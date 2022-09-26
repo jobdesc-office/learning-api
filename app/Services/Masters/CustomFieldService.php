@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\CustomField;
+use DBTypes;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -66,6 +67,26 @@ class CustomFieldService extends CustomField
     {
         return $this->getQuery()
             ->where('custfbpid', $bpid)
+            ->get();
+    }
+
+    public function prospectByBp($bpid)
+    {
+
+        $prospectrefid = find_type()->in(DBTypes::prospectCustomField)->get(DBTypes::prospectCustomField)->getId();
+        return $this->getQuery()
+            ->where('custfbpid', $bpid)
+            ->where('custfreftypeid', $prospectrefid)
+            ->get();
+    }
+
+    public function activityByBp($bpid)
+    {
+
+        $activityrefid = find_type()->in(DBTypes::activityCustomField)->get(DBTypes::activityCustomField)->getId();
+        return $this->getQuery()
+            ->where('custfbpid', $bpid)
+            ->where('custfreftypeid', $activityrefid)
             ->get();
     }
 
