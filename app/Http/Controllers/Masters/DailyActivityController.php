@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 class DailyActivityController extends Controller
 {
 
+    public function select($id, Request $req, DailyActivityServices $userServices)
+    {
+        $searchValue = trim(strtolower($req->get('searchValue')));
+        $selects = $userServices->select($searchValue, $id);
+
+        return response()->json($selects);
+    }
+
     public function datatables($id, DailyActivityServices $userServices)
     {
         $query = $userServices->datatables($id);
