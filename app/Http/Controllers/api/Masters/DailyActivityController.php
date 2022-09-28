@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Prospect;
 use App\Services\Masters\ActivityCustomFieldService;
+use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\FilesServices;
 use App\Services\Masters\TrHistoryServices;
@@ -83,8 +84,9 @@ class DailyActivityController extends Controller
         return $trHistoryServices->findHistories($request->get('dayactid'), $dailyActivity->getTable(), $request->get('bpid'));
     }
 
-    public function dailyActivityCustomField(Request $request, ActivityCustomFieldService $service)
+    public function dailyActivityCustomField($id, Request $request, CustomFieldService $service)
     {
-        return response()->json($service->getAll(collect($request->all())->filter()));
+        $customField = $service->activityByBp($id);
+        return response()->json($customField);
     }
 }

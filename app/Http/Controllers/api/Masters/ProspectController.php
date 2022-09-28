@@ -14,6 +14,7 @@ use App\Services\Masters\ProspectCustomFieldServices;
 use App\Services\Masters\ProspectProductServices;
 use App\Services\Masters\ProspectServices;
 use App\Services\Masters\TrHistoryServices;
+use DBTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -105,8 +106,7 @@ class ProspectController extends Controller
 
     public function prospectcustomfield($id, CustomFieldService $service)
     {
-        // todo get custom field based on prospect ref id
-        $customField = $service->byBp($id);
+        $customField = $service->prospectByBp($id);
         return response()->json($customField);
     }
 }

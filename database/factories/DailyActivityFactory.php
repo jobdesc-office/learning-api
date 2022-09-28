@@ -29,6 +29,7 @@ class DailyActivityFactory extends Factory
             'dayactcatid' => find_type()->childrenByCode([\DBTypes::activitycategory])->randomChildren()->getChildrenId(),
             'dayactdate' => $this->getActDate(),
             'dayactdesc' => $this->faker->text(),
+            'dayactaddress' => $this->faker->address(),
             'dayactloc' => $this->getLocation(),
             'dayactlatitude' => $this->faker->latitude(),
             'dayactlongitude' => $this->faker->longitude(),
