@@ -33,10 +33,10 @@ class PermissionController extends Controller
         return response()->json($roles);
     }
 
-    public function permission(Request $req, PermissionServices $permissionServices)
+    public function permission(Request $req, MenuServices $menuServices)
     {
         $roleid = $req->get('roleid');
-        $roles = $permissionServices->permission($roleid);
+        $roles = $menuServices->permission($roleid);
 
         return response()->json($roles);
     }
