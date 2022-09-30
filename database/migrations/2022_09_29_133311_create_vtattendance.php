@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class CreateVtattendance extends Migration
 {
@@ -15,18 +14,18 @@ class CreateVtattendance extends Migration
     {
         pgsql()->create('vtattendance', function (Blueprint $table) {
             $table->id('attid');
-            $table->bigInteger('attbpid')->nullable();
-            $table->bigInteger('attuserid')->nullable();
-            $table->date('attdate')->nullable();
-            $table->time('attclockin')->nullable();
-            $table->time('attclockout')->nullable();
-            $table->double('attlat')->nullable();
-            $table->double('attlong')->nullable();
-            $table->text('attaddress')->nullable();
+            $table->bigInteger('attbpid')->nullable(true);
+            $table->bigInteger('attuserid')->nullable(true);
+            $table->date('attdate')->nullable(true);
+            $table->time('attclockin')->nullable(true);
+            $table->time('attclockout')->nullable(true);
+            $table->double('attlat')->nullable(true);
+            $table->double('attlong')->nullable(true);
+            $table->text('attaddress')->nullable(true);
 
-            $table->bigInteger('createdby')->nullable();
+            $table->bigInteger('createdby')->nullable(true);
             $table->timestamp('createddate')->useCurrent();
-            $table->bigInteger('updatedby')->nullable();
+            $table->bigInteger('updatedby')->nullable(true);
             $table->timestamp('updateddate')->useCurrent();
             $table->boolean('isactive')->default(true);
         });
