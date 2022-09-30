@@ -7,10 +7,13 @@ use App\Services\Masters\ScheduleServices;
 use App\Services\Masters\ScheduleGuestServices;
 use App\Services\Masters\DspByBpService;
 use App\Services\Masters\DspByCustLabelService;
+use App\Services\Masters\DspByCustLabelDtService;
 use App\Services\Masters\DspByCustService;
 use App\Services\Masters\DspByOwnerService;
 use App\Services\Masters\DspByStageService;
+use App\Services\Masters\DspByStageDtService;
 use App\Services\Masters\DspByStatusService;
+use App\Services\Masters\DspByStatusDtService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,19 +33,19 @@ class HomeController extends Controller
         return response()->json($service->getReportByBp($id, $data, $order));
     }
 
-    public function reportByStage($id, Request $request, DspByStageService $service)
+    public function reportByStage($id, Request $request, DspByStageDtService $service)
     {
         $data = collect($request->all())->filter();
         return response()->json($service->getReportByBp($id, $data));
     }
 
-    public function reportByStatus($id, Request $request, DspByStatusService $service)
+    public function reportByStatus($id, Request $request, DspByStatusDtService $service)
     {
         $data = collect($request->all())->filter();
         return response()->json($service->getReportByBp($id, $data));
     }
 
-    public function reportByCustLabel($id, Request $request, DspByCustLabelService $service)
+    public function reportByCustLabel($id, Request $request, DspByCustLabelDtService $service)
     {
         $data = collect($request->all())->filter();
         return response()->json($service->getReportByBp($id, $data));

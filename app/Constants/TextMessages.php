@@ -11,4 +11,9 @@ class TextMessages
     const failedEdit = 'Data failed to update';
     const successDelete = 'Data deleted successfully';
     const failedDelete = 'Data failed to delete';
+
+    const viewable = 'This Feature is Viewable by Users';
+    const create = 'This Feature is Viewable by Users';
+    const update = 'This Feature is Viewable by Users';
+    const delete = 'This Feature is Viewable by Users';
 }

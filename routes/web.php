@@ -178,6 +178,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
             $router->get('bp/{id}', 'DailyActivityController@all');
+            $router->get('select/{id}', 'DailyActivityController@select');
             $router->post('datatables/{id}', 'DailyActivityController@datatables');
 
             $router->get('{id}', 'DailyActivityController@show');
@@ -202,6 +203,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('selectwithbp/{id}', 'CustomFieldController@selectWithBp');
             $router->post('datatables', 'CustomFieldController@datatables');
             $router->post('datatables/{id}', 'CustomFieldController@datatablesbp');
+            $router->post('datatablesdayactbp/{id}', 'CustomFieldController@datatablesdayactbp');
 
             $router->post('', 'CustomFieldController@store');
             $router->get('{id}', 'CustomFieldController@show');

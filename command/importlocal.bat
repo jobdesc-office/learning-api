@@ -3,3 +3,10 @@ psql -c "\copy msprovince FROM 'csv_backup/province.csv' delimiter ',' csv heade
 psql -c "\copy mscity FROM 'csv_backup/city.csv' delimiter ',' csv header;" "host=localhost port=5432 dbname=ventes user=postgres password=revan1853"
 psql -c "\copy mssubdistrict FROM 'csv_backup/subdistrict.csv' delimiter ',' csv header;" "host=localhost port=5432 dbname=ventes user=postgres password=revan1853"
 psql -c "\copy msvillage FROM 'csv_backup/village.csv' delimiter ',' csv header;" "host=localhost port=5432 dbname=ventes user=postgres password=revan1853"
+
+@REM psql -c "\copy dspbybp FROM 'dsp/dspbybp.csv' delimiter ',' csv header;" "host=10.21.1.30 port=5432 dbname=ventes user=postgres password=revan1853"
+@REM psql -c "\copy dspbycust FROM 'dsp/dspbycust.csv' delimiter ',' csv header;" "host=10.21.1.30 port=5432 dbname=ventes user=postgres password=revan1853"
+@REM psql -c "\copy dspbycustlabel FROM 'dsp/dspbycustlabel.csv' delimiter ',' csv header;" "host=10.21.1.30 port=5432 dbname=ventes user=postgres password=revan1853"
+@REM psql -c "\copy dspbyowner FROM 'dsp/dspbyowner.csv' delimiter ',' csv header;" "host=10.21.1.30 port=5432 dbname=ventes user=postgres password=revan1853"
+@REM psql -c "\copy dspbystage FROM 'dsp/dspbystage.csv' delimiter ',' csv header;" "host=10.21.1.30 port=5432 dbname=ventes user=postgres password=revan1853"
+@REM psql -c "\copy dspbystatus FROM 'dsp/dspbystatus.csv' delimiter ',' csv header;" "host=10.21.1.30 port=5432 dbname=ventes user=postgres password=revan1853"

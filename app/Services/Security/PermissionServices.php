@@ -13,9 +13,9 @@ class PermissionServices extends Permission
         return $this->newQuery()->select('permisid', 'permismenuid', 'permisfeatid', 'hasaccess')
             ->orderBy('permisfeatid', 'asc')
             ->with(['menu' => function ($query) {
-                $query->select('menuid', 'menunm', 'menuroute');
+                $query->select('*');
             }, 'feature' => function ($query) {
-                $query->select('featid', 'feattitle', 'featslug');
+                $query->select('*');
             }])
             ->where('roleid', $roleid)
             ->get();

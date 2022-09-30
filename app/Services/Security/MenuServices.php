@@ -4,9 +4,77 @@ namespace App\Services\Security;
 
 use App\Models\Security\Menu;
 use Illuminate\Support\Facades\DB;
+use DBTypes;
 
 class MenuServices extends Menu
 {
+
+    public function permission($roleid)
+    {
+        return $this->newQuery()->orderBy('menunm', 'asc')
+            ->with([
+                'menucreatedby',
+                'menuupdatedby',
+                'menutype' => function ($query) use ($roleid) {
+                    $query->select('typeid', 'typename');
+                },
+                'features' => function ($query) use ($roleid) {
+                    $query->select('*')->with([
+                        'permissions' => function ($query) use ($roleid) {
+                            $query->select('*')->where('roleid', $roleid);
+                        },
+                    ]);
+                },
+                'children' => function ($query) use ($roleid) {
+                    $query->select('*')->orderBy('menunm', 'asc')->with([
+                        'menucreatedby',
+                        'menuupdatedby',
+                        'menutype' => function ($query) use ($roleid) {
+                            $query->select('typeid', 'typename');
+                        },
+                        'features' => function ($query) use ($roleid) {
+                            $query->select('*')->with([
+                                'permissions' => function ($query) use ($roleid) {
+                                    $query->select('*')->where('roleid', $roleid);
+                                },
+                            ]);
+                        },
+                        'children' => function ($query) use ($roleid) {
+                            $query->select('*')->orderBy('menunm', 'asc')->with([
+                                'menucreatedby',
+                                'menuupdatedby',
+                                'menutype' => function ($query) use ($roleid) {
+                                    $query->select('typeid', 'typename');
+                                },
+                                'features' => function ($query) use ($roleid) {
+                                    $query->select('*')->with([
+                                        'permissions' => function ($query) use ($roleid) {
+                                            $query->select('*')->where('roleid', $roleid);
+                                        },
+                                    ]);
+                                },
+                                'children' => function ($query) use ($roleid) {
+                                    $query->select('*')->orderBy('menunm', 'asc')->with([
+                                        'menucreatedby',
+                                        'menuupdatedby',
+                                        'menutype' => function ($query) use ($roleid) {
+                                            $query->select('typeid', 'typename');
+                                        },
+                                        'features' => function ($query) use ($roleid) {
+                                            $query->select('*')->with([
+                                                'permissions' => function ($query) use ($roleid) {
+                                                    $query->select('*')->where('roleid', $roleid);
+                                                },
+                                            ]);
+                                        }
+                                    ]);
+                                }
+                            ]);
+                        }
+                    ]);
+                }
+            ])->where('masterid', null)->where('menutypeid', 8)->get();
+    }
 
     public function select($searchValue)
     {
@@ -36,7 +104,7 @@ class MenuServices extends Menu
                 'menutype' => function ($query) {
                     $query->select('typeid', 'typename');
                 }
-            ])
+            ])->where('menutypeid', '!=', 8)
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })

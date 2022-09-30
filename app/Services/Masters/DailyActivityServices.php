@@ -16,6 +16,25 @@ use Illuminate\Support\Str;
 
 class DailyActivityServices extends DailyActivity
 {
+
+    public function select($searchValue, $bpid)
+    {
+        return $this->getQuery()->select('*')
+            ->where(function ($query) use ($searchValue) {
+                $searchValue = trim(strtolower($searchValue));
+                $query->where(DB::raw('TRIM(LOWER(dayactloclabel))'), 'like', "%$searchValue%");
+            })
+            ->whereHas('dayactuser', function ($query) use ($bpid) {
+                $query->with([
+                    'userdetails' => function ($query) use ($bpid) {
+                        $query->where('userdtbpid', $bpid);
+                    }
+                ]);
+            })
+            ->orderBy('dayactdate', 'asc')
+            ->get();
+    }
+
     public function find($id)
     {
         return $this->getQuery()->findOrFail($id);

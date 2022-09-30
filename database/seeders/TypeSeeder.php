@@ -16,7 +16,6 @@ class TypeSeeder extends Seeder
             'typename' => 'Role',
             'children' => [
                 ['typecd' => \DBTypes::roleSuperAdmin, 'typename' => 'Super Admin', 'createdby' => 1, 'updatedby' => 1],
-                ['typecd' => \DBTypes::roleEmployee, 'typename' => 'Employee', 'createdby' => 1, 'updatedby' => 1],
             ],
             'createdby' => 1,
             'updatedby' => 1,
@@ -35,8 +34,8 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::menuType,
             'typename' => 'Menu Type',
             'children' => [
-                ['typename' => 'Web', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Apps', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => \DBTypes::web, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => \DBTypes::apps, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

@@ -3,9 +3,16 @@
 class DBTypes
 {
 
+    const admin = 2;
+    const webb = 8;
+    const appss = 9;
+
     const role = 'role';
     const roleSuperAdmin = 'rolespa';
     const roleEmployee = 'roleemp';
+
+    const web = 'Web';
+    const apps = 'Apps';
 
     const businessPartner = 'bptype';
 

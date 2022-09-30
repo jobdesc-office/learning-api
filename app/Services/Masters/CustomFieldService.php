@@ -8,6 +8,7 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use DBTypes;
 
 class CustomFieldService extends CustomField
 {
@@ -29,6 +30,22 @@ class CustomFieldService extends CustomField
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
             ->where('custfbpid', $id)
+            ->whereHas('custfreftype', function ($query) {
+                $query->where('typecd', DBTypes::prospectCustomField);
+            })
+            ->orderBy($order, $orderby);
+    }
+
+    public function datatablesdayactbp($id, $order, $orderby, $search)
+    {
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->where('custfbpid', $id)
+            ->whereHas('custfreftype', function ($query) {
+                $query->where('typecd', DBTypes::activityCustomField);
+            })
             ->orderBy($order, $orderby);
     }
 
@@ -58,6 +75,9 @@ class CustomFieldService extends CustomField
     public function withBp($bpid)
     {
         return $this->getQuery()->select('*')
+            ->whereHas('custfreftype', function ($query) {
+                $query->where('typecd', DBTypes::prospectCustomField);
+            })
             ->where('custfbpid', $bpid)
             ->orderBy('custfname', 'asc')
             ->get();

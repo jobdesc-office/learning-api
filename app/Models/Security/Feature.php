@@ -31,7 +31,7 @@ class Feature extends DefaultModel
 
     public function permissions()
     {
-        return $this->hasMany(Permission::class, 'permisfeatid', 'featid');
+        return $this->hasOne(Permission::class, 'permisfeatid', 'featid');
     }
 
     public function featcreatedby()

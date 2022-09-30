@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([TypeSeeder::class]);
+        $this->call([PermissionSeeder::class]);
         BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
         UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
         $this->call([BpTypeSeeder::class]);
