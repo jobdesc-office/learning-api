@@ -73,7 +73,7 @@ class MenuServices extends Menu
                         }
                     ]);
                 }
-            ])->where('masterid', null)->get();
+            ])->where('masterid', null)->where('menutypeid', 8)->get();
     }
 
     public function select($searchValue)
@@ -104,7 +104,7 @@ class MenuServices extends Menu
                 'menutype' => function ($query) {
                     $query->select('typeid', 'typename');
                 }
-            ])
+            ])->where('menutypeid', '!=', 8)
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })

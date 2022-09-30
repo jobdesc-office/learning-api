@@ -35,8 +35,8 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::menuType,
             'typename' => 'Menu Type',
             'children' => [
-                ['typename' => 'Web', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Apps', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => \DBTypes::web, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => \DBTypes::apps, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
