@@ -9,6 +9,11 @@ class Attendance extends DefaultModel
    protected $table = "vtattendance";
    protected $primaryKey = "attid";
 
+   protected $casts = [
+      'attlat' => 'double',
+      'attlong' => 'double',
+   ];
+
    protected $fillable = [
       "attbpid",
       "attuserid",

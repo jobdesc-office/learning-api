@@ -578,9 +578,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->group(['prefix' => 'attendance'], function () use ($router) {
                 $router->get('', 'AttendanceController@all');
                 $router->post('', 'AttendanceController@store');
-                // $router->get('{id}', 'CompetitorController@show');
-                $router->put('{id}', 'CompetitorController@update');
-                // $router->delete('{id}', 'CompetitorController@destroy');
+                $router->get('{id}', 'AttendanceController@show');
+                $router->put('{id}', 'AttendanceController@update');
+                $router->delete('{id}', 'AttendanceController@destroy');
             });
 
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
