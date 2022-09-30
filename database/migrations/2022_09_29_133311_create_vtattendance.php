@@ -15,14 +15,14 @@ class CreateVtattendance extends Migration
     {
         pgsql()->create('vtattendance', function (Blueprint $table) {
             $table->id('attid');
-            $table->bigInteger('attbpid');
-            $table->bigInteger('attuserid');
-            $table->date('attdate');
-            $table->time('attclockin');
-            $table->time('attclockout');
-            $table->double('attlat');
-            $table->double('attlong');
-            $table->text('attaddress');
+            $table->bigInteger('attbpid')->nullable();
+            $table->bigInteger('attuserid')->nullable();
+            $table->date('attdate')->nullable();
+            $table->time('attclockin')->nullable();
+            $table->time('attclockout')->nullable();
+            $table->double('attlat')->nullable();
+            $table->double('attlong')->nullable();
+            $table->text('attaddress')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();
