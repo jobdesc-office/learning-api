@@ -573,6 +573,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->delete('{id}', 'CompetitorController@destroy');
             });
 
+            $router->group(['prefix' => 'attendance'], function () use ($router) {
+                $router->get('', 'AttendanceController@all');
+                $router->post('', 'AttendanceController@store');
+                // $router->get('{id}', 'CompetitorController@show');
+                $router->put('{id}', 'CompetitorController@update');
+                // $router->delete('{id}', 'CompetitorController@destroy');
+            });
+
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
                 $router->get('count', 'DailyActivityController@dailyActivityCount');
                 $router->get('histories', 'DailyActivityController@dailyActivityHistories');
