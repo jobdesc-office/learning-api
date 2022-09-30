@@ -381,6 +381,7 @@ class PermissionSeeder extends Seeder
          ],
       ],
 
+      // Mobiles Menus 
 
       [
          'menutypeid' => \DBTypes::appss,
