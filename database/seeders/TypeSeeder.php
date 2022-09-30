@@ -16,7 +16,6 @@ class TypeSeeder extends Seeder
             'typename' => 'Role',
             'children' => [
                 ['typecd' => \DBTypes::roleSuperAdmin, 'typename' => 'Super Admin', 'createdby' => 1, 'updatedby' => 1],
-                ['typecd' => \DBTypes::roleEmployee, 'typename' => 'Employee', 'createdby' => 1, 'updatedby' => 1],
             ],
             'createdby' => 1,
             'updatedby' => 1,
