@@ -5,6 +5,7 @@ namespace App\Http\Controllers\masters;
 use App\Http\Controllers\Controller;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\UserServices;
+use App\Services\Masters\ActivityCFServices;
 use DB;
 use DBTypes;
 use Illuminate\Http\Request;
@@ -36,9 +37,10 @@ class DailyActivityController extends Controller
         return response()->json(['activities' => $activities, 'employees' => $employees]);
     }
 
-    public function show($id, DailyActivityServices $businessPartnerService)
+    public function show($id, DailyActivityServices $businessPartnerService, ActivityCFServices $activity)
     {
         $row = $businessPartnerService->find($id);
+        $rowcf = $activity->findall($id);
         return response()->json($row);
     }
 }

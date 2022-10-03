@@ -43,6 +43,16 @@ class CustomField extends DefaultModel
         return $this->belongsTo(BusinessPartner::class, 'custfbpid', 'bpid');
     }
 
+    public function refprospect()
+    {
+        return $this->belongsTo(Prospect::class, 'thisdataid', 'prospectid');
+    }
+
+    public function refactivity()
+    {
+        return $this->belongsTo(DailyActivity::class, 'thisdataid', 'dayactid');
+    }
+
     public function custftype()
     {
         return $this->belongsTo(Types::class, 'custftypeid', 'typeid');
