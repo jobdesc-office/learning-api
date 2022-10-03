@@ -9,14 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class ContactPersonController extends Controller
 {
-    public function datatables(ContactPersonServices $cityservice)
-    {
-        $query = $cityservice->datatables();
-
-        return datatables()->eloquent($query)
-            ->toJson();
-    }
-
     public function all(Request $req, ContactPersonServices $prospectService)
     {
         $whereArr = collect($req->all())->filter();

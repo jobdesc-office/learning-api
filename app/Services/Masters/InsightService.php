@@ -16,7 +16,7 @@ abstract class InsightService
 
    public function getReportYearByBp($bpid, $order = 'asc')
    {
-      $query = $this->getQuery()->where('prospectbpid', $bpid)->orderBy('prospectvalue', 'desc');
+      $query = $this->getQuery()->where('prospectbpid', $bpid);
       return $query->select('prospectyy')->groupBy('prospectyy')->get()->map(function ($data) {
          return $data->prospectyy;
       });
