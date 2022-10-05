@@ -127,6 +127,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('children', 'TypesChildrenController@children');
 
             $router->post('', 'TypesController@store');
+            $router->post('role', 'TypesChildrenController@storerole');
             $router->get('{id}', 'TypesController@show');
             $router->put('{id}', 'TypesController@update');
             $router->delete('{id}', 'TypesController@destroy');
