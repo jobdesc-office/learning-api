@@ -109,6 +109,14 @@ class BpTypeSeeder extends Seeder
             ['sbttypename' => 'Manufacture', 'createdby' => 1, 'updatedby' => 1],
          ]
       ],
+      [
+         'parent' => \DBTypes::cstmactivitytype,
+         'sbtname' => 'Customer Activity Type',
+         'children' => [
+            ['sbttypename' => 'Clock In First', 'createdby' => 1, 'updatedby' => 1],
+            ['sbttypename' => 'Anytime', 'createdby' => 1, 'updatedby' => 1],
+         ]
+      ],
    ];
 
    /**

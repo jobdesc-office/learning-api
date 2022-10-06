@@ -17,21 +17,14 @@ class AttendanceController extends Controller
 
    public function store(Request $req, AttendanceServices $attendanceServices)
    {
-      $insert = collect($req->only($attendanceServices->getFillable()))->filter()
-         ->except('updatedby');
-
-      $attendanceServices->create($insert->toArray());
-
+      $attendanceServices->fill($req->all())->save();
       return response()->json(['message' => \TextMessages::successCreate]);
    }
 
    public function update($id, Request $req, AttendanceServices $attendanceServices)
    {
       $row = $attendanceServices->findOrFail($id);
-      $update = collect($req->only($attendanceServices->getFillable()))->filter()
-         ->except('createdby');
-      $row->update($update->toArray());
-
+      $row->fill($req->all())->save();
       return response()->json(['message' => \TextMessages::successEdit]);
    }
 }
