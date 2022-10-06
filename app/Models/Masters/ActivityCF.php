@@ -29,7 +29,7 @@ class ActivityCF extends DefaultModel
 
     public function activity()
     {
-        return $this->belongsTo(DailyActivity::class, "activityid", "activityid");
+        return $this->belongsTo(DailyActivity::class, "activityid", "dayactid");
     }
 
     public function customfield()

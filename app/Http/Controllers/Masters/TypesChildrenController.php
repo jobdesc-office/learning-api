@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Masters;
 use App\Http\Controllers\Controller;
 use App\Services\Masters\TypeChildrenServices;
 use App\Models\Masters\Types;
+use App\Models\Security\Feature;
+use App\Models\Security\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TypesChildrenController extends Controller
 {
@@ -80,6 +83,30 @@ class TypesChildrenController extends Controller
         $modelTypes->fill($insert->toArray())->save();
 
         return response()->json(['message' => \TextMessages::successCreate]);
+    }
+
+    public function storerole(Request $req, Types $modelTypes, Permission $permission)
+    {
+        $insert = collect($req->only($modelTypes->getFillable()))->filter()->except('updatedby');
+
+
+        DB::beginTransaction();
+        try {
+            $feature = Feature::all();
+            $role = $modelTypes->create($insert->toArray());
+            foreach ($feature as $key) {
+                $permission->create([
+                    'roleid' => $role->typeid,
+                    'permismenuid' => $key->featmenuid,
+                    'permisfeatid' => $key->featid,
+                    'hasaccess' => false,
+                ]);
+            }
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successCreate]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
     }
 
     public function parent(Request $req, TypeChildrenServices $typeChildrenServices)

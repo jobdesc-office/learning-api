@@ -8,7 +8,6 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use DBTypes;
 
 class CustomFieldService extends CustomField
 {
@@ -159,7 +158,16 @@ class CustomFieldService extends CustomField
             },
             'custftype' => function ($query) {
                 $query->select('typeid', 'typename');
-            }
+            },
+            'custfreftype' => function ($query) {
+                $query->select('typeid', 'typename');
+            },
+            'refprospect' => function ($query) {
+                $query->with([
+                    'prospectcust'
+                ]);
+            }, 'refactivity'
+
         ]);
     }
 }
