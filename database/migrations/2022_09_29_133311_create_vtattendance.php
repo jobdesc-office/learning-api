@@ -19,9 +19,12 @@ class CreateVtattendance extends Migration
             $table->date('attdate')->nullable(true);
             $table->time('attclockin')->nullable(true);
             $table->time('attclockout')->nullable(true);
-            $table->double('attlat')->nullable(true);
-            $table->double('attlong')->nullable(true);
-            $table->text('attaddress')->nullable(true);
+            $table->double('attlatin')->nullable(true);
+            $table->double('attlongin')->nullable(true);
+            $table->text('attaddressin')->nullable(true);
+            $table->double('attlatout')->nullable(true);
+            $table->double('attlongout')->nullable(true);
+            $table->text('attaddressout')->nullable(true);
 
             $table->bigInteger('createdby')->nullable(true);
             $table->timestamp('createddate')->useCurrent();

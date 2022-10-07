@@ -13,8 +13,10 @@ class Attendance extends DefaultModel
    protected $primaryKey = "attid";
 
    protected $casts = [
-      'attlat' => 'double',
-      'attlong' => 'double',
+      'attlatin' => 'double',
+      'attlongin' => 'double',
+      'attlatout' => 'double',
+      'attlongout' => 'double',
    ];
 
    protected $fillable = [
@@ -23,9 +25,12 @@ class Attendance extends DefaultModel
       "attdate",
       "attclockin",
       "attclockout",
-      "attlat",
-      "attlong",
-      "attaddress",
+      "attlatin",
+      "attlongin",
+      "attaddressin",
+      "attlatout",
+      "attlongout",
+      "attaddressout",
       "createdby",
       "updatedby",
       'isactive',
@@ -37,9 +42,12 @@ class Attendance extends DefaultModel
       "attdate" => "Date",
       "attclockin" => "Clock In",
       "attclockout" => "Clock Out",
-      "attlat" => "Latitude",
-      "attlong" => "Longitude",
-      "attaddress" => "Address",
+      "attlatin" => "Clock In Latitude",
+      "attlongin" => "Clock In Longitude",
+      "attaddressin" => "Clock In Address",
+      "attlatin" => "Clock Out Latitude",
+      "attlongin" => "Clock Out Longitude",
+      "attaddressin" => "Clock Out Address",
    ];
 
    const CREATED_AT = "createddate";

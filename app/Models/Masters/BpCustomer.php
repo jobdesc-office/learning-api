@@ -15,6 +15,7 @@ class BpCustomer extends DefaultModel
         'sbcbpid',
         'sbccstmid',
         'sbccstmstatusid',
+        'sbcactivitytypeid',
         'sbccstmname',
         'sbccstmphone',
         'sbccstmaddress',
@@ -27,6 +28,7 @@ class BpCustomer extends DefaultModel
         'sbcbpid' => "Business Partner Id",
         'sbccstmid' => "Id",
         'sbccstmstatusid' => "Status Id",
+        'sbcactivitytypeid' => "Activity Id",
         'sbccstmname' => "Name",
         'sbccstmphone' => "Phone",
         'sbccstmaddress' => "Address",
@@ -38,6 +40,11 @@ class BpCustomer extends DefaultModel
     public function sbccstmstatus()
     {
         return $this->hasOne(Types::class, 'typeid', 'sbccstmstatusid');
+    }
+
+    public function sbcactivitytype()
+    {
+        return $this->hasOne(Stbptype::class, 'sbtid', 'sbcactivitytypeid');
     }
 
     public function sbcbp()

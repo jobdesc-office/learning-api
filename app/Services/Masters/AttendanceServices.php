@@ -18,6 +18,14 @@ class AttendanceServices extends Attendance
          $query = $query->where($attwhere->toArray());
       }
 
+      if ($whereArr->has('datefrom')) {
+         $query = $query->whereDate('attdate', '>=', $whereArr->get('datefrom'));
+      }
+
+      if ($whereArr->has('dateto')) {
+         $query = $query->whereDate('attdate', '<=', $whereArr->get('dateto'));
+      }
+
       return $query->get();
    }
 
