@@ -3,7 +3,9 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Attendance;
+use Doctrine\DBAL\Query;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceServices extends Attendance
 {
@@ -17,6 +19,17 @@ class AttendanceServices extends Attendance
       }
 
       return $query->get();
+   }
+
+   public function datatables($id, $startDate, $endDate, $userid)
+   {
+      $query = $this->getQuery()->select('*')
+         ->whereBetween('attdate', [$startDate, $endDate])
+         ->where('attbpid', $id);
+      if ($userid != null) {
+         $query =  $query->where('attuserid', $userid);
+      }
+      return $query;
    }
 
    public function getQuery()

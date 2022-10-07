@@ -10,4 +10,5 @@ class FactoryCount
     const userDetailCount = 25;
     const bpCustomerCount = 132;
     const contactCount = 50;
+    const attendanceCount = 300;
 }

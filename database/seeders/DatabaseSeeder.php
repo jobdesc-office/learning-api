@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Masters\Attendance;
 use App\Models\Masters\BusinessPartner;
 use App\Models\Masters\ContactPerson;
 use App\Models\Masters\Customer;
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
         UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
         $this->call([BpTypeSeeder::class]);
+        Attendance::factory(\FactoryCount::attendanceCount)->createQuietly();
 
         Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();
         Customer::factory(\FactoryCount::customerCount)->createQuietly();
