@@ -20,6 +20,9 @@ class BpCustomerService extends BpCustomer
             ->newQuery()->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('typeid', 'typename');
+                // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -49,6 +52,9 @@ class BpCustomerService extends BpCustomer
     {
         return $this
             ->newQuery()->with([
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('typeid', 'typename');
+                // },
                 'bpcustcreatedby',
                 'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
@@ -80,6 +86,9 @@ class BpCustomerService extends BpCustomer
         return $this
             ->newQuery()->with([
                 'bpcustcreatedby',
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('typeid', 'typename');
+                // },
                 'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
@@ -108,6 +117,9 @@ class BpCustomerService extends BpCustomer
             ->newQuery()->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('typeid', 'typename');
+                // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -137,6 +149,9 @@ class BpCustomerService extends BpCustomer
             ->newQuery()->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('typeid', 'typename');
+                // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -197,6 +212,9 @@ class BpCustomerService extends BpCustomer
             ->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('typeid', 'typename');
+                // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },

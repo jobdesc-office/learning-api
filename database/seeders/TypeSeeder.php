@@ -64,6 +64,14 @@ class TypeSeeder extends Seeder
             ]
         ],
         [
+            'typecd' => \DBTypes::cstmactivitytype,
+            'typename' => 'Customer Activity Type',
+            'children' => [
+                ['typename' => 'Clock In First', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Anytime', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
             'typecd' => \DBTypes::cstmstatus,
             'typename' => 'Customer Status',
             'children' => [
