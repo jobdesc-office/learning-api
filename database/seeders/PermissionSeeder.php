@@ -221,6 +221,193 @@ class PermissionSeeder extends Seeder
             ],
             [
                'menutypeid' => \DBTypes::webb,
+               'menunm' => 'Regions',
+               'menuicon' => 'FontAwesomeIcons.earthAmerica',
+               'createdby' => 1,
+
+               'children' => [
+                  [
+                     'menutypeid' => \DBTypes::webb,
+                     'menunm' => 'Countries',
+                     'menuicon' => 'FontAwesomeIcons.globe',
+                     'menuroute' => '/masters/country',
+                     'createdby' => 1,
+
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::webb,
+                     'menunm' => 'Provinces',
+                     'menuicon' => 'FontAwesomeIcons.earthAmerica',
+                     'menuroute' => '/masters/province',
+                     'createdby' => 1,
+
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::webb,
+                     'menunm' => 'Cities',
+                     'menuicon' => 'FontAwesomeIcons.city',
+                     'menuroute' => '/masters/city',
+                     'createdby' => 1,
+
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::webb,
+                     'menunm' => 'Subdistrict',
+                     'menuicon' => 'FontAwesomeIcons.city',
+                     'menuroute' => '/masters/subdistrict',
+                     'createdby' => 1,
+
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::webb,
+                     'menunm' => 'Villages',
+                     'menuicon' => 'FontAwesomeIcons.city',
+                     'menuroute' => '/masters/village',
+                     'createdby' => 1,
+
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                        [
+                           'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ],
+                     ],
+                  ],
+               ],
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::webb,
                'menunm' => 'Files',
                'menuicon' => 'Icons.file_open',
                'menuroute' => '/settings/files',
@@ -241,6 +428,28 @@ class PermissionSeeder extends Seeder
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::webb,
+               'menunm' => 'Informations',
+               'menuicon' => 'Icons.info',
+               'menuroute' => '/settings/information',
+               'createdby' => 1,
+
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
                      ],

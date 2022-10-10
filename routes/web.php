@@ -48,15 +48,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
     $router->group(['namespace' => 'Masters'], function () use ($router) {
 
-        // $router->group(['prefix' => 'info'], function () use ($router) {
-        //     $router->get('byname', 'InformationController@byname');
-        // $router->post('datatables', 'InformationController@datatables');
+        $router->group(['prefix' => 'info'], function () use ($router) {
+            $router->post('datatables', 'InformationController@datatables');
 
-        // $router->post('', 'InformationController@store');
-        // $router->get('{id}', 'InformationController@show');
-        // $router->put('{id}', 'InformationController@update');
-        // $router->delete('{id}', 'InformationController@destroy');
-        // });
+            $router->post('', 'InformationController@store');
+            $router->get('{id}', 'InformationController@show');
+            $router->put('{id}', 'InformationController@update');
+            $router->delete('{id}', 'InformationController@destroy');
+        });
 
 
         $router->group(['prefix' => 'country'], function () use ($router) {
