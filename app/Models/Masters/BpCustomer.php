@@ -44,7 +44,7 @@ class BpCustomer extends DefaultModel
 
     public function sbcactivitytype()
     {
-        return $this->hasOne(Stbptype::class, 'sbtid', 'sbcactivitytypeid');
+        return $this->belongsTo(Stbptype::class, 'sbcactivitytypeid', 'sbtid');
     }
 
     public function sbcbp()

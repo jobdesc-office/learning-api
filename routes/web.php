@@ -150,6 +150,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
+            $router->get('setanytime/{id}', 'BpCustomerController@setAnytime');
+            $router->get('setonlywithattendance/{id}', 'BpCustomerController@setOnlyWithAttendance');
             $router->get('select', 'BpCustomerController@select');
             $router->get('select/{id}', 'BpCustomerController@selectBp');
             $router->get('', 'BpCustomerController@all');

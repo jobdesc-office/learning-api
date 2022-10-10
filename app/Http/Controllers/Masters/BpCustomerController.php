@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\CustomerService;
 use App\Models\Masters\Files;
+use App\Models\Masters\Stbptype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -316,5 +317,17 @@ class BpCustomerController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
         }
+    }
+
+    public function setAnytime($id, BpCustomerService $bpCustomerService)
+    {
+        $bpCustomerService->setAnytime($id);
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
+    public function setOnlyWithAttendance($id, BpCustomerService $bpCustomerService)
+    {
+        $bpCustomerService->setOnlyWithAttendance($id);
+        return response()->json(['message' => \TextMessages::successEdit]);
     }
 }

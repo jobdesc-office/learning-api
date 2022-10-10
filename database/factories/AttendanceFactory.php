@@ -17,7 +17,6 @@ class AttendanceFactory extends Factory
         $user = UserDetail::whereHas('user', function ($query) {
             $query->where('username', 'developer');
         })->get()->first();
-        Log::info($user);
         return [
             'attbpid' => $user->userdtbpid,
             'attuserid' => $user->userid,
