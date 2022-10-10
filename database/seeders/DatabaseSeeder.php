@@ -30,14 +30,14 @@ class DatabaseSeeder extends Seeder
         $this->call([PermissionSeeder::class]);
         BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
         UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
+        $this->call([BpTypeSeeder::class]);
         Attendance::factory(\FactoryCount::attendanceCount)->createQuietly();
 
         Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();
         Customer::factory(\FactoryCount::customerCount)->createQuietly();
-        DailyActivity::factory(\FactoryCount::dailyActivityCount)->createQuietly();
+        // DailyActivity::factory(\FactoryCount::dailyActivityCount)->createQuietly();
 
         $this->call([BpCustomerSeeder::class]);
-        $this->call([BpTypeSeeder::class]);
 
 
         ContactPerson::factory(\FactoryCount::contactCount)->createQuietly();
