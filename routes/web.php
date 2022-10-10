@@ -185,6 +185,14 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'DailyActivityController@show');
         });
 
+        $router->group(['prefix' => 'attendance'], function () use ($router) {
+            $router->get('bp/{id}', 'AttendanceController@all');
+            $router->get('select/{id}', 'AttendanceController@select');
+            $router->post('datatables/{id}', 'AttendanceController@datatables');
+
+            $router->get('{id}', 'AttendanceController@show');
+        });
+
         $router->group(['prefix' => 'competitor'], function () use ($router) {
             $router->get('select', 'CompetitorController@select');
             $router->post('deleteimages', 'CompetitorController@deleteImages');
