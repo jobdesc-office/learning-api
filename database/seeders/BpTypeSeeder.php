@@ -83,6 +83,16 @@ class BpTypeSeeder extends Seeder
             ['sbttypename' => 'Meeting at Office', 'createdby' => 1, 'updatedby' => 1],
          ]
       ],
+      // [
+      //    'parent' => \DBTypes::activitytype,
+      //    'sbtname' => 'Daily Activity type',
+      //    'children' => [
+      //       ['sbttypename' => 'Department', 'createdby' => 1, 'updatedby' => 1],
+      //       ['sbttypename' => 'Meeting', 'createdby' => 1, 'updatedby' => 1],
+      //       ['sbttypename' => 'Doing Daily Task', 'createdby' => 1, 'updatedby' => 1],
+      //       ['sbttypename' => 'Other', 'createdby' => 1, 'updatedby' => 1],
+      //    ]
+      // ],
       [
          'parent' => \DBTypes::contactType,
          'sbtname' => 'Contact Type',

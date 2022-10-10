@@ -13,7 +13,7 @@ class CreateMsinformationTable extends Migration
      */
     public function up()
     {
-        Schema::create('msinformation', function (Blueprint $table) {
+        pgsql()->create('msinformation', function (Blueprint $table) {
             $table->id('infoid');
             $table->string('infoname');
             $table->text('infodesc')->nullable(true);
@@ -33,6 +33,6 @@ class CreateMsinformationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msinformation');
+        pgsql()->dropIfExists('msinformation');
     }
 }

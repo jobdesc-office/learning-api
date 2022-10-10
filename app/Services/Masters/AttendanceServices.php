@@ -32,10 +32,15 @@ class AttendanceServices extends Attendance
    public function datatables($id, $startDate, $endDate, $userid)
    {
       $query = $this->getQuery()->select('*')
-         ->whereBetween('attdate', [$startDate, $endDate])
          ->where('attbpid', $id);
       if ($userid != null) {
          $query =  $query->where('attuserid', $userid);
+      }
+      if ($startDate != null && $endDate != null) {
+         $query =  $query->whereBetween('attdate', [$startDate, $endDate]);
+      }
+      if ($startDate != null && $endDate == null) {
+         $query =  $query->where('attdate', $startDate);
       }
       return $query;
    }
