@@ -5,6 +5,7 @@ namespace App\Services\Masters;
 use App\Collections\Files\FileFinder;
 use App\Collections\Files\FileUploader;
 use App\Models\Masters\BpCustomer;
+use App\Models\Masters\Stbptype;
 use DBTypes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -87,7 +88,7 @@ class BpCustomerService extends BpCustomer
             ->newQuery()->with([
                 'bpcustcreatedby',
                 // 'sbcactivitytype' => function ($query) {
-                //     $query->select('typeid', 'typename');
+                //     $query->select('sbtid', 'sbtname');
                 // },
                 'bpcustupdatedby',
                 'sbccstmstatus' => function ($query) {
@@ -117,9 +118,9 @@ class BpCustomerService extends BpCustomer
             ->newQuery()->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
-                // 'sbcactivitytype' => function ($query) {
-                //     $query->select('typeid', 'typename');
-                // },
+                'sbcactivitytype' => function ($query) {
+                    $query->select('sbtid', 'sbttypename');
+                },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -143,6 +144,22 @@ class BpCustomerService extends BpCustomer
             ->orderBy($order, $orderby);
     }
 
+    public function setAnytime($id)
+    {
+        $customer = $this->find($id);
+        $id = Stbptype::where('sbttypename', 'Anytime')->get()->first()->sbtid;
+        $customer->sbcactivitytypeid = $id;
+        $customer->save();
+    }
+
+    public function setOnlyWithAttendance($id)
+    {
+        $customer = $this->find($id);
+        $id = Stbptype::where('sbttypename', 'Clock In First')->get()->first()->sbtid;
+        $customer->sbcactivitytypeid = $id;
+        $customer->save();
+    }
+
     public function datatablesbppros($id, $order, $orderby, $search, $where)
     {
         return $this
@@ -150,7 +167,7 @@ class BpCustomerService extends BpCustomer
                 'bpcustcreatedby',
                 'bpcustupdatedby',
                 // 'sbcactivitytype' => function ($query) {
-                //     $query->select('typeid', 'typename');
+                //     $query->select('sbtid', 'sbtname');
                 // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
@@ -212,9 +229,9 @@ class BpCustomerService extends BpCustomer
             ->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
-                // 'sbcactivitytype' => function ($query) {
-                //     $query->select('typeid', 'typename');
-                // },
+                'sbcactivitytype' => function ($query) {
+                    $query->select('sbtid', 'sbttypename');
+                },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },

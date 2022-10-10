@@ -26,6 +26,8 @@ class DBTypes
 
     const cstmtype = 'cstmtype';
     const cstmactivitytype = 'cstacttype';
+    const clockinfirst = "cif";
+    const anytime = "at";
 
     const cstmstatus = 'cstmstatus';
 
