@@ -11,7 +11,7 @@ class InformationSeeder extends Seeder
     protected $data = [
         [
             'infoname' => 'whatsventes',
-            'infodesc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum congue ligula, non bibendum velit finibus in. Nam efficitur ligula id elementum ullamcorper. Nam consequat, neque eu finibus convallis, sem metus sodales ipsum, nec aliquet turpis felis quis diam. Duis placerat mattis sem, nec varius nunc maximus ac. Pellentesque volutpat tristique lorem, ac maximus orci pellentesque quis. Donec at egestas enim. Proin vitae dictum purus, et pulvinar quam. Maecenas vel neque lorem. Ut pretium scelerisque augue non varius.
+            'infodesc' => 'Whats Ventes ? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum congue ligula, non bibendum velit finibus in. Nam efficitur ligula id elementum ullamcorper. Nam consequat, neque eu finibus convallis, sem metus sodales ipsum, nec aliquet turpis felis quis diam. Duis placerat mattis sem, nec varius nunc maximus ac. Pellentesque volutpat tristique lorem, ac maximus orci pellentesque quis. Donec at egestas enim. Proin vitae dictum purus, et pulvinar quam. Maecenas vel neque lorem. Ut pretium scelerisque augue non varius.
 
             Nam tempor lorem non maximus sollicitudin. Nam venenatis, leo et malesuada maximus, justo nulla condimentum tellus, vel mattis massa quam placerat nunc. Cras cursus eleifend dolor vel elementum. Ut sed elit nec libero malesuada vehicula at sit amet sem. Aliquam erat volutpat. Pellentesque eget rhoncus augue. Duis eu volutpat tellus. Phasellus molestie congue consectetur. Aliquam erat volutpat. Duis bibendum elit libero, sollicitudin pellentesque ipsum ullamcorper sit amet. Vivamus malesuada a purus ut facilisis. Quisque sed nulla arcu. Donec a libero vel turpis gravida imperdiet in non ligula. Proin convallis malesuada gravida. Mauris hendrerit nisl eu elementum elementum. Nam ut placerat quam, at mattis augue.
             
@@ -23,7 +23,7 @@ class InformationSeeder extends Seeder
         ],
         [
             'infoname' => 'abouthyperdata',
-            'infodesc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum congue ligula, non bibendum velit finibus in. Nam efficitur ligula id elementum ullamcorper. Nam consequat, neque eu finibus convallis, sem metus sodales ipsum, nec aliquet turpis felis quis diam. Duis placerat mattis sem, nec varius nunc maximus ac. Pellentesque volutpat tristique lorem, ac maximus orci pellentesque quis. Donec at egestas enim. Proin vitae dictum purus, et pulvinar quam. Maecenas vel neque lorem. Ut pretium scelerisque augue non varius.
+            'infodesc' => 'About Hyper Data Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum congue ligula, non bibendum velit finibus in. Nam efficitur ligula id elementum ullamcorper. Nam consequat, neque eu finibus convallis, sem metus sodales ipsum, nec aliquet turpis felis quis diam. Duis placerat mattis sem, nec varius nunc maximus ac. Pellentesque volutpat tristique lorem, ac maximus orci pellentesque quis. Donec at egestas enim. Proin vitae dictum purus, et pulvinar quam. Maecenas vel neque lorem. Ut pretium scelerisque augue non varius.
 
             Nam tempor lorem non maximus sollicitudin. Nam venenatis, leo et malesuada maximus, justo nulla condimentum tellus, vel mattis massa quam placerat nunc. Cras cursus eleifend dolor vel elementum. Ut sed elit nec libero malesuada vehicula at sit amet sem. Aliquam erat volutpat. Pellentesque eget rhoncus augue. Duis eu volutpat tellus. Phasellus molestie congue consectetur. Aliquam erat volutpat. Duis bibendum elit libero, sollicitudin pellentesque ipsum ullamcorper sit amet. Vivamus malesuada a purus ut facilisis. Quisque sed nulla arcu. Donec a libero vel turpis gravida imperdiet in non ligula. Proin convallis malesuada gravida. Mauris hendrerit nisl eu elementum elementum. Nam ut placerat quam, at mattis augue.
             
@@ -47,6 +47,8 @@ class InformationSeeder extends Seeder
                 $typeData = $type->fill(collect($data)->only($type->getFillable())->toArray());
                 $typeData->infoname = $data['infoname'];
                 $typeData->infodesc = $data['infodesc'];
+                $typeData->createdby = 1;
+                $typeData->updatedby = 1;
                 $typeData->save();
             });
         }

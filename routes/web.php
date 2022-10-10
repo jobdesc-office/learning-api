@@ -23,6 +23,13 @@ $router->get('t2IF5xRe', function () {
 
 $router->group(['prefix' => 'auth'], function () use ($router) {
     $router->post('signin', 'AuthController@signin');
+
+    $router->group(['namespace' => 'Masters'], function () use ($router) {
+
+        $router->group(['prefix' => 'info'], function () use ($router) {
+            $router->get('byname', 'InformationController@byname');
+        });
+    });
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
@@ -40,6 +47,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('pIeYujTv', 'AuthController@signOut');
 
     $router->group(['namespace' => 'Masters'], function () use ($router) {
+
+        // $router->group(['prefix' => 'info'], function () use ($router) {
+        //     $router->get('byname', 'InformationController@byname');
+        // $router->post('datatables', 'InformationController@datatables');
+
+        // $router->post('', 'InformationController@store');
+        // $router->get('{id}', 'InformationController@show');
+        // $router->put('{id}', 'InformationController@update');
+        // $router->delete('{id}', 'InformationController@destroy');
+        // });
+
 
         $router->group(['prefix' => 'country'], function () use ($router) {
             $router->get('select', 'CountryController@select');

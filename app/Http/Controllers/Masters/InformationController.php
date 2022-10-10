@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\DB;
 class InformationController extends Controller
 {
 
-    public function select(Request $req, InformationServices $Informationservice)
+    public function byname(Request $req, InformationServices $Informationservice)
     {
-        $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $Informationservice->select($searchValue);
+        $selects = $Informationservice->byname($req->get('infoname'));
 
         return response()->json($selects);
     }
