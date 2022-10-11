@@ -3,6 +3,8 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Attendance;
+use Auth;
+use Carbon\Carbon;
 use Doctrine\DBAL\Query;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +45,17 @@ class AttendanceServices extends Attendance
          $query =  $query->where('attdate', $startDate);
       }
       return $query;
+   }
+
+   public function getMyAttendanceToday()
+   {
+      $query = $this->getQuery();
+      $date = new Carbon();
+      $query = $query->where('attuserid', Auth::user()->userid)->whereDate('attdate', $date->today()->format('Y-m-d'))->get();
+      if ($query != null && count($query) > 0) {
+         return $query->first();
+      }
+      return null;
    }
 
    public function getQuery()
