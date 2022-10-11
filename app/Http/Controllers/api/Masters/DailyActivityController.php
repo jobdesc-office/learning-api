@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Prospect;
 use App\Services\Masters\ActivityCustomFieldService;
+use App\Services\Masters\AttendanceServices;
+use App\Services\Masters\BpCustomerService;
+use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\FilesServices;
@@ -88,5 +91,26 @@ class DailyActivityController extends Controller
     {
         $customField = $service->activityByBp($id);
         return response()->json($customField);
+    }
+
+    public function allow($id, BpCustomerService $bpCustomerService, AttendanceServices $attendanceServices)
+    {
+        $result = false;
+        $bpCustomer = $bpCustomerService->getAll(collect(['sbcbpid' => $id]));
+        if ($bpCustomer != null && count($bpCustomer) > 0) {
+            if ($bpCustomer->first()->sbcactivitytype->sbttypename == "Anytime") {
+                $result =  true;
+            } else {
+                $attendance = $attendanceServices->getMyAttendanceToday();
+                if ($attendance != null) {
+                    $result =  true;
+                } else {
+                    $result =  false;
+                }
+            }
+        } else {
+            $result =  true;
+        }
+        return response()->json(['allow' => $result]);
     }
 }
