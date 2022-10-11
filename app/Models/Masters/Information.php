@@ -21,6 +21,9 @@ class Information extends DefaultModel
     protected $alias = [
         'infoname' => "Name",
         'infodesc' => "Description",
+        "createdby" => "Craeted By",
+        "updatedby" => "Updated By",
+        'isactive' => "Is Active",
     ];
 
     const CREATED_AT = "createddate";

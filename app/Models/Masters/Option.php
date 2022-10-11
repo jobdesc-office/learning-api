@@ -4,22 +4,22 @@ namespace App\Models\Masters;
 
 use App\Models\DefaultModel;
 
-class Product extends DefaultModel
+class Option extends DefaultModel
 {
-    protected $table = "msproduct";
-    protected $primaryKey = "productid";
+    protected $table = "vtoption";
+    protected $primaryKey = "optid";
 
     protected $fillable = [
-        "productname",
-        "productbpid",
+        "custfid",
+        "optvalue",
         "createdby",
         "updatedby",
         'isactive',
     ];
 
     protected $alias = [
-        "productname" => "Name",
-        "productbpid" => "Business Partner Id",
+        "custfid" => "CustomField ID",
+        "optvalue" => "Value",
         "createdby" => "Craeted By",
         "updatedby" => "Updated By",
         'isactive' => "Is Active",
@@ -28,17 +28,17 @@ class Product extends DefaultModel
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 
-    public function businesspartner()
+    public function customizefield()
     {
-        return $this->belongsTo(BusinessPartner::class, 'productbpid', 'bpid');
+        return $this->belongsTo(CustomField::class, 'custfid', 'custfid');
     }
 
-    public function productcreatedby()
+    public function optioncreatedby()
     {
         return $this->belongsTo(User::class, "createdby", "userid");
     }
 
-    public function productupdatedby()
+    public function optionupdatedby()
     {
         return $this->belongsTo(User::class, "updatedby", "userid");
     }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\CustomFieldService;
+use App\Services\Masters\OptionServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomFieldController extends Controller
 {
@@ -286,11 +288,19 @@ class CustomFieldController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, CustomFieldService $modelCustomFieldService)
+    public function destroy($id, CustomFieldService $modelCustomFieldService, OptionServices $modelOptionService)
     {
-        $row = $modelCustomFieldService->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $modelOptionService->where('custfid', $id)->delete();
+            $row = $modelCustomFieldService->findOrFail($id);
+            $row->delete();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['message' => \TextMessages::failedDelete, 'error' => $th]);
+        }
     }
 }

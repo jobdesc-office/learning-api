@@ -140,6 +140,7 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Phone', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Email', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Text', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Selectbox', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

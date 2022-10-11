@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateMsinformationTable extends Migration
+class CreateVtoptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateMsinformationTable extends Migration
      */
     public function up()
     {
-        pgsql()->create('msinformation', function (Blueprint $table) {
-            $table->id('infoid');
-            $table->string('infoname');
-            $table->text('infodesc')->nullable(true);
+        pgsql()->create('vtoption', function (Blueprint $table) {
+            $table->id('optid');
+            $table->bigInteger('cusftid');
+            $table->text('optvalue');
 
             $table->bigInteger('createdby')->nullable(true);
             $table->timestamp('createddate')->useCurrent();
@@ -32,6 +32,6 @@ class CreateMsinformationTable extends Migration
      */
     public function down()
     {
-        pgsql()->dropIfExists('msinformation');
+        pgsql()->dropIfExists('vtoption');
     }
 }
