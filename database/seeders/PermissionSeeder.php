@@ -330,7 +330,7 @@ class PermissionSeeder extends Seeder
                   ],
                   [
                      'menutypeid' => \DBTypes::webb,
-                     'menunm' => 'Subdistrict',
+                     'menunm' => 'Subdistricts',
                      'menuicon' => 'FontAwesomeIcons.city',
                      'menuroute' => '/masters/subdistrict',
                      'createdby' => 1,
@@ -416,12 +416,6 @@ class PermissionSeeder extends Seeder
                'features' => [
                   [
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-                     'permission' => [
-                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-                     ],
-                  ],
-                  [
-                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
                      ],
