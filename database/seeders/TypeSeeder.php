@@ -216,6 +216,14 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Meeting at Office', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::informationtype,
+            'typename' => 'Information Type',
+            'children' => [
+                ['typename' => 'Mobile', 'typecd' => DBTypes::mobileinfotype, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Web', 'typecd' => DBTypes::webinfotype, 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
         // [
         //     'typecd' => \DBTypes::activitytype,
         //     'typename' => 'Daily Activity type',

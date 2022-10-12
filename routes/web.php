@@ -622,6 +622,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'DailyActivityController@update');
                 $router->delete('{id}', 'DailyActivityController@destroy');
             });
+
+            $router->group(['prefix' => 'information'], function () use ($router) {
+                $router->get('', 'InformationController@getall');
+            });
         });
 
         $router->group(['namespace' => 'api\Security'], function () use ($router) {

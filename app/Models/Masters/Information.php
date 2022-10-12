@@ -13,6 +13,7 @@ class Information extends DefaultModel
     protected $fillable = [
         "infoname",
         "infodesc",
+        "infotypeid",
         "createdby",
         "updatedby",
         'isactive',
@@ -20,6 +21,7 @@ class Information extends DefaultModel
 
     protected $alias = [
         'infoname' => "Name",
+        'infotypeid' => "Information Type",
         'infodesc' => "Description",
         "createdby" => "Craeted By",
         "updatedby" => "Updated By",
@@ -28,6 +30,11 @@ class Information extends DefaultModel
 
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
+
+    public function infotype()
+    {
+        return $this->belongsTo(Types::class, 'infotypeid', 'typeid');
+    }
 
     public function infocreatedby()
     {

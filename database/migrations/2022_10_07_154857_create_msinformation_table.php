@@ -16,6 +16,7 @@ class CreateMsinformationTable extends Migration
             $table->id('infoid');
             $table->string('infoname');
             $table->text('infodesc')->nullable(true);
+            $table->bigInteger('infotypeid');
 
             $table->bigInteger('createdby')->nullable(true);
             $table->timestamp('createddate')->useCurrent();

@@ -61,4 +61,8 @@ class DBTypes
 
     const activitytype = 'dayacttype';
     const activitycategory = 'dayactcat';
+
+    const informationtype = 'infotype';
+    const mobileinfotype = 'mobile';
+    const webinfotype = 'web';
 }

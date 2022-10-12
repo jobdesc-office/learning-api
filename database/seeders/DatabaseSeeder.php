@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([InformationSeeder::class]);
         $this->call([TypeSeeder::class]);
         $this->call([PermissionSeeder::class]);
         BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
@@ -36,6 +35,7 @@ class DatabaseSeeder extends Seeder
         Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();
         Customer::factory(\FactoryCount::customerCount)->createQuietly();
         DailyActivity::factory(\FactoryCount::dailyActivityCount)->createQuietly();
+        $this->call([InformationSeeder::class]);
 
         $this->call([BpCustomerSeeder::class]);
 
