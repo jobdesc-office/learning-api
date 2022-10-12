@@ -31,7 +31,8 @@ class ProspectCustomFieldServices extends ProspectCustomField
             'customfield' => function ($query) {
                 $query->with(['custftype']);
             },
-            'prospect'
+            'prospect',
+            'selectedoption'
         ]);
     }
 }

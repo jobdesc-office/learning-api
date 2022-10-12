@@ -43,6 +43,11 @@ class CustomField extends DefaultModel
         return $this->belongsTo(BusinessPartner::class, 'custfbpid', 'bpid');
     }
 
+    public function selectoption()
+    {
+        return $this->hasMany(Option::class, 'custfid', 'custfid');
+    }
+
     public function refprospect()
     {
         return $this->belongsTo(Prospect::class, 'thisdataid', 'prospectid');

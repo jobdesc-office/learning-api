@@ -166,8 +166,9 @@ class CustomFieldService extends CustomField
                 $query->with([
                     'prospectcust'
                 ]);
-            }, 'refactivity'
-
+            },
+            'refactivity',
+            'selectoption',
         ]);
     }
 }

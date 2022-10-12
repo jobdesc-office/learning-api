@@ -17,7 +17,8 @@ class CreateTrprospectcfTable extends Migration
             $table->id('prospectcfid');
             $table->bigInteger('prospectid');
             $table->bigInteger('prospectcustfid');
-            $table->string('prospectcfvalue', 255);
+            $table->string('prospectcfvalue', 255)->nullable();
+            $table->bigInteger('optchoosed')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

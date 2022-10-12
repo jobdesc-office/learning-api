@@ -13,6 +13,7 @@ class ProspectCustomField extends DefaultModel
         "prospectid",
         "prospectcustfid",
         "prospectcfvalue",
+        "optchoosed",
         "createdby",
         "updatedby",
         'isactive',
@@ -22,10 +23,16 @@ class ProspectCustomField extends DefaultModel
         "prospectid" => "Prospect Id",
         "prospectcustfid" => "Custom Field Id",
         "prospectcfvalue" => "Custom Field Value",
+        "optchoosed" => "Custom Field Choosed",
     ];
 
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
+
+    public function selectedoption()
+    {
+        return $this->belongsTo(Option::class, 'optchoosed', 'optid');
+    }
 
     public function prospect()
     {

@@ -262,13 +262,32 @@ class CustomFieldController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, CustomFieldService $modelCustomFieldService)
+    public function store(Request $req, CustomFieldService $modelCustomFieldService, OptionServices $modelOptionServices)
     {
-        $insert = collect($req->only($modelCustomFieldService->getFillable()))->filter()->except('updatedby');
+        DB::beginTransaction();
+        try {
+            $insert = collect($req->only($modelCustomFieldService->getFillable()))->filter()->except('updatedby');
 
-        $modelCustomFieldService->create($insert->toArray());
+            $customfield = $modelCustomFieldService->create($insert->toArray());
 
-        return response()->json(['message' => \TextMessages::successCreate]);
+            $roles = json_decode($req->get('option'));
+            if ($roles != null) {
+                foreach ($roles as $role) {
+                    $modelOptionServices->create([
+                        'custfid' => $customfield->custfid,
+                        'optvalue' => $role->optvalue,
+                        'createdby' => $customfield->createdby,
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => \TextMessages::successCreate]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['message' => \TextMessages::failedDelete, 'error' => $th]);
+        }
     }
 
     public function show($id, CustomFieldService $CustomFieldService)
@@ -277,13 +296,24 @@ class CustomFieldController extends Controller
         return response()->json($row);
     }
 
-    public function update($id, Request $req, CustomFieldService $modelCustomFieldService)
+    public function update($id, Request $req, CustomFieldService $modelCustomFieldService, OptionServices $modelOptionServices)
     {
         $row = $modelCustomFieldService->findOrFail($id);
 
         $update = collect($req->only($modelCustomFieldService->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
+        $roles = json_decode($req->get('option'));
+        if ($roles != null) {
+            $modelOptionServices->where('custfid', $id)->delete();
+            foreach ($roles as $role) {
+                $modelOptionServices->create([
+                    'custfid' => $id,
+                    'optvalue' => $role->optvalue,
+                    'updatedby' => $req->get('updatedby'),
+                ]);
+            }
+        }
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
