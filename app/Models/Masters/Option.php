@@ -10,7 +10,7 @@ class Option extends DefaultModel
     protected $primaryKey = "optid";
 
     protected $fillable = [
-        "custfid",
+        "optcustfid",
         "optvalue",
         "createdby",
         "updatedby",

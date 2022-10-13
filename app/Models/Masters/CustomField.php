@@ -45,7 +45,7 @@ class CustomField extends DefaultModel
 
     public function selectoption()
     {
-        return $this->hasMany(Option::class, 'custfid', 'custfid');
+        return $this->hasMany(Option::class, 'optcustfid', 'custfid');
     }
 
     public function refprospect()

@@ -14,7 +14,7 @@ class CreateVtoptionTable extends Migration
     {
         pgsql()->create('vtoption', function (Blueprint $table) {
             $table->id('optid');
-            $table->bigInteger('custfid');
+            $table->bigInteger('optcustfid');
             $table->text('optvalue');
 
             $table->bigInteger('createdby')->nullable(true);
