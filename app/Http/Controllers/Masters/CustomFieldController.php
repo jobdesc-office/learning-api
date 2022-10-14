@@ -274,7 +274,7 @@ class CustomFieldController extends Controller
             if ($roles != null) {
                 foreach ($roles as $role) {
                     $modelOptionServices->create([
-                        'custfid' => $customfield->custfid,
+                        'optcustfid' => $customfield->custfid,
                         'optvalue' => $role->optvalue,
                         'createdby' => $customfield->createdby,
                     ]);
@@ -305,10 +305,10 @@ class CustomFieldController extends Controller
         $row->update($update->toArray());
         $roles = json_decode($req->get('option'));
         if ($roles != null) {
-            $modelOptionServices->where('custfid', $id)->delete();
+            $modelOptionServices->where('optcustfid', $id)->delete();
             foreach ($roles as $role) {
                 $modelOptionServices->create([
-                    'custfid' => $id,
+                    'optcustfid' => $id,
                     'optvalue' => $role->optvalue,
                     'updatedby' => $req->get('updatedby'),
                 ]);
@@ -322,7 +322,7 @@ class CustomFieldController extends Controller
     {
         DB::beginTransaction();
         try {
-            $modelOptionService->where('custfid', $id)->delete();
+            $modelOptionService->where('optcustfid', $id)->delete();
             $row = $modelCustomFieldService->findOrFail($id);
             $row->delete();
 
