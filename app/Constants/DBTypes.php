@@ -65,4 +65,6 @@ class DBTypes
     const informationtype = 'infotype';
     const mobileinfotype = 'mobile';
     const webinfotype = 'web';
+
+    const dayactreftype = 'actreft';
 }

@@ -224,6 +224,14 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Web', 'typecd' => DBTypes::webinfotype, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::dayactreftype,
+            'typename' => 'Daily Activity Reference Type',
+            'children' => [
+                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
         // [
         //     'typecd' => \DBTypes::activitytype,
         //     'typename' => 'Daily Activity type',

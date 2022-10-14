@@ -16,6 +16,8 @@ class DailyActivity extends DefaultModel
         "dayactcatid",
         "dayactcustid",
         "dayactdate",
+        "dayactreftypeid",
+        "dayactrefid",
         "dayactdesc",
         "dayactloclabel",
         "dayactloc",
@@ -66,6 +68,11 @@ class DailyActivity extends DefaultModel
         return $this->belongsTo(Stbptype::class, "dayactcatid", "sbtid");
     }
 
+    public function dayactreftype()
+    {
+        return $this->belongsTo(Types::class, "dayactreftypeid", "typeid");
+    }
+
     public function dayactcust()
     {
         return $this->belongsTo(BpCustomer::class, "dayactcustid", "sbcid");
@@ -79,6 +86,11 @@ class DailyActivity extends DefaultModel
     public function activitycustomfield()
     {
         return $this->hasMany(ActivityCF::class, "activityid", "dayactid");
+    }
+
+    public function refprospect()
+    {
+        return $this->belongsTo(Prospect::class, 'refid', 'prospectid');
     }
 
     const CREATED_AT = "createddate";
