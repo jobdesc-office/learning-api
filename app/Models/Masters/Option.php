@@ -10,7 +10,7 @@ class Option extends DefaultModel
     protected $primaryKey = "optid";
 
     protected $fillable = [
-        "custfid",
+        "optcustfid",
         "optvalue",
         "createdby",
         "updatedby",
@@ -18,7 +18,7 @@ class Option extends DefaultModel
     ];
 
     protected $alias = [
-        "custfid" => "CustomField ID",
+        "optcustfid" => "CustomField ID",
         "optvalue" => "Value",
         "createdby" => "Craeted By",
         "updatedby" => "Updated By",
@@ -30,7 +30,7 @@ class Option extends DefaultModel
 
     public function customizefield()
     {
-        return $this->belongsTo(CustomField::class, 'custfid', 'custfid');
+        return $this->belongsTo(CustomField::class, 'optcustfid', 'custfid');
     }
 
     public function optioncreatedby()

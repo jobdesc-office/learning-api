@@ -40,6 +40,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $types = new ReflectionClass(DBTypes::class);
         return response()->json($types->getConstants());
     });
+    $router->get('/information', 'api\masters\InformationController@getall');
 });
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
@@ -621,10 +622,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('{id}', 'DailyActivityController@show');
                 $router->put('{id}', 'DailyActivityController@update');
                 $router->delete('{id}', 'DailyActivityController@destroy');
-            });
-
-            $router->group(['prefix' => 'information'], function () use ($router) {
-                $router->get('', 'InformationController@getall');
             });
         });
 

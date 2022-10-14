@@ -13,6 +13,7 @@ class ActivityCF extends DefaultModel
         "activityid",
         "activitycustfid",
         "activitycfvalue",
+        "optchoosed",
         "createdby",
         "updatedby",
         'isactive',
@@ -35,5 +36,10 @@ class ActivityCF extends DefaultModel
     public function customfield()
     {
         return $this->belongsTo(CustomField::class, 'activitycustfid', 'custfid');
+    }
+
+    public function selectedoption()
+    {
+        return $this->belongsTo(Option::class, 'optchoosed', 'optid');
     }
 }
