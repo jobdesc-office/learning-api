@@ -46,7 +46,7 @@ class ContactPersonServices extends ContactPerson
             'contactupdatedby',
             'contactcustomer',
             'contacttype' => function ($query) {
-                $query->select('typeid', 'typename');
+                $query->select('sbtid', 'sbttypename');
             },
         ]);
     }

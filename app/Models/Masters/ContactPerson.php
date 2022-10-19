@@ -40,7 +40,7 @@ class ContactPerson extends DefaultModel
 
     public function contacttype()
     {
-        return $this->belongsTo(Types::class, "contacttypeid", "typeid");
+        return $this->belongsTo(Stbptype::class, "contacttypeid", "sbtid");
     }
 
     public function contactcustomer()

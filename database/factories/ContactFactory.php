@@ -38,7 +38,7 @@ class ContactFactory extends Factory
 
       return [
          "contactbpcustomerid" => $customer->sbcid,
-         "contacttypeid" => $type->getId(),
+         "contacttypeid" => $type->getChildrenId(),
          "contactvalueid" => $value,
          "contactname" => $this->faker->name(),
          "createdby" => 1,
@@ -49,8 +49,8 @@ class ContactFactory extends Factory
 
    function getType()
    {
-      $customertype = find_type()->byCode([\DBTypes::contactType])
-         ->children(\DBTypes::contactType);
-      return $customertype->random();
+      $customertype = find_type()->childrenByCode([\DBTypes::contactType])
+         ->randomChildren();
+      return $customertype;
    }
 }
