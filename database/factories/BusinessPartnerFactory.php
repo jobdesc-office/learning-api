@@ -17,6 +17,7 @@ class BusinessPartnerFactory extends Factory
             'bppicname' => $this->faker->name(),
             'bpemail' => $this->faker->email(),
             'bpphone' => $this->faker->phoneNumber(),
+            'bpactanytime' => true,
             'bptypeid' => find_type()->byCode([\DBTypes::businessPartner])->children(\DBTypes::businessPartner)->random()->getId(),
             'createdby' => 1,
             'updatedby' => 1,

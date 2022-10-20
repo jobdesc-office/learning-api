@@ -184,7 +184,11 @@ class DailyActivityServices extends DailyActivity
         return $this->newQuery()->with([
             'dayactuser',
             'dayactreftype',
-            'refprospect',
+            'refprospect' => function ($query) {
+                $query->with(['prospectcust', 'prospectstatus', 'prospectowneruser' => function ($query) {
+                    $query->with(['user']);
+                }]);
+            },
             'dayactupdatedby',
             'dayactcust',
             'dayactcat' => function ($query) {

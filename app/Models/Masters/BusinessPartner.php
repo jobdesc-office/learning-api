@@ -20,6 +20,7 @@ class BusinessPartner extends DefaultModel
         "bppicname",
         "bpemail",
         "bpphone",
+        "bpactanytime",
         "createdby",
         "updatedby",
         'isactive'
@@ -28,6 +29,7 @@ class BusinessPartner extends DefaultModel
     protected $alias = [
         'bpname' => "Name",
         "bptypeid" => "Type Id",
+        "bpactanytime" => "Allow Activity Anytime",
         'bppicname' => "Picture",
         "bpemail" => "Email",
         "bpphone" => "phone",
