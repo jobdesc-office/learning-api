@@ -17,6 +17,7 @@ class PermissionSeeder extends Seeder
       [
          'menutypeid' => \DBTypes::webb,
          'menunm' => 'Insight',
+         'menuicon' => 'Icons.extension',
          'createdby' => 1,
 
          'children' => [
