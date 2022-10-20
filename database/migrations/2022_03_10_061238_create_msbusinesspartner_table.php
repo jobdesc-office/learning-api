@@ -20,6 +20,7 @@ class CreateMsbusinesspartnerTable extends Migration
             $table->string('bppicname')->nullable();
             $table->string('bpemail')->nullable();
             $table->string('bpphone')->nullable();
+            $table->boolean('bpactanytime')->nullable();
 
             $table->bigInteger('createdby')->nullable();
             $table->timestamp('createddate')->useCurrent();

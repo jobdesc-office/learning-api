@@ -35,7 +35,6 @@ class BpCustomerSeeder extends Seeder
             $bpCustomer->sbccstmname =  $customer->cstmname;
             $bpCustomer->sbccstmaddress =  $customer->cstmaddress;
             $bpCustomer->sbccstmphone =  $customer->cstmphone;
-            $bpCustomer->sbcactivitytypeid = find_type()->childrenByCode([\DBTypes::cstmactivitytype])->randomChildren()->getChildrenId();
             $bpCustomer->save();
          }
       });

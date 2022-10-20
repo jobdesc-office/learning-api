@@ -90,7 +90,7 @@ class DailyActivity extends DefaultModel
 
     public function refprospect()
     {
-        return $this->belongsTo(Prospect::class, 'refid', 'prospectid');
+        return $this->belongsTo(Prospect::class, 'dayactrefid', 'prospectid');
     }
 
     const CREATED_AT = "createddate";
