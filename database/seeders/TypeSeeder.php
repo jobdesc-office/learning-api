@@ -228,7 +228,7 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::dayactreftype,
             'typename' => 'Daily Activity Reference Type',
             'children' => [
-                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Prospect', 'typecd' => \DBTypes::dayactreftypeprospect, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         // [

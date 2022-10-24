@@ -17,6 +17,13 @@ use Illuminate\Support\Str;
 class DailyActivityServices extends DailyActivity
 {
 
+    public function details($id)
+    {
+        return $this->getQuery()
+            ->where('dayactrefid', $id)
+            ->where('dayactreftypeid', find_type()->in([\DBTypes::dayactreftypeprospect])->get(\DBTypes::dayactreftypeprospect)->getId())->orderBy('dayactdate', 'desc');
+    }
+
     public function select($searchValue, $bpid)
     {
         return $this->getQuery()->select('*')
