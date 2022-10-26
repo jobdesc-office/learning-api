@@ -303,17 +303,17 @@ class CustomFieldController extends Controller
         $update = collect($req->only($modelCustomFieldService->getFillable()))
             ->except('createdby');
         $row->update($update->toArray());
-        $roles = json_decode($req->get('option'));
-        if ($roles != null) {
-            $modelOptionServices->where('optcustfid', $id)->delete();
-            foreach ($roles as $role) {
-                $modelOptionServices->create([
-                    'optcustfid' => $id,
-                    'optvalue' => $role->optvalue,
-                    'updatedby' => $req->get('updatedby'),
-                ]);
-            }
-        }
+        // $roles = json_decode($req->get('option'));
+        // if ($roles != null) {
+        //     $modelOptionServices->where('optcustfid', $id)->delete();
+        //     foreach ($roles as $role) {
+        //         $modelOptionServices->create([
+        //             'optcustfid' => $id,
+        //             'optvalue' => $role->optvalue,
+        //             'updatedby' => $req->get('updatedby'),
+        //         ]);
+        //     }
+        // }
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }

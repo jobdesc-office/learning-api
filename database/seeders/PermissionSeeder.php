@@ -140,7 +140,7 @@ class PermissionSeeder extends Seeder
                'menunm' => 'Types',
                'menuicon' => 'Icons.category',
                'createdby' => 1,
-
+               'menuroute' => '/-type',
                'children' => [
                   [
                      'menutypeid' => \DBTypes::webb,
@@ -225,7 +225,7 @@ class PermissionSeeder extends Seeder
                'menunm' => 'Regions',
                'menuicon' => 'FontAwesomeIcons.earthAmerica',
                'createdby' => 1,
-
+               'menuroute' => '/-region',
                'children' => [
                   [
                      'menutypeid' => \DBTypes::webb,

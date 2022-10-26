@@ -168,7 +168,9 @@ class CustomFieldService extends CustomField
                 ]);
             },
             'refactivity',
-            'selectoption',
+            'selectoption' => function ($query) {
+                $query->orderBy('optvalue', 'asc');
+            },
         ]);
     }
 }
