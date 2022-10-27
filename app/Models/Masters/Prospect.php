@@ -40,22 +40,22 @@ class Prospect extends DefaultModel
     ];
 
     protected $alias = [
-        "prospectname" => "Name",
-        "prospectcode" => "Code",
-        "prospectstartdate" => "Start Date",
-        "prospectenddate" => "End Date",
-        "prospectvalue" => "Value",
-        "prospectowner" => "Owner",
-        "prospectstageid" => "Stage Id",
-        "prospectstatusid" => "Status Id",
-        "prospectexpclosedate" => "Expectated Close Date",
-        "prospectbpid" => "Business Partner Id",
-        "prospectdescription" => "Description",
-        "prospectcustid" => "Customer Id",
-        "prospectrefid" => "Reference Id",
-        "prospectlostreasonid" => "Lost Reason Id",
-        "prospectlostdesc" => "Lost Description",
-        "prospectcustlabel" => "Customer Label",
+        "prospectname" => "Prospect Name",
+        "prospectcode" => "Prospect Code",
+        "prospectstartdate" => "Prospect Start Date",
+        "prospectenddate" => "Prospect End Date",
+        "prospectvalue" => "Prospect Value",
+        "prospectowner" => "Prospect Owner",
+        "prospectstageid" => "Prospect Stage Id",
+        "prospectstatusid" => "Prospect Status Id",
+        "prospectexpclosedate" => "Prospect Expectated Close Date",
+        "prospectbpid" => "Prospect Business Partner Id",
+        "prospectdescription" => "Prospect Description",
+        "prospectcustid" => "Prospect Customer Id",
+        "prospectrefid" => "Prospect Reference Id",
+        "prospectlostreasonid" => "Prospect Lost Reason Id",
+        "prospectlostdesc" => "Prospect Lost Description",
+        "prospectcustlabel" => "Prospect Customer Label",
     ];
 
     const CREATED_AT = "createddate";
