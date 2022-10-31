@@ -67,4 +67,5 @@ class DBTypes
     const webinfotype = 'web';
 
     const dayactreftype = 'actreft';
+    const dayactreftypeprospect = 'prospect';
 }

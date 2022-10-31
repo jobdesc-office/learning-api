@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProspectFactory extends Factory
 {
+    protected $x = 0;
     protected $model = Prospect::class;
 
     public function definition(): array
@@ -29,7 +30,7 @@ class ProspectFactory extends Factory
         $minute = [0, 15, 30, 45, 59][rand(0, 4)];
         return [
             'prospectname' => $this->faker->name(),
-            'prospectcode' => (new ProspectServices)->generateCode(),
+            'prospectcode' => $this->generateCode($this->x++),
             'prospectstartdate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectenddate' => Carbon::create(2022, $month, $day, $hour, $minute, 0),
             'prospectvalue' => $this->faker->numberBetween(100000, 10000000000),
@@ -43,6 +44,18 @@ class ProspectFactory extends Factory
             'prospectcustid' => $customer->cstmid,
             'createdby' => $user->userid,
         ];
+    }
+
+    function generateCode($count)
+    {
+        $code = "PRS";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$increment";;
     }
 
     function getStatus()

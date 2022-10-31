@@ -29,7 +29,10 @@ class DailyActivityFactory extends Factory
             'dayactcatid' => find_type()->childrenByCode([\DBTypes::activitycategory])->randomChildren()->getChildrenId(),
             'dayactdate' => $this->getActDate(),
             'dayactdesc' => $this->faker->text(),
+            'dayactreftypeid' => $this->getTypeId(),
             'dayactaddress' => $this->faker->address(),
+            'dayactrefid' => $this->faker->numberBetween(1, 10),
+            'dayactcustid' => $this->faker->numberBetween(1, 10),
             'dayactloc' => $this->getLocation(),
             'dayactlatitude' => $this->faker->latitude(),
             'dayactlongitude' => $this->faker->longitude(),
@@ -61,5 +64,12 @@ class DailyActivityFactory extends Factory
     function getLocation()
     {
         return $this->location;
+    }
+
+    function getTypeid()
+    {
+        $customertype = find_type()->byCode([\DBTypes::dayactreftype])
+            ->children(\DBTypes::dayactreftype);
+        return $customertype->random()->getId();
     }
 }

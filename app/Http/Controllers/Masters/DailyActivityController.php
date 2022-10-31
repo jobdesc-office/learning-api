@@ -21,9 +21,18 @@ class DailyActivityController extends Controller
         return response()->json($selects);
     }
 
-    public function datatables($id, DailyActivityServices $userServices)
+    public function datatables($id, Request $req, DailyActivityServices $userServices)
     {
-        $query = $userServices->datatables($id);
+        $start = $req->get('startdate');
+        $end = $req->get('enddate');
+        $categoryid = $req->get('categoryid');
+
+        $query = $userServices->datatables(
+            $id,
+            $start,
+            $end,
+            $categoryid
+        );
         return
             datatables()->eloquent($query)
             ->toJson()

@@ -11,18 +11,30 @@ use App\Models\Masters\ProspectAssign;
 use App\Models\Masters\ProspectCustomField;
 use App\Models\Masters\Customer;
 use App\Models\Masters\ContactPerson;
+use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Product;
 use App\Models\Masters\Files;
 use App\Services\Masters\BpCustomerService;
 use App\Services\Masters\ProspectServices;
+use App\Services\Masters\TrHistoryServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DBTypes;
 use Exception;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class ProspectController extends Controller
 {
+
+    public function prospectHistories(Request $request, TrHistoryServices $trHistoryServices, Prospect $prospect, ProspectProduct $prospectProduct, ProspectAssign $prospectAssign, DailyActivity $dailyActivity, ProspectCustomField $prospectCustomField, Files $files)
+    {
+        $prospect =  $trHistoryServices->findHistories($request->get('prospectid'), $prospect->getTable(), $request->get('bpid'));
+        $product =  $trHistoryServices->findProspectProductHistories($request->get('prospectid'), $prospectProduct->getTable(), $request->get('bpid'));
+        $assign =  $trHistoryServices->findProspectAssignHistories($request->get('prospectid'), $prospectAssign->getTable(), $request->get('bpid'));
+        $activity =  $trHistoryServices->findProspectActivityHistories($request->get('prospectid'), $dailyActivity->getTable(), $request->get('bpid'));
+        $customfield =  $trHistoryServices->findProspectCustomfieldHistories($request->get('prospectid'), $prospectCustomField->getTable(), $request->get('bpid'));
+        $file =  $trHistoryServices->findProspectFileHistories($request->get('prospectid'), $files->getTable(), $request->get('bpid'));
+        return response()->json(['prospect' => $prospect, 'prospectproduct' => $product, 'prospectassign' => $assign, 'prospectactivity' => $activity, 'prospectcustomfield' => $customfield, 'prospectfile' => $file]);
+    }
 
     public function lastid(ProspectServices $ProspectServices)
     {

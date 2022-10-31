@@ -6,15 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Masters\ProspectActivity;
 use App\Models\Masters\ProspectProduct;
 use App\Services\Masters\ProspectActivityServices;
+
+use App\Services\Masters\DailyActivityServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class ProspectActivityController extends Controller
 {
-    public function details(Request $req, ProspectActivityServices $ProspectActivityServices)
-    {
+    public function details(
+        Request $req,
+        DailyActivityServices $dailyActivityServices
+    ) {
         $id = $req->get('id');
-        $query = $ProspectActivityServices->details($id);
+        $query = $dailyActivityServices->details($id);
 
         return $query->get();
     }
@@ -25,34 +30,36 @@ class ProspectActivityController extends Controller
         return response()->json($Prospects);
     }
 
-    public function store(Request $req, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
+    public function store(Request $req, DailyActivityServices $dailyActivityServices)
     {
-        $insert = collect($req->only($ProspectActivityModel->getFillable()))->filter()->except('updatedby');
+        $prospecttype = find_type()->in([\DBTypes::dayactreftypeprospect])->get(\DBTypes::dayactreftypeprospect)->getId();
 
-        $ProspectActivityModel->fill($insert->toArray())->save();
+        $insert = collect($req->only($dailyActivityServices->getFillable()))->filter()->put('dayactreftypeid', $prospecttype)->except('updatedby');
+
+        $dailyActivityServices->fill($insert->toArray())->save();
 
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, ProspectActivityServices $ProspectServices)
+    public function show($id, DailyActivityServices $dailyActivityServices)
     {
-        $Prospect = $ProspectServices->find($id);
+        $Prospect = $dailyActivityServices->find($id);
         return response()->json($Prospect);
     }
 
-    public function update($id, Request $req, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
+    public function update($id, Request $req, ProspectActivity $ProspectActivityModel, DailyActivityServices $dailyActivityServices)
     {
 
-        $fields = collect($req->only($ProspectActivityModel->getFillable()))
+        $fields = collect($req->only($dailyActivityServices->getFillable()))
             ->except('createdby', 'prospectdtprospectid');
-        $ProspectActivityModel->findOrFail($id)->update($fields->toArray());
+        $dailyActivityServices->findOrFail($id)->update($fields->toArray());
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, ProspectActivity $ProspectActivityModel, ProspectProduct $ProspectProduct)
+    public function destroy($id, ProspectActivity $ProspectActivityModel, DailyActivityServices $dailyActivityServices)
     {
-        $ProspectActivityModel->findOrFail($id)->delete();
+        $dailyActivityServices->findOrFail($id)->delete();
         return response()->json(['message' => \TextMessages::successDelete]);
     }
 }
