@@ -90,14 +90,26 @@ class DailyActivityServices extends DailyActivity
         }
     }
 
-    public function datatables($id)
+    public function datatables($id, $startDate, $endDate, $categoryid)
     {
-        return $this->getQuery()
+        $query = $this->getQuery()
             ->select('vtdailyactivity.*')
             ->join('msuser', 'vtdailyactivity.createdby', '=', 'msuser.userid')
             ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
             ->orderBy('vtdailyactivity.dayactdate', 'asc')
             ->where('msuserdt.userdtbpid', $id);
+
+        if ($categoryid != null) {
+            $query =  $query->where('vtdailyactivity.dayactcatid', $categoryid);
+        }
+        if ($startDate != null && $endDate != null) {
+            $query =  $query->whereBetween('vtdailyactivity.dayactdate', [$startDate, $endDate]);
+        }
+        if ($startDate != null && $endDate == null) {
+            $query =  $query->where('vtdailyactivity.dayactdate', $startDate);
+        }
+
+        return $query;
     }
 
     public function getBp(int $id)
