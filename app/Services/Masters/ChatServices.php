@@ -82,7 +82,15 @@ class ChatServices extends Chat
         return $this->newQuery()->with([
             'chatbp',
             'chatreceiver',
+            'chatreftype',
             'createdbyuser',
+            'refprospect' => function ($query) {
+                $query->with([
+                    'prospectcust' => function ($query) {
+                        $query->with(['sbccstm']);
+                    },
+                ]);
+            },
             'chatfile' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
                     ->whereHas('transtype', function ($query) {
