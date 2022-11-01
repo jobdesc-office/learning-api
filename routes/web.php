@@ -156,6 +156,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('session', 'UsersController@session');
             $router->get('select', 'UsersController@select');
             $router->get('select/{id}', 'UsersController@selectwithsamebp');
+            $router->get('samebp/{id}', 'UsersController@samebp');
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');
