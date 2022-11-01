@@ -608,6 +608,34 @@ class PermissionSeeder extends Seeder
                   ],
                ],
             ],
+            [
+               'menutypeid' => \DBTypes::webb,
+               'menunm' => 'Chat',
+               'menuicon' => 'Icons.chat',
+               'menuroute' => '/ventes/chat',
+               'createdby' => 1,
+
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+               ],
+            ],
          ],
          'features' => [
             [
