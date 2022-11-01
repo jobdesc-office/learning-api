@@ -68,4 +68,6 @@ class DBTypes
 
     const dayactreftype = 'actreft';
     const dayactreftypeprospect = 'prospect';
+
+    const chatreftype = 'chtreft';
 }

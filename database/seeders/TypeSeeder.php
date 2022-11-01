@@ -231,6 +231,13 @@ class TypeSeeder extends Seeder
                 ['typename' => 'Prospect', 'typecd' => \DBTypes::dayactreftypeprospect, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
+        [
+            'typecd' => \DBTypes::chatreftype,
+            'typename' => 'Chat Reference Type',
+            'children' => [
+                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
         // [
         //     'typecd' => \DBTypes::activitytype,
         //     'typename' => 'Daily Activity type',

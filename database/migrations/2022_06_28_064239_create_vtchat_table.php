@@ -17,7 +17,7 @@ class CreateVtchatTable extends Migration
             $table->id('chatid');
             $table->bigInteger('chatbpid');
             $table->text('chatmessage')->nullable();
-            $table->string('chatrefname', 255)->nullable();
+            $table->string('chatreftypeid', 255)->nullable();
             $table->bigInteger('chatrefid')->nullable();
             $table->text('chatfile')->nullable();
             $table->timestamp('chatreadat')->nullable();
