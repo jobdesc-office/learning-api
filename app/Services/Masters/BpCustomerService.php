@@ -118,9 +118,9 @@ class BpCustomerService extends BpCustomer
             ->newQuery()->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
-                'sbcactivitytype' => function ($query) {
-                    $query->select('sbtid', 'sbttypename');
-                },
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('sbtid', 'sbttypename');
+                // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -148,7 +148,7 @@ class BpCustomerService extends BpCustomer
     {
         $customer = $this->find($id);
         $id = Stbptype::where('sbttypename', 'Anytime')->get()->first()->sbtid;
-        $customer->sbcactivitytypeid = $id;
+        // $customer->sbcactivitytypeid = $id;
         $customer->save();
     }
 
@@ -156,7 +156,7 @@ class BpCustomerService extends BpCustomer
     {
         $customer = $this->find($id);
         $id = Stbptype::where('sbttypename', 'Clock In First')->get()->first()->sbtid;
-        $customer->sbcactivitytypeid = $id;
+        // $customer->sbcactivitytypeid = $id;
         $customer->save();
     }
 
@@ -202,14 +202,14 @@ class BpCustomerService extends BpCustomer
     {
         $query = $this->getQuery();
 
-        $bpcustomerwhere = $whereArr->only($this->fillable);
+        $bpcustomerwhere = $whereArr->only($this->getFillable());
         if ($bpcustomerwhere->isNotEmpty()) {
             $query = $query->where($bpcustomerwhere->toArray());
         }
 
         // search by customer fields
         $customerServices = new CustomerService();
-        $customerwhere = $whereArr->only($customerServices->fillable);
+        $customerwhere = $whereArr->only($customerServices->getFillable());
         if ($customerwhere->isNotEmpty()) {
             $query = $query->whereHas('sbccstm', function ($query) use ($customerwhere) {
                 $query->where($customerwhere->toArray());
@@ -229,9 +229,9 @@ class BpCustomerService extends BpCustomer
             ->with([
                 'bpcustcreatedby',
                 'bpcustupdatedby',
-                'sbcactivitytype' => function ($query) {
-                    $query->select('sbtid', 'sbttypename');
-                },
+                // 'sbcactivitytype' => function ($query) {
+                //     $query->select('sbtid', 'sbttypename');
+                // },
                 'sbccstmstatus' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
