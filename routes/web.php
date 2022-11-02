@@ -214,6 +214,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'AttendanceController@show');
         });
 
+        $router->group(['prefix' => 'chat'], function () use ($router) {
+            $router->get('conversation', 'ChatController@getConversation');
+            $router->get('users-unread-messages', 'ChatController@usersUnreadMessages');
+            $router->get('read', 'ChatController@readMessage');
+            $router->get('', 'ChatController@all');
+            $router->post('', 'ChatController@store');
+            $router->get('{id}', 'ChatController@show');
+            $router->put('{id}', 'ChatController@update');
+            $router->delete('{id}', 'ChatController@destroy');
+        });
+
         $router->group(['prefix' => 'competitor'], function () use ($router) {
             $router->get('select', 'CompetitorController@select');
             $router->post('deleteimages', 'CompetitorController@deleteImages');
