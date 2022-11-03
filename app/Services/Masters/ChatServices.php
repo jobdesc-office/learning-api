@@ -84,6 +84,16 @@ class ChatServices extends Chat
             'chatreceiver',
             'chatreftype',
             'createdbyuser',
+            'refactivity' => function ($query) {
+                $query->with([
+                    'dayactuser',
+                    'dayactreftype',
+                    'dayactcust',
+                    'dayactcat' => function ($query) {
+                        $query->select('sbtid', 'sbttypename');
+                    },
+                ]);
+            },
             'refprospect' => function ($query) {
                 $query->with([
                     'prospectcust' => function ($query) {

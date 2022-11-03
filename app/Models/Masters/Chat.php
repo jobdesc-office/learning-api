@@ -23,6 +23,10 @@ class Chat extends DefaultModel
         'isactive',
     ];
 
+    protected $casts = [
+        'chatreftypeid' => 'integer',
+    ];
+
     public function chatbp()
     {
         return $this->belongsTo(BusinessPartner::class, "chatbpid", "bpid");
@@ -51,6 +55,11 @@ class Chat extends DefaultModel
     public function refprospect()
     {
         return $this->belongsTo(Prospect::class, 'chatrefid', 'prospectid');
+    }
+
+    public function refactivity()
+    {
+        return $this->belongsTo(DailyActivity::class, 'chatrefid', 'dayactid');
     }
 
     const CREATED_AT = "createddate";
