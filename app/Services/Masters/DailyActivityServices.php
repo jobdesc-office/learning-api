@@ -223,6 +223,6 @@ class DailyActivityServices extends DailyActivity
                         $query->where('typecd', DBTypes::dailyactivitypics);
                     });
             },
-        ]);
+        ])->orderBy('createddate', 'desc');
     }
 }

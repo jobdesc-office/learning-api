@@ -177,7 +177,7 @@ class ProspectServices extends Prospect
             'prospectcust' => function ($query) {
                 $query->with(['sbccstm']);
             },
-        ]);
+        ])->orderBy('createddate', 'desc');
     }
 
     public function getQueery()

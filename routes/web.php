@@ -633,7 +633,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
-                $router->get('allow/{id}', 'DailyActivityController@allow');
+                $router->get('allow/daily/{id}', 'DailyActivityController@dailyActivityAllow');
+                $router->get('allow/prospect/{id}', 'DailyActivityController@prospectActivityAllow');
                 $router->get('count', 'DailyActivityController@dailyActivityCount');
                 $router->get('histories', 'DailyActivityController@dailyActivityHistories');
                 $router->get('customfield/{id}', 'DailyActivityController@dailyActivityCustomField');
