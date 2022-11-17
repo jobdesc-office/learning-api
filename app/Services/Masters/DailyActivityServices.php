@@ -27,10 +27,11 @@ class DailyActivityServices extends DailyActivity
     public function select($searchValue, $bpid)
     {
         return $this->getQuery()->select('*')
-            ->where(function ($query) use ($searchValue) {
+            ->whereHas('dayactuser', function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
-                $query->where(DB::raw('TRIM(LOWER(dayactloclabel))'), 'like', "%$searchValue%");
+                $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");
             })
+
             ->whereHas('dayactuser', function ($query) use ($bpid) {
                 $query->with([
                     'userdetails' => function ($query) use ($bpid) {
