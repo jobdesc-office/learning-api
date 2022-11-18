@@ -317,7 +317,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('histories', 'ProspectController@prospectHistories');
             $router->get('lastid', 'ProspectController@lastid');
             $router->get('select', 'ProspectController@select');
-            $router->get('selectref', 'ProspectController@selectref');
+            $router->get('selectref/{id}', 'ProspectController@selectref');
             $router->get('', 'ProspectController@all');
             $router->post('datatables/{id}', 'ProspectController@datatablesbp');
             $router->post('datatables', 'ProspectController@datatables');

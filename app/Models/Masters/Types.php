@@ -36,6 +36,11 @@ class Types extends DefaultModel
         return $this->belongsTo(Types::class, 'typemasterid', 'typeid');
     }
 
+    public function childrens()
+    {
+        return $this->hasMany(Types::class, 'typeid', 'typemasterid',);
+    }
+
     public function typecreatedby()
     {
         return $this->belongsTo(User::class, "createdby", "userid");
