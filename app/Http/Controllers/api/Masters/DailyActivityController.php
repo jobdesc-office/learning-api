@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\BusinessPartner;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Prospect;
 use App\Services\Masters\ActivityCustomFieldService;
@@ -13,6 +14,7 @@ use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\FilesServices;
 use App\Services\Masters\TrHistoryServices;
+use Carbon\Carbon;
 use DB;
 use DBTypes;
 use Illuminate\Http\Request;
@@ -93,24 +95,25 @@ class DailyActivityController extends Controller
         return response()->json($customField);
     }
 
-    public function allow($id, BpCustomerService $bpCustomerService, AttendanceServices $attendanceServices)
+    public function dailyActivityAllow($id, BusinessPartner $bpService, AttendanceServices $attendanceServices)
     {
         $result = false;
-        $bpCustomer = $bpCustomerService->getAll(collect(['sbcbpid' => $id]));
-        if ($bpCustomer != null && count($bpCustomer) > 0) {
-            if ($bpCustomer->first()->sbcactivitytype->sbttypename == "Anytime") {
-                $result =  true;
-            } else {
-                $attendance = $attendanceServices->getMyAttendanceToday();
-                if ($attendance != null) {
-                    $result =  true;
-                } else {
-                    $result =  false;
-                }
-            }
-        } else {
-            $result =  true;
-        }
+        $bp = $bpService->find($id);
+        if ($bp->bpdayactanytime) $result = true;
+
+        $attendance = $attendanceServices->getAll(collect(['attuserid' => auth()->user()->userid, 'attdate' => Carbon::now()->format("Y-m-d")]));
+        if ($attendance->isNotEmpty()) $result = true;
+        return response()->json(['allow' => $result]);
+    }
+
+    public function prospectActivityAllow($id, BusinessPartner $bpService, AttendanceServices $attendanceServices)
+    {
+        $result = false;
+        $bp = $bpService->find($id);
+        if ($bp->bpprosactanytime) $result = true;
+
+        $attendance = $attendanceServices->getAll(collect(['attuserid' => auth()->user()->userid, 'attdate' => Carbon::now()->format("Y-m-d")]));
+        if ($attendance->isNotEmpty()) $result = true;
         return response()->json(['allow' => $result]);
     }
 }

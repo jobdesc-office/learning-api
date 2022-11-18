@@ -36,12 +36,13 @@ class TypeServices extends Types
             ->get();
     }
 
-    public function byCode($code)
+    public function byCode($code, $search = "")
     {
         return $this->newQuery()->select('typeid', 'typecd', 'typename', 'typeseq', 'typemasterid')
             ->whereHas('parent', function ($query) use ($code) {
                 $query->where('typecd', $code);
             })
+            ->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$search%")
             ->with([
                 'typecreatedby',
                 'typeupdatedby',

@@ -11,7 +11,7 @@ class TypesController extends Controller
 
     public function byCode(Request $req, TypeServices $typeServices)
     {
-        $types = $typeServices->byCode($req->get('typecd'));
+        $types = $typeServices->byCode($req->get('typecd'), $req->get('search'));
         return response()->json($types);
     }
 
