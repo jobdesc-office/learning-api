@@ -216,7 +216,7 @@ class DailyActivityServices extends DailyActivity
             },
             'dayactcust',
             "activitycustomfield" => function ($query) {
-                $query->with('customfield');
+                $query->with(['customfield']);
             },
             'dayactpics' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))

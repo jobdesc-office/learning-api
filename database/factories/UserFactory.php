@@ -24,6 +24,17 @@ class UserFactory extends Factory
     {
         $number = $this->faker->unique()->numberBetween(0, 25);
         $number = $number == 0 ? '' : $number;
+        if ($number == 22) {
+            return [
+                'username' => 'demo',
+                'userpassword' => Hash::make('demo' . $number),
+                'userfullname' => "Mr. Demo",
+                'useremail' => "demo@demo.demo",
+                'userphone' => "08812422394523",
+                'createdby' => 1,
+                'updatedby' => 1,
+            ];
+        }
         return [
             'username' => 'developer' . ($number == 0 ? '' : $number),
             'userpassword' => Hash::make('user123' . $number),
