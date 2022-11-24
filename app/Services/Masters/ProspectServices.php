@@ -58,10 +58,10 @@ class ProspectServices extends Prospect
             ->get();
     }
 
-    public function selectref($searchValue)
+    public function selectref($id, $searchValue)
     {
         return $this->getQueery()->select('*')
-            ->where('prospectrefid', null)
+            ->where('prospectbpid', $id)
             ->where(function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%$searchValue%");

@@ -82,6 +82,7 @@ class TypeServices extends Types
             ->with([
                 'typecreatedby',
                 'typeupdatedby',
+                'childrens',
             ])
             ->where('typemasterid', $code)
             ->orderBy('typename', 'asc')

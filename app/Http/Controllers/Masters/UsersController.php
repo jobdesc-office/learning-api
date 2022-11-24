@@ -51,7 +51,7 @@ class UsersController extends Controller
     public function reset($id, UserServices $userServices)
     {
         $userServices->findOrFail($id)->update([
-            'userdeviceid' => '',
+            'userdeviceid' => null,
         ]);
 
         return response()->json(['message' => \TextMessages::successEdit]);

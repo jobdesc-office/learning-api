@@ -51,10 +51,10 @@ class ProspectController extends Controller
         return response()->json($selects);
     }
 
-    public function selectref(Request $req, ProspectServices $ProspectServices)
+    public function selectref($id, Request $req, ProspectServices $ProspectServices)
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
-        $selects = $ProspectServices->selectref($searchValue);
+        $selects = $ProspectServices->selectref($id, $searchValue);
 
         return response()->json($selects);
     }
