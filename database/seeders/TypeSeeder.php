@@ -186,6 +186,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Prospect Activity', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

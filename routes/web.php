@@ -654,6 +654,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->put('{id}', 'MenusController@update');
                 $router->delete('{id}', 'MenusController@destroy');
             });
+
+            $router->group(['prefix' => 'permissions'], function () use ($router) {
+                $router->get('{id}', 'PermissionController@permissions');
+            });
         });
     });
 });
