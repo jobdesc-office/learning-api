@@ -168,6 +168,14 @@ class DailyActivityServices extends DailyActivity
                 $query = $query->where($dailyactivityWhere->toArray());
             }
 
+            if ($whereArr->has('startdate')) {
+                $query = $query->whereDate('dayactdate', ">=", $whereArr->get('startdate'));
+            }
+
+            if ($whereArr->has('enddate')) {
+                $query = $query->whereDate('dayactdate', "<=", $whereArr->get('enddate'));
+            }
+
             if ($whereArr->has('bpid')) {
                 $bpid = $whereArr->get('bpid');
                 $query = $query->whereHas('dayactuser', function ($query) use ($bpid) {
