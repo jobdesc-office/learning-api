@@ -647,7 +647,7 @@ class PermissionSeeder extends Seeder
          ],
       ],
 
-      // Mobiles Menus 
+      // Mobile Menus 
 
       [
          'menutypeid' => \DBTypes::appss,
@@ -817,152 +817,154 @@ class PermissionSeeder extends Seeder
                ],
             ],
          ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect activity',
-         'createdby' => 1,
-         'features' => [
+         'children' =>  [
             [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect activity',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect competitor',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect competitor',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect product',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect product',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect contacts',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect contacts',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect assign',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect assign',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
          ],
@@ -978,6 +980,155 @@ class PermissionSeeder extends Seeder
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
                ],
             ]
+         ],
+         'children' => [
+            [
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'insight 1',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ]
+               ],
+               'children' => [
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total value',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total won',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total lost',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'value by customer',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'value by stage',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'value by customer label',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'insight 2',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ]
+               ],
+               'children' => [
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total value',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total won',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total lost',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+               ],
+            ],
          ],
       ],
    ];

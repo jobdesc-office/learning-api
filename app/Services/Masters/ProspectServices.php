@@ -83,7 +83,9 @@ class ProspectServices extends Prospect
                 $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
                 if ($prospectassignwhere->isNotEmpty()) {
                     $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                        $query->orWhere($prospectassignwhere->toArray());
+                        $query->where(function ($query) use ($prospectassignwhere) {
+                            $query->orWhere($prospectassignwhere->toArray());
+                        });
                     });
                 }
             });
@@ -93,7 +95,7 @@ class ProspectServices extends Prospect
         if ($whereArr->has("search")) {
             $query = $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
-
+        // dd($query->toSql());
         return $query->get();
     }
 
