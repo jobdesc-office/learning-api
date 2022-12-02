@@ -119,4 +119,22 @@ class BusinessPartnerController extends Controller
 
         return response()->json(['message' => \TextMessages::successDelete]);
     }
+
+    public function setdayact($id, Request $req, BusinessPartner $modelBusinessPartner)
+    {
+        $row = $modelBusinessPartner->findOrFail($id);
+        $row->update([
+            'bpdayactanytime' => $req->get('allow'),
+        ]);
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
+    public function setprosact($id, Request $req, BusinessPartner $modelBusinessPartner)
+    {
+        $row = $modelBusinessPartner->findOrFail($id);
+        $row->update([
+            'bpprosactanytime' => $req->get('allow'),
+        ]);
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
 }

@@ -35,14 +35,12 @@ class CorsMiddleware
             'Access-Control-Allow-Headers'     => 'Content-Type, Accept, Authorization, X-Requested-With, Application, api-key, content-length'
         ];
 
-        if ($request->isMethod('OPTIONS'))
-        {
+        if ($request->isMethod('OPTIONS')) {
             return response()->json('{"method":"OPTIONS"}', 200, $headers);
         }
 
         $response = $next($request);
-        foreach($headers as $key => $value)
-        {
+        foreach ($headers as $key => $value) {
             $response->headers->set($key, $value);
         }
 
