@@ -137,6 +137,18 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'TypesController@destroy');
         });
 
+        $router->group(['prefix' => 'securitygroup'], function () use ($router) {
+            $router->get('by-codemaster', 'SecurityGroupController@byCodeMaster');
+            $router->get('by-code', 'SecurityGroupController@byCode');
+            $router->get('by-code-add', 'SecurityGroupController@byCodeAdd');
+            $router->post('datatables', 'SecurityGroupController@datatables');
+
+            $router->post('', 'SecurityGroupController@store');
+            $router->get('{id}', 'SecurityGroupController@show');
+            $router->put('{id}', 'SecurityGroupController@update');
+            $router->delete('{id}', 'SecurityGroupController@destroy');
+        });
+
         $router->group(['prefix' => 'typeschildren'], function () use ($router) {
             $router->post('datatables', 'TypesChildrenController@datatablesNonFilter');
             $router->post('datatables/{id}', 'TypesChildrenController@datatables');

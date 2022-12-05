@@ -26,6 +26,7 @@ class AuthController extends Controller
                 'userdtid' => $data->getId(),
                 'usertype' => $data->userType()->toArray(),
                 'businesspartner' => $data->businessPartner(),
+                'securitygroup' => $data->securitygroup(),
             ];
         })->all());
         if ($user->getId() != null) $user->put('jwt_token', $token);

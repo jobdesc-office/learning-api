@@ -31,6 +31,7 @@ class AuthController extends Controller
                     'userdtid' => $data->getId(),
                     'usertype' => $data->userType()->toArray(),
                     'businesspartner' => $data->businessPartner()->toArray(),
+                    'securitygroup' => $data->securitygroup(),
                 ];
             })->all(),
         ]);

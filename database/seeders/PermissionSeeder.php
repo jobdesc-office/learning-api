@@ -137,6 +137,40 @@ class PermissionSeeder extends Seeder
          'children' => [
             [
                'menutypeid' => \DBTypes::webb,
+               'menunm' => 'Security Group',
+               'menuicon' => 'Icons.group',
+               'menuroute' => '/masters/securitygroup',
+               'createdby' => 1,
+
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::webb,
                'menunm' => 'Types',
                'menuicon' => 'Icons.category',
                'createdby' => 1,

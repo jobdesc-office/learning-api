@@ -27,7 +27,7 @@ class UserDetailColumn extends Collection
 
     public function userType()
     {
-        if($this->hasNotEmpty('usertype'))
+        if ($this->hasNotEmpty('usertype'))
             return new TypeColumn($this->get('usertype'));
 
         return new TypeColumn();
@@ -35,9 +35,14 @@ class UserDetailColumn extends Collection
 
     public function businessPartner()
     {
-        if($this->hasNotEmpty('businesspartner'))
+        if ($this->hasNotEmpty('businesspartner'))
             return new BusinessPartnerColumn($this->get('businesspartner'));
 
         return new BusinessPartnerColumn();
+    }
+
+    public function securitygroup()
+    {
+        return $this->get('securitygroup');
     }
 }
