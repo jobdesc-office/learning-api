@@ -2,6 +2,8 @@
 
 use App\Actions\FindTypeAction;
 use App\Actions\FindBpTypeAction;
+use App\Models\Masters\UserDetail;
+use Illuminate\Support\Collection;
 
 function find_type($key = 'typecd', $keys = [], $items = [])
 {
@@ -21,6 +23,35 @@ function pgsql()
 function pgsql2()
 {
     return Schema::connection('pgsql2');
+}
+
+function kacungs()
+{
+    $bpid = request()->header('bpid');
+    $userid = auth()->id();
+    $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
+
+    function getSecurities($security)
+    {
+        $securities = collect([]);
+        if ($security instanceof Collection) {
+            foreach ($security as $sc) {
+                $securities->push(...getSecurities($sc));
+            }
+        } else {
+            if ($security->children->isNotEmpty()) $securities->push(...getSecurities($security->children));
+            $securities->push($security);
+        }
+        return $securities;
+    }
+
+    $groups = getSecurities($userdetail->securitygroup->children);
+    $kacungs = collect([]);
+    foreach ($groups as $group) {
+        $kacungs->push(...$group->users);
+    }
+
+    return $kacungs;
 }
 
 class TempFile

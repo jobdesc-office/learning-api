@@ -36,7 +36,12 @@ class SecurityGroup extends DefaultModel
 
     public function children()
     {
-        return $this->hasMany(SecurityGroup::class, 'sgid', 'sgmasterid',);
+        return $this->hasMany(SecurityGroup::class, 'sgmasterid', 'sgid');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(UserDetail::class, 'userdtsgid', 'sgid');
     }
 
     public function businesspartner()

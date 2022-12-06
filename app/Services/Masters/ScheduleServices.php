@@ -133,6 +133,15 @@ class ScheduleServices extends Schedule
             $endDate = $whereArr->get('enddate');
             $query = $query->where(DB::raw("get_schedule_from_dates(schestartdate, scheenddate, '$startDate', '$endDate')"), "true");
         }
+
+        $userids = kacungs()->map(function ($item) {
+            return $item->userid;
+        })->toArray();
+
+        if ($userids) {
+            $query = $query->onWhereIn('schetowardid', $userids);
+        }
+
         return $query;
     }
 

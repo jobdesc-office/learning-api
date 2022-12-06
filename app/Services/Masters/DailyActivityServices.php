@@ -160,12 +160,19 @@ class DailyActivityServices extends DailyActivity
     public function getAll(Collection $whereArr)
     {
         try {
+            $users = kacungs();
+            $userids = $users->map(function ($item) {
+                return $item->userid;
+            })->toArray();
 
             $query = $this->getQuery();
 
             $dailyactivityWhere = $whereArr->only($this->fillable);
             if ($dailyactivityWhere->isNotEmpty()) {
                 $query = $query->where($dailyactivityWhere->toArray());
+                if ($userids) {
+                    $query = $query->orWhereIn('createdby', $userids);
+                }
             }
 
             if ($whereArr->has('startdate')) {
@@ -198,10 +205,17 @@ class DailyActivityServices extends DailyActivity
     public function countAll(Collection $whereArr)
     {
         $query = $this->getQuery();
+        $users = kacungs();
+        $userids = $users->map(function ($item) {
+            return $item->userid;
+        })->toArray();
 
         $dailyactivityWhere = $whereArr->only($this->fillable);
         if ($dailyactivityWhere->isNotEmpty()) {
             $query = $query->where($dailyactivityWhere->toArray());
+            if ($userids) {
+                $query = $query->orWhereIn('createdby', $userids);
+            }
         }
 
         return $query->count();

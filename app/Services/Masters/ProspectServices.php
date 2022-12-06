@@ -73,18 +73,29 @@ class ProspectServices extends Prospect
     public function getAll(Collection $whereArr)
     {
         $query = $this->getQuery();
+        $users = kacungs();
+        $userids = $users->map(function ($item) {
+            return $item->userdtid;
+        })->toArray();
 
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
-            $query = $query->where(function ($query) use ($prospectwhere, $whereArr) {
+            $query = $query->where(function ($query) use ($prospectwhere, $whereArr, $userids) {
                 $query = $query->where($prospectwhere->toArray());
+                if ($userids) {
+                    $query = $query->orWhereIn('prospectowner', $userids);
+                }
 
                 $prospectAssignModel = new ProspectAssign;
                 $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
                 if ($prospectassignwhere->isNotEmpty()) {
-                    $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                        $query->where(function ($query) use ($prospectassignwhere) {
+                    $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere, $userids) {
+                        $query->where(function ($query) use ($prospectassignwhere, $userids) {
                             $query->orWhere($prospectassignwhere->toArray());
+                            if ($userids) {
+                                $query = $query->orWhereIn('prospectassignto', $userids);
+                                $query = $query->orWhereIn('prospectreportto', $userids);
+                            }
                         });
                     });
                 }
@@ -102,18 +113,29 @@ class ProspectServices extends Prospect
     public function countAll(Collection $whereArr)
     {
         $query = $this->getQuery();
+        $users = kacungs();
+        $userids = $users->map(function ($item) {
+            return $item->userdtid;
+        })->toArray();
 
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
             $query = $query->where($prospectwhere->toArray());
+            if ($userids) {
+                $query = $query->orWhereIn('prospectowner', $userids);
+            }
         }
 
         $prospectAssignModel = new ProspectAssign;
         $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
         if ($prospectassignwhere->isNotEmpty()) {
-            $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                $query->where(function ($query) use ($prospectassignwhere) {
+            $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere, $userids) {
+                $query->where(function ($query) use ($prospectassignwhere, $userids) {
                     $query->orWhere($prospectassignwhere->toArray());
+                    if ($userids) {
+                        $query = $query->orWhereIn('prospectassignto', $userids);
+                        $query = $query->orWhereIn('prospectreportto', $userids);
+                    }
                 });
             });
         }
