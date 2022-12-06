@@ -72,6 +72,7 @@ class UserServices extends User
 
                 $query->select('userid', 'userdttypeid', 'userdtbpid')
                     ->with([
+                        "securitygroup",
                         'usertype' => function ($query) {
                             $query->select('typeid', 'typename', 'typecd');
                         },
@@ -106,6 +107,7 @@ class UserServices extends User
             'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
+                    "securitygroup",
                     'usertype' => function ($query) {
                         $query->select('typeid', 'typename');
                     },
@@ -113,7 +115,7 @@ class UserServices extends User
                         $query->select('bpid', 'bpname', 'bpemail', 'bpphone')->with(['bptype']);
                     }
                 ]);
-            }
+            },
         ])
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
@@ -128,6 +130,7 @@ class UserServices extends User
             'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
+                    "securitygroup",
                     'usertype' => function ($query) {
                         $query->select('typeid', 'typename');
                     },
@@ -154,6 +157,7 @@ class UserServices extends User
             'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
+                    "securitygroup",
                     'usertype' => function ($query) {
                         $query->select('typeid', 'typename');
                     },

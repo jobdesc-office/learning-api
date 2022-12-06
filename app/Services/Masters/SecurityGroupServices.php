@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\SecurityGroup;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class SecurityGroupServices extends SecurityGroup
@@ -113,6 +114,16 @@ class SecurityGroupServices extends SecurityGroup
                 }
             ]
         );
+    }
+
+    public function getAll(Collection $where)
+    {
+        $query =  $this->newQuery();
+        return $query->where(function ($query) use ($where) {
+            $search = $where->get('searchValue');
+            $query->where(DB::raw("TRIM(LOWER(sgname))"), 'like', "%$search%");
+            $query->where('sgbpid', $where->get('sgbpid'));
+        })->get();
     }
 
     public function find($id)

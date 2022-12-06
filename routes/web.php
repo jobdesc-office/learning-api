@@ -141,6 +141,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('by-codemaster', 'SecurityGroupController@byCodeMaster');
             $router->get('by-code', 'SecurityGroupController@byCode');
             $router->get('by-code-add', 'SecurityGroupController@byCodeAdd');
+            $router->get('all', 'SecurityGroupController@all');
             $router->post('datatables', 'SecurityGroupController@datatables');
 
             $router->post('', 'SecurityGroupController@store');

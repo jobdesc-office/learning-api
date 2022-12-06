@@ -89,6 +89,12 @@ class SecurityGroupController extends Controller
             ->getOriginalContent();
     }
 
+    public function all(Request $req, SecurityGroupServices $securityGroupServices)
+    {
+        $data = $securityGroupServices->getAll(collect($req->all())->filter());
+        return response()->json($data);
+    }
+
     public function store(Request $req, SecurityGroup $modelSecurityGroup)
     {
         $insert = collect($req->only($modelSecurityGroup->getFillable()))->filter()->except('updatedby');

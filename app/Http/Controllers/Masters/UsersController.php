@@ -214,12 +214,14 @@ class UsersController extends Controller
         $resultUser = $modelUser->create($insert->toArray());
 
         $roles = json_decode($req->get('roles'));
+        $securitygroups = json_decode($req->get('securitygroups'));
         if ($roles != null) {
-            foreach ($roles as $role) {
+            foreach ($roles as $key => $role) {
                 $modelUserDetail->create([
                     'userid' => $resultUser->userid,
                     'userdttypeid' => $role->roleid,
                     'userdtbpid' => $role->bpid,
+                    'userdtsgid' => $securitygroups[$key]->sgid,
                 ]);
             }
         }
@@ -242,13 +244,15 @@ class UsersController extends Controller
             $row->update($update->toArray());
 
             $roles = json_decode($req->get('roles'));
+            $securitygroups = json_decode($req->get('securitygroups'));
             if ($roles) {
                 $modelUserDetail->where('userid', $id)->delete();
-                foreach ($roles as $role) {
+                foreach ($roles as $key => $role) {
                     $modelUserDetail->create([
                         'userid' => $id,
                         'userdttypeid' => $role->roleid,
                         'userdtbpid' => $role->bpid,
+                        'userdtsgid' => $securitygroups[$key]->sgid,
                     ]);
                 }
             }
@@ -258,13 +262,15 @@ class UsersController extends Controller
             $row->update($update->toArray());
 
             $roles = json_decode($req->get('roles'));
+            $securitygroups = json_decode($req->get('securitygroups'));
             if ($roles) {
                 $modelUserDetail->where('userid', $id)->delete();
-                foreach ($roles as $role) {
+                foreach ($roles as $key => $role) {
                     $modelUserDetail->create([
                         'userid' => $id,
                         'userdttypeid' => $role->roleid,
                         'userdtbpid' => $role->bpid,
+                        'userdtsgid' => $securitygroups[$key]->sgid,
                     ]);
                 }
             }
