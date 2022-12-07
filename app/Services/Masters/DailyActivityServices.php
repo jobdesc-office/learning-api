@@ -160,7 +160,7 @@ class DailyActivityServices extends DailyActivity
     public function getAll(Collection $whereArr)
     {
         try {
-            $users = kacungs();
+            $users = kacungs($whereArr->get('groupid'));
             $userids = $users->map(function ($item) {
                 return $item->userid;
             })->toArray();

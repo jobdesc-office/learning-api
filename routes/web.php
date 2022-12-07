@@ -549,6 +549,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('count', 'ProspectController@prospectCount');
                 $router->get('histories', 'ProspectController@prospectHistories');
                 $router->get('customfield/{id}', 'ProspectController@prospectcustomfield');
+                $router->get('groups', 'ProspectController@groups');
                 $router->get('report/{id}/years', 'ProspectController@reportYear');
                 $router->get('', 'ProspectController@all');
                 $router->post('', 'ProspectController@store');
@@ -646,10 +647,11 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
-                $router->get('allow/daily/{id}', 'DailyActivityController@dailyActivityAllow');
-                $router->get('allow/prospect/{id}', 'DailyActivityController@prospectActivityAllow');
                 $router->get('count', 'DailyActivityController@dailyActivityCount');
                 $router->get('histories', 'DailyActivityController@dailyActivityHistories');
+                $router->get('allow/daily/{id}', 'DailyActivityController@dailyActivityAllow');
+                $router->get('allow/prospect/{id}', 'DailyActivityController@prospectActivityAllow');
+                $router->get('groups', 'ProspectController@groups');
                 $router->get('customfield/{id}', 'DailyActivityController@dailyActivityCustomField');
                 $router->get('', 'DailyActivityController@all');
                 $router->post('', 'DailyActivityController@store');

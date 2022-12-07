@@ -113,7 +113,7 @@ class ProspectServices extends Prospect
     public function countAll(Collection $whereArr)
     {
         $query = $this->getQuery();
-        $users = kacungs();
+        $users = kacungs($whereArr->get('groupid'));
         $userids = $users->map(function ($item) {
             return $item->userdtid;
         })->toArray();

@@ -2,6 +2,7 @@
 
 use App\Actions\FindTypeAction;
 use App\Actions\FindBpTypeAction;
+use App\Models\Masters\SecurityGroup;
 use App\Models\Masters\UserDetail;
 use Illuminate\Support\Collection;
 
@@ -25,27 +26,32 @@ function pgsql2()
     return Schema::connection('pgsql2');
 }
 
-function kacungs()
+function getSecurities($security)
 {
-    $bpid = request()->header('bpid');
-    $userid = auth()->id();
-    $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
-
-    function getSecurities($security)
-    {
-        $securities = collect([]);
-        if ($security instanceof Collection) {
-            foreach ($security as $sc) {
-                $securities->push(...getSecurities($sc));
-            }
-        } else {
-            if ($security->children->isNotEmpty()) $securities->push(...getSecurities($security->children));
-            $securities->push($security);
+    $securities = collect([]);
+    if ($security instanceof Collection) {
+        foreach ($security as $sc) {
+            $securities->push(...getSecurities($sc));
         }
-        return $securities;
+    } else {
+        if ($security->children->isNotEmpty()) $securities->push(...getSecurities($security->children));
+        $securities->push($security);
     }
+    return $securities;
+}
 
-    $groups = getSecurities($userdetail->securitygroup->children);
+function kacungs($id = null)
+{
+    $security = null;
+    if ($id != null) {
+        $security = SecurityGroup::find($id);
+    } else {
+        $bpid = request()->header('bpid');
+        $userid = auth()->id();
+        $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
+        $security = $userdetail->securitygroup;
+    }
+    $groups = getSecurities($security->children);
     $kacungs = collect([]);
     foreach ($groups as $group) {
         $kacungs->push(...$group->users);

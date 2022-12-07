@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Masters\BusinessPartner;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Prospect;
+use App\Models\Masters\SecurityGroup;
+use App\Models\Masters\UserDetail;
 use App\Services\Masters\ActivityCustomFieldService;
 use App\Services\Masters\AttendanceServices;
 use App\Services\Masters\BpCustomerService;
@@ -76,6 +78,17 @@ class DailyActivityController extends Controller
             DB::rollBack();
         }
         return response()->json(['message' => \TextMessages::successDelete], 400);
+    }
+
+    public function groups(Request $request)
+    {
+        $bpid = request()->header('bpid');
+        $userid = auth()->id();
+        $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
+        $group = $userdetail->securitygroup;
+
+        $groups = getSecurities($group);
+        return response()->json($groups);
     }
 
     public function dailyActivityCount(Request $req, DailyActivityServices $activityServices)

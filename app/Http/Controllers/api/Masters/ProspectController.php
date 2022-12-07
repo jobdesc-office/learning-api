@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Masters\DspByCust;
 use App\Models\Masters\Prospect;
 use App\Models\Masters\ProspectCustomField;
+use App\Models\Masters\SecurityGroup;
+use App\Models\Masters\UserDetail;
 use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DspByCustServices;
 use App\Services\Masters\ProspectAssignServices;
@@ -91,6 +93,17 @@ class ProspectController extends Controller
             DB::rollBack();
             return response()->json(['message' => $th->getMessage()]);
         }
+    }
+
+    public function groups()
+    {
+        $bpid = request()->header('bpid');
+        $userid = auth()->id();
+        $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
+        $group = $userdetail->securitygroup;
+
+        $groups = getSecurities($group);
+        return response()->json($groups);
     }
 
     public function prospectCount(Request $req, ProspectServices $prospectServices)
