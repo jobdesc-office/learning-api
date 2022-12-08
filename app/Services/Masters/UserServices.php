@@ -155,6 +155,7 @@ class UserServices extends User
         return $this->newQuery()->with([
             'usercreatedby',
             'userupdatedby',
+            'appaccess',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
                     "securitygroup",
