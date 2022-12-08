@@ -22,6 +22,7 @@ class CreateMsuserTable extends Migration
             $table->string('userphone', 100)->nullable();
             $table->string('userdeviceid', 50)->nullable();
             $table->text('userfcmtoken')->nullable();
+            $table->bigInteger('userappaccess')->nullable();
             $table->text('usersocketid')->nullable();
 
             $table->bigInteger('createdby')->nullable();

@@ -16,6 +16,8 @@ class TypeSeeder extends Seeder
             'typename' => 'Role',
             'children' => [
                 ['typecd' => \DBTypes::roleSuperAdmin, 'typename' => 'Super Admin', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::roleSPVMarketing, 'typename' => 'SPV Marketing', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::roleMarketingSales, 'typename' => 'Marketing Sales', 'createdby' => 1, 'updatedby' => 1],
             ],
             'createdby' => 1,
             'updatedby' => 1,
@@ -238,6 +240,15 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::appaccess,
+            'typename' => 'App Access Type',
+            'children' => [
+                ['typename' => 'Only Web', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Only Mobile', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Web And Mobile', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         // [

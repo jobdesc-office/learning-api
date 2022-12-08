@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call([TypeSeeder::class]);
         $this->call([PermissionSeeder::class]);
         BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
-        UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
-        $this->call([BpTypeSeeder::class, SecurityGroupSeeder::class]);
+        // UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
+        $this->call([UserSeeder::class, BpTypeSeeder::class, SecurityGroupSeeder::class]);
         Attendance::factory(\FactoryCount::attendanceCount)->createQuietly();
 
         Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();

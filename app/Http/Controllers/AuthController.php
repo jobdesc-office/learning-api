@@ -15,8 +15,21 @@ class AuthController extends Controller
     {
         $credentials = $req->only(['username', 'password']);
 
-        if (!$token = Auth::claims(['source' => $req->get('source')])->attempt($credentials, true))
-            return response()->json(['message' => \TextMessages::failedSignIn], 400);
+        $type  = find_type()->byCode([\DBTypes::appaccess])
+            ->children(\DBTypes::appaccess);
+        $onlyMobile = $type->filter(function ($item) {
+            return $item->get('typename') == "Only Web";
+        });
+        $both =  $type->filter(function ($item) {
+            return $item->get('typename') == "Web And Mobile";
+        });
+        $credentials['userappaccess'] = $onlyMobile->first()->getId();
+        if (!$token = Auth::claims(['source' => $req->get('source')])->attempt($credentials, true)) {
+            $credentials['userappaccess'] = $both->first()->getId();
+            if (!$token = Auth::claims(['source' => $req->get('source')])->attempt($credentials, true)) {
+                return response()->json(['message' => \TextMessages::failedSignIn], 400);
+            }
+        }
 
         $user = new UserColumn($authServices->authQuery()->find(\auth()->id()));
 

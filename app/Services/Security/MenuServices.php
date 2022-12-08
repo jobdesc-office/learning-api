@@ -73,7 +73,7 @@ class MenuServices extends Menu
                         }
                     ]);
                 }
-            ])->where('masterid', null)->where('menutypeid', 8)->get();
+            ])->where('masterid', null)->where('menutypeid', 9)->get();
     }
 
     public function permissionApp($roleid)
@@ -140,7 +140,7 @@ class MenuServices extends Menu
                         }
                     ]);
                 }
-            ])->where('masterid', null)->where('menutypeid', 9)->get();
+            ])->where('masterid', null)->where('menutypeid', 10)->get();
     }
 
     public function select($searchValue)
@@ -171,7 +171,7 @@ class MenuServices extends Menu
                 'menutype' => function ($query) {
                     $query->select('typeid', 'typename');
                 }
-            ])->where('menutypeid', '!=', 8)
+            ])->where('menutypeid', '!=', 9)
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
