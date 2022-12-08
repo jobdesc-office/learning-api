@@ -357,7 +357,6 @@ class PermissionSeeder extends Seeder
                      'menuicon' => 'FontAwesomeIcons.earthAmerica',
                      'menuroute' => '/masters/province',
                      'createdby' => 1,
-
                      'features' => [
                         [
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
