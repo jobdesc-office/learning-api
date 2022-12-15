@@ -73,10 +73,14 @@ class ProspectServices extends Prospect
     public function getAll(Collection $whereArr)
     {
         $query = $this->getQuery();
-        $users = kacungs();
-        $userids = $users->map(function ($item) {
-            return $item->userdtid;
-        })->toArray();
+        $userids = null;
+
+        if (!$whereArr->has('userchildid')) {
+            $users = kacungs($whereArr->get('groupid'));
+            $userids = $users->map(function ($item) {
+                return $item->userdtid;
+            })->toArray();
+        }
 
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
@@ -92,10 +96,8 @@ class ProspectServices extends Prospect
                     $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere, $userids) {
                         $query->where(function ($query) use ($prospectassignwhere, $userids) {
                             $query->orWhere($prospectassignwhere->toArray());
-                            if ($userids) {
-                                $query = $query->orWhereIn('prospectassignto', $userids);
-                                $query = $query->orWhereIn('prospectreportto', $userids);
-                            }
+                            $query = $query->orWhereIn('prospectassignto', $userids);
+                            $query = $query->orWhereIn('prospectreportto', $userids);
                         });
                     });
                 }

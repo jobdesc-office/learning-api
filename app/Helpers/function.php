@@ -51,6 +51,7 @@ function kacungs($id = null)
         $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
         $security = $userdetail->securitygroup;
     }
+    if ($security == null) return collect([]);
     $groups = getSecurities($security->children);
     $kacungs = collect([]);
     foreach ($groups as $group) {

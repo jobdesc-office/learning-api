@@ -139,7 +139,7 @@ class ScheduleServices extends Schedule
         })->toArray();
 
         if ($userids) {
-            $query = $query->onWhereIn('schetowardid', $userids);
+            $query = $query->orWhereIn('schetowardid', $userids);
         }
 
         return $query;

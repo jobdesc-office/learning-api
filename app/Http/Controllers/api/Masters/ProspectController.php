@@ -97,12 +97,10 @@ class ProspectController extends Controller
 
     public function groups()
     {
-        $bpid = request()->header('bpid');
-        $userid = auth()->id();
-        $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
-        $group = $userdetail->securitygroup;
-
-        $groups = getSecurities($group);
+        $groups = kacungs();
+        $groups = kacungs()->map(function ($item) {
+            return collect($item->toArray())->merge(['user' => $item->user])->toArray();
+        });
         return response()->json($groups);
     }
 

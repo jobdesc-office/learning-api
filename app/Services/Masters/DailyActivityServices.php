@@ -160,10 +160,14 @@ class DailyActivityServices extends DailyActivity
     public function getAll(Collection $whereArr)
     {
         try {
-            $users = kacungs($whereArr->get('groupid'));
-            $userids = $users->map(function ($item) {
-                return $item->userid;
-            })->toArray();
+            $userids = null;
+
+            if (!$whereArr->has('userchildid')) {
+                $users = kacungs($whereArr->get('groupid'));
+                $userids = $users->map(function ($item) {
+                    return $item->userid;
+                })->toArray();
+            }
 
             $query = $this->getQuery();
 
