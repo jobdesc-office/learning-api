@@ -40,16 +40,20 @@ function getSecurities($security)
     return $securities;
 }
 
+function getParents($security)
+{
+    $securities = collect([$security]);
+    if ($security->parent != null) $securities->push(...getParents($security->parent));
+    return $securities;
+}
+
 function kacungs($id = null)
 {
     $security = null;
     if ($id != null) {
         $security = SecurityGroup::find($id);
     } else {
-        $bpid = request()->header('bpid');
-        $userid = auth()->id();
-        $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
-        $security = $userdetail->securitygroup;
+        $security = mySecurityGroup();
     }
     if ($security == null) return collect([]);
     $groups = getSecurities($security->children);
@@ -59,6 +63,26 @@ function kacungs($id = null)
     }
 
     return $kacungs;
+}
+
+function parents($id = null)
+{
+    $security = null;
+    if ($id != null) {
+        $security = SecurityGroup::find($id);
+    } else {
+        $security = mySecurityGroup();
+    }
+    if ($security == null) return collect([]);
+    return getParents($security);
+}
+
+function mySecurityGroup()
+{
+    $bpid = request()->header('bpid');
+    $userid = auth()->id();
+    $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
+    return $userdetail->securitygroup;
 }
 
 class TempFile

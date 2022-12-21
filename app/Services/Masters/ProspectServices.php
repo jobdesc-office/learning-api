@@ -96,8 +96,10 @@ class ProspectServices extends Prospect
                     $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere, $userids) {
                         $query->where(function ($query) use ($prospectassignwhere, $userids) {
                             $query->orWhere($prospectassignwhere->toArray());
-                            $query = $query->orWhereIn('prospectassignto', $userids);
-                            $query = $query->orWhereIn('prospectreportto', $userids);
+                            if ($userids) {
+                                $query = $query->orWhereIn('prospectassignto', $userids);
+                                $query = $query->orWhereIn('prospectreportto', $userids);
+                            }
                         });
                     });
                 }
