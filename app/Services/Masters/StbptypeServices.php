@@ -25,6 +25,30 @@ class StBpTypeServices extends Stbptype
             ->orderBy('sbttypename', 'asc')->get();
     }
 
+    public function byCodeInSecurity($code, $bpid, $search = "")
+    {
+        $search = Str::lower($search);
+        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
+            $query->where('typecd', $code);
+        })
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('sbtbpid', $bpid);
+                    $query->whereNull('sbtsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('sbtbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('sbtsgid', $ids);
+                });
+            })
+            ->where('isactive', true)
+            ->where(DB::raw('TRIM(LOWER(sbttypename))'), 'like', "%$search%")
+            ->orderBy('sbttypename', 'asc')->get();
+    }
+
     public function byCodeAdd($code, $bpid, $searchValue)
     {
         return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
@@ -84,7 +108,8 @@ class StBpTypeServices extends Stbptype
             },
             'stbptypebp' => function ($query) {
                 $query->select('bpid', 'bpname');
-            }
+            },
+            'securitygroup',
         ]);
     }
 }

@@ -5,6 +5,7 @@ class TextMessages
 
     const failedSignIn = 'Wrong username or password';
 
+    const limitReached = 'quota limit has beed reached';
     const successCreate = 'Data created successfully';
     const failedCreate = 'Data failed to create';
     const successEdit = 'Data updated successfully';

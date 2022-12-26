@@ -18,6 +18,7 @@ class ScheduleFactory extends Factory
      * @var string
      */
     protected $model = Schedule::class;
+    protected $x = 0;
 
     /**
      * Define the model's default state.
@@ -30,6 +31,7 @@ class ScheduleFactory extends Factory
         return [
             "schenm" => $this->faker->sentence(3),
             "schestartdate" => $this->getStartDate(),
+            'schecd' => $this->generateCode($this->x++),
             "scheenddate" => $this->getEndDate(),
             "schestarttime" => $this->getStartTime(),
             "scheendtime" => $this->getEndTime(),
@@ -76,6 +78,19 @@ class ScheduleFactory extends Factory
         $this->location = "https://maps.google.com?q=$coordinates[latitude],$coordinates[longitude]";
 
         $this->isOnline = $this->faker->boolean;
+    }
+
+    function generateCode($count)
+    {
+        $code = "SCH";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$day$increment";;
     }
 
     function getStartDate()

@@ -15,6 +15,7 @@ class CreateVtscheduleTable extends Migration
     {
         pgsql()->create('vtschedule', function (Blueprint $table) {
             $table->id('scheid');
+            $table->string('schecd', 100)->nullable();
             $table->string('schenm', 50)->nullable();
             $table->date('schestartdate')->nullable();
             $table->date('scheenddate')->nullable();

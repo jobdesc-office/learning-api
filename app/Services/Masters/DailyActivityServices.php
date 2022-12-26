@@ -8,6 +8,7 @@ use App\Collections\Files\FileUploader;
 use App\Models\Masters\ActivityCF;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Files;
+use Carbon\Carbon;
 use DBTypes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -124,10 +125,12 @@ class DailyActivityServices extends DailyActivity
 
     public function addAll(Collection $activities)
     {
+        $activityService = new DailyActivityServices;
         $activities->put('activities', json_decode($activities->get('activities')));
-        $data = array_map(function ($item) {
+        $data = array_map(function ($item) use ($activityService) {
             $item = collect($item);
             $item->put('createdby', auth()->user()->userid);
+            $item->put('dayactcd', $activityService->generateCode());
             $activity = new DailyActivity;
             $activity->fill($item->filter()->all())->save();
             return collect($activity->attributes)->put('file', $item->get('file'))->put('customfields', $item->get('customfields'))->all();
@@ -229,6 +232,7 @@ class DailyActivityServices extends DailyActivity
     {
         return $this->newQuery()->with([
             'dayactuser',
+            'schedules',
             'dayactreftype',
             'refprospect' => function ($query) {
                 $query->with(['prospectcust', 'prospectstatus', 'prospectowneruser' => function ($query) {
@@ -251,5 +255,19 @@ class DailyActivityServices extends DailyActivity
                     });
             },
         ])->orderBy('createddate', 'desc');
+    }
+
+    function generateCode()
+    {
+        $code = "ACT";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+        $count = DailyActivity::count() + 1;
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$day$increment";
     }
 }

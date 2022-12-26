@@ -23,6 +23,10 @@ class DBTypes
     const menuType = 'mntp';
     const schedulePermission = 'scp';
 
+    const webAccess = 'webacc';
+    const mobileAccess = 'mobileacc';
+    const allAccess = 'allacc';
+
     const schedule = 'schedule';
     const scheduleEvent = "scheevent";
     const scheduleTask = "schetask";

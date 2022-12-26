@@ -74,6 +74,7 @@ class BusinessPartnerServices extends BusinessPartner
             'bptype' => function ($query) {
                 $query->select('typeid', 'typename');
             },
+            'quota',
             'bpcreatedby',
             'bpupdatedby'
         ]);

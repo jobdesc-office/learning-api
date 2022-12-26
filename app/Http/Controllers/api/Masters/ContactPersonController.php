@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\ContactPersonServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +17,9 @@ class ContactPersonController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, ContactPersonServices $modelContactPersonServices)
+    public function store(Request $req, ContactPersonServices $modelContactPersonServices, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddContact(1)) return response()->json(['message' => "Contact " . \TextMessages::limitReached], 400);
         $insert = collect($req->only($modelContactPersonServices->getFillable()))->filter()
             ->except('updatedby');
 

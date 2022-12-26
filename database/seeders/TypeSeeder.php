@@ -246,9 +246,9 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::appaccess,
             'typename' => 'App Access Type',
             'children' => [
-                ['typename' => 'Only Web', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Only Mobile', 'createdby' => 1, 'updatedby' => 1],
-                ['typename' => 'Web And Mobile', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Only Web', 'typecd' => \DBTypes::webAccess, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Only Mobile', 'typecd' => \DBTypes::mobileAccess, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Web And Mobile', 'typecd' => \DBTypes::allAccess, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         // [

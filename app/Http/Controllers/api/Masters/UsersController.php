@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\User;
 use App\Models\Masters\UserDetail;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\UserServices;
 use App\Services\Masters\TypeServices;
 use App\Services\Masters\BusinessPartnerServices;

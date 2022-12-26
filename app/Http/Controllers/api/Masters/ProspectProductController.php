@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
 use App\Models\Masters\DspByCust;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\ProspectProductServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +19,10 @@ class ProspectProductController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, ProspectProductServices $modelProspectProductServices)
+    public function store(Request $req, ProspectProductServices $modelProspectProductServices, BpQuotaServices $quotaServices)
     {
+
+        if (!$quotaServices->isAllowAddProduct(1)) return response()->json(['message' => "Product " . \TextMessages::limitReached], 400);
         $insert = collect($req->all())->filter()
             ->except('updatedby');
         $modelProspectProductServices->createProspectProduct($insert);

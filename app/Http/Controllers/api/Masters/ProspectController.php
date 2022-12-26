@@ -8,6 +8,7 @@ use App\Models\Masters\Prospect;
 use App\Models\Masters\ProspectCustomField;
 use App\Models\Masters\SecurityGroup;
 use App\Models\Masters\UserDetail;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DspByCustServices;
 use App\Services\Masters\ProspectAssignServices;
@@ -30,14 +31,16 @@ class ProspectController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, ProspectServices $modelProspectServices)
+    public function store(Request $req, ProspectServices $modelProspectServices, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddProspect(1)) return response()->json(['message' => "Prospect " . \TextMessages::limitReached], 400);
         $insert = collect($req->all())->filter()->except('updatedby');
         $insert->put('prospectcode', $modelProspectServices->generateCode());
         $insert->put('createdby',  auth()->user()->userid);
         $modelProspectServices->fill($insert->toArray())->save();
 
         if ($insert->has('products')) {
+            if (!$quotaServices->isAllowAddProduct(count($insert->get('products')))) return response()->json(['message' => "Product " . \TextMessages::limitReached], 400);
             foreach ($insert->get('products') as $product) {
                 $productData = collect($product);
                 $productData->put('prosproductprospectid', $modelProspectServices->prospectid);

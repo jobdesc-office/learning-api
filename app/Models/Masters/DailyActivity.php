@@ -93,6 +93,11 @@ class DailyActivity extends DefaultModel
         return $this->belongsTo(Prospect::class, 'dayactrefid', 'prospectid');
     }
 
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'scherefid', 'dayactid');
+    }
+
     const CREATED_AT = "createddate";
     const UPDATED_AT = "updateddate";
 }

@@ -19,9 +19,10 @@ class ScheduleController extends Controller
         return response()->json($schedules);
     }
 
-    public function store(Request $req, Schedule $scheduleModel)
+    public function store(Request $req, Schedule $scheduleModel, ScheduleServices $scheduleServices)
     {
         $insert = collect($req->only($scheduleModel->getFillable()))->filter();
+        $insert->put('schecd', $scheduleServices->generateCode());
 
         $result = $scheduleModel->fill($insert->toArray())->save();
 

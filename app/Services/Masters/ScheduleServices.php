@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Schedule;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -143,6 +144,21 @@ class ScheduleServices extends Schedule
         }
 
         return $query;
+    }
+
+    public function generateCode()
+    {
+        $code = "SCH";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+
+        $count = Schedule::count() + 1;
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$day$increment";
     }
 
     public function filterScheduleWeb(Collection $whereArr, $id)

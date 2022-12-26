@@ -11,6 +11,8 @@ use App\Services\Masters\TypeServices;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\UserDetailServices;
 use App\Services\AuthServices;
+use App\Services\Masters\BpQuotaServices;
+use DBTypes;
 use Hamcrest\Type\IsInteger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -207,9 +209,23 @@ class UsersController extends Controller
         return response()->json($users);
     }
 
-    public function store(Request $req, User $modelUser, UserDetail $modelUserDetail)
+    public function store(Request $req, User $modelUser, UserDetail $modelUserDetail, BpQuotaServices $quotaServices)
     {
         $insert = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))->except('updatedby');
+
+        $types = find_type()->in([DBTypes::webAccess, DBTypes::allAccess, DBTypes::mobileAccess]);
+        $accessid = $insert->get('userappaccess');
+        switch ($accessid) {
+            case $types->get(DBTypes::webAccess)->getId():
+                if (!$quotaServices->isAllowAddWebUser(1)) return response()->json(['message' => "Web user " . \TextMessages::limitReached], 400);
+                break;
+            case $types->get(DBTypes::mobileAccess)->getId():
+                if (!$quotaServices->isAllowAddMobileUser(1)) return response()->json(['message' => "Mobile user " . \TextMessages::limitReached], 400);
+                break;
+            case $types->get(DBTypes::allAccess)->getId():
+                if (!$quotaServices->isAllowAddUser(1)) return response()->json(['message' => "User " . \TextMessages::limitReached], 400);
+                break;
+        }
 
         $resultUser = $modelUser->create($insert->toArray());
 

@@ -55,6 +55,11 @@ class BusinessPartner extends DefaultModel
         return $this->hasMany(UserDetail::class, 'userdtbpid', 'bpid');
     }
 
+    public function quota()
+    {
+        return $this->hasOne(BpQuota::class, 'sbqbpid', 'bpid');
+    }
+
     public function bpcreatedby()
     {
         return $this->belongsTo(User::class, "createdby", "userid");

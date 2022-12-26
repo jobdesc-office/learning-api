@@ -15,6 +15,7 @@ use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Product;
 use App\Models\Masters\Files;
 use App\Services\Masters\BpCustomerService;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\ProspectServices;
 use App\Services\Masters\TrHistoryServices;
 use Illuminate\Http\Request;
@@ -179,8 +180,9 @@ class ProspectController extends Controller
         return response()->json($Prospects);
     }
 
-    public function storeCustomer(Request $req, Customer $modelCustomer, ContactPerson $modelContactPerson, BpCustomerService $modelBpCustomerService)
+    public function storeCustomer(Request $req, Customer $modelCustomer, ContactPerson $modelContactPerson, BpCustomerService $modelBpCustomerService, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddCustomer(1)) return response()->json(['message' => "Customer " . \TextMessages::limitReached], 400);
         $isregistered = $req->get('isregistered');
         if ($isregistered == 'true') {
             DB::beginTransaction();
@@ -236,8 +238,9 @@ class ProspectController extends Controller
         }
     }
 
-    public function storeProduct(Request $req, Product $ProductModel)
+    public function storeProduct(Request $req, Product $ProductModel, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddProduct(1)) return response()->json(['message' => "Product " . \TextMessages::limitReached], 400);
         $insert = collect($req->only($ProductModel->getFillable()))->filter()->except('updatedby');
 
         $ProductModel->create($insert->toArray());
@@ -245,8 +248,9 @@ class ProspectController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectServices $modelProspectServices)
+    public function store(Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct, ProspectServices $modelProspectServices, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddProspect(1)) return response()->json(['message' => "Prospect " . \TextMessages::limitReached], 400);
         $insert = collect($req->only($ProspectModel->getFillable()))->filter()->except('updatedby');
 
         $insert->put('prospectcode', $modelProspectServices->generateCode());
@@ -254,6 +258,7 @@ class ProspectController extends Controller
 
         if ($req->has('products') && $req->get('products') != null) {
             $members = json_decode($req->get('products'));
+            if (!$quotaServices->isAllowAddProduct(count($members))) return response()->json(['message' => "Product " . \TextMessages::limitReached], 400);
             foreach ($members as $member) {
                 $ProspectProduct->create([
                     'prosproductprospectid' => $ProspectModel->prospectid,
@@ -277,7 +282,7 @@ class ProspectController extends Controller
         return response()->json($Prospect);
     }
 
-    public function update($id, Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct)
+    public function update($id, Request $req, Prospect $ProspectModel, ProspectProduct $ProspectProduct, BpQuotaServices $quotaServices)
     {
 
         $fields = collect($req->only($ProspectModel->getFillable()))
@@ -287,6 +292,7 @@ class ProspectController extends Controller
         $products = json_decode($req->get('products'));
         if ($products) {
             $ProspectProduct->where('prosproductprospectid', $id)->delete();
+            if (!$quotaServices->isAllowAddProduct(count($products))) return response()->json(['message' => "Product " . \TextMessages::limitReached], 400);
             foreach ($products as $product) {
                 $ProspectProduct->create([
                     'prosproductprospectid' => $id,

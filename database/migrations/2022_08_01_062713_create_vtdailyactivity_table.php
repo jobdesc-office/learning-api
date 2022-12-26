@@ -16,6 +16,7 @@ class CreateVtdailyactivityTable extends Migration
         pgsql()->create('vtdailyactivity', function (Blueprint $table) {
             $table->id('dayactid');
             $table->integer('dayactcatid')->nullable();
+            $table->string('dayactcd', 100)->nullable();
             $table->integer('dayactcustid')->nullable();
             $table->integer('dayactrefid')->nullable();
             $table->integer('dayactreftypeid')->nullable();

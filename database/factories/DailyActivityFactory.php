@@ -16,6 +16,7 @@ class DailyActivityFactory extends Factory
      * @var string
      */
     protected $model = DailyActivity::class;
+    protected $x = 0;
 
     /**
      * Define the model's default state.
@@ -29,6 +30,7 @@ class DailyActivityFactory extends Factory
             'dayactcatid' => find_type()->childrenByCode([\DBTypes::activitycategory])->randomChildren()->getChildrenId(),
             'dayactdate' => $this->getActDate(),
             'dayactdesc' => $this->faker->text(),
+            'dayactcd' => $this->generateCode($this->x++),
             'dayactreftypeid' => $this->getTypeId(),
             'dayactaddress' => $this->faker->address(),
             'dayactrefid' => $this->faker->numberBetween(1, 10),
@@ -71,5 +73,18 @@ class DailyActivityFactory extends Factory
         $customertype = find_type()->byCode([\DBTypes::dayactreftype])
             ->children(\DBTypes::dayactreftype);
         return $customertype->random()->getId();
+    }
+
+    function generateCode($count)
+    {
+        $code = "ACT";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$day$increment";
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\BpCustomerService;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\CustomerService;
 use App\Services\Masters\FilesServices;
 use DB;
@@ -23,9 +24,9 @@ class BpCustomerController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function store(Request $req, BpCustomerService $modelBpCustomerService)
+    public function store(Request $req, BpCustomerService $modelBpCustomerService, BpQuotaServices $quotaServices)
     {
-
+        if (!$quotaServices->isAllowAddCustomer(1)) return response()->json(['message' => "Customer " . \TextMessages::limitReached], 400);
         $insert = collect($req->all())->filter();
 
         if ($req->hasFile('sbccstmpic')) {

@@ -11,6 +11,7 @@ use App\Models\Masters\UserDetail;
 use App\Services\Masters\ActivityCustomFieldService;
 use App\Services\Masters\AttendanceServices;
 use App\Services\Masters\BpCustomerService;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DailyActivityServices;
@@ -20,6 +21,7 @@ use Carbon\Carbon;
 use DB;
 use DBTypes;
 use Illuminate\Http\Request;
+use PDO;
 
 class DailyActivityController extends Controller
 {
@@ -31,9 +33,20 @@ class DailyActivityController extends Controller
         return response()->json($activity);
     }
 
-    public function store(Request $req, DailyActivityServices $activityServices)
+    public function store(Request $req, DailyActivityServices $activityServices, BpQuotaServices $quotaServices)
     {
         if ($req->has('activities')) {
+            // $activities = json_decode($req->getContent())->activities;
+            $activities = json_decode($req->get('activities'));
+
+            $type = find_type()->in([DBTypes::dayactreftypeprospect])->get(DBTypes::dayactreftypeprospect)->getId();
+            $typeid = $activities[0]->dayactreftypeid;
+            if ($typeid == null) {
+                if (!$quotaServices->isAllowAddDailyActivity(count($activities))) return response()->json(['message' => "Daily Activity " . \TextMessages::limitReached], 400);
+            } else if ($typeid == $type) {
+                if (!$quotaServices->isAllowAddProspectActivity(count($activities))) return response()->json(['message' => "Prospect Activity " . \TextMessages::limitReached], 400);
+            }
+
             $activityServices->addAll(collect($req->all())->filter());
         }
         return response()->json(['message' => \TextMessages::successCreate]);
