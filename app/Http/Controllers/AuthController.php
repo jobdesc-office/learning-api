@@ -24,6 +24,7 @@ class AuthController extends Controller
             return $item->get('typename') == "Web And Mobile";
         });
         $credentials['userappaccess'] = $onlyMobile->first()->getId();
+
         if (!$token = Auth::claims(['source' => $req->get('source')])->attempt($credentials, true)) {
             $credentials['userappaccess'] = $both->first()->getId();
             if (!$token = Auth::claims(['source' => $req->get('source')])->attempt($credentials, true)) {

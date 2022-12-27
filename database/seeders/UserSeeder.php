@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
             'username' => 'developer',
             'userpassword' => 'user123',
             'userfullname' => "Men in black",
-            'userappaccess' => 106,
+            'userappaccess' => 107,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 2,
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'username' => 'guanting123',
             'userpassword' => 'guanting123',
             'userfullname' => "Guanting Yin",
-            'userappaccess' => 106,
+            'userappaccess' => 107,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 3,
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'username' => 'saiful123',
             'userpassword' => 'saiful123',
             'userfullname' => "Saiful Anwar",
-            'userappaccess' => 105,
+            'userappaccess' => 106,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 3,
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'username' => 'nurul123',
             'userpassword' => 'nurul123',
             'userfullname' => "Nurul Rahma",
-            'userappaccess' => 105,
+            'userappaccess' => 106,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 3,
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             'username' => 'mansur123',
             'userpassword' => 'mansur123',
             'userfullname' => "Mansur Umar",
-            'userappaccess' => 105,
+            'userappaccess' => 106,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 4,
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
             'username' => 'vina123',
             'userpassword' => 'vina123',
             'userfullname' => "Vina Guntur",
-            'userappaccess' => 105,
+            'userappaccess' => 106,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 4,
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             'username' => 'günter123',
             'userpassword' => 'günter123',
             'userfullname' => "Günter Hermenegild",
-            'userappaccess' => 105,
+            'userappaccess' => 106,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 4,
@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
             'username' => 'yuki123',
             'userpassword' => 'yuki123',
             'userfullname' => "Yuki Katsurou",
-            'userappaccess' => 105,
+            'userappaccess' => 106,
             // userdetail
             'userdtbpid' => 1,
             'userdttypeid' => 4,

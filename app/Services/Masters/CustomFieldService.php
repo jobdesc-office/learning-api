@@ -84,6 +84,31 @@ class CustomFieldService extends CustomField
             ->orderBy($order, $orderby);
     }
 
+    public function datatablesschedulebp($id, $order, $orderby, $search)
+    {
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->where(function ($query) use ($id) {
+                $query->where(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
+            ->whereHas('custfreftype', function ($query) {
+                $query->where('typecd', DBTypes::scheduleCustomField);
+            })
+            ->orderBy($order, $orderby);
+    }
+
     public function select($searchValue)
     {
         return $this->getQuery()->select('*')
@@ -202,6 +227,28 @@ class CustomFieldService extends CustomField
                 });
             })
             ->where('custfreftypeid', $activityrefid)
+            ->get();
+    }
+
+    public function scheduleByBp($bpid)
+    {
+
+        $schedulerefid = find_type()->in(DBTypes::scheduleCustomField)->get(DBTypes::scheduleCustomField)->getId();
+        return $this->getQuery()
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
+            ->where('custfreftypeid', $schedulerefid)
             ->get();
     }
 

@@ -54,6 +54,7 @@ class DBTypes
     const customizeFieldRefType = 'cfref';
     const prospectCustomField = 'proscfrf';
     const activityCustomField = 'actcfrf';
+    const scheduleCustomField = 'schecfrf';
 
     const contactType = "contact";
     const scheRefType = "scheref";

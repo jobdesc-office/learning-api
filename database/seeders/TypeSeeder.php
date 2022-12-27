@@ -151,6 +151,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typecd' => \DBTypes::activityCustomField, 'typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
                 ['typecd' => \DBTypes::prospectCustomField, 'typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::scheduleCustomField, 'typename' => 'Schedule', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [

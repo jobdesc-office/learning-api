@@ -5,7 +5,9 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\ProspectActivity;
 use App\Models\Masters\Schedule;
+use App\Models\Masters\ScheduleCF;
 use App\Models\Masters\ScheduleGuest;
+use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\ScheduleServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +29,6 @@ class ScheduleController extends Controller
         $result = $scheduleModel->fill($insert->toArray())->save();
 
         if ($result) {
-
             if ($req->has('members') && $req->get('members') != null) {
                 $members = json_decode($req->get('members'));
                 foreach ($members as $member) {
@@ -39,6 +40,15 @@ class ScheduleController extends Controller
                         'schepermisid' => $member->schepermisid
                     ]);
                     $guest->save();
+                }
+            }
+
+            if ($req->has('customfields')) {
+                foreach ($req->get('customfields') as $customfield) {
+                    $activitycf = new ScheduleCF;
+                    $activitycf->fill(collect($customfield)->all());
+                    $activitycf->scheduleid =  $scheduleModel->scheid;
+                    $activitycf->save();
                 }
             }
 
@@ -104,5 +114,11 @@ class ScheduleController extends Controller
     {
         $schedules = $scheduleServices->countAll(collect($req->all()));
         return response()->json(['count' => $schedules]);
+    }
+
+    public function scheduleCustomField($id, Request $request, CustomFieldService $service)
+    {
+        $customField = $service->scheduleByBp($id);
+        return response()->json($customField);
     }
 }

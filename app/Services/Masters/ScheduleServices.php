@@ -60,7 +60,10 @@ class ScheduleServices extends Schedule
                 },
                 'schereftype' => function ($query) {
                     $query->select('typeid', 'typename');
-                }
+                },
+                'schedulecustomfield' => function ($query) {
+                    $query->with(['customfield']);
+                },
             ])
             ->findOrFail($id);
     }
@@ -102,7 +105,10 @@ class ScheduleServices extends Schedule
                 },
                 'schetoward' => function ($query) {
                     $query->select('userid', 'userfullname');
-                }
+                },
+                'schedulecustomfield' => function ($query) {
+                    $query->with(['customfield']);
+                },
             ]);
 
         $scheduleWhere = $whereArr->only($this->getFillable());

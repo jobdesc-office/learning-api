@@ -258,6 +258,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('datatables', 'CustomFieldController@datatables');
             $router->post('datatables/{id}', 'CustomFieldController@datatablesbp');
             $router->post('datatablesdayactbp/{id}', 'CustomFieldController@datatablesdayactbp');
+            $router->post('datatablesschedulebp/{id}', 'CustomFieldController@datatablesschedulebp');
 
             $router->post('', 'CustomFieldController@store');
             $router->get('{id}', 'CustomFieldController@show');
@@ -485,6 +486,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->group(['prefix' => 'schedule'], function () use ($router) {
                 $router->get('count', 'ScheduleController@scheduleCount');
+                $router->get('customfield/{id}', 'ScheduleController@scheduleCustomField');
                 $router->get('', 'ScheduleController@all');
                 $router->post('', 'ScheduleController@store');
                 $router->get('{id}', 'ScheduleController@show');
