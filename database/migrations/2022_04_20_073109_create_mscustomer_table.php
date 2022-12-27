@@ -16,6 +16,7 @@ class CreateMscustomerTable extends Migration
         pgsql()->create('mscustomer', function (Blueprint $table) {
             $table->id('cstmid');
             $table->string('cstmprefix', 100)->nullable();
+            $table->string('cstmcode', 50)->nullable();
             $table->string('cstmname', 100);
             $table->string('cstmphone', 20)->nullable();
             $table->text('cstmaddress')->nullable();

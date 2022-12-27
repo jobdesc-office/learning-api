@@ -20,6 +20,7 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
 
     protected $fillable = [
         'username',
+        'usercode',
         'userpassword',
         'userfullname',
         'useremail',
@@ -35,6 +36,7 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
 
     protected $alias = [
         'username' => "Username",
+        'usercode' => "User Code",
         'userpassword' => "Password",
         'userfullname' => "Fullname",
         'useremail' => "Email",

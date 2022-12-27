@@ -16,6 +16,7 @@ class CreateMsuserTable extends Migration
         pgsql()->create('msuser', function (Blueprint $table) {
             $table->id('userid');
             $table->string('username', 50);
+            $table->string('usercode', 50)->nullable();
             $table->text('userpassword');
             $table->string('userfullname', 100);
             $table->string('useremail', 100)->nullable();

@@ -16,6 +16,7 @@ class Customer extends DefaultModel
     protected $fillable = [
         'cstmprefix',
         'cstmname',
+        'cstmcode',
         'cstmphone',
         'cstmaddress',
         'cstmtypeid',
@@ -35,6 +36,7 @@ class Customer extends DefaultModel
     protected $alias = [
         'cstmprefix' => "Prefix",
         'cstmname' => "Name",
+        'cstmcode' => "Code",
         'cstmphone' => "Phone",
         'cstmaddress' => "Address",
         'cstmtypeid' => "Type Id",
