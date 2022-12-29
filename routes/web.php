@@ -562,6 +562,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->group(['prefix' => 'insight'], function () use ($router) {
                 $router->get('agingreport', 'InsightController@agingreport');
+                $router->get('fcvsactual', 'InsightController@fcvsactual');
+                $router->get('fcvsactualyears', 'InsightController@fcvsactualYears');
                 $router->get('bycust/{id}', 'InsightController@reportByCust');
                 $router->get('bystage/{id}', 'InsightController@reportByStage');
                 $router->get('bystatus/{id}', 'InsightController@reportByStatus');
