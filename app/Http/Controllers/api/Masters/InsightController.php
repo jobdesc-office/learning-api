@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\DspByOwner;
 use App\Models\Masters\DspByStatusDt;
+use App\Services\Masters\AgingReportService;
 use App\Services\Masters\DspByBpService;
 use App\Services\Masters\DspByCustLabelDtService;
 use App\Services\Masters\DspByCustLabelService;
@@ -72,5 +73,10 @@ class InsightController extends Controller
          $item = intval($item);
          return $item;
       }));
+   }
+
+   public function agingreport(Request $request, AgingReportService $service)
+   {
+      return response()->json($service->getAll(collect($request->all())->filter()));
    }
 }
