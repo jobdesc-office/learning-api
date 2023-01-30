@@ -2,6 +2,9 @@
 
 use App\Actions\FindTypeAction;
 use App\Actions\FindBpTypeAction;
+use App\Models\Masters\SecurityGroup;
+use App\Models\Masters\UserDetail;
+use Illuminate\Support\Collection;
 
 function find_type($key = 'typecd', $keys = [], $items = [])
 {
@@ -21,6 +24,65 @@ function pgsql()
 function pgsql2()
 {
     return Schema::connection('pgsql2');
+}
+
+function getSecurities($security)
+{
+    $securities = collect([]);
+    if ($security instanceof Collection) {
+        foreach ($security as $sc) {
+            $securities->push(...getSecurities($sc));
+        }
+    } else {
+        if ($security->children->isNotEmpty()) $securities->push(...getSecurities($security->children));
+        $securities->push($security);
+    }
+    return $securities;
+}
+
+function getParents($security)
+{
+    $securities = collect([$security]);
+    if ($security->parent != null) $securities->push(...getParents($security->parent));
+    return $securities;
+}
+
+function kacungs($id = null)
+{
+    $security = null;
+    if ($id != null) {
+        $security = SecurityGroup::find($id);
+    } else {
+        $security = mySecurityGroup();
+    }
+    if ($security == null) return collect([]);
+    $groups = getSecurities($security->children);
+    $kacungs = collect([]);
+    foreach ($groups as $group) {
+        $kacungs->push(...$group->users);
+    }
+
+    return $kacungs;
+}
+
+function parents($id = null)
+{
+    $security = null;
+    if ($id != null) {
+        $security = SecurityGroup::find($id);
+    } else {
+        $security = mySecurityGroup();
+    }
+    if ($security == null) return collect([]);
+    return getParents($security);
+}
+
+function mySecurityGroup()
+{
+    $bpid = request()->header('bpid');
+    $userid = auth()->id();
+    $userdetail = UserDetail::where(['userid' => $userid, 'userdtbpid' => $bpid])->first();
+    return $userdetail->securitygroup;
 }
 
 class TempFile

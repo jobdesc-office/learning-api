@@ -13,6 +13,7 @@ class Stbptype extends DefaultModel
         "sbtbpid",
         "sbtname",
         "sbtseq",
+        "sbtsgid",
         "sbttypemasterid",
         "sbttypename",
         "sbtremark",
@@ -22,6 +23,7 @@ class Stbptype extends DefaultModel
     ];
 
     protected $alias = [
+        "sbtsgid" => "Security Group Id",
         "sbtbpid" => "Business Partner Id",
         "sbtname" => "Name",
         "sbtseq" => "Sequel",
@@ -36,6 +38,11 @@ class Stbptype extends DefaultModel
     public function stbptypetype()
     {
         return $this->belongsTo(Types::class, 'sbttypemasterid', 'typeid');
+    }
+
+    public function securitygroup()
+    {
+        return $this->belongsTo(SecurityGroup::class, 'sbtsgid', 'sgid');
     }
 
     public function stbptypebp()

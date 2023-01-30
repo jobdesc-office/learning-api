@@ -13,6 +13,7 @@ class DailyActivity extends DefaultModel
     protected $primaryKey = "dayactid";
 
     protected $fillable = [
+        "dayactcd",
         "dayactcatid",
         "dayactcustid",
         "dayactdate",
@@ -32,6 +33,7 @@ class DailyActivity extends DefaultModel
     protected $alias = [
         "dayactcatid" => "Category Id",
         "dayacttypeid" => "Type Id",
+        "dayactcd" => "Code",
         "dayactcustid" => "BpCustomer Id",
         "dayacttypevalue" => "Subject",
         "dayactdate" => "Date",
@@ -91,6 +93,11 @@ class DailyActivity extends DefaultModel
     public function refprospect()
     {
         return $this->belongsTo(Prospect::class, 'dayactrefid', 'prospectid');
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'scherefid', 'dayactid');
     }
 
     const CREATED_AT = "createddate";

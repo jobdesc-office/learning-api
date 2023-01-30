@@ -16,6 +16,7 @@ class CreateVtcustomfieldTable extends Migration
         pgsql()->create('vtcustomfield', function (Blueprint $table) {
             $table->id('custfid');
             $table->bigInteger('custfbpid');
+            $table->bigInteger('custfsgid')->nullable();
             $table->string('custfname', 255);
             $table->bigInteger('custftypeid');
             $table->bigInteger('custfreftypeid');

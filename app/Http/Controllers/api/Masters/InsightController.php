@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api\masters;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\DspByOwner;
 use App\Models\Masters\DspByStatusDt;
+use App\Models\Masters\Fcvsactual;
+use App\Services\Masters\AgingReportService;
 use App\Services\Masters\DspByBpService;
 use App\Services\Masters\DspByCustLabelDtService;
 use App\Services\Masters\DspByCustLabelService;
@@ -14,6 +16,7 @@ use App\Services\Masters\DspByStageDtService;
 use App\Services\Masters\DspByStageService;
 use App\Services\Masters\DspByStatusDtService;
 use App\Services\Masters\DspByStatusService;
+use App\Services\Masters\FcvsactualService;
 use Illuminate\Http\Request;
 
 class InsightController extends Controller
@@ -72,5 +75,23 @@ class InsightController extends Controller
          $item = intval($item);
          return $item;
       }));
+   }
+
+   public function fcvsactualYears(Request $request, FcvsactualService $service)
+   {
+      return response()->json($service->getReportYearByBp()->map(function ($item) {
+         $item = intval($item);
+         return $item;
+      }));
+   }
+
+   public function agingreport(Request $request, AgingReportService $service)
+   {
+      return response()->json($service->getAll(collect($request->all())->filter()));
+   }
+
+   public function fcvsactual(Request $request, FcvsactualService $service)
+   {
+      return response()->json($service->getAll(collect($request->all())->filter()));
    }
 }

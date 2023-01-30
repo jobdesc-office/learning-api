@@ -53,7 +53,7 @@ class ChatServices extends Chat
         $result = [];
         $receiverids = json_decode($request->get('chatreceiverids'));
         foreach ($receiverids as $receiverid) {
-            $query = $query->where('createdby', auth()->user()->userid)->where('chatreceiverid', $receiverid)->where('chatreadat', null);
+            $query = $query->where('createdby', $receiverid)->where('chatreceiverid', auth()->user()->userid)->where('chatreadat', null);
             $result[$receiverid] = $query->count();
         }
         return $result;
@@ -82,7 +82,25 @@ class ChatServices extends Chat
         return $this->newQuery()->with([
             'chatbp',
             'chatreceiver',
+            'chatreftype',
             'createdbyuser',
+            'refactivity' => function ($query) {
+                $query->with([
+                    'dayactuser',
+                    'dayactreftype',
+                    'dayactcust',
+                    'dayactcat' => function ($query) {
+                        $query->select('sbtid', 'sbttypename');
+                    },
+                ]);
+            },
+            'refprospect' => function ($query) {
+                $query->with([
+                    'prospectcust' => function ($query) {
+                        $query->with(['sbccstm']);
+                    },
+                ]);
+            },
             'chatfile' => function ($query) {
                 $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
                     ->whereHas('transtype', function ($query) {

@@ -26,6 +26,24 @@ class ProspectAssignServices extends ProspectAssign
         return $query->get();
     }
 
+    public function store(Collection $data)
+    {
+        $prospectassign = $this->fill($data->toArray());
+        return $prospectassign->save();
+    }
+
+    public function updateData($id, Collection $data)
+    {
+        $prospectassign = $this->find($id);
+        return $prospectassign->update($data->toArray());
+    }
+
+    public function deleteData($id)
+    {
+        $prospectassign = $this->find($id);
+        return $prospectassign->delete();
+    }
+
     public function getQuery()
     {
         return $this->newQuery()->with([

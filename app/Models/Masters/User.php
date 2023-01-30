@@ -20,6 +20,7 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
 
     protected $fillable = [
         'username',
+        'usercode',
         'userpassword',
         'userfullname',
         'useremail',
@@ -27,6 +28,7 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
         'userdeviceid',
         'userfcmtoken',
         'usersocketid',
+        'userappaccess',
         'createdby',
         'updatedby',
         'isactive',
@@ -34,10 +36,12 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
 
     protected $alias = [
         'username' => "Username",
+        'usercode' => "User Code",
         'userpassword' => "Password",
         'userfullname' => "Fullname",
         'useremail' => "Email",
         'userphone' => "Phone",
+        'userappaccess' => "User App Access",
         'userdeviceid' => "Device Id",
         'userfcmtoken' => "Firebase Cloud Messaging Token",
         'usersocketid' => "Socket Client Id",
@@ -90,5 +94,10 @@ class User extends DefaultModel implements AuthenticatableContract, Authorizable
     public function userupdatedby()
     {
         return $this->belongsTo(User::class, "updatedby", "userid");
+    }
+
+    public function appaccess()
+    {
+        return $this->belongsTo(Types::class, "userappaccess", "typeid");
     }
 }

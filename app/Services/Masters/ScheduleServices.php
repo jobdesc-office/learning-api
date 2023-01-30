@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Schedule;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -59,7 +60,10 @@ class ScheduleServices extends Schedule
                 },
                 'schereftype' => function ($query) {
                     $query->select('typeid', 'typename');
-                }
+                },
+                'schedulecustomfield' => function ($query) {
+                    $query->with(['customfield']);
+                },
             ])
             ->findOrFail($id);
     }
@@ -101,7 +105,10 @@ class ScheduleServices extends Schedule
                 },
                 'schetoward' => function ($query) {
                     $query->select('userid', 'userfullname');
-                }
+                },
+                'schedulecustomfield' => function ($query) {
+                    $query->with(['customfield']);
+                },
             ]);
 
         $scheduleWhere = $whereArr->only($this->getFillable());
@@ -133,7 +140,31 @@ class ScheduleServices extends Schedule
             $endDate = $whereArr->get('enddate');
             $query = $query->where(DB::raw("get_schedule_from_dates(schestartdate, scheenddate, '$startDate', '$endDate')"), "true");
         }
+
+        $userids = kacungs()->map(function ($item) {
+            return $item->userid;
+        })->toArray();
+
+        if ($userids) {
+            $query = $query->orWhereIn('schetowardid', $userids);
+        }
+
         return $query;
+    }
+
+    public function generateCode()
+    {
+        $code = "SCH";
+
+        $date = Carbon::now();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+
+        $count = Schedule::count() + 1;
+        $increment = str_pad($count, 4, "0", STR_PAD_LEFT);
+
+        return "$code$year$month$day$increment";
     }
 
     public function filterScheduleWeb(Collection $whereArr, $id)

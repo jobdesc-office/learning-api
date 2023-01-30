@@ -4,11 +4,15 @@ class DBTypes
 {
 
     const admin = 2;
-    const webb = 8;
-    const appss = 9;
+    const spv = 3;
+    const marsa = 4;
+    const webb = 9;
+    const appss = 10;
 
     const role = 'role';
     const roleSuperAdmin = 'rolespa';
+    const roleSPVMarketing = 'rolespv';
+    const roleMarketingSales = 'rolems';
     const roleEmployee = 'roleemp';
 
     const web = 'Web';
@@ -18,6 +22,10 @@ class DBTypes
 
     const menuType = 'mntp';
     const schedulePermission = 'scp';
+
+    const webAccess = 'webacc';
+    const mobileAccess = 'mobileacc';
+    const allAccess = 'allacc';
 
     const schedule = 'schedule';
     const scheduleEvent = "scheevent";
@@ -46,6 +54,7 @@ class DBTypes
     const customizeFieldRefType = 'cfref';
     const prospectCustomField = 'proscfrf';
     const activityCustomField = 'actcfrf';
+    const scheduleCustomField = 'schecfrf';
 
     const contactType = "contact";
     const scheRefType = "scheref";
@@ -67,4 +76,8 @@ class DBTypes
     const webinfotype = 'web';
 
     const dayactreftype = 'actreft';
+    const dayactreftypeprospect = 'prospect';
+
+    const chatreftype = 'chtreft';
+    const appaccess = 'appaccess';
 }

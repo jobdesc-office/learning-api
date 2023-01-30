@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\ContactPersonServices;
 use App\Services\Masters\SubdistrictServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use TextMessages;
 
 class ContactPersonController extends Controller
 {
@@ -89,8 +91,9 @@ class ContactPersonController extends Controller
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function store(Request $req, ContactPersonServices $modelContactPersonServices)
+    public function store(Request $req, ContactPersonServices $modelContactPersonServices, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddContact(1)) return response()->json(['message' => "Contact " . \TextMessages::limitReached], 400);
         $insert = collect($req->only($modelContactPersonServices->getFillable()))->filter()
             ->except('updatedby');
 

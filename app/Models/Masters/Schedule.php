@@ -14,6 +14,7 @@ class Schedule extends DefaultModel
 
     protected $fillable = [
         "schenm",
+        "schecd",
         "schestartdate",
         "scheenddate",
         "schestarttime",
@@ -39,6 +40,7 @@ class Schedule extends DefaultModel
 
     protected $alias = [
         "schenm" => "Name",
+        "schecd" => "Code",
         "schestartdate" => "Start Date",
         "scheenddate" => "End Date",
         "schestarttime" => "Start Time",
@@ -101,5 +103,10 @@ class Schedule extends DefaultModel
     public function scheupdatedby()
     {
         return $this->belongsTo(User::class, "updatedby", "userid");
+    }
+
+    public function schedulecustomfield()
+    {
+        return $this->hasMany(ScheduleCF::class, "scheduleid", "scheid");
     }
 }

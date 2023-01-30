@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Collections\Files\FileUploader;
 use App\Models\Masters\BpCustomer;
+use App\Services\Masters\BpQuotaServices;
 use DBTypes;
 use Exception;
 
@@ -88,8 +89,9 @@ class CustomerController extends Controller
         return response()->json($businesspartners);
     }
 
-    public function storeCustomer(Request $req, Customer $modelCustomer, BpCustomerService $modelBpCustomerService)
+    public function storeCustomer(Request $req, Customer $modelCustomer, BpCustomerService $modelBpCustomerService, BpQuotaServices $quotaServices)
     {
+        if (!$quotaServices->isAllowAddCustomer(1)) return response()->json(['message' => "Customer " . \TextMessages::limitReached], 400);
         $isregistered = $req->get('isregistered');
         $stat = $req->get('sbccstmstatusid');
         switch ($stat) {

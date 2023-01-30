@@ -29,6 +29,8 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -39,6 +41,8 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
@@ -62,24 +66,32 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -96,24 +108,32 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -124,6 +144,8 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
@@ -137,10 +159,52 @@ class PermissionSeeder extends Seeder
          'children' => [
             [
                'menutypeid' => \DBTypes::webb,
+               'menunm' => 'Security Group',
+               'menuicon' => 'Icons.group',
+               'menuroute' => '/masters/securitygroup',
+               'createdby' => 1,
+
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::webb,
                'menunm' => 'Types',
                'menuicon' => 'Icons.category',
                'createdby' => 1,
-
+               'menuroute' => '/-type',
                'children' => [
                   [
                      'menutypeid' => \DBTypes::webb,
@@ -154,24 +218,32 @@ class PermissionSeeder extends Seeder
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -188,24 +260,32 @@ class PermissionSeeder extends Seeder
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -216,6 +296,8 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -225,7 +307,7 @@ class PermissionSeeder extends Seeder
                'menunm' => 'Regions',
                'menuicon' => 'FontAwesomeIcons.earthAmerica',
                'createdby' => 1,
-
+               'menuroute' => '/-region',
                'children' => [
                   [
                      'menutypeid' => \DBTypes::webb,
@@ -239,24 +321,32 @@ class PermissionSeeder extends Seeder
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -267,30 +357,37 @@ class PermissionSeeder extends Seeder
                      'menuicon' => 'FontAwesomeIcons.earthAmerica',
                      'menuroute' => '/masters/province',
                      'createdby' => 1,
-
                      'features' => [
                         [
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -307,24 +404,32 @@ class PermissionSeeder extends Seeder
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -341,24 +446,32 @@ class PermissionSeeder extends Seeder
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -375,24 +488,32 @@ class PermissionSeeder extends Seeder
                            'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                         [
                            'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                            'permission' => [
                               ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                            ],
                         ],
                      ],
@@ -403,6 +524,8 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -419,12 +542,16 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -441,12 +568,16 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -463,12 +594,16 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -485,24 +620,32 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -513,6 +656,8 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
@@ -536,24 +681,32 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -570,24 +723,32 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                   [
                      'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -604,6 +765,42 @@ class PermissionSeeder extends Seeder
                      'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                      'permission' => [
                         ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::webb,
+               'menunm' => 'Chat',
+               'menuicon' => 'Icons.chat',
+               'menuroute' => '/ventes/chat',
+               'createdby' => 1,
+
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                      ],
                   ],
                ],
@@ -614,12 +811,14 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
       ],
 
-      // Mobiles Menus 
+      // Mobile Menus 
 
       [
          'menutypeid' => \DBTypes::appss,
@@ -630,6 +829,8 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ]
          ],
@@ -643,6 +844,8 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ]
          ],
@@ -656,12 +859,16 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
@@ -675,24 +882,32 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
@@ -706,24 +921,71 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+               ],
+            ],
+         ],
+      ],
+      [
+         'menutypeid' => \DBTypes::appss,
+         'menunm' => 'attendance',
+         'createdby' => 1,
+         'features' => [
+            [
+               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+               'permission' => [
+                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+               ],
+            ],
+            [
+               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+               'permission' => [
+                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+               ],
+            ],
+            [
+               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+               'permission' => [
+                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+               ],
+            ],
+            [
+               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+               'permission' => [
+                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
@@ -737,142 +999,215 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
             [
                'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
                ],
             ],
          ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect activity',
-         'createdby' => 1,
-         'features' => [
+         'children' =>  [
             [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect activity',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect competitor',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect competitor',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect product',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect product',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect contacts',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
             [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-         ],
-      ],
-      [
-         'menutypeid' => \DBTypes::appss,
-         'menunm' => 'prospect contacts',
-         'createdby' => 1,
-         'features' => [
-            [
-               'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
-               ],
-            ],
-            [
-               'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
-               'permission' => [
-                  ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'prospect assign',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Create', 'featslug' => 'create', 'featuredesc' => \TextMessages::create, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Update', 'featslug' => 'update', 'featuredesc' => \TextMessages::update, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
+                  [
+                     'feattitle' => 'Delete', 'featslug' => 'delete', 'featuredesc' => \TextMessages::delete, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ],
                ],
             ],
          ],
@@ -886,8 +1221,170 @@ class PermissionSeeder extends Seeder
                'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
                'permission' => [
                   ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                  ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
                ],
             ]
+         ],
+         'children' => [
+            [
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'insight 1',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ]
+               ],
+               'children' => [
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total value',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total won',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total lost',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'value by customer',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'value by stage',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'value by customer label',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::spv, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+               ],
+            ],
+            [
+               'menutypeid' => \DBTypes::appss,
+               'menunm' => 'insight 2',
+               'createdby' => 1,
+               'features' => [
+                  [
+                     'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                     'permission' => [
+                        ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                        ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                     ],
+                  ]
+               ],
+               'children' => [
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total value',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total won',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+                  [
+                     'menutypeid' => \DBTypes::appss,
+                     'menunm' => 'total lost',
+                     'createdby' => 1,
+                     'features' => [
+                        [
+                           'feattitle' => 'Viewable', 'featslug' => 'viewable', 'featuredesc' => \TextMessages::viewable, 'createdby' => 1,
+                           'permission' => [
+                              ['roleid' => \DBTypes::admin, 'hasaccess' => true, 'createdby' => 1],
+                              ['roleid' => \DBTypes::marsa, 'hasaccess' => true, 'createdby' => 1],
+                           ],
+                        ]
+                     ],
+                  ],
+               ],
+            ],
          ],
       ],
    ];

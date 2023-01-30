@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Services\Masters\OptionServices;
+use App\Models\Masters\ProspectCustomField;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OptionController extends Controller
 {
@@ -35,11 +37,19 @@ class OptionController extends Controller
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
-    public function destroy($id, OptionServices $modelOptionServices)
+    public function destroy($id, OptionServices $modelOptionServices, ProspectCustomField $prospectCustomField)
     {
-        $row = $modelOptionServices->findOrFail($id);
-        $row->delete();
+        DB::beginTransaction();
+        try {
+            $prospectCustomField->where('optchoosed', $id)->delete();
+            $row = $modelOptionServices->findOrFail($id);
+            $row->delete();
 
-        return response()->json(['message' => \TextMessages::successDelete]);
+            DB::commit();
+            return response()->json(['message' => \TextMessages::successDelete]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['message' => \TextMessages::failedDelete, 'error' => $th]);
+        }
     }
 }

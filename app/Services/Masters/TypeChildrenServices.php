@@ -35,7 +35,6 @@ class TypeChildrenServices extends Types
                 'typecreatedby',
                 'typeupdatedby',
             ])
-            ->where('typemasterid', null)
             ->where(function ($query) use ($searchValue) {
                 $query->where(DB::raw('TRIM(LOWER(typename))'), 'like', "%$searchValue%");
             })

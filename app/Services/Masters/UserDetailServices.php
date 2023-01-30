@@ -22,6 +22,7 @@ class UserDetailServices extends UserDetail
                 'businesspartner' => function ($query) {
                     $query->select('bpid', 'bpname', 'bpphone', 'bpemail')->with(['bptype']);
                 },
+                'securitygroup',
             ])
             ->where(function ($query) use ($searchValue) {
                 $query->where(DB::raw('TRIM(LOWER(userfullname))'), 'like', "%$searchValue%");

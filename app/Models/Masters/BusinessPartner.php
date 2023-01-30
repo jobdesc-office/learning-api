@@ -20,7 +20,8 @@ class BusinessPartner extends DefaultModel
         "bppicname",
         "bpemail",
         "bpphone",
-        "bpactanytime",
+        "bpdayactanytime",
+        "bpprosactanytime",
         "createdby",
         "updatedby",
         'isactive'
@@ -29,7 +30,8 @@ class BusinessPartner extends DefaultModel
     protected $alias = [
         'bpname' => "Name",
         "bptypeid" => "Type Id",
-        "bpactanytime" => "Allow Activity Anytime",
+        "bpdayactanytime" => "Allow Daily Activity Anytime",
+        "bpprosactanytime" => "Allow Prospect Activity Anytime",
         'bppicname' => "Picture",
         "bpemail" => "Email",
         "bpphone" => "phone",
@@ -51,6 +53,11 @@ class BusinessPartner extends DefaultModel
     public function userdetail()
     {
         return $this->hasMany(UserDetail::class, 'userdtbpid', 'bpid');
+    }
+
+    public function quota()
+    {
+        return $this->hasOne(BpQuota::class, 'sbqbpid', 'bpid');
     }
 
     public function bpcreatedby()

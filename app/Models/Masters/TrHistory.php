@@ -23,6 +23,31 @@ class TrHistory extends DefaultModel
     ];
 
 
+    public function historyrefprospectfile()
+    {
+        return $this->belongsTo(Files::class, 'historyrefid', 'fileid');
+    }
+
+    public function historyrefprospectcustomfield()
+    {
+        return $this->belongsTo(ProspectCustomField::class, 'historyrefid', 'prospectcfid');
+    }
+
+    public function historyrefprospectactivity()
+    {
+        return $this->belongsTo(DailyActivity::class, 'historyrefid', 'dayactid');
+    }
+
+    public function historyrefprospectassign()
+    {
+        return $this->belongsTo(ProspectAssign::class, 'historyrefid', 'prospectassignid');
+    }
+
+    public function historyrefprospectproduct()
+    {
+        return $this->belongsTo(ProspectProduct::class, 'historyrefid', 'prosproductid');
+    }
+
     public function historytbhistory()
     {
         return $this->belongsTo(TbHistory::class, 'historytbhistoryid', 'tbhistoryid');

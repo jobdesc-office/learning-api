@@ -16,6 +16,8 @@ class TypeSeeder extends Seeder
             'typename' => 'Role',
             'children' => [
                 ['typecd' => \DBTypes::roleSuperAdmin, 'typename' => 'Super Admin', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::roleSPVMarketing, 'typename' => 'SPV Marketing', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::roleMarketingSales, 'typename' => 'Marketing Sales', 'createdby' => 1, 'updatedby' => 1],
             ],
             'createdby' => 1,
             'updatedby' => 1,
@@ -149,6 +151,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typecd' => \DBTypes::activityCustomField, 'typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
                 ['typecd' => \DBTypes::prospectCustomField, 'typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typecd' => \DBTypes::scheduleCustomField, 'typename' => 'Schedule', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
@@ -186,6 +189,7 @@ class TypeSeeder extends Seeder
             'children' => [
                 ['typename' => 'Prospect Activity', 'createdby' => 1, 'updatedby' => 1],
                 ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         [
@@ -228,7 +232,24 @@ class TypeSeeder extends Seeder
             'typecd' => \DBTypes::dayactreftype,
             'typename' => 'Daily Activity Reference Type',
             'children' => [
+                ['typename' => 'Prospect', 'typecd' => \DBTypes::dayactreftypeprospect, 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::chatreftype,
+            'typename' => 'Chat Reference Type',
+            'children' => [
                 ['typename' => 'Prospect', 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Daily Activity', 'createdby' => 1, 'updatedby' => 1],
+            ]
+        ],
+        [
+            'typecd' => \DBTypes::appaccess,
+            'typename' => 'App Access Type',
+            'children' => [
+                ['typename' => 'Only Web', 'typecd' => \DBTypes::webAccess, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Only Mobile', 'typecd' => \DBTypes::mobileAccess, 'createdby' => 1, 'updatedby' => 1],
+                ['typename' => 'Web And Mobile', 'typecd' => \DBTypes::allAccess, 'createdby' => 1, 'updatedby' => 1],
             ]
         ],
         // [

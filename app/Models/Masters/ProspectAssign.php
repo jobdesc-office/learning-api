@@ -13,7 +13,6 @@ class ProspectAssign extends DefaultModel
         "prospectid",
         "prospectassignto",
         "prospectreportto",
-        "prospectid",
         "prospectassigndesc",
         "createdby",
         "updatedby",

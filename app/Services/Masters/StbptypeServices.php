@@ -4,6 +4,7 @@ namespace App\Services\Masters;
 
 use App\Models\Masters\Stbptype;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StBpTypeServices extends Stbptype
 {
@@ -12,13 +13,39 @@ class StBpTypeServices extends Stbptype
         return $this->getQuery()->findOrFail($id);
     }
 
-    public function byCode($code, $bpid)
+    public function byCode($code, $bpid, $search = "")
     {
+        $search = Str::lower($search);
         return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
             $query->where('typecd', $code);
         })
             ->where('sbtbpid', $bpid)
             ->where('isactive', true)
+            ->where(DB::raw('TRIM(LOWER(sbttypename))'), 'like', "%$search%")
+            ->orderBy('sbttypename', 'asc')->get();
+    }
+
+    public function byCodeInSecurity($code, $bpid, $search = "")
+    {
+        $search = Str::lower($search);
+        return $this->getQuery()->whereHas('stbptypetype', function ($query) use ($code) {
+            $query->where('typecd', $code);
+        })
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('sbtbpid', $bpid);
+                    $query->whereNull('sbtsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('sbtbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('sbtsgid', $ids);
+                });
+            })
+            ->where('isactive', true)
+            ->where(DB::raw('TRIM(LOWER(sbttypename))'), 'like', "%$search%")
             ->orderBy('sbttypename', 'asc')->get();
     }
 
@@ -81,7 +108,8 @@ class StBpTypeServices extends Stbptype
             },
             'stbptypebp' => function ($query) {
                 $query->select('bpid', 'bpname');
-            }
+            },
+            'securitygroup',
         ]);
     }
 }

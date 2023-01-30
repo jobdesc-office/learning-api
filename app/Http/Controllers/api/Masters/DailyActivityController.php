@@ -3,19 +3,25 @@
 namespace App\Http\Controllers\api\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\BusinessPartner;
 use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Prospect;
+use App\Models\Masters\SecurityGroup;
+use App\Models\Masters\UserDetail;
 use App\Services\Masters\ActivityCustomFieldService;
 use App\Services\Masters\AttendanceServices;
 use App\Services\Masters\BpCustomerService;
+use App\Services\Masters\BpQuotaServices;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\CustomFieldService;
 use App\Services\Masters\DailyActivityServices;
 use App\Services\Masters\FilesServices;
 use App\Services\Masters\TrHistoryServices;
+use Carbon\Carbon;
 use DB;
 use DBTypes;
 use Illuminate\Http\Request;
+use PDO;
 
 class DailyActivityController extends Controller
 {
@@ -27,9 +33,20 @@ class DailyActivityController extends Controller
         return response()->json($activity);
     }
 
-    public function store(Request $req, DailyActivityServices $activityServices)
+    public function store(Request $req, DailyActivityServices $activityServices, BpQuotaServices $quotaServices)
     {
         if ($req->has('activities')) {
+            // $activities = json_decode($req->getContent())->activities;
+            $activities = json_decode($req->get('activities'));
+
+            $type = find_type()->in([DBTypes::dayactreftypeprospect])->get(DBTypes::dayactreftypeprospect)->getId();
+            $typeid = $activities[0]->dayactreftypeid;
+            if ($typeid == null) {
+                if (!$quotaServices->isAllowAddDailyActivity(count($activities))) return response()->json(['message' => "Daily Activity " . \TextMessages::limitReached], 400);
+            } else if ($typeid == $type) {
+                if (!$quotaServices->isAllowAddProspectActivity(count($activities))) return response()->json(['message' => "Prospect Activity " . \TextMessages::limitReached], 400);
+            }
+
             $activityServices->addAll(collect($req->all())->filter());
         }
         return response()->json(['message' => \TextMessages::successCreate]);
@@ -76,6 +93,15 @@ class DailyActivityController extends Controller
         return response()->json(['message' => \TextMessages::successDelete], 400);
     }
 
+    public function groups(Request $request)
+    {
+        $groups = kacungs();
+        $groups = kacungs()->map(function ($item) {
+            return collect($item->toArray())->merge(['user' => $item->user])->toArray();
+        });
+        return response()->json($groups);
+    }
+
     public function dailyActivityCount(Request $req, DailyActivityServices $activityServices)
     {
         $activitys = $activityServices->countAll(collect($req->all()));
@@ -93,24 +119,25 @@ class DailyActivityController extends Controller
         return response()->json($customField);
     }
 
-    public function allow($id, BpCustomerService $bpCustomerService, AttendanceServices $attendanceServices)
+    public function dailyActivityAllow($id, BusinessPartner $bpService, AttendanceServices $attendanceServices)
     {
         $result = false;
-        $bpCustomer = $bpCustomerService->getAll(collect(['sbcbpid' => $id]));
-        if ($bpCustomer != null && count($bpCustomer) > 0) {
-            if ($bpCustomer->first()->sbcactivitytype->sbttypename == "Anytime") {
-                $result =  true;
-            } else {
-                $attendance = $attendanceServices->getMyAttendanceToday();
-                if ($attendance != null) {
-                    $result =  true;
-                } else {
-                    $result =  false;
-                }
-            }
-        } else {
-            $result =  true;
-        }
+        $bp = $bpService->find($id);
+        if ($bp->bpdayactanytime) $result = true;
+
+        $attendance = $attendanceServices->getAll(collect(['attuserid' => auth()->user()->userid, 'attdate' => Carbon::now()->format("Y-m-d")]));
+        if ($attendance->isNotEmpty()) $result = true;
+        return response()->json(['allow' => $result]);
+    }
+
+    public function prospectActivityAllow($id, BusinessPartner $bpService, AttendanceServices $attendanceServices)
+    {
+        $result = false;
+        $bp = $bpService->find($id);
+        if ($bp->bpprosactanytime) $result = true;
+
+        $attendance = $attendanceServices->getAll(collect(['attuserid' => auth()->user()->userid, 'attdate' => Carbon::now()->format("Y-m-d")]));
+        if ($attendance->isNotEmpty()) $result = true;
         return response()->json(['allow' => $result]);
     }
 }

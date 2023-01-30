@@ -11,6 +11,8 @@ use App\Services\Masters\TypeServices;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Services\Masters\UserDetailServices;
 use App\Services\AuthServices;
+use App\Services\Masters\BpQuotaServices;
+use DBTypes;
 use Hamcrest\Type\IsInteger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -51,7 +53,7 @@ class UsersController extends Controller
     public function reset($id, UserServices $userServices)
     {
         $userServices->findOrFail($id)->update([
-            'userdeviceid' => '',
+            'userdeviceid' => null,
         ]);
 
         return response()->json(['message' => \TextMessages::successEdit]);
@@ -61,6 +63,13 @@ class UsersController extends Controller
     {
         $searchValue = trim(strtolower($req->get('searchValue')));
         $selects = $userServices->select($searchValue);
+
+        return response()->json($selects);
+    }
+
+    public function samebp($id, UserServices $userServices)
+    {
+        $selects = $userServices->samebp($id);
 
         return response()->json($selects);
     }
@@ -200,19 +209,35 @@ class UsersController extends Controller
         return response()->json($users);
     }
 
-    public function store(Request $req, User $modelUser, UserDetail $modelUserDetail)
+    public function store(Request $req, User $modelUser, UserDetail $modelUserDetail, BpQuotaServices $quotaServices)
     {
         $insert = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))->except('updatedby');
+
+        $types = find_type()->in([DBTypes::webAccess, DBTypes::allAccess, DBTypes::mobileAccess]);
+        $accessid = $insert->get('userappaccess');
+        switch ($accessid) {
+            case $types->get(DBTypes::webAccess)->getId():
+                if (!$quotaServices->isAllowAddWebUser(1)) return response()->json(['message' => "Web user " . \TextMessages::limitReached], 400);
+                break;
+            case $types->get(DBTypes::mobileAccess)->getId():
+                if (!$quotaServices->isAllowAddMobileUser(1)) return response()->json(['message' => "Mobile user " . \TextMessages::limitReached], 400);
+                break;
+            case $types->get(DBTypes::allAccess)->getId():
+                if (!$quotaServices->isAllowAddUser(1)) return response()->json(['message' => "User " . \TextMessages::limitReached], 400);
+                break;
+        }
 
         $resultUser = $modelUser->create($insert->toArray());
 
         $roles = json_decode($req->get('roles'));
+        $securitygroups = json_decode($req->get('securitygroups'));
         if ($roles != null) {
-            foreach ($roles as $role) {
+            foreach ($roles as $key => $role) {
                 $modelUserDetail->create([
                     'userid' => $resultUser->userid,
                     'userdttypeid' => $role->roleid,
                     'userdtbpid' => $role->bpid,
+                    'userdtsgid' => $securitygroups[$key]->sgid,
                 ]);
             }
         }
@@ -235,13 +260,15 @@ class UsersController extends Controller
             $row->update($update->toArray());
 
             $roles = json_decode($req->get('roles'));
+            $securitygroups = json_decode($req->get('securitygroups'));
             if ($roles) {
                 $modelUserDetail->where('userid', $id)->delete();
-                foreach ($roles as $role) {
+                foreach ($roles as $key => $role) {
                     $modelUserDetail->create([
                         'userid' => $id,
                         'userdttypeid' => $role->roleid,
                         'userdtbpid' => $role->bpid,
+                        'userdtsgid' => $securitygroups[$key]->sgid,
                     ]);
                 }
             }
@@ -251,13 +278,15 @@ class UsersController extends Controller
             $row->update($update->toArray());
 
             $roles = json_decode($req->get('roles'));
+            $securitygroups = json_decode($req->get('securitygroups'));
             if ($roles) {
                 $modelUserDetail->where('userid', $id)->delete();
-                foreach ($roles as $role) {
+                foreach ($roles as $key => $role) {
                     $modelUserDetail->create([
                         'userid' => $id,
                         'userdttypeid' => $role->roleid,
                         'userdtbpid' => $role->bpid,
+                        'userdtsgid' => $securitygroups[$key]->sgid,
                     ]);
                 }
             }

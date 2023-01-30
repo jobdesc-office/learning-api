@@ -17,6 +17,7 @@ class CreateMsuserdtTable extends Migration
             $table->id('userdtid');
             $table->bigInteger('userid');
             $table->bigInteger('userdttypeid');
+            $table->bigInteger('userdtsgid')->nullable();
             $table->bigInteger('userdtbpid');
             $table->string('userdtbranchnm', 100)->nullable();
             $table->string('userdtreferalcode', 50)->nullable();

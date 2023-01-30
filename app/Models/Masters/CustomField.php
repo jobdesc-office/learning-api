@@ -11,6 +11,7 @@ class CustomField extends DefaultModel
 
     protected $fillable = [
         "custfbpid",
+        "custfsgid",
         "custfname",
         "custftypeid",
         "alldata",
@@ -26,6 +27,7 @@ class CustomField extends DefaultModel
         "custfbpid" => "",
         "custfname" => "",
         "custftypeid" => "",
+        "custfsgid" => "Security Group Id",
         "alldata" => "",
         "onlythisdata" => "",
         "thisdataid" => "",
@@ -41,6 +43,11 @@ class CustomField extends DefaultModel
     public function businesspartner()
     {
         return $this->belongsTo(BusinessPartner::class, 'custfbpid', 'bpid');
+    }
+
+    public function securitygroup()
+    {
+        return $this->belongsTo(SecurityGroup::class, 'custfsgid', 'sgid');
     }
 
     public function selectoption()

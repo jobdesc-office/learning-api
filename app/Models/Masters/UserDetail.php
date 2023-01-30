@@ -21,6 +21,7 @@ class UserDetail extends DefaultModel
         "userdtbranchnm",
         "userdtreferalcode",
         "userdtrelationid",
+        "userdtsgid",
         "createdby",
         "updatedby",
         "isactive"
@@ -33,6 +34,7 @@ class UserDetail extends DefaultModel
         "userdtbranchnm" => "Branch Name",
         "userdtreferalcode" => "Referal Code",
         "userdtrelationid" => "Relation Id",
+        "userdtsgid" => "Security Group Id"
     ];
 
     const CREATED_AT = "createddate";
@@ -56,5 +58,10 @@ class UserDetail extends DefaultModel
     public function businesspartner()
     {
         return $this->belongsTo(BusinessPartner::class, 'userdtbpid', 'bpid');
+    }
+
+    public function securitygroup()
+    {
+        return $this->belongsTo(SecurityGroup::class, 'userdtsgid', 'sgid');
     }
 }

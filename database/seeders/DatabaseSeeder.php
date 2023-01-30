@@ -10,6 +10,7 @@ use App\Models\Masters\DailyActivity;
 use App\Models\Masters\Schedule;
 use App\Models\Masters\UserDetail;
 use App\Models\Masters\Prospect;
+use App\Models\Masters\SecurityGroup;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 
@@ -28,8 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call([TypeSeeder::class]);
         $this->call([PermissionSeeder::class]);
         BusinessPartner::factory(\FactoryCount::bpCount)->createQuietly();
-        UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
-        $this->call([BpTypeSeeder::class]);
+        // UserDetail::factory(\FactoryCount::userDetailCount)->createQuietly();
+        $this->call([UserSeeder::class, BpTypeSeeder::class, SecurityGroupSeeder::class]);
         Attendance::factory(\FactoryCount::attendanceCount)->createQuietly();
 
         Schedule::factory(\FactoryCount::scheduleCount)->createQuietly();

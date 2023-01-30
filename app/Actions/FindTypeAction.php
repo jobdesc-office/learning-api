@@ -50,7 +50,6 @@ class FindTypeAction
     public function childrenByCode($code)
     {
         $codes = is_array($code) ? $code : func_get_args();
-        Log::info($codes);
         $types = (new StBpTypeServices)->whereParent($codes);
         return new TypeFinder('typecd', $code, $types->toArray());
     }

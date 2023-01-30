@@ -58,10 +58,10 @@ class ProspectServices extends Prospect
             ->get();
     }
 
-    public function selectref($searchValue)
+    public function selectref($id, $searchValue)
     {
         return $this->getQueery()->select('*')
-            ->where('prospectrefid', null)
+            ->where('prospectbpid', $id)
             ->where(function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%$searchValue%");
@@ -73,17 +73,34 @@ class ProspectServices extends Prospect
     public function getAll(Collection $whereArr)
     {
         $query = $this->getQuery();
+        $userids = null;
+
+        if (!$whereArr->has('userchildid')) {
+            $users = kacungs($whereArr->get('groupid'));
+            $userids = $users->map(function ($item) {
+                return $item->userdtid;
+            })->toArray();
+        }
 
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
-            $query = $query->where(function ($query) use ($prospectwhere, $whereArr) {
+            $query = $query->where(function ($query) use ($prospectwhere, $whereArr, $userids) {
                 $query = $query->where($prospectwhere->toArray());
+                if ($userids) {
+                    $query = $query->orWhereIn('prospectowner', $userids);
+                }
 
                 $prospectAssignModel = new ProspectAssign;
                 $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
                 if ($prospectassignwhere->isNotEmpty()) {
-                    $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                        $query->orWhere($prospectassignwhere->toArray());
+                    $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere, $userids) {
+                        $query->where(function ($query) use ($prospectassignwhere, $userids) {
+                            $query->orWhere($prospectassignwhere->toArray());
+                            if ($userids) {
+                                $query = $query->orWhereIn('prospectassignto', $userids);
+                                $query = $query->orWhereIn('prospectreportto', $userids);
+                            }
+                        });
                     });
                 }
             });
@@ -93,24 +110,37 @@ class ProspectServices extends Prospect
         if ($whereArr->has("search")) {
             $query = $query->where(DB::raw('TRIM(LOWER(prospectname))'), 'like', "%" . Str::lower($whereArr->get('search')) . "%");
         }
-
+        // dd($query->toSql());
         return $query->get();
     }
 
     public function countAll(Collection $whereArr)
     {
         $query = $this->getQuery();
+        $users = kacungs($whereArr->get('groupid'));
+        $userids = $users->map(function ($item) {
+            return $item->userdtid;
+        })->toArray();
 
         $prospectwhere = $whereArr->only($this->fillable);
         if ($prospectwhere->isNotEmpty()) {
             $query = $query->where($prospectwhere->toArray());
+            if ($userids) {
+                $query = $query->orWhereIn('prospectowner', $userids);
+            }
         }
 
         $prospectAssignModel = new ProspectAssign;
         $prospectassignwhere = $whereArr->only($prospectAssignModel->getFillable());
         if ($prospectassignwhere->isNotEmpty()) {
-            $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere) {
-                $query->orWhere($prospectassignwhere->toArray());
+            $query = $query->orWhereHas('prospectassigns', function ($query) use ($prospectassignwhere, $userids) {
+                $query->where(function ($query) use ($prospectassignwhere, $userids) {
+                    $query->orWhere($prospectassignwhere->toArray());
+                    if ($userids) {
+                        $query = $query->orWhereIn('prospectassignto', $userids);
+                        $query = $query->orWhereIn('prospectreportto', $userids);
+                    }
+                });
             });
         }
 
@@ -177,7 +207,7 @@ class ProspectServices extends Prospect
             'prospectcust' => function ($query) {
                 $query->with(['sbccstm']);
             },
-        ]);
+        ])->orderBy('createddate', 'desc');
     }
 
     public function getQueery()

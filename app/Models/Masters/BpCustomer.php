@@ -23,6 +23,7 @@ class BpCustomer extends DefaultModel
         'isactive'
     ];
 
+
     protected $alias = [
         'sbcbpid' => "Business Partner Id",
         'sbccstmid' => "Id",

@@ -15,7 +15,19 @@ class CustomFieldService extends CustomField
     public function selectWithBp($order, $orderby, $search, $bpid)
     {
         return $this->getQuery()
-            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
@@ -28,7 +40,19 @@ class CustomFieldService extends CustomField
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
-            ->where('custfbpid', $id)
+            ->where(function ($query) use ($id) {
+                $query->where(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->whereHas('custfreftype', function ($query) {
                 $query->where('typecd', DBTypes::prospectCustomField);
             })
@@ -41,9 +65,46 @@ class CustomFieldService extends CustomField
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
-            ->where('custfbpid', $id)
+            ->where(function ($query) use ($id) {
+                $query->where(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->whereHas('custfreftype', function ($query) {
                 $query->where('typecd', DBTypes::activityCustomField);
+            })
+            ->orderBy($order, $orderby);
+    }
+
+    public function datatablesschedulebp($id, $order, $orderby, $search)
+    {
+        return $this->getQuery()
+            ->where(function ($query) use ($search, $order) {
+                $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
+            })
+            ->where(function ($query) use ($id) {
+                $query->where(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($id) {
+                    $query->where('custfbpid', $id);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
+            ->whereHas('custfreftype', function ($query) {
+                $query->where('typecd', DBTypes::scheduleCustomField);
             })
             ->orderBy($order, $orderby);
     }
@@ -62,7 +123,19 @@ class CustomFieldService extends CustomField
     public function selectBp($searchValue,  $bpid)
     {
         return $this->getQuery()->select('*')
-            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->where(function ($query) use ($searchValue) {
                 $searchValue = trim(strtolower($searchValue));
                 $query->where(DB::raw('TRIM(LOWER(custfname))'), 'like', "%$searchValue%");
@@ -77,7 +150,19 @@ class CustomFieldService extends CustomField
             ->whereHas('custfreftype', function ($query) {
                 $query->where('typecd', DBTypes::prospectCustomField);
             })
-            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->orderBy('custfname', 'asc')
             ->get();
     }
@@ -85,7 +170,19 @@ class CustomFieldService extends CustomField
     public function byBp($bpid)
     {
         return $this->getQuery()
-            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->get();
     }
 
@@ -94,7 +191,19 @@ class CustomFieldService extends CustomField
 
         $prospectrefid = find_type()->in(DBTypes::prospectCustomField)->get(DBTypes::prospectCustomField)->getId();
         return $this->getQuery()
-            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->where('custfreftypeid', $prospectrefid)
             ->get();
     }
@@ -104,8 +213,42 @@ class CustomFieldService extends CustomField
 
         $activityrefid = find_type()->in(DBTypes::activityCustomField)->get(DBTypes::activityCustomField)->getId();
         return $this->getQuery()
-            ->where('custfbpid', $bpid)
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
             ->where('custfreftypeid', $activityrefid)
+            ->get();
+    }
+
+    public function scheduleByBp($bpid)
+    {
+
+        $schedulerefid = find_type()->in(DBTypes::scheduleCustomField)->get(DBTypes::scheduleCustomField)->getId();
+        return $this->getQuery()
+            ->where(function ($query) use ($bpid) {
+                $query->where(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $query->whereNull('custfsgid');
+                });
+                $query->orWhere(function ($query) use ($bpid) {
+                    $query->where('custfbpid', $bpid);
+                    $ids = parents()->map(function ($item) {
+                        return $item->sgid;
+                    })->toArray();
+                    $query->whereIn('custfsgid', $ids);
+                });
+            })
+            ->where('custfreftypeid', $schedulerefid)
             ->get();
     }
 
@@ -131,6 +274,7 @@ class CustomFieldService extends CustomField
                 'businesspartner' => function ($query) {
                     $query->select('bpid', 'bpname');
                 },
+                'securitygroup',
                 'custftype' => function ($query) {
                     $query->select('typeid', 'typename');
                 },
@@ -153,6 +297,7 @@ class CustomFieldService extends CustomField
         return $this->newQuery()->with([
             'custfcreatedby',
             'custfupdatedby',
+            'securitygroup',
             'businesspartner' => function ($query) {
                 $query->select('bpid', 'bpname');
             },
@@ -168,7 +313,9 @@ class CustomFieldService extends CustomField
                 ]);
             },
             'refactivity',
-            'selectoption',
+            'selectoption' => function ($query) {
+                $query->orderBy('optvalue', 'asc');
+            },
         ]);
     }
 }

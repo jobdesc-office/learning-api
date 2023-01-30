@@ -14,7 +14,7 @@ class Chat extends DefaultModel
     protected $fillable = [
         "chatbpid",
         "chatmessage",
-        "chatrefname",
+        "chatreftypeid",
         "chatrefid",
         "chatreadat",
         "chatreceiverid",
@@ -23,9 +23,18 @@ class Chat extends DefaultModel
         'isactive',
     ];
 
+    protected $casts = [
+        'chatreftypeid' => 'integer',
+    ];
+
     public function chatbp()
     {
         return $this->belongsTo(BusinessPartner::class, "chatbpid", "bpid");
+    }
+
+    public function chatreftype()
+    {
+        return $this->belongsTo(Types::class, "chatreftypeid", "typeid");
     }
 
     public function chatfile()
@@ -41,6 +50,16 @@ class Chat extends DefaultModel
     public function createdbyuser()
     {
         return $this->belongsTo(User::class, 'createdby', "userid");
+    }
+
+    public function refprospect()
+    {
+        return $this->belongsTo(Prospect::class, 'chatrefid', 'prospectid');
+    }
+
+    public function refactivity()
+    {
+        return $this->belongsTo(DailyActivity::class, 'chatrefid', 'dayactid');
     }
 
     const CREATED_AT = "createddate";

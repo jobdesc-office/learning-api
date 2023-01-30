@@ -137,6 +137,19 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->delete('{id}', 'TypesController@destroy');
         });
 
+        $router->group(['prefix' => 'securitygroup'], function () use ($router) {
+            $router->get('by-codemaster', 'SecurityGroupController@byCodeMaster');
+            $router->get('by-code', 'SecurityGroupController@byCode');
+            $router->get('by-code-add', 'SecurityGroupController@byCodeAdd');
+            $router->get('all', 'SecurityGroupController@all');
+            $router->post('datatables', 'SecurityGroupController@datatables');
+
+            $router->post('', 'SecurityGroupController@store');
+            $router->get('{id}', 'SecurityGroupController@show');
+            $router->put('{id}', 'SecurityGroupController@update');
+            $router->delete('{id}', 'SecurityGroupController@destroy');
+        });
+
         $router->group(['prefix' => 'typeschildren'], function () use ($router) {
             $router->post('datatables', 'TypesChildrenController@datatablesNonFilter');
             $router->post('datatables/{id}', 'TypesChildrenController@datatables');
@@ -156,6 +169,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('session', 'UsersController@session');
             $router->get('select', 'UsersController@select');
             $router->get('select/{id}', 'UsersController@selectwithsamebp');
+            $router->get('samebp/{id}', 'UsersController@samebp');
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');
@@ -213,6 +227,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('{id}', 'AttendanceController@show');
         });
 
+        $router->group(['prefix' => 'chat'], function () use ($router) {
+            $router->get('conversation', 'ChatController@getConversation');
+            $router->get('users-unread-messages', 'ChatController@usersUnreadMessages');
+            $router->get('read', 'ChatController@readMessage');
+            $router->get('', 'ChatController@all');
+            $router->post('', 'ChatController@store');
+            $router->get('{id}', 'ChatController@show');
+            $router->put('{id}', 'ChatController@update');
+            $router->delete('{id}', 'ChatController@destroy');
+        });
+
         $router->group(['prefix' => 'competitor'], function () use ($router) {
             $router->get('select', 'CompetitorController@select');
             $router->post('deleteimages', 'CompetitorController@deleteImages');
@@ -233,11 +258,19 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->post('datatables', 'CustomFieldController@datatables');
             $router->post('datatables/{id}', 'CustomFieldController@datatablesbp');
             $router->post('datatablesdayactbp/{id}', 'CustomFieldController@datatablesdayactbp');
+            $router->post('datatablesschedulebp/{id}', 'CustomFieldController@datatablesschedulebp');
 
             $router->post('', 'CustomFieldController@store');
             $router->get('{id}', 'CustomFieldController@show');
             $router->put('{id}', 'CustomFieldController@update');
             $router->delete('{id}', 'CustomFieldController@destroy');
+        });
+
+        $router->group(['prefix' => 'option'], function () use ($router) {
+            $router->post('', 'OptionController@store');
+            $router->get('{id}', 'OptionController@show');
+            $router->put('{id}', 'OptionController@update');
+            $router->delete('{id}', 'OptionController@destroy');
         });
 
         $router->group(['prefix' => 'file'], function () use ($router) {
@@ -295,9 +328,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'prospect'], function () use ($router) {
+            $router->get('histories', 'ProspectController@prospectHistories');
             $router->get('lastid', 'ProspectController@lastid');
             $router->get('select', 'ProspectController@select');
-            $router->get('selectref', 'ProspectController@selectref');
+            $router->get('selectref/{id}', 'ProspectController@selectref');
             $router->get('', 'ProspectController@all');
             $router->post('datatables/{id}', 'ProspectController@datatablesbp');
             $router->post('datatables', 'ProspectController@datatables');
@@ -452,6 +486,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->group(['prefix' => 'schedule'], function () use ($router) {
                 $router->get('count', 'ScheduleController@scheduleCount');
+                $router->get('customfield/{id}', 'ScheduleController@scheduleCustomField');
                 $router->get('', 'ScheduleController@all');
                 $router->post('', 'ScheduleController@store');
                 $router->get('{id}', 'ScheduleController@show');
@@ -516,6 +551,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('count', 'ProspectController@prospectCount');
                 $router->get('histories', 'ProspectController@prospectHistories');
                 $router->get('customfield/{id}', 'ProspectController@prospectcustomfield');
+                $router->get('groups', 'ProspectController@groups');
                 $router->get('report/{id}/years', 'ProspectController@reportYear');
                 $router->get('', 'ProspectController@all');
                 $router->post('', 'ProspectController@store');
@@ -525,6 +561,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'insight'], function () use ($router) {
+                $router->get('agingreport', 'InsightController@agingreport');
+                $router->get('fcvsactual', 'InsightController@fcvsactual');
+                $router->get('fcvsactualyears', 'InsightController@fcvsactualYears');
                 $router->get('bycust/{id}', 'InsightController@reportByCust');
                 $router->get('bystage/{id}', 'InsightController@reportByStage');
                 $router->get('bystatus/{id}', 'InsightController@reportByStatus');
@@ -613,9 +652,11 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             });
 
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
-                $router->get('allow/{id}', 'DailyActivityController@allow');
                 $router->get('count', 'DailyActivityController@dailyActivityCount');
                 $router->get('histories', 'DailyActivityController@dailyActivityHistories');
+                $router->get('allow/daily/{id}', 'DailyActivityController@dailyActivityAllow');
+                $router->get('allow/prospect/{id}', 'DailyActivityController@prospectActivityAllow');
+                $router->get('groups', 'ProspectController@groups');
                 $router->get('customfield/{id}', 'DailyActivityController@dailyActivityCustomField');
                 $router->get('', 'DailyActivityController@all');
                 $router->post('', 'DailyActivityController@store');
@@ -632,6 +673,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('{id}', 'MenusController@show');
                 $router->put('{id}', 'MenusController@update');
                 $router->delete('{id}', 'MenusController@destroy');
+            });
+
+            $router->group(['prefix' => 'permissions'], function () use ($router) {
+                $router->get('{id}', 'PermissionController@permissions');
             });
         });
     });

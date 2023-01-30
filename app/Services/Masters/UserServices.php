@@ -29,6 +29,15 @@ class UserServices extends User
             ->get();
     }
 
+    public function samebp($id)
+    {
+        return $this->newQuery()->select('*')
+            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+            ->where('msuserdt.userdtbpid', $id)
+            ->orderBy('userfullname', 'asc')
+            ->get();
+    }
+
     public function select($searchValue)
     {
         return $this->newQuery()->select('*')
@@ -63,6 +72,7 @@ class UserServices extends User
 
                 $query->select('userid', 'userdttypeid', 'userdtbpid')
                     ->with([
+                        "securitygroup",
                         'usertype' => function ($query) {
                             $query->select('typeid', 'typename', 'typecd');
                         },
@@ -97,6 +107,7 @@ class UserServices extends User
             'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
+                    "securitygroup",
                     'usertype' => function ($query) {
                         $query->select('typeid', 'typename');
                     },
@@ -104,7 +115,7 @@ class UserServices extends User
                         $query->select('bpid', 'bpname', 'bpemail', 'bpphone')->with(['bptype']);
                     }
                 ]);
-            }
+            },
         ])
             ->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
@@ -119,6 +130,7 @@ class UserServices extends User
             'userupdatedby',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
+                    "securitygroup",
                     'usertype' => function ($query) {
                         $query->select('typeid', 'typename');
                     },
@@ -143,8 +155,10 @@ class UserServices extends User
         return $this->newQuery()->with([
             'usercreatedby',
             'userupdatedby',
+            'appaccess',
             'userdetails' => function ($query) {
                 $query->select('*')->with([
+                    "securitygroup",
                     'usertype' => function ($query) {
                         $query->select('typeid', 'typename');
                     },

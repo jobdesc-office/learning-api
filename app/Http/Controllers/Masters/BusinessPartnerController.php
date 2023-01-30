@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\BpQuota;
 use App\Models\Masters\BusinessPartner;
 use App\Services\Masters\BusinessPartnerServices;
 use App\Models\Masters\Stbptype;
+use App\Services\Masters\BpQuotaServices;
 use Database\Seeders\BpTypeSeeder;
 use Illuminate\Http\Request;
 use DBTypes;
@@ -92,12 +94,28 @@ class BusinessPartnerController extends Controller
         $bp = $modelBusinessPartner->create($insert->toArray());
         $seeder = new BpTypeSeeder;
         $seeder->run($bp->bpid);
+        $bpQuota = new BpQuota;
+        $insertBpQuota = collect($req->only($bpQuota->getFillable()))->filter()->except('updatedby');
+        $bpQuota->fill($insertBpQuota->toArray());
+        $bpQuota->fill(['sbqbpid' => $bp->bpid]);
+        $bpQuota->save();
         return response()->json(['message' => \TextMessages::successCreate]);
     }
 
-    public function show($id, BusinessPartnerServices $businessPartnerService)
+    public function show($id, BusinessPartnerServices $businessPartnerService, BpQuotaServices $bpQuotaServices)
     {
         $row = $businessPartnerService->find($id);
+        if ($row->quota) {
+            $quota = $bpQuotaServices->getQuotaDetail();
+            $row->quota->sbqwebuserquotaused = $quota->sbqwebuserquotaused;
+            $row->quota->sbqmobuserquotaused = $quota->sbqmobuserquotaused;
+            $row->quota->sbqcstmquotaused = $quota->sbqcstmquotaused;
+            $row->quota->sbqcntcquotaused = $quota->sbqcntcquotaused;
+            $row->quota->sbqprodquotaused = $quota->sbqprodquotaused;
+            $row->quota->sbqprosquotaused = $quota->sbqprosquotaused;
+            $row->quota->sbqdayactquotaused = $quota->sbqdayactquotaused;
+            $row->quota->sbqprosactquotaused = $quota->sbqprosactquotaused;
+        }
         return response()->json($row);
     }
 
@@ -109,6 +127,13 @@ class BusinessPartnerController extends Controller
             ->except('createdby');
         $row->update($update->toArray());
 
+        $bpQuota = new BpQuota;
+        $bpQuota->where('sbqbpid', $id)->delete();
+        $insertBpQuota = collect($req->only($bpQuota->getFillable()))->filter()->except('updatedby');
+        $bpQuota->fill($insertBpQuota->toArray());
+        $bpQuota->fill(['sbqbpid' => $id]);
+        $bpQuota->save();
+
         return response()->json(['message' => \TextMessages::successEdit]);
     }
 
@@ -118,5 +143,23 @@ class BusinessPartnerController extends Controller
         $row->delete();
 
         return response()->json(['message' => \TextMessages::successDelete]);
+    }
+
+    public function setdayact($id, Request $req, BusinessPartner $modelBusinessPartner)
+    {
+        $row = $modelBusinessPartner->findOrFail($id);
+        $row->update([
+            'bpdayactanytime' => $req->get('allow'),
+        ]);
+        return response()->json(['message' => \TextMessages::successEdit]);
+    }
+
+    public function setprosact($id, Request $req, BusinessPartner $modelBusinessPartner)
+    {
+        $row = $modelBusinessPartner->findOrFail($id);
+        $row->update([
+            'bpprosactanytime' => $req->get('allow'),
+        ]);
+        return response()->json(['message' => \TextMessages::successEdit]);
     }
 }

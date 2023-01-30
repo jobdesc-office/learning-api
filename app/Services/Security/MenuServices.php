@@ -76,6 +76,73 @@ class MenuServices extends Menu
             ])->where('masterid', null)->where('menutypeid', 9)->get();
     }
 
+    public function permissionApp($roleid)
+    {
+        return $this->newQuery()->orderBy('menunm', 'asc')
+            ->with([
+                'menucreatedby',
+                'menuupdatedby',
+                'menutype' => function ($query) use ($roleid) {
+                    $query->select('typeid', 'typename');
+                },
+                'features' => function ($query) use ($roleid) {
+                    $query->select('*')->with([
+                        'permissions' => function ($query) use ($roleid) {
+                            $query->select('*')->where('roleid', $roleid);
+                        },
+                    ]);
+                },
+                'children' => function ($query) use ($roleid) {
+                    $query->select('*')->orderBy('menunm', 'asc')->with([
+                        'menucreatedby',
+                        'menuupdatedby',
+                        'menutype' => function ($query) use ($roleid) {
+                            $query->select('typeid', 'typename');
+                        },
+                        'features' => function ($query) use ($roleid) {
+                            $query->select('*')->with([
+                                'permissions' => function ($query) use ($roleid) {
+                                    $query->select('*')->where('roleid', $roleid);
+                                },
+                            ]);
+                        },
+                        'children' => function ($query) use ($roleid) {
+                            $query->select('*')->orderBy('menunm', 'asc')->with([
+                                'menucreatedby',
+                                'menuupdatedby',
+                                'menutype' => function ($query) use ($roleid) {
+                                    $query->select('typeid', 'typename');
+                                },
+                                'features' => function ($query) use ($roleid) {
+                                    $query->select('*')->with([
+                                        'permissions' => function ($query) use ($roleid) {
+                                            $query->select('*')->where('roleid', $roleid);
+                                        },
+                                    ]);
+                                },
+                                'children' => function ($query) use ($roleid) {
+                                    $query->select('*')->orderBy('menunm', 'asc')->with([
+                                        'menucreatedby',
+                                        'menuupdatedby',
+                                        'menutype' => function ($query) use ($roleid) {
+                                            $query->select('typeid', 'typename');
+                                        },
+                                        'features' => function ($query) use ($roleid) {
+                                            $query->select('*')->with([
+                                                'permissions' => function ($query) use ($roleid) {
+                                                    $query->select('*')->where('roleid', $roleid);
+                                                },
+                                            ]);
+                                        }
+                                    ]);
+                                }
+                            ]);
+                        }
+                    ]);
+                }
+            ])->where('masterid', null)->where('menutypeid', 10)->get();
+    }
+
     public function select($searchValue)
     {
         return $this->newQuery()->select('menuid', 'menunm', 'masterid')

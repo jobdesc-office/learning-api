@@ -16,6 +16,7 @@ class CreateStbptypeTable extends Migration
         pgsql()->create('stbptype', function (Blueprint $table) {
             $table->id('sbtid');
             $table->bigInteger('sbtbpid');
+            $table->bigInteger('sbtsgid')->nullable();
             $table->text('sbtname')->nullable();
             $table->integer('sbtseq')->nullable();
             $table->bigInteger('sbttypemasterid');
