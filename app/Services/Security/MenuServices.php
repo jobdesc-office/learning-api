@@ -73,7 +73,7 @@ class MenuServices extends Menu
                         }
                     ]);
                 }
-            ])->where('masterid', null)->where('menutypeid', 8)->get();
+            ])->where('masterid', null)->where('menutypeid', 9)->get();
     }
 
     public function select($searchValue)
