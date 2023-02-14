@@ -169,7 +169,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('session', 'UsersController@session');
             $router->get('select', 'UsersController@select');
             $router->get('select/{id}', 'UsersController@selectwithsamebp');
-            $router->get('samebp/{id}', 'UsersController@samebp');
+            $router->get('samebp/{id}', 'UserDetailServices@samebp');
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');
@@ -423,6 +423,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'permission'], function () use ($router) {
             $router->post('role', 'PermissionController@role');
             $router->get('menu', 'PermissionController@menu');
+            $router->post('update', 'PermissionController@updateParentAccess');
 
             $router->post('', 'PermissionController@store');
             $router->get('{id}', 'PermissionController@show');

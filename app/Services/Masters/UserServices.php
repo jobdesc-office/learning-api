@@ -29,14 +29,14 @@ class UserServices extends User
             ->get();
     }
 
-    public function samebp($id)
-    {
-        return $this->newQuery()->select('*')
-            ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
-            ->where('msuserdt.userdtbpid', $id)
-            ->orderBy('userfullname', 'asc')
-            ->get();
-    }
+    // public function samebp($id)
+    // {
+    //     return $this->newQuery()->select('*')
+    //         ->join('msuserdt', 'msuser.userid', '=', 'msuserdt.userid')
+    //         ->where('msuserdt.userdtbpid', $id)
+    //         ->orderBy('userfullname', 'asc')
+    //         ->get();
+    // }
 
     public function select($searchValue)
     {

@@ -67,9 +67,9 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
-    public function samebp($id, UserServices $userServices)
+    public function samebp($id, UserDetail $userDtServices)
     {
-        $selects = $userServices->samebp($id);
+        $selects = $userDtServices->samebp($id);
 
         return response()->json($selects);
     }
@@ -148,6 +148,10 @@ class UsersController extends Controller
 
     public function datatablesbp($id, Request $req, UserServices $userServices)
     {
+        // $all = $req->all();
+        // foreach ($all as $a) {
+        //     echo $a;
+        // }
         $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');
@@ -214,6 +218,7 @@ class UsersController extends Controller
         $insert = collect($req->only($modelUser->getFillable()))->filter()->put('userpassword', Hash::make($req->get('userpassword')))->except('updatedby');
 
         $types = find_type()->in([DBTypes::webAccess, DBTypes::allAccess, DBTypes::mobileAccess]);
+
         $accessid = $insert->get('userappaccess');
         switch ($accessid) {
             case $types->get(DBTypes::webAccess)->getId():
@@ -231,13 +236,14 @@ class UsersController extends Controller
 
         $roles = json_decode($req->get('roles'));
         $securitygroups = json_decode($req->get('securitygroups'));
+
         if ($roles != null) {
             foreach ($roles as $key => $role) {
                 $modelUserDetail->create([
                     'userid' => $resultUser->userid,
                     'userdttypeid' => $role->roleid,
                     'userdtbpid' => $role->bpid,
-                    'userdtsgid' => $securitygroups[$key]->sgid,
+                    'userdtsgid' => (int)$securitygroups[0]->sgid,
                 ]);
             }
         }

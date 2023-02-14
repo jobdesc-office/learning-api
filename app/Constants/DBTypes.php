@@ -3,6 +3,7 @@
 class DBTypes
 {
 
+
     const admin = 2;
     const spv = 3;
     const marsa = 4;
@@ -26,6 +27,7 @@ class DBTypes
     const webAccess = 'webacc';
     const mobileAccess = 'mobileacc';
     const allAccess = 'allacc';
+    const accesses = ['webacc', 'mobileacc', 'allacc'];
 
     const schedule = 'schedule';
     const scheduleEvent = "scheevent";

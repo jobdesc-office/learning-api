@@ -20,4 +20,9 @@ class PermissionServices extends Permission
             ->where('roleid', $roleid)
             ->get();
     }
+
+    public function updateAccsess($menufeatid, $roleid)
+    {
+        return $this->newQuery()->select('*')->where('roleid', $roleid)->where('permisfeatid', $menufeatid)->get();
+    }
 }

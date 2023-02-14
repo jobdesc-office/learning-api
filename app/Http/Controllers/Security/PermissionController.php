@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
 use App\Models\Security\Feature;
+use App\Models\Security\Menu;
 use App\Models\Security\Permission;
 use App\Services\Security\PermissionServices;
 use App\Services\Security\MenuServices;
@@ -31,6 +32,18 @@ class PermissionController extends Controller
         $roles = $menuServices->allMenuParent($roleid);
 
         return response()->json($roles);
+    }
+
+    public function updateParentAccess(Request $req, PermissionServices $modelMenu)
+    {
+        $parent = $modelMenu->where('roleid', $req->get('roleid'))->where('permisfeatid', $req->get('parentId'))->update(['hasaccess' => $req->get('hasaccess'), 'updatedby' => $req->get('updatedby')]);
+        $childId = $req->get('childId');
+        foreach ($childId as $c) {
+            $child = $modelMenu->where('roleid', $req->get('roleid'))->where('permisfeatid', $c)->update(['hasaccess' => $req->get('hasaccess'), 'updatedby' => $req->get('updatedby')]);
+        }
+        $data = [$parent, $child];
+
+        return response($data);
     }
 
     public function permission(Request $req, MenuServices $menuServices)
@@ -83,10 +96,22 @@ class PermissionController extends Controller
      *
      * @return JsonResponse
      * */
-    public function update($id, Request $req, PermissionServices $modelMenu)
+    public function update(int $id, Request $req, PermissionServices $modelMenu)
     {
-        $row = $modelMenu->findOrFail($id);
-        $row->update(['hasaccess' => $req->get('hasaccess'), 'updatedby' => $req->get('updatedby')]);
+        $row = $modelMenu->where('roleid', $req->get('roleid'))->where('permisid', $id)->update(['hasaccess' => $req->get('hasaccess'), 'updatedby' => $req->get('updatedby')]);
+        $childId = $req->get('childId');
+        $childValue = [];
+        $index = 0;
+        foreach ($childId as $c) {
+            $childValue[$index] = $modelMenu->select('hasaccess')->where('roleid', $req->get('roleid'))->where('permisfeatid', $c)->get();
+            $index++;
+        }
+
+        if (($childValue[0][0]['hasaccess'] == 1 && $childValue[1][0]['hasaccess'] == 1) || (($childValue[0][0]['hasaccess'] == 0 && $childValue[1][0]['hasaccess'] == 1) || ($childValue[0][0]['hasaccess'] == 1 && $childValue[1][0]['hasaccess'] == 0))) {
+            $parent = $modelMenu->where('roleid', $req->get('roleid'))->where('permisfeatid', $req->get('parentId'))->update(['hasaccess' => 'true', 'updatedby' => $req->get('updatedby')]);
+        } else if ($childValue[0][0]['hasaccess'] == 0 && $childValue[1][0]['hasaccess'] == 0) {
+            $parent = $modelMenu->where('roleid', $req->get('roleid'))->where('permisfeatid', $req->get('parentId'))->update(['hasaccess' => 'false', 'updatedby' => $req->get('updatedby')]);
+        }
 
         return response()->json(['message' => \TextMessages::successEdit]);
     }

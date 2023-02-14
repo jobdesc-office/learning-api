@@ -67,4 +67,13 @@ class UserDetailServices extends UserDetail
                 'user',
             ]);
     }
+
+    public function samebp($id)
+    {
+        return $this->newQuery()->select('*')
+            ->join('msuser', 'msuserdt.userid', '=', 'msuser.userid')
+            ->where('msuserdt.userdtbpid', $id)
+            ->orderBy('msuser.userfullname', 'asc')
+            ->get();
+    }
 }

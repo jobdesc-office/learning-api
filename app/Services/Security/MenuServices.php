@@ -16,7 +16,7 @@ class MenuServices extends Menu
                 'menucreatedby',
                 'menuupdatedby',
                 'menutype' => function ($query) use ($roleid) {
-                    $query->select('typeid', 'typename');
+                    $query->select('typeid', 'typename', 'typecd');
                 },
                 'features' => function ($query) use ($roleid) {
                     $query->select('*')->with([
@@ -30,7 +30,7 @@ class MenuServices extends Menu
                         'menucreatedby',
                         'menuupdatedby',
                         'menutype' => function ($query) use ($roleid) {
-                            $query->select('typeid', 'typename');
+                            $query->select('typeid', 'typename', 'typecd');
                         },
                         'features' => function ($query) use ($roleid) {
                             $query->select('*')->with([
@@ -44,7 +44,7 @@ class MenuServices extends Menu
                                 'menucreatedby',
                                 'menuupdatedby',
                                 'menutype' => function ($query) use ($roleid) {
-                                    $query->select('typeid', 'typename');
+                                    $query->select('typeid', 'typename', 'typecd');
                                 },
                                 'features' => function ($query) use ($roleid) {
                                     $query->select('*')->with([
@@ -58,7 +58,7 @@ class MenuServices extends Menu
                                         'menucreatedby',
                                         'menuupdatedby',
                                         'menutype' => function ($query) use ($roleid) {
-                                            $query->select('typeid', 'typename');
+                                            $query->select('typeid', 'typename', 'typecd');
                                         },
                                         'features' => function ($query) use ($roleid) {
                                             $query->select('*')->with([
@@ -171,8 +171,7 @@ class MenuServices extends Menu
                 'menutype' => function ($query) {
                     $query->select('typeid', 'typename');
                 }
-            ])->where('menutypeid', '!=', 9)
-            ->where(function ($query) use ($search, $order) {
+            ])->where(function ($query) use ($search, $order) {
                 $query->where(DB::raw("TRIM(LOWER($order))"), 'like', "%$search%");
             })
             ->orderBy($order, $orderby);
@@ -187,7 +186,7 @@ class MenuServices extends Menu
                 'menucreatedby',
                 'menuupdatedby',
                 'menutype' => function ($query) {
-                    $query->select('typeid', 'typename');
+                    $query->select('typeid', 'typename', 'typecd');
                 }, 'children' => function ($query) use ($roleid) {
                     $query->orderBy('menunm', 'asc')->with([
                         'features' => function ($query) use ($roleid) {
@@ -207,7 +206,7 @@ class MenuServices extends Menu
             ->get();
     }
 
-    public function find($id)
+    public function find($menuid)
     {
         return $this->newQuery()->select('*')
             ->with([
@@ -220,6 +219,31 @@ class MenuServices extends Menu
                     $query->select('typeid', 'typename');
                 }
             ])
-            ->findOrFail($id);
+            ->findOrFail($menuid);
+        // return $this->newQuery()
+        //     ->where('menuid', $menuid)
+        //     ->orderBy('menunm', 'asc')
+        //     ->with([
+        //         'menucreatedby',
+        //         'menuupdatedby',
+        //         'menutype' => function ($query) {
+        //             $query->select('typeid', 'typename', 'typecd');
+        //         }, 'children' => function ($query) use ($roleid) {
+        //             $query->orderBy('menunm', 'asc')->with([
+        //                 'features' => function ($query) use ($roleid) {
+        //                     $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+        //                 },
+        //                 'children' => function ($query) use ($roleid) {
+        //                     $query->orderBy('menunm', 'asc')->with(['features' => function ($query) use ($roleid) {
+        //                         $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+        //                     }]);
+        //                 }
+        //             ]);
+        //         },
+        //         'features' => function ($query) use ($roleid) {
+        //             $query->join('mspermission', 'msfeature.featid', '=', 'mspermission.permisfeatid')->where('roleid', $roleid)->orderBy('mspermission.permisfeatid', 'asc');
+        //         }
+        //     ])
+        //     ->get();
     }
 }
