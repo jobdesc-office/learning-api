@@ -140,4 +140,9 @@ class Prospect extends DefaultModel
     {
         return $this->hasMany(Files::class, 'refid', 'prospectid');
     }
+
+    public function prospectcompetitor()
+    {
+        return $this->hasMany(Competitor::class, 'comptrefid', 'prospectid');
+    }
 }

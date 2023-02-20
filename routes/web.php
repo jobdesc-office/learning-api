@@ -246,7 +246,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
             $router->post('', 'CompetitorController@store');
             $router->get('{id}', 'CompetitorController@show');
-            $router->put('{id}', 'CompetitorController@update');
+            $router->post('{id}', 'CompetitorController@update');
             $router->delete('{id}', 'CompetitorController@destroy');
         });
 

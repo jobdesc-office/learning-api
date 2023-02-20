@@ -25,10 +25,6 @@ class MenusController extends Controller
 
     public function datatables(Request $req, MenuServices $menuServices)
     {
-        $all = $req->all();
-        foreach ($all as $a) {
-            echo $a;
-        }
         $search = trim(strtolower($req->get('search[value]')));
         $order = $req->get('order[0][column]');
         $orderby = $req->get('order[0][dir]');

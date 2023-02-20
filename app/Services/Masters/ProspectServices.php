@@ -259,6 +259,14 @@ class ProspectServices extends Prospect
                         $query->where('typecd', DBTypes::prospectfile);
                     });
             },
+            'prospectcompetitor' => function ($query) {
+                $query->select('*')->with(['comptpics' => function ($query) {
+                    $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
+                        ->whereHas('transtype', function ($query) {
+                            $query->where('typecd', DBTypes::comppics);
+                        });
+                },]);
+            },
         ]);
     }
 }

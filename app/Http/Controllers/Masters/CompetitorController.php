@@ -179,6 +179,7 @@ class CompetitorController extends Controller
             DB::commit();
             return response()->json(['message' => \TextMessages::successCreate]);
         } catch (Exception $th) {
+            return response()->json(['message' => 'Rollback masbro', 'error' => $th]);
             DB::rollBack();
         }
     }
@@ -191,7 +192,6 @@ class CompetitorController extends Controller
 
     public function update($id, Request $req, CompetitorServices $modelCompetitorServices, Files $modelFiles)
     {
-
         DB::beginTransaction();
         try {
             $row = $modelCompetitorServices->findOrFail($id);
@@ -226,7 +226,7 @@ class CompetitorController extends Controller
             return response()->json(['message' => \TextMessages::successEdit]);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json(['message' => $th]);
+            return response()->json(['message' => "rollback mas bro", 'error' => $th]);
         }
     }
 

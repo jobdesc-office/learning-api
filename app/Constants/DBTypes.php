@@ -16,8 +16,8 @@ class DBTypes
     const roleMarketingSales = 'rolems';
     const roleEmployee = 'roleemp';
 
-    const web = 'Web';
-    const apps = 'Apps';
+    const web = 'web';
+    const apps = 'apps';
 
     const businessPartner = 'bptype';
 

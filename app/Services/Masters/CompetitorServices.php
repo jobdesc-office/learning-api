@@ -109,11 +109,14 @@ class CompetitorServices extends Competitor
    public function getQuery()
    {
       return $this->newQuery()->with([
-         'comptcreatedby',
+         'comptcreatedby' => function ($query) {
+            $query->select('userid', 'username', 'userfullname');
+         },
          'comptupdatedby',
          'comptreftype' => function ($query) {
             $query->select('typeid', 'typename');
          },
+         // 'comptrefid',
          'comptbp',
          'comptpics' => function ($query) {
             $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
