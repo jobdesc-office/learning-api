@@ -31,6 +31,7 @@ class Attendance extends DefaultModel
       "attlatout",
       "attlongout",
       "attaddressout",
+      "atttype",
       "createdby",
       "updatedby",
       'isactive',

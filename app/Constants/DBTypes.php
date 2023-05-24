@@ -82,4 +82,8 @@ class DBTypes
 
     const chatreftype = 'chtreft';
     const appaccess = 'appaccess';
+
+    const attendanceType = 'att';
+    const attendancePresent = 'attpresent';
+    const attendanceOutOfLocation = 'attool';
 }
