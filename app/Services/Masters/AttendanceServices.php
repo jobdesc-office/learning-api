@@ -31,6 +31,36 @@ class AttendanceServices extends Attendance
       return $query->get();
    }
 
+   public function getMonth($month, $start, $end)
+   {
+      $query = $this->getQuery()->whereMonth('attdate', $month);
+      $groupedData = $query->get()->groupBy('attuserid');
+      $finalData = $groupedData->map(function ($group) {
+         return [
+            'attuserid' => $group->first()->attuserid,
+            'attusername' => $group->first()->attuser->userfullname,
+            'attdate' => $group->pluck('attdate')->unique()->toArray(),
+         ];
+      });
+
+      $totalCount = $query->count();
+
+      $offset = $start == 0 ? $start : max($start + 1, 0);
+      $limit = $start == 0 ? min($end - $start + 1, $totalCount - $offset) : min($end - $start, $totalCount - $offset);
+
+      $data = $query->offset($offset)->limit($limit)->get();
+      $isLastPage = ($offset + $limit) >= $totalCount;
+      $totalPage = $groupedData->count();
+
+      $response = [
+         'data' => $finalData,
+         'isLastPage' => $isLastPage,
+         'totalPages' => $totalPage,
+      ];
+
+      return  $response;
+   }
+
    public function datatables($id, $startDate, $endDate, $userid)
    {
       $query = $this->getQuery()->select('*')

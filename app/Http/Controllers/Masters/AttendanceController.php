@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\masters;
 
 use App\Http\Controllers\Controller;
+use App\Models\Masters\Attendance;
 use App\Services\Masters\AttendanceServices;
 use App\Services\Masters\UserServices;
 use App\Services\Masters\ActivityCFServices;
@@ -19,6 +20,13 @@ class AttendanceController extends Controller
         $selects = $userServices->select($searchValue, $id);
 
         return response()->json($selects);
+    }
+
+    public function calendar(Request $req, AttendanceServices $attendanceServices)
+    {
+        $data = $attendanceServices->getMonth($req->get('month'), $req->get('start'), $req->get('end'));
+
+        return response()->json($data);
     }
 
     public function datatables($id, Request $req, AttendanceServices $userServices)

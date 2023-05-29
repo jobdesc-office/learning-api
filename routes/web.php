@@ -169,7 +169,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('session', 'UsersController@session');
             $router->get('select', 'UsersController@select');
             $router->get('select/{id}', 'UsersController@selectwithsamebp');
-            $router->get('samebp/{id}', 'UserDetailServices@samebp');
+            $router->get('samebp/{id}', 'UsersController@samebp');
             $router->get('all', 'UsersController@allUser');
             $router->get('prospect-owner', 'UsersController@prospectowner');
             $router->post('datatables', 'UsersController@datatables');
@@ -215,6 +215,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('bp/{id}', 'DailyActivityController@all');
             $router->get('select/{id}', 'DailyActivityController@select');
             $router->post('datatables/{id}', 'DailyActivityController@datatables');
+            $router->post('calendar', 'DailyActivityController@datatables');
 
             $router->get('{id}', 'DailyActivityController@show');
         });
@@ -222,6 +223,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'attendance'], function () use ($router) {
             $router->get('bp/{id}', 'AttendanceController@all');
             $router->get('select/{id}', 'AttendanceController@select');
+            $router->get('calendar', 'AttendanceController@calendar');
             $router->post('datatables/{id}', 'AttendanceController@datatables');
 
             $router->get('{id}', 'AttendanceController@show');

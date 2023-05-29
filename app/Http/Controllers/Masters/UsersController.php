@@ -67,7 +67,7 @@ class UsersController extends Controller
         return response()->json($selects);
     }
 
-    public function samebp($id, UserDetail $userDtServices)
+    public function samebp($id, UserDetailServices $userDtServices)
     {
         $selects = $userDtServices->samebp($id);
 
