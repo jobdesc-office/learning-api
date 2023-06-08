@@ -31,34 +31,83 @@ class AttendanceServices extends Attendance
       return $query->get();
    }
 
-   public function getMonth($month, $start, $end)
+   public function getMonth($start, $end, $startDate, $endDate, $isExport)
    {
-      $query = $this->getQuery()->whereMonth('attdate', $month);
-      $groupedData = $query->get()->groupBy('attuserid');
-      $finalData = $groupedData->map(function ($group) {
+      $query = $this->getQuery()->with(['atttypes']);
+      if ($startDate != 'null' && $endDate != 'null') {
+         $query =  $query->whereBetween('attdate', [$startDate, $endDate]);
+      }
+      if ($startDate != 'null' && $endDate == 'null') {
+         $date = Carbon::createFromFormat('Y-m-d', $startDate);
+         $month = $date->format('m');
+         $year = $date->format('Y');
+         $query =  $query->whereMonth('attdate', $month)->whereYear('attdate', $year);
+      }
+
+      $typenames = [];
+      foreach ($query->get() as $attendaces_) {
+         $typename = $attendaces_['atttypes']['typename'] ?? "H";
+
+         if (!in_array($typename, $typenames)) {
+            $typenames[] = $typename;
+         }
+      }
+
+
+      $groupedData = $query->get()->groupBy(['attuserid', 'attdate']);
+
+      $finalData = $groupedData->map(function ($group) use ($typenames) {
+         $attuser = $group->first()->first()->attuser;
+         $attendance = [];
+         $attendanceSummary = [];
+         foreach ($typenames as $typename) {
+            $attendanceSummary[$typename] = 0;
+         }
+
+         foreach ($group as $item) {
+            $attdate = $item->first()->attdate;
+            $atttype = $item->first()->atttypes ? $item->first()->atttypes->typename : null;
+            $clockin = Carbon::createFromFormat('H:i:s', $item->first()->attclockin);
+            $clockout = $item->first()->attclockout ? Carbon::createFromFormat('H:i:s', $item->first()->attclockout) : null;
+            $attduration = $clockout != null ? $clockout->diff($clockin)->format('%h:%I:%S') : null;
+
+            $atttype != null ? $attendanceSummary[$atttype]++ : $attendanceSummary["H"]++;
+
+            $attendance[] = [
+               'attdate' => $attdate,
+               'atttype' => $atttype,
+               'clockin' => $clockin,
+               'clockout' => $clockout,
+               'attduration' => $attduration,
+            ];
+         }
+
          return [
-            'attuserid' => $group->first()->attuserid,
-            'attusername' => $group->first()->attuser->userfullname,
-            'attdate' => $group->pluck('attdate')->unique()->toArray(),
+            'attuser' => $attuser,
+            'attendance' => $attendance,
+            'attsummary' => $attendanceSummary,
          ];
       });
 
-      $totalCount = $query->count();
 
+
+      $totalCount = $query->count();
       $offset = $start == 0 ? $start : max($start + 1, 0);
       $limit = $start == 0 ? min($end - $start + 1, $totalCount - $offset) : min($end - $start, $totalCount - $offset);
 
-      $data = $query->offset($offset)->limit($limit)->get();
       $isLastPage = ($offset + $limit) >= $totalCount;
-      $totalPage = $groupedData->count();
+      $dataPerPage = $groupedData->count() > 15 ? 10 : 15;
+      $totalPage = ceil(($groupedData->count()) / $dataPerPage);
 
       $response = [
          'data' => $finalData,
          'isLastPage' => $isLastPage,
+         'typenames' => $typenames,
          'totalPages' => $totalPage,
+         'dataPerPage' => $dataPerPage,
       ];
 
-      return  $response;
+      return $response;
    }
 
    public function datatables($id, $startDate, $endDate, $userid)

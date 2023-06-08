@@ -68,4 +68,9 @@ class Attendance extends DefaultModel
    {
       return $this->belongsTo(BusinessPartner::class, "attbpid", "bpid");
    }
+
+   public function atttypes()
+   {
+      return $this->belongsTo(Types::class, "atttype", "typeid");
+   }
 }
