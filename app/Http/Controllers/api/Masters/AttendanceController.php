@@ -28,13 +28,13 @@ class AttendanceController extends Controller
                $distance = distance($attloc->allatitude, $attloc->allongitude, $req->attlatin, $req->attlongin, "K") * 1000;
                if ($distance > 200) {
                    $typecd = \DBTypes::attendanceOutOfLocation;
+               } else {
+                   $typecd = \DBTypes::attendancePresent;
                    break;
                }
            }
 
            $typeid = find_type()->in([$typecd])->get($typecd)->getId();
-
-           echo $typeid;
 
            $attendanceServices->create([
                'attbpid' => $req->attbpid,
