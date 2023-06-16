@@ -86,4 +86,7 @@ class DBTypes
     const attendanceType = 'att';
     const attendancePresent = 'attpresent';
     const attendanceOutOfLocation = 'attool';
+    const attendanceSick = 'attsick';
+    const attendanceLeave = 'attleave';
+    const attendanceCuti = 'attcuti';
 }

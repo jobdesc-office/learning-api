@@ -44,38 +44,50 @@ class AttendanceServices extends Attendance
          $query =  $query->whereMonth('attdate', $month)->whereYear('attdate', $year);
       }
 
-      $typenames = [];
+      $typecodes = [];
       foreach ($query->get() as $attendaces_) {
-         $typename = $attendaces_['atttypes']['typename'] ?? "H";
+         $typecode = $attendaces_['atttypes']['typecd'] ?? "attpresent";
+         $typedesc = $attendaces_['atttypes']['typedesc'] ?? "Present";
+         $typeExists = false;
+         foreach ($typecodes as $type) {
+            if ($type['typecd'] === $typecode) {
+               $typeExists = true;
+               break;
+            }
+         }
 
-         if (!in_array($typename, $typenames)) {
-            $typenames[] = $typename;
+         if (!$typeExists) {
+            $typecodes[] = [
+               "typecd" => $typecode,
+               "typedesc" => $typedesc
+            ];
          }
       }
 
-
       $groupedData = $query->get()->groupBy(['attuserid', 'attdate']);
 
-      $finalData = $groupedData->map(function ($group) use ($typenames) {
+      $finalData = $groupedData->map(function ($group) use ($typecodes) {
          $attuser = $group->first()->first()->attuser;
          $attendance = [];
          $attendanceSummary = [];
-         foreach ($typenames as $typename) {
-            $attendanceSummary[$typename] = 0;
+         foreach ($typecodes as $typecode) {
+            $attendanceSummary[$typecode['typecd']] = 0;
          }
 
          foreach ($group as $item) {
             $attdate = $item->first()->attdate;
-            $atttype = $item->first()->atttypes ? $item->first()->atttypes->typename : null;
+            $atttypecd = $item->first()->atttypes ? $item->first()->atttypes->typecd : "attpresent";
+            $atttypedesc = $item->first()->atttypes ? $item->first()->atttypes->typedesc : null;
             $clockin = Carbon::createFromFormat('H:i:s', $item->first()->attclockin);
             $clockout = $item->first()->attclockout ? Carbon::createFromFormat('H:i:s', $item->first()->attclockout) : null;
             $attduration = $clockout != null ? $clockout->diff($clockin)->format('%h:%I:%S') : null;
 
-            $atttype != null ? $attendanceSummary[$atttype]++ : $attendanceSummary["H"]++;
+            $attendanceSummary[$atttypecd]++;
 
             $attendance[] = [
                'attdate' => $attdate,
-               'atttype' => $atttype,
+               'atttypecd' => $atttypecd,
+               'atttypedesc' => $atttypedesc,
                'clockin' => $clockin,
                'clockout' => $clockout,
                'attduration' => $attduration,
@@ -90,7 +102,6 @@ class AttendanceServices extends Attendance
       });
 
 
-
       $totalCount = $query->count();
       $offset = $start == 0 ? $start : max($start + 1, 0);
       $limit = $start == 0 ? min($end - $start + 1, $totalCount - $offset) : min($end - $start, $totalCount - $offset);
@@ -102,7 +113,7 @@ class AttendanceServices extends Attendance
       $response = [
          'data' => $finalData,
          'isLastPage' => $isLastPage,
-         'typenames' => $typenames,
+         'typecodes' => $typecodes,
          'totalPages' => $totalPage,
          'dataPerPage' => $dataPerPage,
       ];
