@@ -44,7 +44,9 @@ class AttendanceServices extends Attendance
          $query =  $query->whereMonth('attdate', $month)->whereYear('attdate', $year);
       }
 
-      $typecodes = [];
+      $typecodes = [
+         ['typecd' => 'attalpha', 'typedesc' => 'A']
+      ];
       foreach ($query->get() as $attendaces_) {
          $typecode = $attendaces_['atttypes']['typecd'] ?? "attpresent";
          $typedesc = $attendaces_['atttypes']['typedesc'] ?? "Present";
@@ -69,7 +71,7 @@ class AttendanceServices extends Attendance
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
          $attuser = $group->first()->first()->attuser;
          $attendance = [];
-         $attendanceSummary = [];
+         $attendanceSummary = ['attalpha' => 0];
          foreach ($typecodes as $typecode) {
             $attendanceSummary[$typecode['typecd']] = 0;
          }
@@ -88,8 +90,6 @@ class AttendanceServices extends Attendance
                'attdate' => $attdate,
                'atttypecd' => $atttypecd,
                'atttypedesc' => $atttypedesc,
-               'clockin' => $clockin,
-               'clockout' => $clockout,
                'attduration' => $attduration,
             ];
          }
