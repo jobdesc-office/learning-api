@@ -34,23 +34,53 @@ class AttendanceController extends Controller
 
     public function exportCalendar(AttendanceServices $attendanceServices, Request $req)
     {
-        $startDate = $req->get('startdate');
-        $endDate = $req->get('enddate');
-        $data = $attendanceServices->getMonth($req->get('start'), $req->get('end'), $startDate, $endDate, true);
-        $fileName = 'attendance-' . $startDate . '-' . $endDate . '.xlsx';
+        try {
+            $startDate = $req->get('startdate');
+            $endDate = $req->get('enddate');
+            $data = $attendanceServices->getMonth($req->get('start'), $req->get('end'), $startDate, $endDate, true);
+            $fileName = 'attendance-' . $startDate . '-' . $endDate . '.xlsx';
+            $atttypes = DB::table('mstype')->where('typemasterid', 110)->get();
+            $alpha = (object) ['typecd' => 'attalpha', 'typedesc' => 'A'];
+            $atttypes->push($alpha);
 
-        $exportData = new ExportData($data['data'], $startDate, $endDate, $data['typenames']);
+            $holidayAPIURL = 'https://www.googleapis.com/calendar/v3/calendars/en.indonesian%23holiday%40group.v.calendar.google.com/events?key=' . DBTypes::googleApi;
 
-        $filePath = '/files/' . $fileName;
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $holidayAPIURL);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $holidayResponse = curl_exec($curl);
+            curl_close($curl);
 
-        Excel::store($exportData, $filePath, 'public');
+            $holidayData = json_decode($holidayResponse, true);
+            $holidayList = [];
 
-        $fileUrl = url('storage') . $filePath;
+            if (isset($holidayData['items'])) {
+                foreach ($holidayData['items'] as $holiday) {
+                    if ($holiday['status'] == 'confirmed') {
+                        $holidayList[] = [
+                            'holiday' => $holiday['summary'],
+                            'date' => $holiday['start']['date']
+                        ];
+                    }
+                }
+            }
 
-        return response()->json([
-            'filename' => $fileName,
-            'file_url' => $fileUrl
-        ]);
+            $exportData = new ExportData($data['data'], $startDate, $endDate, $data['typecodes'], $atttypes, json_encode($holidayList));
+            // return $exportData->view()->render();
+
+            $filePath = '/files/' . $fileName;
+
+            Excel::store($exportData, $filePath, 'public');
+
+            $fileUrl = url('storage') . $filePath;
+
+            return response()->json([
+                'filename' => $fileName,
+                'file_url' => $fileUrl
+            ]);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function removeCalendar(Request $req)

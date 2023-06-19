@@ -10,6 +10,8 @@ class DBTypes
     const webb = 9;
     const appss = 10;
 
+    const googleApi = 'AIzaSyDUYfxm7qJq8dcMMhvhaoUukhQqMxBO6oc';
+
     const role = 'role';
     const roleSuperAdmin = 'rolespa';
     const roleSPVMarketing = 'rolespv';
@@ -89,4 +91,5 @@ class DBTypes
     const attendanceSick = 'attsick';
     const attendanceLeave = 'attleave';
     const attendanceCuti = 'attcuti';
+    const attendanceAlpha = 'attalpha';
 }

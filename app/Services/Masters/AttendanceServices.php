@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Models\Masters\Attendance;
+use App\Models\Masters\Types;
 use Auth;
 use Carbon\Carbon;
 use Doctrine\DBAL\Query;
@@ -33,53 +34,34 @@ class AttendanceServices extends Attendance
 
    public function getMonth($start, $end, $startDate, $endDate, $isExport)
    {
-      $query = $this->getQuery()->with(['atttypes']);
+      $query = DB::table('msuser')->leftJoin('vtattendance', 'msuser.userid', '=', 'vtattendance.attuserid')->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype');
       if ($startDate != 'null' && $endDate != 'null') {
-         $query =  $query->whereBetween('attdate', [$startDate, $endDate]);
+         $query =  $query->whereBetween('vtattendance.attdate', [$startDate, $endDate]);
       }
       if ($startDate != 'null' && $endDate == 'null') {
          $date = Carbon::createFromFormat('Y-m-d', $startDate);
          $month = $date->format('m');
          $year = $date->format('Y');
-         $query =  $query->whereMonth('attdate', $month)->whereYear('attdate', $year);
+         $query =  $query->whereMonth('vtattendance.attdate', $month)->whereYear('vtattendance.attdate', $year);
       }
 
-      $typecodes = [
-         ['typecd' => 'attalpha', 'typedesc' => 'A']
-      ];
-      foreach ($query->get() as $attendaces_) {
-         $typecode = $attendaces_['atttypes']['typecd'] ?? "attpresent";
-         $typedesc = $attendaces_['atttypes']['typedesc'] ?? "Present";
-         $typeExists = false;
-         foreach ($typecodes as $type) {
-            if ($type['typecd'] === $typecode) {
-               $typeExists = true;
-               break;
-            }
-         }
-
-         if (!$typeExists) {
-            $typecodes[] = [
-               "typecd" => $typecode,
-               "typedesc" => $typedesc
-            ];
-         }
-      }
-
+      $typecodes = DB::table('mstype')->select('typecd', 'typedesc')->where('typemasterid', 110)->get();
+      $alpha = (object) ['typecd' => 'attalpha', 'typedesc' => 'A'];
+      $typecodes->push($alpha);
       $groupedData = $query->get()->groupBy(['attuserid', 'attdate']);
 
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
-         $attuser = $group->first()->first()->attuser;
+         $attuser = ["userfullname" => $group->first()->first()->userfullname];
          $attendance = [];
-         $attendanceSummary = ['attalpha' => 0];
+         $attendanceSummary = [];
          foreach ($typecodes as $typecode) {
-            $attendanceSummary[$typecode['typecd']] = 0;
+            $attendanceSummary[$typecode->typecd] = 0;
          }
 
          foreach ($group as $item) {
             $attdate = $item->first()->attdate;
-            $atttypecd = $item->first()->atttypes ? $item->first()->atttypes->typecd : "attpresent";
-            $atttypedesc = $item->first()->atttypes ? $item->first()->atttypes->typedesc : null;
+            $atttypecd = $item->first()->typecd ?? "attpresent";
+            $atttypedesc = $item->first()->typedesc ?? "H";
             $clockin = Carbon::createFromFormat('H:i:s', $item->first()->attclockin);
             $clockout = $item->first()->attclockout ? Carbon::createFromFormat('H:i:s', $item->first()->attclockout) : null;
             $attduration = $clockout != null ? $clockout->diff($clockin)->format('%h:%I:%S') : null;
@@ -101,21 +83,18 @@ class AttendanceServices extends Attendance
          ];
       });
 
-
       $totalCount = $query->count();
       $offset = $start == 0 ? $start : max($start + 1, 0);
       $limit = $start == 0 ? min($end - $start + 1, $totalCount - $offset) : min($end - $start, $totalCount - $offset);
 
       $isLastPage = ($offset + $limit) >= $totalCount;
-      $dataPerPage = $groupedData->count() > 15 ? 10 : 15;
-      $totalPage = ceil(($groupedData->count()) / $dataPerPage);
+      $totalPage = ceil(($groupedData->count()) / 10);
 
       $response = [
          'data' => $finalData,
          'isLastPage' => $isLastPage,
          'typecodes' => $typecodes,
          'totalPages' => $totalPage,
-         'dataPerPage' => $dataPerPage,
       ];
 
       return $response;
@@ -123,8 +102,8 @@ class AttendanceServices extends Attendance
 
    public function datatables($id, $startDate, $endDate, $userid)
    {
-      $query = $this->getQuery()->select('*')
-         ->where('attbpid', $id);
+      $query = $this->getQuery()->select('*', DB::raw('(attclockout - attclockin) AS attduration'))
+         ->where('attbpid', $id)->orderBy('attdate', 'DESC');
       if ($userid != null) {
          $query =  $query->where('attuserid', $userid);
       }
