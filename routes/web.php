@@ -654,6 +654,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
                 $router->get('{id}', 'AttendanceController@show');
                 $router->put('{id}', 'AttendanceController@update');
                 $router->delete('{id}', 'AttendanceController@destroy');
+
+                $router->post('permit', 'AttendanceController@store2');
             });
 
             $router->group(['prefix' => 'dailyactivity'], function () use ($router) {

@@ -130,6 +130,7 @@ class AttendanceServices extends Attendance
       return $this->newQuery()->with([
          'attuser',
          'attbp',
+         'atttypes',
       ]);
    }
 }

@@ -71,6 +71,7 @@ class DBTypes
     const dailyactivitypics = "dayactpics";
     const chatfile = "chtfile";
     const prospectfile = "prosfile";
+    const attendancefile = "attfile";
 
     const activitytype = 'dayacttype';
     const activitycategory = 'dayactcat';
@@ -92,4 +93,6 @@ class DBTypes
     const attendanceLeave = 'attleave';
     const attendanceCuti = 'attcuti';
     const attendanceAlpha = 'attalpha';
+    const attendanceIjin = 'attijin';
+    const attendanceSakit = 'attsakit';
 }
