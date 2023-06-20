@@ -50,8 +50,6 @@ class AttendanceServices extends Attendance
       $typecodes = DB::table('mstype')->select('typeid', 'typecd', 'typedesc')->where('typemasterid', 110)->get();
       $groupedData = $query->get()->groupBy(['userid', 'attdate']);
 
-      // return $groupedData;
-
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
          $attuser = ["userfullname" => $group->first()->first()->userfullname]; //untuk usermodel flutter
 
@@ -87,17 +85,10 @@ class AttendanceServices extends Attendance
             'attsummary' => $attendanceSummary,
          ];
       });
-
-      $totalCount = $query->count();
-      $offset = $start == 0 ? $start : max($start + 1, 0);
-      $limit = $start == 0 ? min($end - $start + 1, $totalCount - $offset) : min($end - $start, $totalCount - $offset);
-
-      $isLastPage = ($offset + $limit) >= $totalCount;
       $totalPage = ceil(($groupedData->count()) / 10);
 
       $response = [
          'data' => $finalData,
-         'isLastPage' => $isLastPage,
          'typecodes' => $typecodes,
          'totalPages' => $totalPage,
       ];
