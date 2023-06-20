@@ -32,24 +32,29 @@ class AttendanceServices extends Attendance
       return $query->get();
    }
 
-   public function getRecap($start, $end, $startDate, $endDate, $isExport)
+   public function getRecap($start, $end, $startDate, $endDate, $bpid)
    {
-      $query = DB::table('msuser')->leftJoin('vtattendance', 'msuser.userid', '=', 'vtattendance.attuserid')->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype');
-      if ($startDate != 'null' && $endDate != 'null') {
-         $query =  $query->whereBetween('vtattendance.attdate', [$startDate, $endDate]);
-      }
-      if ($startDate != 'null' && $endDate == 'null') {
-         $date = Carbon::createFromFormat('Y-m-d', $startDate);
-         $month = $date->format('m');
-         $year = $date->format('Y');
-         $query =  $query->whereMonth('vtattendance.attdate', $month)->whereYear('vtattendance.attdate', $year);
-      }
+      $query = DB::table('msuser')->join('msuserdt', 'msuserdt.userid', 'msuser.userid')->leftJoin('vtattendance', function ($join) use ($startDate, $endDate) {
+         $join->on('msuser.userid', '=', 'vtattendance.attuserid');
+         if ($startDate != 'null' && $endDate != 'null') {
+            $join->whereBetween('vtattendance.attdate', [$startDate, $endDate]);
+         }
+         if ($startDate != 'null' && $endDate == 'null') {
+            $date = Carbon::createFromFormat('Y-m-d', $startDate);
+            $month = $date->format('m');
+            $year = $date->format('Y');
+            $join->whereMonth('vtattendance.attdate', $month)->whereYear('vtattendance.attdate', $year);
+         }
+      })->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype')->where('msuserdt.userdtbpid', '=', $bpid);
 
       $typecodes = DB::table('mstype')->select('typeid', 'typecd', 'typedesc')->where('typemasterid', 110)->get();
-      $groupedData = $query->get()->groupBy(['attuserid', 'attdate']);
+      $groupedData = $query->get()->groupBy(['userid', 'attdate']);
+
+      // return $groupedData;
 
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
-         $attuser = ["userfullname" => $group->first()->first()->userfullname];
+         $attuser = ["userfullname" => $group->first()->first()->userfullname]; //untuk usermodel flutter
+
          $attendance = [];
          $attendanceSummary = [];
          foreach ($typecodes as $typecode) {
@@ -58,20 +63,22 @@ class AttendanceServices extends Attendance
 
          foreach ($group as $item) {
             $attdate = $item->first()->attdate;
-            $atttypecd = $item->first()->typecd ?? "attpresent";
-            $atttypedesc = $item->first()->typedesc ?? "H";
-            $clockin = Carbon::createFromFormat('H:i:s', $item->first()->attclockin);
-            $clockout = $item->first()->attclockout ? Carbon::createFromFormat('H:i:s', $item->first()->attclockout) : null;
-            $attduration = $clockout != null ? $clockout->diff($clockin)->format('%h:%I:%S') : null;
+            if ($attdate) {
+               $atttypecd = $item->first()->typecd ?? "attpresent";
+               $atttypedesc = $item->first()->typedesc ?? "H";
+               $clockin = $item->first()->attclockout ? Carbon::createFromFormat('H:i:s', $item->first()->attclockin) : null;
+               $clockout = $item->first()->attclockout ? Carbon::createFromFormat('H:i:s', $item->first()->attclockout) : null;
+               $attduration = $clockout != null && $clockin != null ? $clockout->diff($clockin)->format('%h:%I:%S') : null;
 
-            $attendanceSummary[$atttypecd]++;
+               $attendanceSummary[$atttypecd]++;
 
-            $attendance[] = [
-               'attdate' => $attdate,
-               'atttypecd' => $atttypecd,
-               'atttypedesc' => $atttypedesc,
-               'attduration' => $attduration,
-            ];
+               $attendance[] = [
+                  'attdate' => $attdate,
+                  'atttypecd' => $atttypecd,
+                  'atttypedesc' => $atttypedesc,
+                  'attduration' => $attduration,
+               ];
+            }
          }
 
          return [
