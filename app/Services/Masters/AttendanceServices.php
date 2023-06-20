@@ -32,7 +32,7 @@ class AttendanceServices extends Attendance
       return $query->get();
    }
 
-   public function getMonth($start, $end, $startDate, $endDate, $isExport)
+   public function getRecap($start, $end, $startDate, $endDate, $isExport)
    {
       $query = DB::table('msuser')->leftJoin('vtattendance', 'msuser.userid', '=', 'vtattendance.attuserid')->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype');
       if ($startDate != 'null' && $endDate != 'null') {

@@ -223,9 +223,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'attendance'], function () use ($router) {
             $router->get('bp/{id}', 'AttendanceController@all');
             $router->get('select/{id}', 'AttendanceController@select');
-            $router->get('calendar', 'AttendanceController@calendar');
-            $router->get('exportcalendar', 'AttendanceController@exportCalendar');
-            $router->get('removecalendar', 'AttendanceController@removeCalendar');
+            $router->get('recap', 'AttendanceController@recap');
+            $router->get('exportrecap', 'AttendanceController@exportRecap');
+            $router->get('removerecap', 'AttendanceController@removeRecap');
             $router->post('datatables/{id}', 'AttendanceController@datatables');
 
             $router->get('{id}', 'AttendanceController@show');

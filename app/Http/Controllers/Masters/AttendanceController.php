@@ -25,19 +25,19 @@ class AttendanceController extends Controller
         return response()->json($selects);
     }
 
-    public function calendar(Request $req, AttendanceServices $attendanceServices)
+    public function recap(Request $req, AttendanceServices $attendanceServices)
     {
-        $data = $attendanceServices->getMonth($req->get('start'), $req->get('end'), $req->get('startdate'), $req->get('enddate'), false);
+        $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $req->get('startdate'), $req->get('enddate'), false);
 
         return response()->json($data);
     }
 
-    public function exportCalendar(AttendanceServices $attendanceServices, Request $req)
+    public function exportRecap(AttendanceServices $attendanceServices, Request $req)
     {
         try {
             $startDate = $req->get('startdate');
             $endDate = $req->get('enddate');
-            $data = $attendanceServices->getMonth($req->get('start'), $req->get('end'), $startDate, $endDate, true);
+            $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $startDate, $endDate, true);
             $fileName = 'attendance-' . $startDate . '-' . $endDate . '.xlsx';
             $atttypes = DB::table('mstype')->where('typemasterid', 110)->get();
             $alpha = (object) ['typecd' => 'attalpha', 'typedesc' => 'A'];
@@ -83,7 +83,7 @@ class AttendanceController extends Controller
         }
     }
 
-    public function removeCalendar(Request $req)
+    public function removeRecap(Request $req)
     {
         $filename = $req->get('filename');
         unlink(storage_path('app/public/files/' . $filename));
