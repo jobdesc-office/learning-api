@@ -52,7 +52,10 @@
                     $attTypes = [];
                     
                     foreach ($atttypes as $atttype) {
-                        $attTypes[$atttype->typedesc] = 0;
+                        $attTypes[$atttype->typecd] = (object) [
+                            'typedesc' => $atttype->typedesc,
+                            'count' => 0,
+                        ];
                     }
 
                     $startDate = Carbon::createFromFormat('Y-m-d', $startdate);
@@ -91,7 +94,7 @@
 
                         $cellValue = null;
 
-                        if ($attendanceTypecd == "attpresent") {
+                        if ($attendanceTypecd == \DBTypes::attendancePresent) {
                             if ($attendanceEntry) {
                                 $cellValue = $attendanceDuration != ''
                                     ? $hours >= 8 ? "<td style='border: 1px solid black; text-align: center; color: #4CAF50'>✓</td>" : "<td style='border: 1px solid black; text-align: center; color: red'>✓</td>" 
@@ -99,7 +102,7 @@
                             } else {
                                 if (!$isWeekend && !$isHoliday) {
                                     $cellValue = "<td style='border: 1px solid black; text-align: center;'>A</td>";
-                                    $attTypes['A']++;
+                                    $attTypes[\DBTypes::attendanceAlpha]->count++;
                                 } else {
                                     $cellValue = "<td style='border: 1px solid black; text-align: center;'></td>";
                                 }
@@ -110,12 +113,12 @@
 
                         echo $cellValue;
 
-                        if ($attendanceEntry) $attTypes[$attendanceType]++;
+                        if ($attendanceEntry) $attTypes[$attendanceTypecd]->count++;
                         
                         $startDate->addDay();
                     }
                     foreach ($attTypes as $atttype) {
-                        echo "<td style='border: 1px solid black; text-align: center;'>$atttype</td>";
+                        echo "<td style='border: 1px solid black; text-align: center;'>". $atttype->count ."</td>";
                     }
                 @endphp
             </tr>

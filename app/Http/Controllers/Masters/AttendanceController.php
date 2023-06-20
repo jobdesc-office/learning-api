@@ -39,9 +39,6 @@ class AttendanceController extends Controller
             $endDate = $req->get('enddate');
             $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $startDate, $endDate, true);
             $fileName = 'attendance-' . $startDate . '-' . $endDate . '.xlsx';
-            $atttypes = DB::table('mstype')->where('typemasterid', 110)->get();
-            $alpha = (object) ['typecd' => 'attalpha', 'typedesc' => 'A'];
-            $atttypes->push($alpha);
 
             $holidayAPIURL = 'https://www.googleapis.com/calendar/v3/calendars/en.indonesian%23holiday%40group.v.calendar.google.com/events?key=' . DBTypes::googleApi;
 
@@ -65,8 +62,7 @@ class AttendanceController extends Controller
                 }
             }
 
-            $exportData = new ExportData($data['data'], $startDate, $endDate, $data['typecodes'], $atttypes, json_encode($holidayList));
-            // return $exportData->view()->render();
+            $exportData = new ExportData($data['data'], $startDate, $endDate, $data['typecodes'], json_encode($holidayList));
 
             $filePath = '/files/' . $fileName;
 

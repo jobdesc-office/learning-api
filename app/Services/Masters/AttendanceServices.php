@@ -45,9 +45,7 @@ class AttendanceServices extends Attendance
          $query =  $query->whereMonth('vtattendance.attdate', $month)->whereYear('vtattendance.attdate', $year);
       }
 
-      $typecodes = DB::table('mstype')->select('typecd', 'typedesc')->where('typemasterid', 110)->get();
-      $alpha = (object) ['typecd' => 'attalpha', 'typedesc' => 'A'];
-      $typecodes->push($alpha);
+      $typecodes = DB::table('mstype')->select('typeid', 'typecd', 'typedesc')->where('typemasterid', 110)->get();
       $groupedData = $query->get()->groupBy(['attuserid', 'attdate']);
 
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
