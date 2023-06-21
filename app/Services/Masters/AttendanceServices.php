@@ -98,7 +98,7 @@ class AttendanceServices extends Attendance
 
    public function datatables($id, $startDate, $endDate, $userid)
    {
-      $query = $this->getQuery()->select('*', DB::raw('(vtattendance.attclockout - vtattendance.attclockin) AS attduration'), DB::raw("*,concat('" . url() . "', '/images/medium-thumbnail/', msfiles.directories, '',msfiles.filename) as url"))->leftJoin('msfiles', 'msfiles.refid', 'vtattendance.attid')
+      $query = $this->getQuery()->select('*', DB::raw('(vtattendance.attclockout - vtattendance.attclockin) AS attduration'), DB::raw("*,concat('" . url() . "', '/images/medium-thumbnail/', COALESCE(msfiles.directories, 'images/'), '',COALESCE(msfiles.filename, 'no-image.png')) as url"))->leftJoin('msfiles', 'msfiles.refid', 'vtattendance.attid')
          ->where('vtattendance.attbpid', $id)->orderBy('vtattendance.attdate', 'DESC');
 
       if ($userid != null) {

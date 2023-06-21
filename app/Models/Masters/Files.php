@@ -36,6 +36,11 @@ class Files extends DefaultModel
 
    const CREATED_AT = "createddate";
    const UPDATED_AT = "updateddate";
+   const IMAGE_SIZE_DATATABLES = "datatables";
+   const IMAGE_SIZE_THUMBNAIL_POTRAIT = "thumbnail-potrait";
+   const IMAGE_SIZE_MEDIUM_THUMBNAIL = "medium-thumbnail";
+   const IMAGE_SIZE_MEDIUM = "medium";
+   const IMAGE_SIZE_LARGE = "large";
 
    public static function boot()
    {

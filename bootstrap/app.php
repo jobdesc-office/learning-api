@@ -23,6 +23,10 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+if (!class_exists('Image')) {
+    class_alias('Intervention\Image\Facades\Image', 'Image');
+}
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -98,6 +102,7 @@ $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Yajra\DataTables\DataTablesServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+$app->register(Intervention\Image\ImageServiceProvider::class);
 
 if ($app->environment() !== 'production') {
     $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);

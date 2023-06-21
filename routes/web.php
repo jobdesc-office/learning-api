@@ -688,3 +688,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         });
     });
 });
+
+$router->group(['prefix' => 'images'], function () use ($router) {
+    $router->get('/', function () use ($router) {
+        return "Images API : " . $router->app->version();
+    });
+    $router->get('/{size}/{directories}/{filename}', 'ImagesController@index');
+});
