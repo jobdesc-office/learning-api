@@ -45,7 +45,7 @@ class AttendanceServices extends Attendance
             $year = $date->format('Y');
             $join->whereMonth('vtattendance.attdate', $month)->whereYear('vtattendance.attdate', $year);
          }
-      })->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype')->where('msuserdt.userdtbpid', '=', $bpid);
+      })->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype')->where('msuserdt.userdtbpid', '=', $bpid)->where('msuser.isactive', '=', true);
 
       $typecodes = DB::table('mstype')->select('typeid', 'typecd', 'typedesc')->where('typemasterid', 110)->get();
       $groupedData = $query->get()->groupBy(['userid', 'attdate']);
@@ -98,16 +98,17 @@ class AttendanceServices extends Attendance
 
    public function datatables($id, $startDate, $endDate, $userid)
    {
-      $query = $this->getQuery()->select('*', DB::raw('(attclockout - attclockin) AS attduration'))
-         ->where('attbpid', $id)->orderBy('attdate', 'DESC');
+      $query = $this->getQuery()->select('*', DB::raw('(vtattendance.attclockout - vtattendance.attclockin) AS attduration'), DB::raw("*,concat('" . url() . "', '/images/medium-thumbnail/', msfiles.directories, '',msfiles.filename) as url"))->leftJoin('msfiles', 'msfiles.refid', 'vtattendance.attid')
+         ->where('vtattendance.attbpid', $id)->orderBy('vtattendance.attdate', 'DESC');
+
       if ($userid != null) {
-         $query =  $query->where('attuserid', $userid);
+         $query =  $query->where('vtattendance.attuserid', $userid);
       }
       if ($startDate != null && $endDate != null) {
-         $query =  $query->whereBetween('attdate', [$startDate, $endDate]);
+         $query =  $query->whereBetween('vtattendance.attdate', [$startDate, $endDate]);
       }
       if ($startDate != null && $endDate == null) {
-         $query =  $query->where('attdate', $startDate);
+         $query =  $query->where('vtattendance.attdate', $startDate);
       }
       return $query;
    }

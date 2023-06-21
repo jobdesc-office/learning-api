@@ -64,16 +64,14 @@ class AttendanceController extends Controller
 
             $exportData = new ExportData($data['data'], $startDate, $endDate, $data['typecodes'], json_encode($holidayList));
 
-            $filePath = '/files/' . $fileName;
+            return Excel::download($exportData, $fileName);
 
-            Excel::store($exportData, $filePath, 'public');
+            // $fileUrl = url('storage') . $filePath;
 
-            $fileUrl = url('storage') . $filePath;
-
-            return response()->json([
-                'filename' => $fileName,
-                'file_url' => $fileUrl
-            ]);
+            // return response()->json([
+            //     'filename' => $fileName,
+            //     'file_url' => $fileUrl
+            // ]);
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
