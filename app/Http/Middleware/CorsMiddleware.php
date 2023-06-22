@@ -8,7 +8,7 @@ use Closure;
 class CorsMiddleware
 {
 
-    protected $localhost = 'http://localhost:57827';
+    protected $localhost = 'https://ventes.hyperdatasolusindo.com';
 
     /**
      * Handle an incoming request.
