@@ -108,7 +108,7 @@ class AttendanceController extends Controller
 
        $typecd = \DBTypes::attendancePresent;
        foreach ($attlocs as $attloc) {
-           $distance = distance($attloc->allatitude, $attloc->allongitude, $req->attlatin, $req->attlongin, "K") * 1000;
+           $distance = distance($attloc->allatitude, $attloc->allongitude, $req->attlatout, $req->attlongout, "K") * 1000;
            if ($distance > 200) {
                $typecd = \DBTypes::attendanceOutOfLocation;
            } else {
