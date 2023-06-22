@@ -85,7 +85,7 @@ class AttendanceServices extends Attendance
             'attsummary' => $attendanceSummary,
          ];
       });
-      $totalPage = ceil(($groupedData->count()) / 10);
+      $totalPage = ceil(($groupedData->count()) / 20);
 
       $response = [
          'data' => $finalData,
