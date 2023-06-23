@@ -32,6 +32,13 @@ class AttendanceController extends Controller
         return response()->json($data);
     }
 
+    public function recapDetail($id, AttendanceServices $attendanceServices)
+    {
+        $data = $attendanceServices->show($id);
+
+        return response()->json($data);
+    }
+
     public function exportRecap(AttendanceServices $attendanceServices, Request $req)
     {
         try {

@@ -224,6 +224,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             $router->get('bp/{id}', 'AttendanceController@all');
             $router->get('select/{id}', 'AttendanceController@select');
             $router->get('recap', 'AttendanceController@recap');
+            $router->get('recapdetail/{id}', 'AttendanceController@recapDetail');
             $router->get('exportrecap', 'AttendanceController@exportRecap');
             $router->get('removerecap', 'AttendanceController@removeRecap');
             $router->post('datatables/{id}', 'AttendanceController@datatables');

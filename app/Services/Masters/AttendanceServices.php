@@ -8,6 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use Doctrine\DBAL\Query;
 use Illuminate\Support\Collection;
+use App\Models\Masters\Files;
 use Illuminate\Support\Facades\DB;
 
 class AttendanceServices extends Attendance
@@ -51,7 +52,7 @@ class AttendanceServices extends Attendance
       $groupedData = $query->get()->groupBy(['userid', 'attdate']);
 
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
-         $attuser = ["userfullname" => $group->first()->first()->userfullname]; //untuk usermodel flutter
+         $attuser = ["userfullname" => $group->first()->first()->userfullname];
 
          $attendance = [];
          $attendanceSummary = [];
@@ -61,6 +62,7 @@ class AttendanceServices extends Attendance
 
          foreach ($group as $item) {
             $attdate = $item->first()->attdate;
+            $attid = $item->first()->attid;
             if ($attdate) {
                $atttypecd = $item->first()->typecd ?? "attpresent";
                $atttypedesc = $item->first()->typedesc ?? "H";
@@ -71,6 +73,7 @@ class AttendanceServices extends Attendance
                $attendanceSummary[$atttypecd]++;
 
                $attendance[] = [
+                  'attid' => $attid,
                   'attdate' => $attdate,
                   'atttypecd' => $atttypecd,
                   'atttypedesc' => $atttypedesc,
@@ -98,7 +101,7 @@ class AttendanceServices extends Attendance
 
    public function datatables($id, $startDate, $endDate, $userid)
    {
-      $query = $this->getQuery()->select('*', DB::raw('(vtattendance.attclockout - vtattendance.attclockin) AS attduration'), DB::raw("*,concat('" . url() . "', '/images/medium-thumbnail/', COALESCE(msfiles.directories, 'images/'), '',COALESCE(msfiles.filename, 'no-image.png')) as url"))->leftJoin('msfiles', 'msfiles.refid', 'vtattendance.attid')
+      $query = $this->getQuery()->select('*', DB::raw('(vtattendance.attclockout - vtattendance.attclockin) AS attduration'), DB::raw("*,concat('" . url() . "', '/images/" . Files::IMAGE_SIZE_MEDIUM_THUMBNAIL . "/', COALESCE(msfiles.directories, 'images/'), '',COALESCE(msfiles.filename, 'no-image.png')) as url"))->leftJoin('msfiles', 'msfiles.refid', 'vtattendance.attid')
          ->where('vtattendance.attbpid', $id)->orderBy('vtattendance.attdate', 'DESC');
 
       if ($userid != null) {
@@ -122,6 +125,11 @@ class AttendanceServices extends Attendance
          return $query->first();
       }
       return null;
+   }
+
+   public function show($attid)
+   {
+      return DB::table("vtattendance")->select('*', DB::raw("*,concat('" . url() . "', '/images/" . Files::IMAGE_SIZE_MEDIUM . "/', COALESCE(msfiles.directories, 'images/'), '',COALESCE(msfiles.filename, 'no-image.png')) as url"))->leftJoin('msfiles', 'msfiles.refid', 'vtattendance.attid')->where('msfiles.refid', '=', $attid)->limit(1)->get();
    }
 
    public function getQuery()
