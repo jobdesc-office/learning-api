@@ -27,7 +27,7 @@ class AttendanceController extends Controller
 
     public function recap(Request $req, AttendanceServices $attendanceServices)
     {
-        $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $req->get('startdate'), $req->get('enddate'), $req->get('bpid'));
+        $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $req->get('startdate'), $req->get('enddate'), $req->get('bpid'), $req->get('role'));
 
         return response()->json($data);
     }
@@ -44,7 +44,7 @@ class AttendanceController extends Controller
         try {
             $startDate = $req->get('startdate');
             $endDate = $req->get('enddate');
-            $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $startDate, $endDate, $req->get('bpid'));
+            $data = $attendanceServices->getRecap($req->get('start'), $req->get('end'), $startDate, $endDate, $req->get('bpid'), $req->get('role'));
             $fileName = 'attendance-' . $startDate . '-' . $endDate . '.xlsx';
 
             $holidayAPIURL = 'https://www.googleapis.com/calendar/v3/calendars/en.indonesian%23holiday%40group.v.calendar.google.com/events?key=' . DBTypes::googleApi;

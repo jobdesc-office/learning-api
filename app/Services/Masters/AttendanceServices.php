@@ -33,9 +33,14 @@ class AttendanceServices extends Attendance
       return $query->get();
    }
 
-   public function getRecap($start, $end, $startDate, $endDate, $bpid)
+   public function getRecap($start, $end, $startDate, $endDate, $bpid, $role)
    {
-      $query = DB::table('msuser')->join('msuserdt', 'msuserdt.userid', 'msuser.userid')->leftJoin('vtattendance', function ($join) use ($startDate, $endDate) {
+      $query = DB::table('msuser')->join('msuserdt', function ($join) use ($role) {
+         $join->on('msuserdt.userid', '=', 'msuser.userid');
+         if ($role != 'null') {
+            $join->where('msuserdt.userdttypeid', '=', $role);
+         }
+      })->leftJoin('vtattendance', function ($join) use ($startDate, $endDate) {
          $join->on('msuser.userid', '=', 'vtattendance.attuserid');
          if ($startDate != 'null' && $endDate != 'null') {
             $join->whereBetween('vtattendance.attdate', [$startDate, $endDate]);
