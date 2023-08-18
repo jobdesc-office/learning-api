@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -41,6 +43,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         return response()->json($types->getConstants());
     });
     $router->get('/information', 'api\masters\InformationController@getall');
+});
+
+$router->get('address', function (Request $req) {
+    $latitudelongitude = $req->get('latlng');
+    $apiKey = $req->get('apiKey');
+
+    $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" . $latitudelongitude . "&key=" . $apiKey . "&language=id";
+
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    return response()->json($response);
 });
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
