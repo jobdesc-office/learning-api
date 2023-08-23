@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->get('pullData', 'PullDataController@pullData');
+
 $router->get('t2IF5xRe', function () {
     $types = new ReflectionClass(DBTypes::class);
     return response()->json($types->getConstants());
