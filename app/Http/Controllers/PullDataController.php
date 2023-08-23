@@ -22,7 +22,7 @@ class PullDataController extends Controller
 
         $data = \DB::select("SELECT trp.prospectbpid, EXTRACT('YEAR' FROM prospectstartdate) as prospectyy,
             EXTRACT('MONTH' FROM prospectstartdate) as prospectmm, msbp.bpname as prospectbpname,
-            SUM(trp.prospectvalue) as prospectvalue, msc.cstmname as prospectcustname, trp.prospectcustid
+            SUM(trp.prospectvalue) as prospectvalue, msc.sbccstmname as prospectcustname, trp.prospectcustid
             FROM trprospect trp
             JOIN msbusinesspartner msbp ON msbp.bpid = trp.prospectbpid
             JOIN stbpcustomer msc ON msc.sbcid = trp.prospectcustid
@@ -82,12 +82,12 @@ class PullDataController extends Controller
             EXTRACT('MONTH' FROM prospectstartdate) as prospectmm,
             SUM(trp.prospectvalue) as prospectvalue,
             stbpt.sbttypename as prospectcustlabel,
-            msc.sbcid as prospectcustid, msc.cstmname as prospectcustname
+            msc.sbcid as prospectcustid, msc.sbccstmname as prospectcustname
             FROM trprospect trp
             JOIN stbpcustomer msc ON msc.sbcid = trp.prospectcustid
             JOIN msbusinesspartner msbp ON msbp.bpid = trp.prospectbpid
             JOIN stbptype stbpt ON stbpt.sbtid = prospectcustlabel
-            GROUP BY prospectbpid, prospectyy, prospectmm, prospectbpname, stbpt.sbttypename, msc.cstmname, msc.sbcid
+            GROUP BY prospectbpid, prospectyy, prospectmm, prospectbpname, stbpt.sbttypename, msc.sbccstmname, msc.sbcid
             ORDER BY trp.prospectbpid");
 
         \DB::connection("pgsql2")->table("dspbycustlabeldt")->delete();
@@ -179,12 +179,12 @@ class PullDataController extends Controller
             EXTRACT('MONTH' FROM prospectstartdate) as prospectmm,
             SUM(trp.prospectvalue) as prospectvalue,
             stbpt2.sbttypename as prospectstage,
-            msc.sbcid as prospectcustid, msc.cstmname as prospectcustname
+            msc.sbcid as prospectcustid, msc.sbccstmname as prospectcustname
             FROM trprospect trp
             JOIN stbpcustomer msc ON msc.sbcid = trp.prospectcustid
             JOIN msbusinesspartner msbp ON msbp.bpid = trp.prospectbpid
             JOIN stbptype stbpt2 ON stbpt2.sbtid = trp.prospectstageid
-            GROUP BY prospectbpid, prospectyy, prospectmm, prospectbpname, stbpt2.sbttypename, msc.cstmname, msc.sbcid
+            GROUP BY prospectbpid, prospectyy, prospectmm, prospectbpname, stbpt2.sbttypename, msc.sbccstmname, msc.sbcid
             ORDER BY trp.prospectbpid");
 
         \DB::connection("pgsql2")->table("dspbystagedt")->delete();
@@ -241,12 +241,12 @@ class PullDataController extends Controller
             EXTRACT('MONTH' FROM prospectstartdate) as prospectmm,
             SUM(trp.prospectvalue) as prospectvalue,
             stbpt.sbttypename as prospectstatus,
-            msc.sbcid as prospectcustid, msc.cstmname as prospectcustname
+            msc.sbcid as prospectcustid, msc.sbccstmname as prospectcustname
             FROM trprospect trp
             JOIN stbpcustomer msc ON msc.sbcid = trp.prospectcustid
             JOIN msbusinesspartner msbp ON msbp.bpid = trp.prospectbpid
             JOIN stbptype stbpt ON stbpt.sbtid = trp.prospectstatusid
-            GROUP BY prospectbpid, prospectyy, prospectmm, prospectbpname, stbpt.sbttypename, msc.cstmname, msc.sbcid
+            GROUP BY prospectbpid, prospectyy, prospectmm, prospectbpname, stbpt.sbttypename, msc.sbccstmname, msc.sbcid
             ORDER BY trp.prospectbpid");
 
         \DB::connection("pgsql2")->table("dspbystatusdt")->delete();
