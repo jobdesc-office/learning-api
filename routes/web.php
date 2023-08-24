@@ -475,235 +475,237 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
             // $router->delete('{id}', 'MenusController@destroy');
         });
     });
+});
 
-    $router->group(['prefix' => 'api'], function () use ($router) {
-        $router->get('RJXvksjS', 'api\AuthController@verifyToken');
-        $router->get('pIeYujTv', 'api\AuthController@signOut');
 
-        $router->group(['namespace' => 'api\Masters'], function () use ($router) {
-            $router->group(['prefix' => 'types'], function () use ($router) {
-                $router->get('by-code', 'TypesController@byCode');
-                $router->get('{id}', 'TypesController@show');
-            });
 
-            $router->group(['prefix' => 'bptypes'], function () use ($router) {
-                $router->get('by-code', 'BpTypeController@byCode');
-                $router->get('{id}', 'BpTypeController@show');
-            });
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('RJXvksjS', 'api\AuthController@verifyToken');
+    $router->get('pIeYujTv', 'api\AuthController@signOut');
 
-            $router->group(['prefix' => 'user'], function () use ($router) {
-                $router->get('', 'UsersController@all');
-                $router->post('', 'UsersController@store');
-                $router->get('{id}', 'UsersController@show');
-                $router->put('{id}', 'UsersController@update');
-                $router->delete('{id}', 'UsersController@destroy');
-                $router->put('{id}/attach-device', 'UsersController@attachDevice');
-            });
-
-            $router->group(['prefix' => 'businesspartner'], function () use ($router) {
-                $router->get('', 'BusinessPartnerController@all');
-                $router->post('', 'BusinessPartnerController@store');
-                $router->get('{id}', 'BusinessPartnerController@show');
-                $router->put('{id}', 'BusinessPartnerController@update');
-                $router->delete('{id}', 'BusinessPartnerController@destroy');
-            });
-
-            $router->group(['prefix' => 'schedule'], function () use ($router) {
-                $router->get('count', 'ScheduleController@scheduleCount');
-                $router->get('customfield/{id}', 'ScheduleController@scheduleCustomField');
-                $router->get('', 'ScheduleController@all');
-                $router->post('', 'ScheduleController@store');
-                $router->get('{id}', 'ScheduleController@show');
-                $router->put('{id}', 'ScheduleController@update');
-                $router->delete('{id}', 'ScheduleController@destroy');
-            });
-
-            $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
-                $router->get('', 'BpCustomerController@all');
-                $router->post('', 'BpCustomerController@store');
-                $router->get('{id}', 'BpCustomerController@show');
-                $router->put('{id}', 'BpCustomerController@update');
-                $router->delete('{id}', 'BpCustomerController@destroy');
-            });
-
-            $router->group(['prefix' => 'customer'], function () use ($router) {
-                $router->get('', 'CustomerController@all');
-                $router->post('', 'CustomerController@store');
-                $router->get('{id}', 'CustomerController@show');
-                $router->put('{id}', 'CustomerController@update');
-                $router->delete('{id}', 'CustomerController@destroy');
-            });
-
-            $router->group(['prefix' => 'country'], function () use ($router) {
-                $router->get('by-name', 'CountryController@byName');
-                $router->get('', 'CountryController@all');
-                $router->post('', 'CountryController@store');
-                $router->get('{id}', 'CountryController@show');
-                $router->put('{id}', 'CountryController@update');
-                $router->delete('{id}', 'CountryController@destroy');
-            });
-
-            $router->group(['prefix' => 'province'], function () use ($router) {
-                $router->get('by-name', 'ProvinceController@byName');
-                $router->get('', 'ProvinceController@all');
-                $router->post('', 'ProvinceController@store');
-                $router->get('{id}', 'ProvinceController@show');
-                $router->put('{id}', 'ProvinceController@update');
-                $router->delete('{id}', 'ProvinceController@destroy');
-            });
-
-            $router->group(['prefix' => 'city'], function () use ($router) {
-                $router->get('by-name', 'CityController@byName');
-                $router->get('', 'CityController@all');
-                $router->post('', 'CityController@store');
-                $router->get('{id}', 'CityController@show');
-                $router->put('{id}', 'CityController@update');
-                $router->delete('{id}', 'CityController@destroy');
-            });
-
-            $router->group(['prefix' => 'subdistrict'], function () use ($router) {
-                $router->get('by-name', 'SubdistrictController@byName');
-                $router->get('', 'SubdistrictController@all');
-                $router->post('', 'SubdistrictController@store');
-                $router->get('{id}', 'SubdistrictController@show');
-                $router->put('{id}', 'SubdistrictController@update');
-                $router->delete('{id}', 'SubdistrictController@destroy');
-            });
-
-            $router->group(['prefix' => 'prospect'], function () use ($router) {
-                $router->get('report', 'ProspectController@report');
-                $router->get('count', 'ProspectController@prospectCount');
-                $router->get('histories', 'ProspectController@prospectHistories');
-                $router->get('customfield/{id}', 'ProspectController@prospectcustomfield');
-                $router->get('groups', 'ProspectController@groups');
-                $router->get('report/{id}/years', 'ProspectController@reportYear');
-                $router->get('', 'ProspectController@all');
-                $router->post('', 'ProspectController@store');
-                $router->get('{id}', 'ProspectController@show');
-                $router->put('{id}', 'ProspectController@update');
-                $router->delete('{id}', 'ProspectController@destroy');
-            });
-
-            $router->group(['prefix' => 'insight'], function () use ($router) {
-                $router->get('agingreport', 'InsightController@agingreport');
-                $router->get('fcvsactual', 'InsightController@fcvsactual');
-                $router->get('fcvsactualyears', 'InsightController@fcvsactualYears');
-                $router->get('bycust/{id}', 'InsightController@reportByCust');
-                $router->get('bystage/{id}', 'InsightController@reportByStage');
-                $router->get('bystatus/{id}', 'InsightController@reportByStatus');
-                $router->get('bystatusdt/{id}', 'InsightController@reportByStatusDt');
-                $router->get('bystagedt/{id}', 'InsightController@reportByStageDt');
-                $router->get('bycustlabeldt/{id}', 'InsightController@reportByCustLabelDt');
-                $router->get('bycustlabel/{id}', 'InsightController@reportByCustLabel');
-                $router->get('byowner/{id}', 'InsightController@reportByOwner');
-                $router->get('bybp/{id}/years', 'InsightController@reportYears');
-            });
-
-            $router->group(['prefix' => 'prospectactivity'], function () use ($router) {
-                $router->get('', 'ProspectActivityController@all');
-                $router->post('', 'ProspectActivityController@store');
-                $router->get('{id}', 'ProspectActivityController@show');
-                $router->put('{id}', 'ProspectActivityController@update');
-                $router->delete('{id}', 'ProspectActivityController@destroy');
-            });
-
-            $router->group(['prefix' => 'prospectproduct'], function () use ($router) {
-                $router->get('', 'ProspectProductController@all');
-                $router->post('', 'ProspectProductController@store');
-                $router->get('{id}', 'ProspectProductController@show');
-                $router->put('{id}', 'ProspectProductController@update');
-                $router->delete('{id}', 'ProspectProductController@destroy');
-            });
-
-            $router->group(['prefix' => 'contactperson'], function () use ($router) {
-                $router->get('', 'ContactPersonController@all');
-                $router->post('', 'ContactPersonController@store');
-                $router->get('{id}', 'ContactPersonController@show');
-                $router->put('{id}', 'ContactPersonController@update');
-                $router->delete('{id}', 'ContactPersonController@destroy');
-            });
-
-            $router->group(['prefix' => 'prospectassign'], function () use ($router) {
-                $router->get('', 'ProspectAssignController@all');
-                $router->post('', 'ProspectAssignController@store');
-                $router->get('{id}', 'ProspectAssignController@show');
-                $router->put('{id}', 'ProspectAssignController@update');
-                $router->delete('{id}', 'ProspectAssignController@destroy');
-            });
-
-            $router->group(['prefix' => 'chat'], function () use ($router) {
-                $router->get('conversation', 'ChatController@getConversation');
-                $router->get('users-unread-messages', 'ChatController@usersUnreadMessages');
-                $router->get('read', 'ChatController@readMessage');
-                $router->get('', 'ChatController@all');
-                $router->post('', 'ChatController@store');
-                $router->get('{id}', 'ChatController@show');
-                $router->put('{id}', 'ChatController@update');
-                $router->delete('{id}', 'ChatController@destroy');
-            });
-
-            $router->group(['prefix' => 'village'], function () use ($router) {
-                $router->get('by-name', 'VillageController@byName');
-                $router->get('', 'VillageController@all');
-                $router->post('', 'VillageController@store');
-                $router->get('{id}', 'VillageController@show');
-                $router->put('{id}', 'VillageController@update');
-                $router->delete('{id}', 'VillageController@destroy');
-            });
-
-            $router->group(['prefix' => 'files'], function () use ($router) {
-                $router->get('', 'FilesController@all');
-                $router->post('', 'FilesController@store');
-                $router->get('{id}', 'FilesController@show');
-                $router->put('{id}', 'FilesController@update');
-                $router->delete('{id}', 'FilesController@destroy');
-            });
-
-            $router->group(['prefix' => 'competitor'], function () use ($router) {
-                $router->get('', 'CompetitorController@all');
-                $router->post('', 'CompetitorController@store');
-                $router->get('{id}', 'CompetitorController@show');
-                $router->put('{id}', 'CompetitorController@update');
-                $router->delete('{id}', 'CompetitorController@destroy');
-            });
-
-            $router->group(['prefix' => 'attendance'], function () use ($router) {
-                $router->get('', 'AttendanceController@all');
-                $router->post('', 'AttendanceController@store');
-                $router->get('{id}', 'AttendanceController@show');
-                $router->put('{id}', 'AttendanceController@update');
-                $router->delete('{id}', 'AttendanceController@destroy');
-
-                $router->post('permit', 'AttendanceController@store2');
-            });
-
-            $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
-                $router->get('count', 'DailyActivityController@dailyActivityCount');
-                $router->get('histories', 'DailyActivityController@dailyActivityHistories');
-                $router->get('allow/daily/{id}', 'DailyActivityController@dailyActivityAllow');
-                $router->get('allow/prospect/{id}', 'DailyActivityController@prospectActivityAllow');
-                $router->get('groups', 'ProspectController@groups');
-                $router->get('customfield/{id}', 'DailyActivityController@dailyActivityCustomField');
-                $router->get('', 'DailyActivityController@all');
-                $router->post('', 'DailyActivityController@store');
-                $router->get('{id}', 'DailyActivityController@show');
-                $router->put('{id}', 'DailyActivityController@update');
-                $router->delete('{id}', 'DailyActivityController@destroy');
-            });
+    $router->group(['namespace' => 'api\Masters'], function () use ($router) {
+        $router->group(['prefix' => 'types'], function () use ($router) {
+            $router->get('by-code', 'TypesController@byCode');
+            $router->get('{id}', 'TypesController@show');
         });
 
-        $router->group(['namespace' => 'api\Security'], function () use ($router) {
-            $router->group(['prefix' => 'menus'], function () use ($router) {
+        $router->group(['prefix' => 'bptypes'], function () use ($router) {
+            $router->get('by-code', 'BpTypeController@byCode');
+            $router->get('{id}', 'BpTypeController@show');
+        });
 
-                $router->post('', 'MenusController@store');
-                $router->get('{id}', 'MenusController@show');
-                $router->put('{id}', 'MenusController@update');
-                $router->delete('{id}', 'MenusController@destroy');
-            });
+        $router->group(['prefix' => 'user'], function () use ($router) {
+            $router->get('', 'UsersController@all');
+            $router->post('', 'UsersController@store');
+            $router->get('{id}', 'UsersController@show');
+            $router->put('{id}', 'UsersController@update');
+            $router->delete('{id}', 'UsersController@destroy');
+            $router->put('{id}/attach-device', 'UsersController@attachDevice');
+        });
 
-            $router->group(['prefix' => 'permissions'], function () use ($router) {
-                $router->get('{id}', 'PermissionController@permissions');
-            });
+        $router->group(['prefix' => 'businesspartner'], function () use ($router) {
+            $router->get('', 'BusinessPartnerController@all');
+            $router->post('', 'BusinessPartnerController@store');
+            $router->get('{id}', 'BusinessPartnerController@show');
+            $router->put('{id}', 'BusinessPartnerController@update');
+            $router->delete('{id}', 'BusinessPartnerController@destroy');
+        });
+
+        $router->group(['prefix' => 'schedule'], function () use ($router) {
+            $router->get('count', 'ScheduleController@scheduleCount');
+            $router->get('customfield/{id}', 'ScheduleController@scheduleCustomField');
+            $router->get('', 'ScheduleController@all');
+            $router->post('', 'ScheduleController@store');
+            $router->get('{id}', 'ScheduleController@show');
+            $router->put('{id}', 'ScheduleController@update');
+            $router->delete('{id}', 'ScheduleController@destroy');
+        });
+
+        $router->group(['prefix' => 'bpcustomer'], function () use ($router) {
+            $router->get('', 'BpCustomerController@all');
+            $router->post('', 'BpCustomerController@store');
+            $router->get('{id}', 'BpCustomerController@show');
+            $router->put('{id}', 'BpCustomerController@update');
+            $router->delete('{id}', 'BpCustomerController@destroy');
+        });
+
+        $router->group(['prefix' => 'customer'], function () use ($router) {
+            $router->get('', 'CustomerController@all');
+            $router->post('', 'CustomerController@store');
+            $router->get('{id}', 'CustomerController@show');
+            $router->put('{id}', 'CustomerController@update');
+            $router->delete('{id}', 'CustomerController@destroy');
+        });
+
+        $router->group(['prefix' => 'country'], function () use ($router) {
+            $router->get('by-name', 'CountryController@byName');
+            $router->get('', 'CountryController@all');
+            $router->post('', 'CountryController@store');
+            $router->get('{id}', 'CountryController@show');
+            $router->put('{id}', 'CountryController@update');
+            $router->delete('{id}', 'CountryController@destroy');
+        });
+
+        $router->group(['prefix' => 'province'], function () use ($router) {
+            $router->get('by-name', 'ProvinceController@byName');
+            $router->get('', 'ProvinceController@all');
+            $router->post('', 'ProvinceController@store');
+            $router->get('{id}', 'ProvinceController@show');
+            $router->put('{id}', 'ProvinceController@update');
+            $router->delete('{id}', 'ProvinceController@destroy');
+        });
+
+        $router->group(['prefix' => 'city'], function () use ($router) {
+            $router->get('by-name', 'CityController@byName');
+            $router->get('', 'CityController@all');
+            $router->post('', 'CityController@store');
+            $router->get('{id}', 'CityController@show');
+            $router->put('{id}', 'CityController@update');
+            $router->delete('{id}', 'CityController@destroy');
+        });
+
+        $router->group(['prefix' => 'subdistrict'], function () use ($router) {
+            $router->get('by-name', 'SubdistrictController@byName');
+            $router->get('', 'SubdistrictController@all');
+            $router->post('', 'SubdistrictController@store');
+            $router->get('{id}', 'SubdistrictController@show');
+            $router->put('{id}', 'SubdistrictController@update');
+            $router->delete('{id}', 'SubdistrictController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospect'], function () use ($router) {
+            $router->get('report', 'ProspectController@report');
+            $router->get('count', 'ProspectController@prospectCount');
+            $router->get('histories', 'ProspectController@prospectHistories');
+            $router->get('customfield/{id}', 'ProspectController@prospectcustomfield');
+            $router->get('groups', 'ProspectController@groups');
+            $router->get('report/{id}/years', 'ProspectController@reportYear');
+            $router->get('', 'ProspectController@all');
+            $router->post('', 'ProspectController@store');
+            $router->get('{id}', 'ProspectController@show');
+            $router->put('{id}', 'ProspectController@update');
+            $router->delete('{id}', 'ProspectController@destroy');
+        });
+
+        $router->group(['prefix' => 'insight'], function () use ($router) {
+            $router->get('agingreport', 'InsightController@agingreport');
+            $router->get('fcvsactual', 'InsightController@fcvsactual');
+            $router->get('fcvsactualyears', 'InsightController@fcvsactualYears');
+            $router->get('bycust/{id}', 'InsightController@reportByCust');
+            $router->get('bystage/{id}', 'InsightController@reportByStage');
+            $router->get('bystatus/{id}', 'InsightController@reportByStatus');
+            $router->get('bystatusdt/{id}', 'InsightController@reportByStatusDt');
+            $router->get('bystagedt/{id}', 'InsightController@reportByStageDt');
+            $router->get('bycustlabeldt/{id}', 'InsightController@reportByCustLabelDt');
+            $router->get('bycustlabel/{id}', 'InsightController@reportByCustLabel');
+            $router->get('byowner/{id}', 'InsightController@reportByOwner');
+            $router->get('bybp/{id}/years', 'InsightController@reportYears');
+        });
+
+        $router->group(['prefix' => 'prospectactivity'], function () use ($router) {
+            $router->get('', 'ProspectActivityController@all');
+            $router->post('', 'ProspectActivityController@store');
+            $router->get('{id}', 'ProspectActivityController@show');
+            $router->put('{id}', 'ProspectActivityController@update');
+            $router->delete('{id}', 'ProspectActivityController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospectproduct'], function () use ($router) {
+            $router->get('', 'ProspectProductController@all');
+            $router->post('', 'ProspectProductController@store');
+            $router->get('{id}', 'ProspectProductController@show');
+            $router->put('{id}', 'ProspectProductController@update');
+            $router->delete('{id}', 'ProspectProductController@destroy');
+        });
+
+        $router->group(['prefix' => 'contactperson'], function () use ($router) {
+            $router->get('', 'ContactPersonController@all');
+            $router->post('', 'ContactPersonController@store');
+            $router->get('{id}', 'ContactPersonController@show');
+            $router->put('{id}', 'ContactPersonController@update');
+            $router->delete('{id}', 'ContactPersonController@destroy');
+        });
+
+        $router->group(['prefix' => 'prospectassign'], function () use ($router) {
+            $router->get('', 'ProspectAssignController@all');
+            $router->post('', 'ProspectAssignController@store');
+            $router->get('{id}', 'ProspectAssignController@show');
+            $router->put('{id}', 'ProspectAssignController@update');
+            $router->delete('{id}', 'ProspectAssignController@destroy');
+        });
+
+        $router->group(['prefix' => 'chat'], function () use ($router) {
+            $router->get('conversation', 'ChatController@getConversation');
+            $router->get('users-unread-messages', 'ChatController@usersUnreadMessages');
+            $router->get('read', 'ChatController@readMessage');
+            $router->get('', 'ChatController@all');
+            $router->post('', 'ChatController@store');
+            $router->get('{id}', 'ChatController@show');
+            $router->put('{id}', 'ChatController@update');
+            $router->delete('{id}', 'ChatController@destroy');
+        });
+
+        $router->group(['prefix' => 'village'], function () use ($router) {
+            $router->get('by-name', 'VillageController@byName');
+            $router->get('', 'VillageController@all');
+            $router->post('', 'VillageController@store');
+            $router->get('{id}', 'VillageController@show');
+            $router->put('{id}', 'VillageController@update');
+            $router->delete('{id}', 'VillageController@destroy');
+        });
+
+        $router->group(['prefix' => 'files'], function () use ($router) {
+            $router->get('', 'FilesController@all');
+            $router->post('', 'FilesController@store');
+            $router->get('{id}', 'FilesController@show');
+            $router->put('{id}', 'FilesController@update');
+            $router->delete('{id}', 'FilesController@destroy');
+        });
+
+        $router->group(['prefix' => 'competitor'], function () use ($router) {
+            $router->get('', 'CompetitorController@all');
+            $router->post('', 'CompetitorController@store');
+            $router->get('{id}', 'CompetitorController@show');
+            $router->put('{id}', 'CompetitorController@update');
+            $router->delete('{id}', 'CompetitorController@destroy');
+        });
+
+        $router->group(['prefix' => 'attendance'], function () use ($router) {
+            $router->get('', 'AttendanceController@all');
+            $router->post('', 'AttendanceController@store');
+            $router->get('{id}', 'AttendanceController@show');
+            $router->put('{id}', 'AttendanceController@update');
+            $router->delete('{id}', 'AttendanceController@destroy');
+
+            $router->post('permit', 'AttendanceController@store2');
+        });
+
+        $router->group(['prefix' => 'dailyactivity'], function () use ($router) {
+            $router->get('count', 'DailyActivityController@dailyActivityCount');
+            $router->get('histories', 'DailyActivityController@dailyActivityHistories');
+            $router->get('allow/daily/{id}', 'DailyActivityController@dailyActivityAllow');
+            $router->get('allow/prospect/{id}', 'DailyActivityController@prospectActivityAllow');
+            $router->get('groups', 'ProspectController@groups');
+            $router->get('customfield/{id}', 'DailyActivityController@dailyActivityCustomField');
+            $router->get('', 'DailyActivityController@all');
+            $router->post('', 'DailyActivityController@store');
+            $router->get('{id}', 'DailyActivityController@show');
+            $router->put('{id}', 'DailyActivityController@update');
+            $router->delete('{id}', 'DailyActivityController@destroy');
+        });
+    });
+
+    $router->group(['namespace' => 'api\Security'], function () use ($router) {
+        $router->group(['prefix' => 'menus'], function () use ($router) {
+
+            $router->post('', 'MenusController@store');
+            $router->get('{id}', 'MenusController@show');
+            $router->put('{id}', 'MenusController@update');
+            $router->delete('{id}', 'MenusController@destroy');
+        });
+
+        $router->group(['prefix' => 'permissions'], function () use ($router) {
+            $router->get('{id}', 'PermissionController@permissions');
         });
     });
 });
