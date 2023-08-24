@@ -249,7 +249,7 @@ class DailyActivityServices extends DailyActivity
                 $query->with(['customfield']);
             },
             'dayactpics' => function ($query) {
-                $query->addSelect(DB::raw("*,concat('" . url('storage') . "', '/', \"directories\", '',\"filename\") as url"))
+                $query->addSelect(DB::raw("*,concat('" . url() . "', '/images/', '" . Files::IMAGE_SIZE_MEDIUM . "/', \"directories\", '',\"filename\") as url"))
                     ->whereHas('transtype', function ($query) {
                         $query->where('typecd', DBTypes::dailyactivitypics);
                     });
