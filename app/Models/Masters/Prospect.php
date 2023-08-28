@@ -73,7 +73,7 @@ class Prospect extends DefaultModel
 
     public function prospectowneruser()
     {
-        return $this->belongsTo(UserDetail::class, "prospectowner", "userdtid");
+        return $this->belongsTo(UserDetail::class, "prospectowner", "userid");
     }
 
     public function prospectreference()
