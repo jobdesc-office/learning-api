@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Doctrine\DBAL\Query;
 use Illuminate\Support\Collection;
 use App\Models\Masters\Files;
+use DBTypes;
 use Illuminate\Support\Facades\DB;
 
 class AttendanceServices extends Attendance
@@ -53,7 +54,14 @@ class AttendanceServices extends Attendance
          }
       })->leftJoin('mstype', 'mstype.typeid', 'vtattendance.atttype')->where('msuserdt.userdtbpid', '=', $bpid)->where('msuser.isactive', '=', true);
 
-      $typecodes = DB::table('mstype')->select('typeid', 'typecd', 'typedesc')->where('typemasterid', 110)->get();
+      $typecodes = [];
+      $mstype = DB::table('mstype')->select('typeid', 'typecd', 'typedesc', 'typename')->where('typemasterid', 110)->get();
+
+      foreach ($mstype as $type) {
+         $type->typename = $type->typecd == DBTypes::attendanceOutOfLocation ? "Checkout/Checkin di luar lokasi yang sudah ditentukan atau sedang tugas keluar" : $type->typename;
+         $typecodes = [...$typecodes, $type];
+      }
+
       $groupedData = $query->get()->groupBy(['userid', 'attdate']);
 
       $finalData = $groupedData->map(function ($group) use ($typecodes) {
