@@ -46,6 +46,7 @@ class StBpTypeServices extends Stbptype
             })
             ->where('isactive', true)
             ->where(DB::raw('TRIM(LOWER(sbttypename))'), 'like', "%$search%")
+            ->orderBy('sbtseq', 'asc')
             ->orderBy('sbttypename', 'asc')->get();
     }
 

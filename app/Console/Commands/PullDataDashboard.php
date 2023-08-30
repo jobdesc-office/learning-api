@@ -1,14 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use App\Models\Masters\DspByCust;
-use App\Models\Masters\DspByCustLabel;
 use App\Services\PullDataServices;
+use Illuminate\Console\Command;
 
-class PullDataController extends Controller
+class PullDataDashboard extends Command
 {
-    public function pullData(PullDataServices $pullDataServices) {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'dashboard:pull-data';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Pull data Dashboard every day';
+
+    public function handle(PullDataServices $pullDataServices) : void
+    {
         try {
             $pullDataServices->dspbycust();
             $pullDataServices->dspbycustlabel();
